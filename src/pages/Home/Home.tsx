@@ -3,15 +3,15 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import LoginForm from '../Login';
 import SignupForm from '../Signup';
-import Profile from '../Profile';
+import Profile from '../User';
 
-import './App.css';
+import './Home.css';
 import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../api/rpc';
 import { TOKEN } from '../../utils/consts';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 function Home() {
-    const projects = useSelector(() => {});
+    // const projects = useSelector(() => {});
     
     const [popularJobs, setPopularJobs] = useState([]);
     const [popularProjects, setPopularProjects] = useState([]);

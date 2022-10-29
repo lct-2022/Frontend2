@@ -3,7 +3,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import LoginForm from '../Login';
 import SignupForm from '../Signup';
-import Profile from '../Profile';
+import Profile from '../User';
+import Home from '../Home';
 
 import './App.css';
 
@@ -17,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main/>}/>
+        <Route path="/" element={<Home/>}/>
 
         <Route path="/signup" element={<SignupForm/>}/>
         <Route path="/login" element={<LoginForm/>}/>

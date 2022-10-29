@@ -5,11 +5,11 @@ import './App.css';
 import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../../../api/rpc';
 import { TOKEN } from '../../../../utils/consts';
 import { Props } from './types';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
 const ProjectsList: Props = ({...props}) => {
-    const projects = useSelector(() => {});
+    // const projects = useSelector(() => {});
 
     const [popularJobs, setPopularJobs] = useState([]);
     const [popularProjects, setPopularProjects] = useState([]);
