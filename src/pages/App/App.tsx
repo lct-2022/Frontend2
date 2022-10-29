@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+import LoginForm from '../Login';
 import SignupForm from '../Signup';
 import Profile from '../Profile';
 
@@ -19,7 +20,7 @@ function App() {
         <Route path="/" element={<Main/>}/>
 
         <Route path="/signup" element={<SignupForm/>}/>
-        <Route path="/login" element={<SignupForm/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
         <Route path="/prifile" element={<Profile/>}/>
 
         <Route path="/:user" element={<SignupForm/>}/>

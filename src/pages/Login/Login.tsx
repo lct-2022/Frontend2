@@ -1,33 +1,28 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { prepareFio } from '../../utils/fio';
 
-import './Signup.css';
+import './Login.css';
 
-export function SignupForm() {
+export function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const [res, setRes] = useState('');
 
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
-
     const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
     }
     const navigate = useNavigate();
 
-    const signupAsync = useCallback(async () => {
+    const loginAsync = useCallback(async () => {
         const url = 'https://passport.dev.lct.40ants.com';
         const body = {
             jsonrpc: '2.0',
-            method: 'signup',
+            method: 'login',
             params: {
                 email: email,
                 password: password,
-                fio: '',
             },
             id: 0,
         }
@@ -53,32 +48,27 @@ export function SignupForm() {
     }, [email, password]);
 
     return (
-        <div className="signup_form">
-            <hr/>
+        <div className="login_form">
 
-            {res}
-
-            <hr/>
-
-            <h3>Регистрация</h3>
+            <h3>Login</h3>
 
                 <div className="signup_input">
-                    <label htmlFor="signup_mail">Введите Вашу электронную почту</label>
+                    <label htmlFor="signup_mail">Email</label>
                     <input className="signup_mail" value={email} onChange={changeMail}/>
                 </div>
 
                 <div className="signup_input">
-                    <label htmlFor="signup_password">Придумайте пароль</label>
+                    <label htmlFor="signup_password">Password</label>
                     <input className="signup_password" value={password} onChange={changePassword}/>
                 </div>
 
                 <button 
-                    onClick={signupAsync}
+                    onClick={loginAsync}
                 >
-                    Отправить
+                    Войти
                 </button>
         </div>
     );
 }
 
-export default SignupForm;
+export default LoginForm;
