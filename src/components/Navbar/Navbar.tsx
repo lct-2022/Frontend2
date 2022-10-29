@@ -11,7 +11,6 @@ const MENU_POINTS = {
 }
 
 const LOGOUT_POINT = 'Выйти';
-const SIGNUP_POINT = 'Регистрация';
 const LOGIN_POINT = 'Войти';
 
 function Navbar() {
@@ -21,7 +20,7 @@ function Navbar() {
     const menuPoints = useMemo(() => {
         const menuWithLogin = isAuthorized
             ? {...MENU_POINTS, [LOGOUT_POINT]: '/'}
-            : {...MENU_POINTS, [SIGNUP_POINT]: '/', [LOGIN_POINT]: '/'}
+            : {...MENU_POINTS, [LOGIN_POINT]: '/login'}
 
         return (
             <ul>

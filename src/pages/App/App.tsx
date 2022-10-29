@@ -23,16 +23,16 @@ function App() {
       <Routes>
         <Route path={ROUTES.INDEX} element={<Home/>}/>
 
-        <Route path={ROUTES.SIGNUP} element={<LoginForm isAuthorized={isAuthorized}/>}/>
-        <Route path={ROUTES.LOGIN} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.SIGNUP} element={<LoginForm type="signup"/>}/>
+        <Route path={ROUTES.LOGIN} element={<LoginForm type="login"/>}/>
         <Route path={ROUTES.USER} element={<Profile/>}/>
 
-        <Route path={ROUTES.PROJECTS} element={<LoginForm isAuthorized={isAuthorized}/>}/>
-        <Route path={ROUTES.PROJECT} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.PROJECTS} element={<LoginForm/>}/>
+        <Route path={ROUTES.PROJECT} element={<LoginForm/>}/>
 
-        <Route path={ROUTES.SERVICES} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
 
-        <Route path={ROUTES.CHAT} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
       </Routes>
     </BrowserRouter>
   );

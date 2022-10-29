@@ -5,10 +5,11 @@ import classNames from 'classnames';
 import './Login.css';
 import { Props } from './types';
 import { login, signup } from '../../api/passport';
+import RedirectLoginBlock from './components/Redirect-Block';
 
 const cn = 'login-form';
 
-export const LoginForm: Props = ({isAuthorized}) => {
+export const LoginForm: Props = ({type = 'login'}) => {
     // const isAuthorized = true;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,12 +22,12 @@ export const LoginForm: Props = ({isAuthorized}) => {
     }
     const navigate = useNavigate();
 
-    const btnName = isAuthorized
+    const btnName = type === 'login'
         ? 'Войти'
         : 'Зарегистрироваться'
 
     const loginAsync = useCallback(async () => {
-        const requestResult = isAuthorized
+        const requestResult = type === 'login'
             ? await login(email, password)
             : await signup(email, password)
 
@@ -34,14 +35,14 @@ export const LoginForm: Props = ({isAuthorized}) => {
 
         navigate(`/user/:${requestResult.id}`);
 
+        // Remove ???
         setEmail('');
         setPassword('');
-    }, [email, password, isAuthorized]);
+    }, [email, password, type]);
 
     return (
         <div className="login">
             <div className="login-form">
-
 
                 <div className="login-form-wrapper">
 
@@ -66,10 +67,7 @@ export const LoginForm: Props = ({isAuthorized}) => {
 
                     <div id="divider"/>
 
-                    <div>
-                        
-                    </div>
-
+                    <RedirectLoginBlock type={type}/>
                 </div>
 
             </div>
