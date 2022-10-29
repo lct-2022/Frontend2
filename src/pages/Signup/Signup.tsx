@@ -1,11 +1,16 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { prepareFio } from '../../utils/fio';
 
 import './Signup.css';
 
 export function SignupForm() {
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [fatherName, setFatherName] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    console.log('render');
 
     const [res, setRes] = useState('');
 
@@ -17,66 +22,83 @@ export function SignupForm() {
         setLastName(event.target.value)
     }
 
+    const changeFatherName = (event: ChangeEvent<HTMLInputElement>) => {
+        setFatherName(event.target.value)
+    }
+
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
 
-    const signupAsync = async () => {
-        const url = 'https://passport.dev.lct.40ants.com/';
+    const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value)
+    }
+    // const navigate = useNavigate();
+
+    const clickHandler = () => {
+        // event.preventDefault()
+        console.log('click');
+    }
+
+    const submitHandler = () => {
+        console.log('submit');
+    }
+
+
+    const signupAsync = useCallback(async () => {
+        setEmail('');
+        const url = 'https://passport.dev.lct.40ants.com';
         const body = {
             jsonrpc: '2.0',
             method: 'signup',
             params: {
-                email: 'testEmail',
-                fio: 'testFio',
-                password: 'testPassword',
+                email: email,
+                fio: prepareFio(lastName, name, fatherName),
+                password: password,
+                // email: email,
+                // fio: prepareFio(lastName, name, fatherName),
+                // password: password,
             },
-            id: 1,
+            id: 0,
         }
         const headers = {
             'Content-Type': 'application/json',
-            'authorization': 'token',
         }
         const options = {
             method: 'POST',
             headers,
-            // credentals: 'include',
-            mode: 'no-cors' as RequestMode,
             body: JSON.stringify(body),
         }
         const response = await fetch(url, options);
-        console.log(response);
-        const result = await response.json()
+        const result = await response.json();
         setRes(result.result)
-    }
+        setEmail('');
 
-    useEffect(() => {
-        signupAsync();
-    }, []);
+        // if (!response.ok) {
+        //     setRes('Error')
+        // } else {
+        //     const result = await response.json();
+        //     setRes(result.result)
+        //     // navigate('/profile')
+        // }
+    }, [name, lastName, fatherName, email, password]);
+
+    // useEffect(() => {
+    //     signupAsync()
+    // }, []);
 
     return (
         <div className="signup_form">
             <hr/>
 
             {res}
-
-            {/* <button onClick={signupAsync}>
-                GET PET
-            </button>
-            {pet}
-
-            <button>
-                CREATE PET
-            </button>
-
-            <button>
-                LIST PETS
-            </button> */}
             <hr/>
 
             <h3>Регистрация</h3>
 
-            <form onSubmit={signupAsync}>
+            {/* <form 
+                onSubmit={submitHandler}
+            > */}
 
                 <div className="signup_input">
                     <label htmlFor="signup_name">Введите Ваше имя</label>
@@ -89,8 +111,8 @@ export function SignupForm() {
                 </div>
 
                 <div className="signup_input">
-                    <label htmlFor="signup_lastname">Введите Ваше отчество</label>
-                    <input className="signup_lastname" value={lastName} onChange={changeLastName}/>
+                    <label htmlFor="signup_fathername">Введите Ваше отчество</label>
+                    <input className="signup_fathername" value={fatherName} onChange={changeFatherName}/>
                 </div>
 
                 <div className="signup_input">
@@ -99,15 +121,17 @@ export function SignupForm() {
                 </div>
 
                 <div className="signup_input">
-                    <label htmlFor="signup_mail">Придумайте пароль</label>
-                    <input className="signup_mail" value={lastName} onChange={changeLastName}/>
+                    <label htmlFor="signup_password">Придумайте пароль</label>
+                    <input className="signup_password" value={password} onChange={changePassword}/>
                 </div>
 
-                <button>
+                <button 
+                // type="submit"
+                    onClick={signupAsync}
+                >
                     Отправить
                 </button>
-
-            </form>
+            {/* </form> */}
         </div>
     );
 }
