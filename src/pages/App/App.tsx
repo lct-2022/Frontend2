@@ -8,6 +8,7 @@ import Home from '../Home';
 import './App.css';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
+import ErrorBoundary from '../../components/Error-Boundary';
 
 function Main() {
   return (

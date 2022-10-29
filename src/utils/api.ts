@@ -59,6 +59,11 @@ export async function request(args: IRPCRequestArguments): Promise<IDataRPC<any>
     }
 
     const response = await fetch(url, options);
+
+    if (!response.ok) {
+        throw new Error()
+    }
+    
     const result = await response.json();
     return result;
 }

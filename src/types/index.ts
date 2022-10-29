@@ -1,3 +1,6 @@
+export type Nullable<D> = D | null;
+export type Undefinedable<D> = D | undefined;
+
 export interface IUser {
     // many props
 }
