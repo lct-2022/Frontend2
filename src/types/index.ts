@@ -1,5 +1,5 @@
 export interface IUser {
-
+    // many props
 }
 
 export interface IProject {

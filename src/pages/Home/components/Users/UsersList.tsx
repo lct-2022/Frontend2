@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../../../api/rpc';
+import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 // import { useSelector } from 'react-redux';
 

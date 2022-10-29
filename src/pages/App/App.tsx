@@ -2,11 +2,11 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import LoginForm from '../Login';
-import SignupForm from '../Signup';
 import Profile from '../User';
 import Home from '../Home';
 
 import './App.css';
+import { ROUTES } from '../../utils/routes';
 
 function Main() {
   return (
@@ -15,18 +15,24 @@ function Main() {
 }
 
 function App() {
+  const isAuthorized = true;
+  // useSelector(() => {});
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path={ROUTES.INDEX} element={<Home/>}/>
 
-        <Route path="/signup" element={<SignupForm/>}/>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/prifile" element={<Profile/>}/>
+        <Route path={ROUTES.SIGNUP} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.LOGIN} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.USER} element={<Profile/>}/>
 
-        <Route path="/:user" element={<SignupForm/>}/>
-        <Route path="/projects" element={<SignupForm/>}/>
-        <Route path="/:project" element={<SignupForm/>}/>
+        <Route path={ROUTES.PROJECTS} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+        <Route path={ROUTES.PROJECT} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+
+        <Route path={ROUTES.SERVICES} element={<LoginForm isAuthorized={isAuthorized}/>}/>
+
+        <Route path={ROUTES.CHAT} element={<LoginForm isAuthorized={isAuthorized}/>}/>
       </Routes>
     </BrowserRouter>
   );

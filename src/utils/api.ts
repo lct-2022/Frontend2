@@ -1,22 +1,26 @@
-import { RPC_PROTOCOL, RPC_URL, TOKEN } from "./consts";
+// class API {
+    // headers: any;
+    // uri: string;
+    // timeout?: number;
+    // body: any;
+    // protocol: string;
 
-class API {
-    headers: any;
-    uri: string;
-    timeout?: number;
-    body: any;
-    protocol: string;
+    // constructor(host: string, body: any) {
+    //     this.headers = {};
+    //     this.uri = RPC_URL;
+    //     this.body = {};
+    //     this.protocol = RPC_PROTOCOL;
+    // }
 
-    constructor(host: string, body: any) {
-        this.headers = {};
-        this.uri = RPC_URL;
-        this.body = {};
-        this.protocol = RPC_PROTOCOL;
-    }
+    // private getUrl(host: string) {
+    //     return `${this.protocol}://${host}${this.uri}`;
+    // }
+// }
 
-    private getUrl(host: string) {
-        return `${this.protocol}://${host}${this.uri}`;
-    }
+export interface IDataRPC<D> {
+    result: D,
+    jsonrpc: string,
+    id: number,
 }
 
 interface IRPCRequestArguments {
@@ -28,7 +32,7 @@ interface IRPCRequestArguments {
     }
 }
 
-export async function request(args: IRPCRequestArguments): Promise<any> {
+export async function request(args: IRPCRequestArguments): Promise<IDataRPC<any>> {
     const {method, host, params, settings} = args;
 
     const url = `https://${host}.dev.lct.40ants.com`;
@@ -55,8 +59,8 @@ export async function request(args: IRPCRequestArguments): Promise<any> {
     }
 
     const response = await fetch(url, options);
-    const res = await response.json();
-    return res.result;
+    const result = await response.json();
+    return result;
 }
 
 export enum RPCHosts {

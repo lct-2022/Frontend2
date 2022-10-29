@@ -1,9 +1,15 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
 import './Login.css';
+import { Props } from './types';
+import { login, signup } from '../../api/passport';
 
-export function LoginForm() {
+const cn = 'login-form';
+
+export const LoginForm: Props = ({isAuthorized}) => {
+    // const isAuthorized = true;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,58 +21,58 @@ export function LoginForm() {
     }
     const navigate = useNavigate();
 
-    const loginAsync = useCallback(async () => {
-        const url = 'https://passport.dev.lct.40ants.com';
-        const body = {
-            jsonrpc: '2.0',
-            method: 'login',
-            params: {
-                email: email,
-                password: password,
-            },
-            id: 0,
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-        }
-        const options = {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(body),
-        }
-        const response = await fetch(url, options);
+    const btnName = isAuthorized
+        ? 'Войти'
+        : 'Зарегистрироваться'
 
-        if (response.ok) {
-            const result = await response.json();
-            console.log(result.result)
-            setEmail('');
-            setPassword('');
-            navigate('/profile');
-        } else {
-            console.log('Error');
-        }
-    }, [email, password]);
+    const loginAsync = useCallback(async () => {
+        const requestResult = isAuthorized
+            ? await login(email, password)
+            : await signup(email, password)
+
+        console.log(requestResult);
+
+        navigate(`/user/:${requestResult.id}`);
+
+        setEmail('');
+        setPassword('');
+    }, [email, password, isAuthorized]);
 
     return (
-        <div className="login_form">
+        <div className="login">
+            <div className="login-form">
 
-            <h3>Login</h3>
 
-                <div className="signup_input">
-                    <label htmlFor="signup_mail">Email</label>
-                    <input className="signup_mail" value={email} onChange={changeMail}/>
+                <div className="login-form-wrapper">
+
+                    <h3 className="login-form-title">Login</h3>
+
+                    <div className="login-form-input">
+                        <label htmlFor="login-form-mail" className="login-label">Email</label>
+                        <input className="login-form-mail login-input" value={email} onChange={changeMail}/>
+                    </div>
+
+                    <div className="login-form-input">
+                        <label htmlFor="login-form-password"  className="login-label">Password</label>
+                        <input className="login-form-password login-input" value={password} onChange={changePassword}/>
+                    </div>
+
+                    <button
+                        className="login-form-btn"
+                        onClick={loginAsync}
+                    >
+                    {btnName}
+                    </button>
+
+                    <div id="divider"/>
+
+                    <div>
+                        
+                    </div>
+
                 </div>
 
-                <div className="signup_input">
-                    <label htmlFor="signup_password">Password</label>
-                    <input className="signup_password" value={password} onChange={changePassword}/>
-                </div>
-
-                <button 
-                    onClick={loginAsync}
-                >
-                    Войти
-                </button>
+            </div>
         </div>
     );
 }
