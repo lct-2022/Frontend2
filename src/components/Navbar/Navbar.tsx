@@ -1,29 +1,23 @@
 import React, { memo, useMemo } from 'react';
-import { NavLink } from 'react-router-dom'
-import './App.css';
+import { NavLink, useLocation } from 'react-router-dom'
+import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
+import './Navbar.css';
+import { LOGIN_POINT, LOGOUT_POINT, MENU_POINTS } from './consts';
 // import { useSelector } from 'react-redux';
-
-const MENU_POINTS = {
-    'Эксперты': '/',
-    'Проекты': '/',
-    'Cервисы': '/',
-    'Вакансии': '/',
-}
-
-const LOGOUT_POINT = 'Выйти';
-const LOGIN_POINT = 'Войти';
 
 function Navbar() {
     const isAuthorized = true;
     // useSelector(() => {});
 
+    const location = useLocation()
+
     const menuPoints = useMemo(() => {
         const menuWithLogin = isAuthorized
-            ? {...MENU_POINTS, [LOGOUT_POINT]: '/'}
-            : {...MENU_POINTS, [LOGIN_POINT]: '/login'}
+            ? {...MENU_POINTS, [LOGOUT_POINT]: ROUTES.INDEX}
+            : {...MENU_POINTS, [LOGIN_POINT]: ROUTES.LOGIN}
 
         return (
-            <ul>
+            <ul className="navbar-menu">
                 {Object.entries(menuWithLogin).map(([point, url], index) => (
                     <a
                         key={index}
@@ -40,8 +34,14 @@ function Navbar() {
         )
     }, [isAuthorized]);
 
+    if (NOT_NAVBAR_ROUTES.includes(location.pathname)) {
+        return null;
+    }
+
     return (
-      <div className="navbar_menu">
+      <div className="navbar">
+          <img src="" alt="" className="project-logo"/>
+
           {menuPoints}
       </div>
   )

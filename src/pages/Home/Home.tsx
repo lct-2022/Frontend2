@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 
 import LoginForm from '../Login';
-import SignupForm from '../Signup';
 import Profile from '../User';
 
 import './Home.css';
-import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../api/platform';
+import { getPopularJobs, getPopularProjects } from '../../api/platform';
 import { TOKEN } from '../../utils/consts';
+import { getPopularProfiles } from '../../api/passport';
 // import { useSelector } from 'react-redux';
 
 function Home() {
@@ -30,6 +30,7 @@ function Home() {
 
     return (
         <h1>Home</h1>
+
         // <Navbar/>
     )
 }

@@ -1,8 +1,10 @@
+import { ROUTES } from "../../utils/routes";
+
 const MENU_POINTS = {
-    'Эксперты': '/',
-    'Проекты': '/',
-    'Cервисы': '/',
-    'Вакансии': '/',
+    'Эксперты': ROUTES.EXPERTS,
+    'Проекты': ROUTES.PROJECTS,
+    'Cервисы': ROUTES.SERVICES,
+    'Вакансии': ROUTES.JOBS,
 }
 
 const LOGOUT_POINT = 'Выйти';

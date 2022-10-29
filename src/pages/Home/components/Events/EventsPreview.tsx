@@ -2,14 +2,15 @@ import React, { memo, useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
-import { getPopularProfiles, getPopularJobs, getPopularProjects } from '../../../../api/platform';
+import {getPopularJobs, getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 
 // import { useSelector } from 'react-redux';
 
 
-const JobsList = ({...props}) => {
-    // const jobs = useSelector(() => {});
+const EventsPreview = ({...props}) => {
+    const events = [];
+    // useSelector(() => {});
 
     const [popularJobs, setPopularJobs] = useState([]);
     const [popularProjects, setPopularProjects] = useState([]);
@@ -25,4 +26,4 @@ const JobsList = ({...props}) => {
     )
 }
 
-export default memo(JobsList);
+export default memo(EventsPreview);

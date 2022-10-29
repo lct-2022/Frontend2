@@ -7,6 +7,7 @@ import Home from '../Home';
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
+import Navbar from '../../components/Navbar';
 
 function Main() {
   return (
@@ -20,6 +21,8 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Navbar/>
+      
       <Routes>
         <Route path={ROUTES.INDEX} element={<Home/>}/>
 
@@ -34,6 +37,8 @@ function App() {
 
         <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
       </Routes>
+
+      {/* <Footer/> */}
     </BrowserRouter>
   );
 }

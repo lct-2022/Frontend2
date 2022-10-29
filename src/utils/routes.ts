@@ -8,5 +8,11 @@ export const ROUTES = {
     PARTICIPANTS: '/users/participants',
     USER: '/profile/:id',
     PROJECT: '/profile/:id',
+    JOBS: '/vacancies',
     CHAT: '/chat',
 }
+
+export const NOT_NAVBAR_ROUTES = [
+    ROUTES.LOGIN,
+    ROUTES.SIGNUP,
+]

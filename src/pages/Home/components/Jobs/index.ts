@@ -1,1 +1,1 @@
-export {default} from './JobsList'
+export {default} from './JobsPreview'

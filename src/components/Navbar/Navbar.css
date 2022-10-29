@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100px;
+}
+
+.navbar-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 70%;
+    height: 100%;
+}
+
+a {
+    color: black;
+    font-size: large;
+    font-weight: 800;
+    text-decoration: none;
+}
