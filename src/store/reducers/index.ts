@@ -1,21 +1,14 @@
 import { combineReducers, Reducer } from "redux";
-import { IProject, IUser, Nullable } from "../../types";
 import { activeUserReducer } from './activeUser';
+import { usersReducer } from "./users";
 import { projectsReducer } from './projects';
-
-type BaseReducer = {
-    activeUser: Reducer<Nullable<IUser>>;
-    projects: Reducer<IProject[]>;
-}
-
-export type BaseState = {
-    activeUser: Nullable<IUser>;
-    projects: IProject[];
-}
+import { jobsReducer } from "./jobs";
 
 export const rootReducer = combineReducers({
     activeUser: activeUserReducer,
-    posts: projectsReducer,
+    projects: projectsReducer,
+    users: usersReducer,
+    jobs: jobsReducer,
 });
 
 export type RootType = ReturnType<typeof rootReducer>

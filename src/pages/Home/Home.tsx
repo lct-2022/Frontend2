@@ -6,7 +6,7 @@ import Profile from '../User';
 
 import './Home.css';
 import { getPopularJobs, getPopularProjects } from '../../api/platform';
-import { TOKEN } from '../../utils/consts';
+import { LIMITS, TOKEN } from '../../utils/consts';
 import { getPopularProfiles } from '../../api/passport';
 import { onLoad } from './preloader';
 import { useDispatch } from 'react-redux';
@@ -18,21 +18,27 @@ import { AnyAction } from '@reduxjs/toolkit';
 import { popularProjectsSelector } from '../../store/selectors/projects';
 import { getTokenFromCookies } from '../../utils/cookie';
 // import { useSelector } from 'react-redux';
+import JobsPreview from './components/Jobs'
 
 function Home() {
     const dispatch = useDispatch();
-    console.log(onLoad());
+    //  console.log(store);
      
     // TODO: add preloader
     useEffect(() => {
         dispatch<any>(popularProjectsAction(getTokenFromCookies()));
         dispatch<any>(popularProfilesAction(getTokenFromCookies()));
-        dispatch<any>(popularJobsAction(getTokenFromCookies()));
+        dispatch<any>(popularJobsAction(getTokenFromCookies(), LIMITS.JOBS));
     }, []);
 
     return (
-        <h1>Home</h1>
-        
+        <div>
+            <h1>Home</h1>
+            
+            <br />
+
+            <JobsPreview/>
+        </div>
 
         // <Navbar/>
     )

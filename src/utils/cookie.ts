@@ -1,11 +1,13 @@
 // import Cookies from 'js-cookie'; 
 
+import { TOKEN } from "./consts"
+
 export function getTokenFromCookies() {
-    return 'TOKEN'
+    return TOKEN;
 }
 
 export function setToken() {
-    return 'TOKEN'
+    return TOKEN;
 }
 
 

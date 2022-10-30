@@ -2,20 +2,18 @@ import { IProject } from "../../types";
 import { ProjectsAction, ProjectsActions } from "../types/projects";
 import { IBaseStore } from "../types/store";
 
-type ProjectsState = Pick<IBaseStore, 'projects'>
+type ProjectsState = IBaseStore['projects'];
 
-export const initStore: ProjectsState = {
-    projects: [],
-};
+export const initialStore: ProjectsState = [];
 
-export const projectsReducer = (store: ProjectsState = initStore, action: ProjectsAction) => {
+export const projectsReducer = (store: ProjectsState = initialStore, action: ProjectsAction) => {
     const {type, payload} = action;
 
     switch (type) {
         case ProjectsActions.SET_PROJECTS:
-            return {...store, projects: payload}
+            return payload
         case ProjectsActions.ADD_PROJECT:
-            return {...store, projects: [...store.projects, payload]}
+            return [...store, payload]
 
         default:
             return store;

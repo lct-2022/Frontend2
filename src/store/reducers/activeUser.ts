@@ -3,20 +3,18 @@ import { IUser, Nullable } from "../../types";
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { IBaseStore } from "../types/store";
 
-type UserState = Pick<IBaseStore, 'activeUser'>
+type UserState = IBaseStore['activeUser']
 
-const initStore: UserState = {
-    activeUser: null,
-};
+const initialStore: UserState = null;
 
-export const activeUserReducer = (store: UserState = initStore, action: ActiveUserAction) => {
+export const activeUserReducer = (store: UserState = initialStore, action: ActiveUserAction) => {
     const {type, payload} = action;
 
     switch (type) {
         case ActiveUserActions.SET_USER:
-            return {...store, user: payload}
+            return payload
         case ActiveUserActions.UNSET_USER:
-            return {...store, user: null}
+            return null
 
         default:
             return store;

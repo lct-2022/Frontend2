@@ -25,6 +25,7 @@ export type IUser = ICommonData & {
     admin: Nullable<string>,
 }
 
+// TODO Добавить поле "получили поддержку"
 export type IProject = ICommonData & {
     'author-id': number,
     title: string;

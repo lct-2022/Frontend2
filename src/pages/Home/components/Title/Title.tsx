@@ -6,16 +6,21 @@ import { getPopularJobs, getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 import { popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
+import { TITLE } from './consts';
+import { popularProjectsSelector } from '../../../../store/selectors/projects';
 
 // import { useSelector } from 'react-redux';
 
 
-const JobsPreview = () => {
+
+const TitleHomePage = () => {
     const jobs = useSelector(popularJobsSelector);
-    console.log('==>', useSelector(store => store));
+    const projects = useSelector(popularProjectsSelector);
     
     return (
         <div>
+            <h3>{TITLE}</h3>
+
             {jobs.map((item, index) => (
                 <div key={index} className="vacancy_card">
                     {item.title}
@@ -30,4 +35,4 @@ const JobsPreview = () => {
     )
 }
 
-export default memo(JobsPreview);
+export default memo(TitleHomePage);
