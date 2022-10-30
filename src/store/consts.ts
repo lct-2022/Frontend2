@@ -1,1 +1,4 @@
-export const t = ''
+export type CommonAction<D> = {
+    type: any,
+    action?: D,
+}
