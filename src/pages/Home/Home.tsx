@@ -18,7 +18,8 @@ import { AnyAction } from '@reduxjs/toolkit';
 import { popularProjectsSelector } from '../../store/selectors/projects';
 import { getTokenFromCookies } from '../../utils/cookie';
 // import { useSelector } from 'react-redux';
-import JobsPreview from './components/Jobs'
+import JobsPreview from './components/Jobs';
+import TitleHomePage from './components/Title';
 
 function Home() {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function Home() {
     useEffect(() => {
         dispatch<any>(popularProjectsAction(getTokenFromCookies()));
         dispatch<any>(popularProfilesAction(getTokenFromCookies()));
-        dispatch<any>(popularJobsAction(getTokenFromCookies(), LIMITS.JOBS));
+        dispatch<any>(popularJobsAction(getTokenFromCookies()));
     }, []);
 
     return (
@@ -37,6 +38,7 @@ function Home() {
             
             <br />
 
+            <TitleHomePage/>
             <JobsPreview/>
         </div>
 

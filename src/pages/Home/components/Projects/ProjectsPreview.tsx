@@ -18,9 +18,7 @@ const ProjectsPreview: Props = ({...props}) => {
 
     return (
         <div>
-            {/* {projects.map(() => (
-
-            ))} */}
+            
         </div>
     )
 }

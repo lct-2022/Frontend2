@@ -1,36 +1,49 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-// import './JobsPreview.css';
+import './Title.css';
 import { getPopularJobs, getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
-import { popularJobsSelector } from '../../../../store/selectors/jobs';
+import { allJobsNumSelector, popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
-import { TITLE } from './consts';
-import { popularProjectsSelector } from '../../../../store/selectors/projects';
-
-// import { useSelector } from 'react-redux';
-
-
+import { CARD_TITLES, TITLE } from './consts';
+import { allProjectsSupportedSelector, popularProjectsSelector } from '../../../../store/selectors/projects';
+import { allProfilesNumSelector } from '../../../../store/selectors/users';
 
 const TitleHomePage = () => {
-    const jobs = useSelector(popularJobsSelector);
-    const projects = useSelector(popularProjectsSelector);
+    const projectsNum = useSelector(allProfilesNumSelector);
+    const projectsSupportedNum = useSelector(allProjectsSupportedSelector);
+    const jobsNum = useSelector(allJobsNumSelector);
+
+    const dataToShow = [
+        projectsNum,
+        projectsSupportedNum,
+        jobsNum,
+    ];
     
+    // useEffect(() => {
+
+    // }, []);
+
+    const cards = useMemo(() => {
+        return (
+            <div className="cards-title-home">
+                {dataToShow.map((item, index) => (
+                    <div key={index} className="card-title-home">
+                        <div>{item}</div>
+                        
+                        <div>{CARD_TITLES[index]}</div>
+                    </div>
+                ))}
+            </div>
+        )
+    }, [dataToShow])
+
     return (
         <div>
             <h3>{TITLE}</h3>
 
-            {jobs.map((item, index) => (
-                <div key={index} className="vacancy_card">
-                    {item.title}
-
-                    <hr/>
-
-                    {item.description}
-                    
-                </div>
-            ))}
+            {cards}
         </div>
     )
 }

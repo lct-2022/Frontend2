@@ -1,0 +1,15 @@
+.cards-title-home {
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-title-home {
+    background-color: #D0D5DD;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 16px 32px;
+}

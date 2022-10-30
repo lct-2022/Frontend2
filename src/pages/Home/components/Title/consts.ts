@@ -1,5 +1,7 @@
 export const TITLE = 'Выложи идею и найди кманду для ее реализации';
 
-export const POINTS = [
-    ''
-]
+export const CARD_TITLES = [
+    'Идей в базе',
+    'Получили поддержку',
+    'Вакансий'
+];
