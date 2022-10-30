@@ -1,28 +1,28 @@
-import { Reducer } from "redux";
 import { IUser, Nullable } from "../../types";
-import { UserActions } from "../types";
+import { CommonAction, ActiveUserActions } from "../types";
 
 interface IUserState {
     user: Nullable<IUser>;
 }
 
-interface CommonAction {
-    user: Nullable<IUser>;
-}
-
-type UserActions = {
-
-}
+type UserPayloads = 
+    | IUser
+    | null;
 
 export const initStore: IUserState = {
     user: null,
 };
 
-export const userReducer = (store = initStore, action) => {
+const ActiveUserActionsMap: Record<string, ActiveUserActions> = {
+    SET_USER: 'SET_USER',
+    LOGOUT_USER: 'LOGOUT_USER',
+}
+
+export const activeUserReducer = (store: IUserState, action: CommonAction<UserPayloads>) => {
     switch (action.type) {
-        case UserActions.SET_USER:
+        case ActiveUserActionsMap.SET_USER:
             return {...store, user: action.payload}
-        case UserActions.LOGOUT_USER:
+        case ActiveUserActionsMap.LOGOUT_USER:
             return {...store, user: null}
 
         default:

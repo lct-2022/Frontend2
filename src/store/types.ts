@@ -1,34 +1,25 @@
-// export enum UserActions {
-//     SET_USER = 'SET_USER',
-//     LOGOUT_USER = 'LOGOUT_USER',
-// }
-
-const UserActions = [
+const ActiveUserActionsList = [
     'SET_USER',
     'LOGOUT_USER',
-] as const
+] as const;
 
-const ProjectsActions = [
-    'SET_PROJECT',
-    'LOGOUT_PROJECT',
-] as const
+const ProjectsActionsList = [
+    'SET_PROJECTS',
+    'ADD_PROJECT',
+    'DELETE_PROJECT',
+    'UPDATE_PROJECT',
+] as const;
 
-type UserActions = typeof UserActions[number]
-type ProjectActions = typeof ProjectsActions[number]
-
+export type ActiveUserActions = typeof ActiveUserActionsList[number];
+export type ProjectActions = typeof ProjectsActionsList[number];
 
 type ActionTypes = 
-    | UserActions
+    | ActiveUserActions
     | ProjectActions
 
 export type CommonAction<D> = {
-    type: string,
+    type: ActionTypes,
     payload?: D,
 }
 
-const rtest: CommonAction<Array<any>> = {
-    type: UserActions.SET_USER,
-    payload: [1,2,3]
-}
-
-const t: UserActions = 'SET_USER'
+// export type Actions = CommonAction

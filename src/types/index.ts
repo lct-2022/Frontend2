@@ -1,5 +1,6 @@
 export type Nullable<D> = D | null;
 export type Undefinedable<D> = D | undefined;
+export type Map<D> = {[x in any]: D}
 
 export interface IUser {
     // many props
