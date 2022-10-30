@@ -1,0 +1,25 @@
+.btn {
+    cursor: pointer;
+}
+
+.btn-primary {
+    border-radius: 10%;
+    border: none;
+
+    color: #ffffff;
+    background-color: green;
+
+    font-size: large;
+    font-weight: 500;
+}
+
+.btn-secondary {
+    background-color: palevioletred;
+    color: #ffffff;
+    border-radius: 15px;
+    
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .5);
+    
+    font-size: large;
+    font-weight: 800;
+}

@@ -1,13 +1,10 @@
 import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 
 import './Login.css';
 import { Props } from './types';
 import { login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
-
-const cn = 'login-form';
 
 export const LoginForm: Props = ({type = 'login'}) => {
     // const isAuthorized = true;
