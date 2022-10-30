@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { IProject } from "../../../../types";
+import { IProject, ProjectData } from "../../../../types";
 
 interface IProps {
-    title: IProject['project']['title'],
-    description: IProject['project']['description'], 
-    contest: IProject['project']['contests'],
-    url: IProject['project']['url'],
+    title: ProjectData['title'],
+    description: ProjectData['description'], 
+    contest: ProjectData['contests'],
+    url: ProjectData['url'],
     rating: IProject['rating'],
 }
 

@@ -19,7 +19,8 @@ export function User() {
 
     return (
         <div className="">
-            <UserBusinessInfo fio="currentUserData.fio"/>
+            <h1>Профиль</h1>
+            {/* <UserBusinessInfo fio="currentUserData.fio"/> */}
             {/* <UserOptions/> */}
             {/* <UserCommonInfo data={}/> */}
         </div>

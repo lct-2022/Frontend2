@@ -38,6 +38,8 @@ export type IProject = {
     rating: number;
 }
 
+export type ProjectData = IProject['project'];
+
 export type IJob = ICommonData & {
     'team-id': number;
     title: string;

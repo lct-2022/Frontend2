@@ -1,29 +1,43 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
-import {getPopularJobs, getPopularProjects } from '../../../../api/platform';
+import { getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
+import { useSelector } from 'react-redux';
+import { popularProjectsSelector } from '../../../../store/selectors/projects';
+import EventCard from '../EventItem';
 
-// import { useSelector } from 'react-redux';
+const TITLE = 'Предстоящие мероприятия';
 
+const ProjectsPreview = () => {
+    const projects = useSelector(popularProjectsSelector);
 
-const EventsPreview = ({...props}) => {
-    const events = [];
-    // useSelector(() => {});
-
-    const [popularJobs, setPopularJobs] = useState([]);
-    const [popularProjects, setPopularProjects] = useState([]);
-    const [popularProfiles, setPopularProfiles] = useState([]);
-    const [popularEvents, setPopularEvents] = useState([]);
+    const projectsList = useMemo(() => {
+        return (
+            <div className="vacancies-preview">
+                {projects.map(({project: {title, description, contests, url}, rating}, index) => (
+                    <div key={index}>
+                        <EventCard
+                            title={title}
+                            description={description}
+                            contest={contests}
+                            url={url}
+                            rating={rating}
+                        />
+                    </div>
+                ))}
+            </div>
+        )
+    }, [projects]);
 
     return (
         <div>
-            {/* {projects.map(() => (
+            {TITLE}
 
-            ))} */}
+            {projectsList}
         </div>
     )
 }
 
-export default memo(EventsPreview);
+export default memo(ProjectsPreview);

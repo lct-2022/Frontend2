@@ -4,8 +4,6 @@ import './JobItem.css';
 
 import {Props} from './types';
 
-const TITLE = 'Отправить заявку';
-
 const ProjectItem: Props = ({
     title, 
     description,
@@ -26,11 +24,17 @@ const ProjectItem: Props = ({
                     <div className="card-project-text">
                         {description}
                     </div>
+
+                </div>
+
+                <div className="card-project-detailes">
+                    <span>{contest}</span>
+                    <span>{url}</span>
                 </div>
             </div>
 
-            <button className="card-project-right-block">
-                {TITLE}
+            <button className="card-project-rating">
+                {rating}
             </button>
         </div>
     )

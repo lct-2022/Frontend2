@@ -11,13 +11,16 @@ import { ActiveUserActions } from '../../store/types/activeUser';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { ROUTES } from '../../utils/routes';
 
+enum Labels {
+    EMAIL = 'Email',
+    PASSWORD = 'Password',
+}
+
 export const LoginForm: Props = ({type = 'login'}) => {
-    // const isAuthorized = true;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
-
 
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -30,6 +33,10 @@ export const LoginForm: Props = ({type = 'login'}) => {
     const btnName = type === 'login'
         ? 'Войти'
         : 'Зарегистрироваться'
+
+    const title = type === 'login'
+        ? 'Войти'
+        : 'Регистрация'
 
     const submit = useCallback(() => {
         const requestor = type === 'login'
@@ -55,21 +62,23 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
                 <div className="login-form-wrapper">
 
-                    <h3 className="login-form-title">Login</h3>
+                    <h3 className="login-form-title">{title}</h3>
 
                     <div className="login-form-input">
-                        <label htmlFor="login-form-mail" className="login-label">Email</label>
+                        <label htmlFor="login-form-mail" className="login-label">
+                            {Labels.EMAIL}
+                        </label>
+
                         <input className="login-form-mail login-input" value={email} onChange={changeMail}/>
                     </div>
 
                     <div className="login-form-input">
-                        <label htmlFor="login-form-password"  className="login-label">Password</label>
+                        <label htmlFor="login-form-password" className="login-label">
+                            {Labels.EMAIL}
+                        </label>
+
                         <input className="login-form-password login-input" value={password} onChange={changePassword}/>
                     </div>
-                    
-                    {/* <Button type="secondary">
-                        {btnName}
-                    </Button> */}
 
                     <button
                         className="login-form-btn"
