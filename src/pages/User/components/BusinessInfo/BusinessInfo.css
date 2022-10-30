@@ -1,0 +1,8 @@
+.user-business-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-avatar {
+    border-radius: 50%;
+}

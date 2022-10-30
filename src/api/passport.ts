@@ -36,3 +36,13 @@ export const getPopularProfiles = async (token: string, limit?: number): Promise
         })
     });
 };
+
+export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<IUser>> => {
+    return await request({
+        method: 'my-profile',
+        host: RPCHosts.Passport,
+        settings: {
+            authToken: token
+        },
+    });
+};

@@ -18,6 +18,7 @@ function Home() {
     const [popularProfiles, setPopularProfiles] = useState([]);
     const [popularEvents, setPopularEvents] = useState([]);
 
+    // TODO: add preloader
     const getData = async () => {
         await getPopularProfiles(TOKEN);
         await getPopularJobs(TOKEN);

@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { NavLink, useLocation } from 'react-router-dom'
+import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
 import './Navbar.css';
 import { LOGIN_POINT, LOGOUT_POINT, MENU_POINTS } from './consts';
@@ -17,7 +17,7 @@ function Navbar() {
             : {...MENU_POINTS, [LOGIN_POINT]: ROUTES.LOGIN}
 
         return (
-            <ul className="navbar-menu">
+            <div className="navbar-menu">
                 {Object.entries(menuWithLogin).map(([point, url], index) => (
                     <a
                         key={index}
@@ -29,8 +29,7 @@ function Navbar() {
                         {point}
                     </a>
                 ))}
-
-            </ul>
+            </div>
         )
     }, [isAuthorized]);
 

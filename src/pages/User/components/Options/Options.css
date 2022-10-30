@@ -1,0 +1,16 @@
+.user-menu {
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-menu-point {
+    cursor: pointer;
+}
+
+.user-menu-point:hover {
+    color: green;
+}
+
+.user-menu-point:active {
+    text-decoration: underline;
+}
