@@ -9,6 +9,7 @@ export const initialStore: ProjectsState = {
     list: [],
 };
 
+// TODO - подумать, как исправить типы тут
 export const projectsReducer = (store: ProjectsState = initialStore, action: ProjectsAction) => {
     const {type, payload} = action;
 
