@@ -10,6 +10,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    padding: 16px 32px;
+    width: 200px;
+    height: 100px;
+}
+
+.card-title-home-text {
+    margin: 4px 0;
 }

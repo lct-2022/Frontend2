@@ -13,6 +13,6 @@ export const allProjectsNumSelector = createSelector(
 
 // TODO: support identification
 export const allProjectsSupportedSelector = createSelector(
-    (store: IBaseStore) => store.projects.list.filter(project => project.synced).length,
+    (store: IBaseStore) => store.projects.list.filter(proj => proj.project.synced).length,
     amount => amount,
 );

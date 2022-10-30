@@ -8,13 +8,22 @@ const TITLE = 'Отправить заявку';
 
 const JobCard: Props = ({title, description}) => {
     return (
-        <div>
-            <div className="card-job-left-block">
-                {title}
-                {description}
+        <div className="card-vacancy-home">
+            <div className="card-vacancy-left-block">
+                <div className="card-vacancy-photo"/>
+
+                <div className="card-vacancy-data">
+                    <div className="card-vacancy-text">
+                        {title}
+                    </div>
+
+                    <div className="card-vacancy-text">
+                        {description}
+                    </div>
+                </div>
             </div>
 
-            <button className="card-job-right-block">
+            <button className="card-vacancy-right-block">
                 {TITLE}
             </button>
         </div>

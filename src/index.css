@@ -17,6 +17,19 @@ code {
 button {
   cursor: pointer;
   font-weight: 800;
+
+  width: auto;
+  height: 48px;
+
+  border-radius: 15px;
+  border: none;
+
+  background-color:#475468;
+  color: #ffffff;
+}
+
+button:hover {
+  background-color:#7193c5;
 }
 
 a {

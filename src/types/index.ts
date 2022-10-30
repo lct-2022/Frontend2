@@ -2,6 +2,7 @@ export type Nullable<D> = D | null;
 
 // export type Undefinedable<D> = D | undefined;
 // export type Map<D> = {[x in any]: D};
+
 interface ICommonData {
     'created-at': string;
     'updated-at': string;
@@ -26,12 +27,15 @@ export type IUser = ICommonData & {
 }
 
 // TODO Добавить поле "получили поддержку"
-export type IProject = ICommonData & {
-    'author-id': number,
-    title: string;
-    description: string;
-    url: string;
-    contests: string;
+export type IProject = {
+    project: ICommonData & {
+        'author-id': number,
+        title: string;
+        description: string;
+        url: string;
+        contests: string;
+    };
+    rating: number;
 }
 
 export type IJob = ICommonData & {

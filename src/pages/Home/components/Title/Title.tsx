@@ -1,14 +1,13 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import './Title.css';
-import { getPopularJobs, getPopularProjects } from '../../../../api/platform';
-import { TOKEN } from '../../../../utils/consts';
 import { allJobsNumSelector, popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
 import { CARD_TITLES, TITLE } from './consts';
 import { allProjectsSupportedSelector, popularProjectsSelector } from '../../../../store/selectors/projects';
 import { allProfilesNumSelector } from '../../../../store/selectors/users';
+
+import './Title.css';
 
 const TitleHomePage = () => {
     const projectsNum = useSelector(allProfilesNumSelector);
@@ -20,19 +19,15 @@ const TitleHomePage = () => {
         projectsSupportedNum,
         jobsNum,
     ];
-    
-    // useEffect(() => {
-
-    // }, []);
 
     const cards = useMemo(() => {
         return (
             <div className="cards-title-home">
                 {dataToShow.map((item, index) => (
                     <div key={index} className="card-title-home">
-                        <div>{item}</div>
+                        <div className="card-title-home-text">{item}</div>
                         
-                        <div>{CARD_TITLES[index]}</div>
+                        <div className="card-title-home-text">{CARD_TITLES[index]}</div>
                     </div>
                 ))}
             </div>
