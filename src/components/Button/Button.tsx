@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classname from 'classnames';
+import { Props } from './types';
 
 import './Button.css';
-import { Props } from './types';
 
 const Button: Props = ({
     children,
@@ -17,4 +17,4 @@ const Button: Props = ({
     );
 };
 
-export default Button;
+export default memo<Props>(Button);

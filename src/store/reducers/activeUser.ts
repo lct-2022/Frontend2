@@ -18,7 +18,7 @@ const ActiveUserActionsMap: Record<string, ActiveUserActions> = {
     LOGOUT_USER: 'LOGOUT_USER',
 }
 
-export const activeUserReducer = (store: IUserState, action: CommonAction<UserPayloads>) => {
+export const activeUserReducer = (store: IUserState = initStore, action: CommonAction<UserPayloads>) => {
     switch (action.type) {
         case ActiveUserActionsMap.SET_USER:
             return {...store, user: action.payload}

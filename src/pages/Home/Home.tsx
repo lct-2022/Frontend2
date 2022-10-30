@@ -8,6 +8,7 @@ import './Home.css';
 import { getPopularJobs, getPopularProjects } from '../../api/platform';
 import { TOKEN } from '../../utils/consts';
 import { getPopularProfiles } from '../../api/passport';
+import { onLoad } from './preloader';
 // import { useSelector } from 'react-redux';
 
 function Home() {
@@ -17,17 +18,17 @@ function Home() {
     const [popularProjects, setPopularProjects] = useState([]);
     const [popularProfiles, setPopularProfiles] = useState([]);
     const [popularEvents, setPopularEvents] = useState([]);
-
+    onLoad()
     // TODO: add preloader
-    const getData = async () => {
-        await getPopularProfiles(TOKEN);
-        await getPopularJobs(TOKEN);
-        await getPopularProjects(TOKEN);
-    }
+    // const getData = async () => {
+    //     await getPopularProfiles(TOKEN);
+    //     await getPopularJobs(TOKEN);
+    //     await getPopularProjects(TOKEN);
+    // }
 
-    useEffect(() => {
-        getData();
-    }, []);
+    // useEffect(() => {
+    //     getData();
+    // }, []);
 
     return (
         <h1>Home</h1>

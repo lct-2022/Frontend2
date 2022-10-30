@@ -21,7 +21,7 @@ const projectsActionsMap: Record<ProjectActions, ProjectActions> = {
     UPDATE_PROJECT: 'UPDATE_PROJECT',
 }
 
-export const projectsReducer = (store: IProjectsState, action: CommonAction<ProjectsPayloads>) => {
+export const projectsReducer = (store: IProjectsState = initStore, action: CommonAction<ProjectsPayloads>) => {
     switch (action.type) {
         case projectsActionsMap.SET_PROJECTS:
             return {...store, projects: action.payload}

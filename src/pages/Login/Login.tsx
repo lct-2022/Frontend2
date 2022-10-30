@@ -5,6 +5,7 @@ import './Login.css';
 import { Props } from './types';
 import { login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
+import Button from '../../components/Button';
 
 export const LoginForm: Props = ({type = 'login'}) => {
     // const isAuthorized = true;
@@ -54,12 +55,16 @@ export const LoginForm: Props = ({type = 'login'}) => {
                         <label htmlFor="login-form-password"  className="login-label">Password</label>
                         <input className="login-form-password login-input" value={password} onChange={changePassword}/>
                     </div>
+                    
+                    {/* <Button type="secondary">
+                        {btnName}
+                    </Button> */}
 
                     <button
                         className="login-form-btn"
                         onClick={loginAsync}
                     >
-                    {btnName}
+                        {btnName}
                     </button>
 
                     <div id="divider"/>
