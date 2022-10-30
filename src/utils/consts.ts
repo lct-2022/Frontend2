@@ -1,8 +1,8 @@
 export const TOKEN = '...'
 
 export const LIMITS = {
-    PROJECTS: 3,
-    PROFILES: 3,
-    JOBS: 3,
-    EVENTS: 3,
+    PROJECTS: 2,
+    PROFILES: 2,
+    JOBS: 2,
+    EVENTS: 2,
 }

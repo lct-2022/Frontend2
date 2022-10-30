@@ -18,7 +18,8 @@ function Home() {
     const [popularProjects, setPopularProjects] = useState([]);
     const [popularProfiles, setPopularProfiles] = useState([]);
     const [popularEvents, setPopularEvents] = useState([]);
-    onLoad()
+    console.log(onLoad());
+     
     // TODO: add preloader
     // const getData = async () => {
     //     await getPopularProfiles(TOKEN);

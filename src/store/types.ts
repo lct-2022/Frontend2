@@ -17,9 +17,9 @@ type ActionTypes =
     | ActiveUserActions
     | ProjectActions
 
-export type CommonAction<D> = {
-    type: ActionTypes,
-    payload?: D,
+export type CommonAction<T, P = never> = {
+    type: T,
+    payload?: P,
 }
 
 // export type Actions = CommonAction

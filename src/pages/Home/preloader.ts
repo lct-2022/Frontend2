@@ -7,8 +7,8 @@ export async function onLoad() {
         getPopularJobs(''),
         getPopularProfiles(''),
     ])
-    .then((data) => {
-        console.log(data);
+    // .then((data) => {
+    //     console.log(data);
         
-    })
+    // })
 }
