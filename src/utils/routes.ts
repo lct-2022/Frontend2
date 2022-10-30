@@ -9,6 +9,7 @@ export const ROUTES = {
     USER: '/profile/:id',
     PROJECT: '/profile/:id',
     JOBS: '/vacancies',
+    EVENTS: '/events',
     CHAT: '/chat',
 }
 

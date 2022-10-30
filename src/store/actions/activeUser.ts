@@ -1,6 +1,6 @@
 import {login, signup} from '../../api/passport';
 import { Dispatch } from "react";
-import { CommonAction } from '../types';
+import { CommonAction } from '../../types';
 import { ActiveUserAction, ActiveUserActions } from '../types/activeUser';
 
 function prepareDispatchForSetUser(dispatch: Dispatch<ActiveUserAction>, data: any) {

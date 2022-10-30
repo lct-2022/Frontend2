@@ -9,11 +9,15 @@ import { getPopularJobs, getPopularProjects } from '../../api/platform';
 import { TOKEN } from '../../utils/consts';
 import { getPopularProfiles } from '../../api/passport';
 import { onLoad } from './preloader';
+import { useDispatch } from 'react-redux';
+import { popularProjectsAction } from '../../store/actions/projects';
+import { popularProfilesAction } from '../../store/actions/users';
+import { popularJobsAction } from '../../store/actions/jobs';
 // import { useSelector } from 'react-redux';
 
 function Home() {
     // const projects = useSelector(() => {});
-    
+    const dispatch = useDispatch();
     const [popularJobs, setPopularJobs] = useState([]);
     const [popularProjects, setPopularProjects] = useState([]);
     const [popularProfiles, setPopularProfiles] = useState([]);
@@ -27,9 +31,11 @@ function Home() {
     //     await getPopularProjects(TOKEN);
     // }
 
-    // useEffect(() => {
-    //     getData();
-    // }, []);
+    useEffect(() => {
+        dispatch(popularProjectsAction(''));
+        dispatch(popularProfilesAction());
+        dispatch(popularJobsAction());
+    }, []);
 
     return (
         <h1>Home</h1>

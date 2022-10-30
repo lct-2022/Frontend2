@@ -11,9 +11,11 @@ export const initStore: IUserState = {
 };
 
 export const activeUserReducer = (store: IUserState = initStore, action: ActiveUserAction) => {
-    switch (action.type) {
+    const {type, payload} = action;
+
+    switch (type) {
         case ActiveUserActions.SET_USER:
-            return {...store, user: action.payload}
+            return {...store, user: payload}
         case ActiveUserActions.LOGOUT_USER:
             return {...store, user: null}
 
