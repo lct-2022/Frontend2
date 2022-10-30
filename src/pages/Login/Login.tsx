@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { Props } from './types';
-import { login, signup } from '../../api/passport';
+import { checkAuthorization, login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
+import { ROUTES } from '../../utils/routes';
 
 export const LoginForm: Props = ({type = 'login'}) => {
     // const isAuthorized = true;
@@ -30,19 +31,22 @@ export const LoginForm: Props = ({type = 'login'}) => {
         ? 'Войти'
         : 'Зарегистрироваться'
 
-    const loginAsync = useCallback(async () => {
+    const submit = useCallback(() => {
         const requestor = type === 'login'
             ? login
             : signup
 
-        const requestResult = await requestor(email, password)
-        dispatch<any>(isUserAuthorizedAction(requestResult.result));
-
-        navigate(`/user/:${requestResult.id}`);
-
-        // Remove ???
-        setEmail('');
-        setPassword('');
+        requestor(email, password)
+            .then(({result}) => {
+                dispatch<any>(isUserAuthorizedAction(result))
+                // Remove ???
+                setEmail('');
+                setPassword('');
+                navigate(ROUTES.USER);
+            })
+            .catch(() => {
+                throw new Error();
+            })
     }, [email, password, type]);
 
     return (
@@ -69,7 +73,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
                     <button
                         className="login-form-btn"
-                        onClick={loginAsync}
+                        onClick={submit}
                     >
                         {btnName}
                     </button>

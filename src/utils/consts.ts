@@ -6,3 +6,5 @@ export const LIMITS = {
     JOBS: 2,
     EVENTS: 2,
 }
+
+export const DEFAULT_AVATAR = 'www';

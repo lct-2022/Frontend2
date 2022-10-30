@@ -15,32 +15,24 @@ import { popularProfilesAction } from '../../store/actions/users';
 import { popularJobsAction } from '../../store/actions/jobs';
 import { ProjectsAction, ProjectsActions, SetProjects } from '../../store/types/projects';
 import { AnyAction } from '@reduxjs/toolkit';
+import { popularProjectsSelector } from '../../store/selectors/projects';
+import { getTokenFromCookies } from '../../utils/cookie';
 // import { useSelector } from 'react-redux';
 
 function Home() {
-    // const projects = useSelector(() => {});
     const dispatch = useDispatch();
-    const [popularJobs, setPopularJobs] = useState([]);
-    const [popularProjects, setPopularProjects] = useState([]);
-    const [popularProfiles, setPopularProfiles] = useState([]);
-    const [popularEvents, setPopularEvents] = useState([]);
     console.log(onLoad());
      
     // TODO: add preloader
-    // const getData = async () => {
-    //     await getPopularProfiles(TOKEN);
-    //     await getPopularJobs(TOKEN);
-    //     await getPopularProjects(TOKEN);
-    // }
-
     useEffect(() => {
-        dispatch<any>(popularProjectsAction(''));
-        dispatch<any>(popularProfilesAction(''));
-        dispatch<any>(popularJobsAction(''));
+        dispatch<any>(popularProjectsAction(getTokenFromCookies()));
+        dispatch<any>(popularProfilesAction(getTokenFromCookies()));
+        dispatch<any>(popularJobsAction(getTokenFromCookies()));
     }, []);
 
     return (
         <h1>Home</h1>
+        
 
         // <Navbar/>
     )

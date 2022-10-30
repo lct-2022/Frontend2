@@ -6,7 +6,7 @@ export const ROUTES = {
     SERVICES: '/services',
     EXPERTS: '/users/administrators',
     PARTICIPANTS: '/users/participants',
-    USER: '/profile/:id',
+    USER: '/profile',
     PROJECT: '/profile/:id',
     JOBS: '/vacancies',
     EVENTS: '/events',

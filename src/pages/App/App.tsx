@@ -12,6 +12,7 @@ import ErrorBoundary from '../../components/Error-Boundary';
 import { checkAuthorization } from '../../api/passport';
 import { useDispatch } from 'react-redux';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
+import { getTokenFromCookies } from '../../utils/cookie';
 
 function Main() {
   return (
@@ -25,7 +26,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch<any>(isUserAuthorizedAction('')); // token из кук
+    dispatch<any>(isUserAuthorizedAction(getTokenFromCookies())); // token из кук
   }, []);
 
   return (
