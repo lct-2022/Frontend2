@@ -1,14 +1,13 @@
-import { IProject } from "../../types";
 import { JobsAction, JobsActions } from "../types/jobs";
+import { IBaseStore } from "../types/store";
 
-interface IJobsState {
-    jobs: IProject[];
-}
-export const initStore: IJobsState = {
+type JobsState = Pick<IBaseStore, 'jobs'>;
+
+export const initStore: JobsState = {
     jobs: [],
 };
 
-export const usersReducer = (store: IJobsState = initStore, action: JobsAction) => {
+export const usersReducer = (store: JobsState = initStore, action: JobsAction) => {
     const {type, payload} = action;
 
     switch (type) {

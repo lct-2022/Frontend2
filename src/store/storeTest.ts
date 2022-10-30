@@ -5,7 +5,7 @@ import { BaseState, rootReducer } from './reducers';
 import { activeUserReducer } from "./reducers/activeUser";
 import { projectsReducer } from "./reducers/projects";
 import type { Reducer } from '@reduxjs/toolkit';
-import { CommonAction } from "./types";
+import { CommonAction } from "../types";
 
 // declare const reducer: Reducer<{}>
 

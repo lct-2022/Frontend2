@@ -6,11 +6,17 @@ import { Props } from './types';
 import { login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
+import { useDispatch } from 'react-redux';
+import { ActiveUserActions } from '../../store/types/activeUser';
+import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 
 export const LoginForm: Props = ({type = 'login'}) => {
     // const isAuthorized = true;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+
 
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -25,11 +31,12 @@ export const LoginForm: Props = ({type = 'login'}) => {
         : 'Зарегистрироваться'
 
     const loginAsync = useCallback(async () => {
-        const requestResult = type === 'login'
-            ? await login(email, password)
-            : await signup(email, password)
+        const requestor = type === 'login'
+            ? login
+            : signup
 
-        console.log(requestResult);
+        const requestResult = await requestor(email, password)
+        dispatch<any>(isUserAuthorizedAction(requestResult.result));
 
         navigate(`/user/:${requestResult.id}`);
 

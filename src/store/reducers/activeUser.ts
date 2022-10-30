@@ -1,25 +1,24 @@
 import { IUser, Nullable } from "../../types";
 
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
+import { IBaseStore } from "../types/store";
 
-interface IUserState {
-    user: Nullable<IUser>;
-}
+type UserState = Pick<IBaseStore, 'activeUser'>
 
-export const initStore: IUserState = {
-    user: null,
+const initStore: UserState = {
+    activeUser: null,
 };
 
-export const activeUserReducer = (store: IUserState = initStore, action: ActiveUserAction) => {
+export const activeUserReducer = (store: UserState = initStore, action: ActiveUserAction) => {
     const {type, payload} = action;
 
     switch (type) {
         case ActiveUserActions.SET_USER:
             return {...store, user: payload}
-        case ActiveUserActions.LOGOUT_USER:
+        case ActiveUserActions.UNSET_USER:
             return {...store, user: null}
 
         default:
-            return store
+            return store;
         }
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import LoginForm from '../Login';
@@ -9,6 +9,9 @@ import './App.css';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
 import ErrorBoundary from '../../components/Error-Boundary';
+import { checkAuthorization } from '../../api/passport';
+import { useDispatch } from 'react-redux';
+import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 
 function Main() {
   return (
@@ -19,6 +22,11 @@ function Main() {
 function App() {
   const isAuthorized = true;
   // useSelector(() => {});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch<any>(isUserAuthorizedAction('')); // token из кук
+  }, []);
 
   return (
     <BrowserRouter>

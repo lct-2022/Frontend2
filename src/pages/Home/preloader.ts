@@ -7,6 +7,7 @@ export async function onLoad() {
         getPopularProjects('', LIMITS.PROJECTS),
         getPopularJobs('', LIMITS.PROJECTS),
         getPopularProfiles('', LIMITS.PROJECTS),
+        // my-profile
     ])
     .then(data => data);
 }

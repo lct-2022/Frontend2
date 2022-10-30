@@ -13,6 +13,8 @@ import { useDispatch } from 'react-redux';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { popularProfilesAction } from '../../store/actions/users';
 import { popularJobsAction } from '../../store/actions/jobs';
+import { ProjectsAction, ProjectsActions, SetProjects } from '../../store/types/projects';
+import { AnyAction } from '@reduxjs/toolkit';
 // import { useSelector } from 'react-redux';
 
 function Home() {
@@ -32,9 +34,9 @@ function Home() {
     // }
 
     useEffect(() => {
-        dispatch(popularProjectsAction(''));
-        dispatch(popularProfilesAction());
-        dispatch(popularJobsAction());
+        dispatch<any>(popularProjectsAction(''));
+        dispatch<any>(popularProfilesAction(''));
+        dispatch<any>(popularJobsAction(''));
     }, []);
 
     return (
