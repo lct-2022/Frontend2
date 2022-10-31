@@ -5,3 +5,7 @@
 .all-projects-data {
     display: flex;
 }
+
+.project-hidden {
+    display: none;
+}

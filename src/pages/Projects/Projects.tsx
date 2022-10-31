@@ -9,28 +9,20 @@ import ProjectsList from './components/ProjectsList';
 import Pagination from './components/Pagination';
 import Filtration from './components/Filtration';
 
+import './Projects.css';
+
 
 function ProjectsPage() {
     const [allProjects, setAllProjects] = useState<IProject[]>([]);
 
-    const dispatch = useDispatch();
-
     useEffect(() => {
         getPopularProjects(getTokenFromCookies())
-        .then(data => {
-            setAllProjects(data.result)
-        })
+            .then(data => {
+                setAllProjects(data.result.map(project => ({...project, hidden: false})));
+            })
     }, []);
 
-    console.log(allProjects);
-    
-    const projects = useMemo(() => {
-        return (
-            <div className="projects-container">
-                {allProjects.map(() => (null))}
-            </div>
-        )
-    }, [allProjects]);
+    console.log(allProjects.map(el => el.project.id));
 
     return (
         <div>

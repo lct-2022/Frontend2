@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
 import ProjectItem from '../../../Home/components/ProjectItem';
 import { Props } from '../../types';
+import classname from 'classnames';
 
 const ProjectsList: Props = ({projects}) => {
 
     const projectsList = useMemo(() => {
         return (
             <div className="projects-container">
-                {projects.map(({project: {title, description, contests, url}, rating}, index) => (
-                    <div key={index}>
+                {projects.map(({project: {title, description, contests, url}, rating, hidden}, index) => (
+                    <div key={index} className={`project${hidden ? '-hidden' : ''}`}>
                         <ProjectItem
                             title={title}
                             description={description}
@@ -25,6 +26,7 @@ const ProjectsList: Props = ({projects}) => {
     return (
         <div>
             <h1>Проекты все</h1>
+
             {projectsList}
         </div>
     )

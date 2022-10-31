@@ -23,6 +23,7 @@ export type IUser = ICommonData & {
     job: Nullable<string>,
     about: Nullable<string>,
     admin: Nullable<string>,
+    hidden?: boolean;
 }
 
 // TODO Добавить поле "получили поддержку"
@@ -35,6 +36,7 @@ export type IProject = {
         contests: string;
     };
     rating: number;
+    hidden?: boolean;
 }
 
 export type ProjectData = IProject['project'];
@@ -44,6 +46,7 @@ export type IJob = ICommonData & {
     title: string;
     description: string;
     open: boolean;
+    hidden?: boolean;
 }
 
 export type IEvents = ICommonData & {}
