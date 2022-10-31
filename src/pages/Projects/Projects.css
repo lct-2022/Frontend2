@@ -4,6 +4,7 @@
 
 .all-projects-data {
     display: flex;
+    justify-content: space-around;
 }
 
 .project-hidden {
