@@ -17,7 +17,7 @@ export const BUSINESS_INFO = [
 export const YES = 'Да';
 export const NO = 'Нет';
 
-export const ITEMS_MAP = {
+export const ITEMS_MAP: {[x in string]: string} = {
     fio: 'Фамилия им отчество',
     email: 'Электронная почта',
     birthday: 'Дата рождения',
@@ -29,6 +29,4 @@ export const ITEMS_MAP = {
     job: 'Работа',
     about: 'Расскажите о себе',
     admin: 'Админ',
-
-
 }

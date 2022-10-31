@@ -11,8 +11,12 @@
     justify-content: space-around;
     align-items: center;
 
-    width: 65%;
+    width: 70%;
     height: 100%;
+}
+
+.navbar-menu-point {
+    margin: 0 4px;
 }
 
 .avatar {

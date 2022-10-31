@@ -23,7 +23,7 @@ function Navbar() {
                 {Object.entries(menuWithLogin).map(([point, url], index) => (
                     <a
                         key={index}
-                        className="navbar_menu_point"
+                        className="navbar-menu-point"
                         href={url}
                         target="_self"
                         rel="noopener noreferrer"

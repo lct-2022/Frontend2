@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ProjectForm() {
+function ProjectCreate() {
     
   return (
     <h1>Форма проекта</h1>
   )
 }
-export default ProjectForm;
+export default ProjectCreate;

@@ -38,7 +38,7 @@ export function Profile() {
         if (!currentUser) {
             return null;
         }
-        // console.log(prepareProfileItems(Object.entries(currentUser)));
+        console.log(prepareProfileItems((currentUser)));
         
         return (
             <div className="profile-all-data">

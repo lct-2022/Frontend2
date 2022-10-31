@@ -6,7 +6,7 @@ import { getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 import { useSelector } from 'react-redux';
 import { popularProjectsSelector } from '../../../../store/selectors/projects';
-import ProjectCard from '../ProjectItem';
+import ProjectItem from '../ProjectItem';
 
 const TITLE = 'Проекты';
 
@@ -18,7 +18,7 @@ const ProjectsPreview = () => {
             <div className="projects-preview">
                 {projects.map(({project: {title, description, contests, url}, rating}, index) => (
                     <div key={index}>
-                        <ProjectCard
+                        <ProjectItem
                             title={title}
                             description={description}
                             contest={contests}
