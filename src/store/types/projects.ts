@@ -13,7 +13,7 @@ interface IUpdateData {
     project: IProject,
 }
 
-export type SetProjects = CommonAction<ProjectsActions.SET_PROJECTS, IProject[]>
+type SetProjects = CommonAction<ProjectsActions.SET_PROJECTS, IProject[]>
 type AddProject = CommonAction<ProjectsActions.ADD_PROJECT, IProject>
 type DeleteProject = CommonAction<ProjectsActions.DELETE_PROJECT, string>
 type UpdateProjects = CommonAction<ProjectsActions.UPDATE_PROJECT, IUpdateData>

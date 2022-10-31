@@ -61,7 +61,7 @@ export async function request(args: IRPCRequestArguments): Promise<IDataRPC<any>
     const response = await fetch(url, options);
 
     if (!response.ok) {
-        throw new Error()
+        throw new Error();
     }
     
     const result = await response.json();
@@ -74,4 +74,12 @@ export enum RPCHosts {
     Ratings = 'ratings',
     Chat = 'chat',
     Events = 'events',
+}
+
+export const RPCMethods = {
+    Passport: 'passport',
+    Platform: 'platform',
+    Ratings: 'ratings',
+    Chat: 'chat',
+    Events: 'events',
 }

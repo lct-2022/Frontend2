@@ -34,7 +34,7 @@ const ProjectItem: Props = ({
             </div>
 
             <div className="card-project-rating">
-                {rating}
+                rate: {rating}
             </div>
         </div>
     )

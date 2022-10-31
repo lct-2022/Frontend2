@@ -13,6 +13,6 @@ export const currentUserSelector = createSelector(
 )
 
 export const usersAvatarSelector = createSelector(
-    (store: IBaseStore) => store.activeUser?.["avatar-url"],
+    (store: IBaseStore) => store.activeUser?.user?.["avatar-url"],
     avatarUrl => avatarUrl || DEFAULT_AVATAR,
 )

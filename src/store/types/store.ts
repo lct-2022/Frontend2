@@ -6,7 +6,10 @@ type NumerableItems<D> = {
 }
 
 export interface IBaseStore {
-    activeUser: Nullable<IUser>;
+    activeUser: {
+        user: Nullable<IUser>;
+        roles: string[],
+    } 
     projects: NumerableItems<IProject>;
     users: NumerableItems<IUser>;
     jobs: NumerableItems<IJob>;

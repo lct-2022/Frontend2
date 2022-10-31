@@ -8,11 +8,11 @@ const MENU_POINTS = {
     'Вакансии': ROUTES.JOBS,
 }
 
-const LOGOUT_POINT = 'Выйти';
+const NEW_PROJECT_POINT = 'Выложить проект';
 const LOGIN_POINT = 'Войти';
 
 export {
     MENU_POINTS,
-    LOGOUT_POINT,
+    NEW_PROJECT_POINT,
     LOGIN_POINT
 }

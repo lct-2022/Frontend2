@@ -4,6 +4,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import LoginForm from '../Login';
 import Profile from '../User';
 import Home from '../Home';
+import Application from '../Application';
+import ProjectForm from '../Project';
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
@@ -14,15 +16,15 @@ import { useDispatch } from 'react-redux';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { getTokenFromCookies } from '../../utils/cookie';
 
-function Main() {
-  return (
-    <h1>Main</h1>
-  )
-}
+// function Main() {
+//   return (
+//     <h1>Main</h1>
+//   )
+// }
+// export default Main;
+
 
 function App() {
-  const isAuthorized = true;
-  // useSelector(() => {});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,7 +40,10 @@ function App() {
 
         <Route path={ROUTES.SIGNUP} element={<LoginForm type="signup"/>}/>
         <Route path={ROUTES.LOGIN} element={<LoginForm type="login"/>}/>
+
         <Route path={ROUTES.USER} element={<Profile/>}/>
+        <Route path={ROUTES.APPLICATION} element={<Application/>}/>
+        <Route path={ROUTES.PROJECT} element={<ProjectForm/>}/>
 
         <Route path={ROUTES.PROJECTS} element={<LoginForm/>}/>
         <Route path={ROUTES.PROJECT} element={<LoginForm/>}/>

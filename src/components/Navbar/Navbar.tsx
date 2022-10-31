@@ -1,21 +1,21 @@
 import React, { memo, useMemo } from 'react';
 import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
-import './Navbar.css';
-import { LOGIN_POINT, LOGOUT_POINT, MENU_POINTS } from './consts';
+import { LOGIN_POINT, NEW_PROJECT_POINT, MENU_POINTS } from './consts';
 import { usersAvatarSelector, isUserAuthorizedSelector } from '../../store/selectors/activeUser';
 import { useSelector } from 'react-redux';
 // import { useSelector } from 'react-redux';
+import './Navbar.css';
 
 function Navbar() {
+    const location = useLocation();
+
     const isAuthorized = useSelector(isUserAuthorizedSelector);
     const usersAvatar = useSelector(usersAvatarSelector);
 
-    const location = useLocation();
-
     const menuPoints = useMemo(() => {
         const menuWithLogin = isAuthorized
-            ? {...MENU_POINTS, [LOGOUT_POINT]: ROUTES.INDEX}
+            ? {...MENU_POINTS, [NEW_PROJECT_POINT]: ROUTES.PROJECT}
             : {...MENU_POINTS, [LOGIN_POINT]: ROUTES.LOGIN}
 
         return (
@@ -40,11 +40,11 @@ function Navbar() {
     }
 
     return (
-      <div className="navbar">
-          <img src={usersAvatar} alt="" className="avatar"/>
+        <div className="navbar">
+            <img src={usersAvatar} alt="" className="avatar"/>
 
-          {menuPoints}
-      </div>
+            {menuPoints}
+        </div>
   )
 }
 

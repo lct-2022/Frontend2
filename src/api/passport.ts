@@ -52,7 +52,17 @@ export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<IUs
         method: 'my-profile',
         host: RPCHosts.Passport,
         settings: {
-            authToken: token
+            authToken: token,
+        },
+    });
+};
+
+export const getRoles = async (token: string): Promise<IDataRPC<string[]>> => {
+    return await request({
+        method: 'my-roles',
+        host: RPCHosts.Passport,
+        settings: {
+            authToken: token,
         },
     });
 };
