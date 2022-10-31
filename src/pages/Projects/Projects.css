@@ -10,3 +10,14 @@
 .project-hidden {
     display: none;
 }
+
+.projects-page-options {
+    display: flex;
+    justify-content: space-around;
+ 
+}
+
+.projects-page-list {
+   width: 70%;
+ 
+}

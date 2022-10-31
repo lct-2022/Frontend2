@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
@@ -11,6 +12,7 @@ import Filtration from './components/Filtration';
 
 import './Projects.css';
 
+const cName = cn('projects-page')
 
 function ProjectsPage() {
     const [allProjects, setAllProjects] = useState<IProject[]>([]);
@@ -25,12 +27,11 @@ function ProjectsPage() {
     console.log(allProjects.map(el => el.project.id));
 
     return (
-        <div>
+        <div className={cName()}>
             <h1>Projects</h1>
 
-            <div className="all-projects-continer">
-                <div className="all-projects-data">
-                    <div>
+                <div className={cName('options')}>
+                    <div className={cName('list')}>
                         <ProjectsList projects={allProjects}/>
                     </div>
 
@@ -44,8 +45,6 @@ function ProjectsPage() {
 
                 {/* <Pagination projects={allProjects}/> */}
             </div>
-
-        </div>
     )
 }
 export default ProjectsPage;
