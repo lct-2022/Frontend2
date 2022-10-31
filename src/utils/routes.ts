@@ -11,6 +11,7 @@ export const ROUTES = {
     JOBS: '/vacancies',
     EVENTS: '/events',
     CHAT: '/chat',
+    APPLICATION: '/apply',
 }
 
 export const NOT_NAVBAR_ROUTES = [

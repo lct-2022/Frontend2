@@ -1,6 +1,6 @@
 import React, { memo} from 'react';
 
-import './JobItem.css';
+import './ProjectItem.css';
 
 import {Props} from './types';
 
@@ -33,9 +33,9 @@ const ProjectItem: Props = ({
                 </div>
             </div>
 
-            <button className="card-project-rating">
+            <div className="card-project-rating">
                 {rating}
-            </button>
+            </div>
         </div>
     )
 }

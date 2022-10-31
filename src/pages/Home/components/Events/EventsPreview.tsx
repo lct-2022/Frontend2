@@ -11,25 +11,22 @@ import EventCard from '../EventItem';
 const TITLE = 'Предстоящие мероприятия';
 
 const ProjectsPreview = () => {
-    const projects = useSelector(popularProjectsSelector);
+    const pevents = useSelector(popularProjectsSelector);
 
     const projectsList = useMemo(() => {
         return (
             <div className="vacancies-preview">
-                {projects.map(({project: {title, description, contests, url}, rating}, index) => (
+                {pevents.map(({project: {title, description, contests, url}, rating}, index) => (
                     <div key={index}>
                         <EventCard
                             title={title}
                             description={description}
-                            contest={contests}
-                            url={url}
-                            rating={rating}
                         />
                     </div>
                 ))}
             </div>
         )
-    }, [projects]);
+    }, [pevents]);
 
     return (
         <div>

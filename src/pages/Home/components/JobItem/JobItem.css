@@ -16,6 +16,11 @@
 .card-vacancy-left-block {
     display: flex;
     align-items: center;
+    max-width: 50%;
+}
+
+.card-project-data {
+    flex-wrap: wrap;
 }
 
 .card-vacancy-text {

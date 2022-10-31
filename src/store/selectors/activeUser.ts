@@ -9,7 +9,7 @@ export const isUserAuthorizedSelector = createSelector(
 
 export const currentUserSelector = createSelector(
     (store: IBaseStore) => store.activeUser,
-    user => !!user,
+    user => user,
 )
 
 export const usersAvatarSelector = createSelector(

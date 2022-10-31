@@ -17,10 +17,12 @@ enum Labels {
 }
 
 export const LoginForm: Props = ({type = 'login'}) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    //TODO Formik!!!
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const dispatch = useDispatch();
 
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
@@ -28,7 +30,6 @@ export const LoginForm: Props = ({type = 'login'}) => {
     const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
     }
-    const navigate = useNavigate();
 
     const btnName = type === 'login'
         ? 'Войти'

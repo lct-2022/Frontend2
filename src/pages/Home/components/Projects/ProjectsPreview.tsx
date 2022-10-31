@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import './App.css';
+import './ProjectsPreview.css';
 import { getPopularProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 import { useSelector } from 'react-redux';
@@ -15,7 +15,7 @@ const ProjectsPreview = () => {
 
     const projectsList = useMemo(() => {
         return (
-            <div className="vacancies-preview">
+            <div className="projects-preview">
                 {projects.map(({project: {title, description, contests, url}, rating}, index) => (
                     <div key={index}>
                         <ProjectCard
@@ -33,7 +33,7 @@ const ProjectsPreview = () => {
 
     return (
         <div>
-            {TITLE}
+            <h3>{TITLE}</h3>
 
             {projectsList}
         </div>
