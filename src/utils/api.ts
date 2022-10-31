@@ -76,10 +76,22 @@ export enum RPCHosts {
     Events = 'events',
 }
 
-export const RPCMethods = {
-    Passport: 'passport',
-    Platform: 'platform',
-    Ratings: 'ratings',
-    Chat: 'chat',
-    Events: 'events',
+export const RPC_METHODS = {
+    PASSPORT: {
+        LOGIN: 'login',
+        SIGNUP: 'signup',
+        MY_PROFILE: 'my-profile',
+        POOULAR_PROFILES: 'popular-profiles',
+        GET_ROLES: 'get-roles'
+    },
+    PLATFORM: {
+        POPULAR_PROJECTS: 'popular-projects',
+        POPULAR_JOBS: 'popular-jobs',
+    },
+    RATING: {
+
+    },
+    CHAT: {
+
+    }
 }

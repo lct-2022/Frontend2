@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 import { IUser } from '../../types';
 import { prepareProfileItems } from './utils';
+import { ITEMS_MAP } from './consts';
 // IUser
 const TITLE = 'Профиль';
 const notPublicItems: Array<keyof IUser> = [
@@ -24,9 +25,9 @@ const notPublicItems: Array<keyof IUser> = [
 ]
 
 export function Profile() {
-    const navigate = useNavigate();
-
+    const [editMode, setEditMode] = useState(false);
     const currentUser = useSelector(currentUserSelector);
+    const navigate = useNavigate();
     console.log(currentUser);
     
     if (!currentUser) {
@@ -41,17 +42,26 @@ export function Profile() {
         
         return (
             <div className="profile-all-data">
-                {(Object.entries(prepareProfileItems(currentUser))).map(([key, value]) => (
+                {(Object.entries(prepareProfileItems(currentUser))).map(([key, value]) => {
+                    if (editMode) {
+                        return (
+                            <div>
+                                <label htmlFor="">{ITEMS_MAP[key]}</label>
+                                <input type="text" value={value?.toString() || ''} />
+                            </div>
+                        )
+                    } else 
+                    return (
                     <div
-                        key={key}
+                        key={ITEMS_MAP[key]}
                         className="profile-item"
                     >
                         {key}:&nbsp;{value}
                     </div>
-                ))}
+                )})}
             </div>
         )
-    }, [currentUser]);
+    }, [currentUser, editMode]);
 
     if (!currentUser) {
         navigate(ROUTES.LOGIN);
@@ -65,6 +75,10 @@ export function Profile() {
             {/* <UserBusinessInfo fio="currentUserData.fio"/> */}
             {/* <UserOptions/> */}
             {/* <UserCommonInfo data={}/> */}
+
+            <button onClick={() => setEditMode(prev => !prev)}>
+                Изменить
+            </button>
         </div>
     );
 }

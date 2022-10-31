@@ -18,7 +18,9 @@ export const activeUserReducer = (store: UserState = initialStore, action: Activ
             return {...store, user: payload};
         case ActiveUserActions.UNSET_USER:
             return {...store, user: null}
-
+        case ActiveUserActions.SET_ROLES:
+            return {...store, user: null}
+    
         default:
             return store;
         }
