@@ -1,5 +1,12 @@
-.job-page-title {
+.job-page-title-block {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
+    margin-bottom: 32px;
+}
+
+.job-page-vacancy-title {
+    font-size: 30px;
+    font-weight: 600;
 }

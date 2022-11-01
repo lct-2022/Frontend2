@@ -40,7 +40,7 @@ const TitleHomePage = () => {
 
     return (
         <div className={cName()}>
-            <h3>{TITLE}</h3>
+            <h3 className={cName('title')}>{TITLE}</h3>
 
             {cards}
         </div>
