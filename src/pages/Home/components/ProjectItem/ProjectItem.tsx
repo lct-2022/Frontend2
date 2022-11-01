@@ -1,4 +1,4 @@
-import React, { memo} from 'react';
+import React, { memo, useCallback} from 'react';
 import { cn } from '@bem-react/classname'
 
 
@@ -6,6 +6,10 @@ import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../../utils/routes';
+import { getCurrentProject } from '../../../../api/platform';
+import { getCurrentProjectAction } from '../../../../store/actions/projects';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const cName = cn('project-item');
 
@@ -17,20 +21,30 @@ const ProjectItem: Props = ({
     contest,
     url,
     rating,
+    id,
 }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const passToProject = useCallback(() => {
+        dispatch<any>(getCurrentProjectAction(id))
+            .then(() => {
+                navigate(ROUTES.PROJECT)
+            });
+    }, [id]);
+
     return (
         <div className={cName()}>
             <div className={cName('left-block')}>
                 <div className={cName('logo')}/>
 
                 <div className={cName('data')}>
-                    <div className={cName('text', {title: true})}>
-                        <a href={ROUTES.PROJECT}>{title}</a>
-                    </div>
+                    <p className={cName('text', {title: true})} onClick={passToProject}>
+                        {title}
+                    </p>
 
-                    <div className={cName('text', {description: true})}>
+                    <p className={cName('text', {description: true})}>
                         {description}
-                    </div>
+                    </p>
 
                 </div>
 

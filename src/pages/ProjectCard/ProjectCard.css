@@ -1,0 +1,24 @@
+.project-card-title-card {
+    display: flex;
+    align-items: flex-start;
+
+    margin-bottom: 24px;
+}
+
+.project-card-logo {
+    width: 96px;
+    height: 96px;
+    margin-right: 32px;
+    
+    border-radius: 8px;
+    background-color: grey;
+}
+
+.project-card-title {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.project-card-details {
+    display: flex;
+}

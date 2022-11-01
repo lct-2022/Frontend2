@@ -9,7 +9,8 @@ export interface IBaseStore {
     activeUser: {
         user: Nullable<IUser>;
         roles: string[],
-    } 
+    },
+    activeProject: Nullable<IProject['project']>, 
     projects: NumerableItems<IProject>;
     users: NumerableItems<IUser>;
     jobs: NumerableItems<IJob>;

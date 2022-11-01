@@ -16,7 +16,7 @@ const ProjectsPreview = () => {
     const projectsList = useMemo(() => {
         return (
             <div className="projects-preview">
-                {projects.map(({project: {title, description, contests, url}, rating}, index) => (
+                {projects.map(({project: {title, description, contests, url, id}, rating}, index) => (
                     <div key={index}>
                         <ProjectItem
                             title={title}
@@ -24,6 +24,7 @@ const ProjectsPreview = () => {
                             contest={contests}
                             url={url}
                             rating={rating}
+                            id={id}
                         />
                     </div>
                 ))}

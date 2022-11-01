@@ -26,6 +26,16 @@
     margin: 4px 0;
 }
 
+.project-item-text_title {
+    font-size: 16px;
+    font-weight: 500px;
+}
+
+.project-item-text_title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .project-item-text_description {
     font-size: 12px;
 }
@@ -35,7 +45,7 @@
     height: 48px;
     margin-right: 8px;
     
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: grey;
 }
 

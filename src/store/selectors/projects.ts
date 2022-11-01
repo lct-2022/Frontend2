@@ -16,3 +16,8 @@ export const allProjectsSupportedSelector = createSelector(
     (store: IBaseStore) => store.projects.list.filter(proj => proj.project.synced).length,
     amount => amount,
 );
+
+export const currentProjectSelector = createSelector(
+    (store: IBaseStore) => store.activeProject,
+    project => project,
+);

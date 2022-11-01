@@ -50,6 +50,10 @@ input {
   font-size: large;
 }
 
+p {
+  margin: 0;
+}
+
 #divider {
   display: block;
 

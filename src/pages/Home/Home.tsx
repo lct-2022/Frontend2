@@ -16,9 +16,9 @@ function Home() {
      
     // TODO: add preloader
     useEffect(() => {
-        dispatch<any>(popularProjectsAction(getTokenFromCookies()));
+        dispatch<any>(popularProjectsAction());
         dispatch<any>(popularProfilesAction(getTokenFromCookies()));
-        dispatch<any>(popularJobsAction(getTokenFromCookies()));
+        dispatch<any>(popularJobsAction());
     }, []);
 
     return (

@@ -18,7 +18,7 @@ function ProjectsPage() {
     const [allProjects, setAllProjects] = useState<IProject[]>([]);
 
     useEffect(() => {
-        getPopularProjects(getTokenFromCookies())
+        getPopularProjects()
             .then(data => {
                 setAllProjects(data.result.map(project => ({...project, hidden: false})));
             })

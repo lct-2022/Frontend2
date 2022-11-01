@@ -7,6 +7,8 @@ import Home from '../Home';
 import Application from '../Application';
 import ProjectCreate from '../ProjectCreate';
 import Projects from '../Projects';
+import ProjectCard from '../ProjectCard';
+
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
@@ -16,18 +18,6 @@ import { checkAuthorization } from '../../api/passport';
 import { useDispatch } from 'react-redux';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { getTokenFromCookies } from '../../utils/cookie';
-
-// import React from 'react';
-// function Main() {
-//     return (
-//         <div>
-//             <h1>Main</h1>
-
-//         </div>
-//     )
-// }
-// export default Main;
-
 
 function App() {
   const dispatch = useDispatch();
@@ -49,13 +39,12 @@ function App() {
 
         <Route path={ROUTES.USER} element={<Profile/>}/>
         <Route path={ROUTES.APPLICATION} element={<Application/>}/>
-        <Route path={ROUTES.PROJECT} element={<ProjectCreate/>}/>
-
+        <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
         <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
-        <Route path={ROUTES.PROJECT} element={<LoginForm/>}/>
+        <Route path={ROUTES.PROJECT} element={<ProjectCard/>}/>
+
 
         <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
-
         <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
       </Routes>
 

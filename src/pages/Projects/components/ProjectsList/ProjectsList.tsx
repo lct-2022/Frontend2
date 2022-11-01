@@ -17,7 +17,7 @@ const ProjectsList: Props = ({projects}) => {
         }
         return (
             <div className={cName('container')}>
-                {projects.map(({project: {title, description, contests, url}, rating, hidden}, index) => (
+                {projects.map(({project: {title, description, contests, url, id}, rating, hidden}, index) => (
                     <div key={index} className={cName('project', {hidden})}>
                         <ProjectItem
                             title={title}
@@ -25,6 +25,7 @@ const ProjectsList: Props = ({projects}) => {
                             contest={contests}
                             url={url}
                             rating={rating}
+                            id={id}
                         />
                     </div>
                 ))}

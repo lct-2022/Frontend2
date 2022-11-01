@@ -7,6 +7,7 @@ interface IProps {
     contest: ProjectData['contests'],
     url: ProjectData['url'],
     rating: IProject['rating'],
+    id: ProjectData['id'],
 }
 
 export type Props = FC<IProps>;

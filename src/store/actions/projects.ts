@@ -1,15 +1,30 @@
 import { Dispatch } from "react";
-import { getPopularProjects } from '../../api/platform';
+import { getCurrentProject, getPopularProjects } from '../../api/platform';
+import { TOKEN } from "../../utils/consts";
+import { ActiveProjectActions, SetProject } from "../types/activeProject";
 import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
 
-export const popularProjectsAction = (token: string, limit?: number) => {
+export const popularProjectsAction = (limit?: number) => {
     return async (dispatch: Dispatch<SetProjects>) => {
 
-        const popularProjectsResponse = await getPopularProjects(token, limit);
+        const popularProjectsResponse = await getPopularProjects(limit);
 
         dispatch({
             type: ProjectsActions.SET_PROJECTS,
             payload: popularProjectsResponse.result,
+        });
+    }
+}
+
+export const getCurrentProjectAction = (id: number) => {
+    return async (dispatch: Dispatch<SetProject>) => {
+
+        const currentProjectResponse = await getCurrentProject(id);
+        console.log(currentProjectResponse.result);
+        
+        dispatch({
+            type: ActiveProjectActions.SET_PROJECT,
+            payload: currentProjectResponse.result,
         });
     }
 }
