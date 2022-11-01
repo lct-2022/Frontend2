@@ -1,4 +1,4 @@
-.card-vacancy-home {
+.vacancy-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,22 +13,22 @@
     min-height: 64px;
 }
 
-.card-vacancy-left-block {
+.vacancy-card-left-block {
     display: flex;
     align-items: center;
     max-width: 50%;
 }
 
-.card-project-data {
+.vacancy-card-data {
     flex-wrap: wrap;
 }
 
-.card-vacancy-text {
+.vacancy-card-text {
     margin: 4px 0;
     flex-wrap: wrap;
 }
 
-.card-vacancy-photo {
+.vacancy-card-logo {
     width: 48px;
     height: 48px;
     margin-right: 8px;

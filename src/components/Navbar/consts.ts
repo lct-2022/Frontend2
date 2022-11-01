@@ -5,7 +5,7 @@ const MENU_POINTS = {
     'Проекты': ROUTES.PROJECTS,
     'Cервисы': ROUTES.SERVICES,
     'Мероприятия': ROUTES.EVENTS,
-    'Вакансии': ROUTES.JOBS,
+    'Вакансии': ROUTES.PROJECTS,
 }
 
 const NEW_PROJECT_POINT = 'Выложить проект';

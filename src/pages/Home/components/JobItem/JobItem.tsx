@@ -1,10 +1,13 @@
 import React, { memo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../utils/routes';
+import { cn } from '@bem-react/classname'
 
 import './JobItem.css';
 
 import {Props} from './types';
+
+const cName = cn('vacancy-card');
 
 const TITLE = 'Отправить заявку';
 
@@ -16,22 +19,22 @@ const JobCard: Props = ({title, description}) => {
     }
 
     return (
-        <div className="card-vacancy-home">
-            <div className="card-vacancy-left-block">
-                <div className="card-vacancy-photo"/>
+        <div className={cName()}>
+            <div className={cName('left-block')}>
+                <div className={cName('logo')}/>
 
-                <div className="card-vacancy-data">
-                    <div className="card-vacancy-text">
+                <div className={cName('data')}>
+                    <div className={cName('text')}>
                         {title}
                     </div>
 
-                    <div className="card-vacancy-text">
+                    <div className={cName('text')}>
                         {description}
                     </div>
                 </div>
             </div>
 
-            <button className="card-vacancy-right-block" onClick={passToApply}>
+            <button className={cName('right-block')} onClick={passToApply}>
                 {TITLE}
             </button>
         </div>

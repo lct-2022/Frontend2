@@ -46,36 +46,36 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
 
                 <div className={cName('boxes')}>
                     <div className={cName('field')}>
-                        <input className="input-chbx-team-size" value="1-5" type="checkbox" onChange={filterByLimitsProject}/>
-                        <label htmlFor="input-chbx-team-size">1-5</label>
+                        <input className={cName('box')} value="1-5" type="checkbox" onChange={filterByLimitsProject}/>
+                        <label htmlFor={cName('box')}>1-5</label>
                     </div>
 
                     <div className={cName('field')}>
-                        <input className="input-chbx-team-size" value="6-10" type="checkbox" onChange={filterByLimitsProject}/>
-                        <label htmlFor="input-chbx-team-size">6-10</label>
+                        <input className={cName('box')} value="6-10" type="checkbox" onChange={filterByLimitsProject}/>
+                        <label htmlFor={cName('box')}>6-10</label>
                     </div>
 
                     <div className={cName('field')}>
-                        <input className="input-chbx-team-size" value="11-20" type="checkbox" onChange={filterByLimitsProject}/>
-                        <label htmlFor="input-chbx-team-size">11-20</label>
+                        <input className={cName('box')} value="11-20" type="checkbox" onChange={filterByLimitsProject}/>
+                        <label htmlFor={cName('box')}>11-20</label>
                     </div>
 
                     <div className={cName('field')}>
-                        <input className="input-chbx-team-size" value="20+" type="checkbox" onChange={filterByLimitsProject}/>
-                        <label htmlFor="input-chbx-team-size">20+</label>
+                        <input className={cName('box')} value="20+" type="checkbox" onChange={filterByLimitsProject}/>
+                        <label htmlFor={cName('box')}>20+</label>
                     </div>
                 </div>
             </div>
-            <div>
+
+            <div className={cName('block')}>
                 <h5 className={cName('field-title')}>Рейтинг</h5>
 
                 <div className={cName('boxes')}>
                     <div className={cName('field')}>
-                        <input className="input-chbx-team-size" value="1+" type="checkbox" onChange={filterByLimitsRating}/>
-                        <label htmlFor="input-chbx-team-size">1+</label>
+                        <input className={cName('box')} value="1+" type="checkbox" onChange={filterByLimitsRating}/>
+                        <label htmlFor={cName('box')}>1+</label>
                     </div>
                 </div>
-
             </div>
         </div>
     )
