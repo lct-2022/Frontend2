@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react';
 import { getCurrentUserProfile } from '../../api/passport';
-import { UserOptions } from './components/Options/Options';
 
 import UserBusinessInfo from './components/BusinessInfo'
 import UserCommonInfo from './components/CommonInfo'
+import UserOptions from './components/Options';
 
 import './User.css';
 import { currentUserSelector } from '../../store/selectors/activeUser';
@@ -71,9 +71,9 @@ export function Profile() {
         <div className="profile">
             <h1>{TITLE}</h1>
 
+            <UserOptions/>
             {userData}
             {/* <UserBusinessInfo fio="currentUserData.fio"/> */}
-            {/* <UserOptions/> */}
             {/* <UserCommonInfo data={}/> */}
 
             <button onClick={() => setEditMode(prev => !prev)}>

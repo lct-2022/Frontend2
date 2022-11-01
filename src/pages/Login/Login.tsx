@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { ROUTES } from '../../utils/routes';
+import { setAuthToken } from '../../utils/cookie';
 
 enum Labels {
     EMAIL = 'Email',
@@ -47,6 +48,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
         requestor(email, password)
             .then(({result}) => {
                 dispatch<any>(isUserAuthorizedAction(result));
+                setAuthToken(result);
                 // Remove ???
                 setEmail('');
                 setPassword('');
@@ -70,15 +72,15 @@ export const LoginForm: Props = ({type = 'login'}) => {
                             {Labels.EMAIL}
                         </label>
 
-                        <input className="login-form-mail login-input" value={email} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="text" value={email} onChange={changeMail}/>
                     </div>
 
                     <div className="login-form-input">
                         <label htmlFor="login-form-password" className="login-label">
-                            {Labels.EMAIL}
+                            {Labels.PASSWORD}
                         </label>
 
-                        <input className="login-form-password login-input" value={password} onChange={changePassword}/>
+                        <input className="login-form-password login-input" type="password" value={password} onChange={changePassword}/>
                     </div>
 
                     <button

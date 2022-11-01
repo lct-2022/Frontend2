@@ -2,7 +2,7 @@ import {checkAuthorization, getRoles} from '../../api/passport';
 import { Dispatch } from "react";
 import { ActiveUserAction, ActiveUserActions } from '../types/activeUser';
 
-export const isUserAuthorizedAction = (token: string | undefined) => {
+export const isUserAuthorizedAction = (token: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
         const signupResponse = await checkAuthorization(token);

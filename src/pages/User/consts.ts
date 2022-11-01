@@ -1,10 +1,9 @@
 export const OPTIONS = [
     'Биография',
     'Резюме',
+    'Список команд',
     'Проекты',
-    'Комментарии',
     'Приглашения',
-    'Админ',
 ]
 
 export const ADMIN = 'Админ';
@@ -18,7 +17,7 @@ export const YES = 'Да';
 export const NO = 'Нет';
 
 export const ITEMS_MAP: {[x in string]: string} = {
-    fio: 'Фамилия им отчество',
+    fio: 'Фамилия Имя Отчество',
     email: 'Электронная почта',
     birthday: 'Дата рождения',
     gender: 'Пол',

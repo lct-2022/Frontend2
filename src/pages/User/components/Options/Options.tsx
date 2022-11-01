@@ -5,7 +5,8 @@ import classnames from 'classnames';
 import './Options.css';
 
 export function UserOptions() {
-
+    console.log(OPTIONS);
+    
     return (
         <div className="user-menu">
             {[...OPTIONS].map((point, index) => (

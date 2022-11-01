@@ -28,7 +28,7 @@ function App() {
   console.log('STORE =>', store)
   
   useEffect(() => {
-    dispatch<any>(isUserAuthorizedAction(getTokenFromCookies())); // token из кук
+      dispatch<any>(isUserAuthorizedAction(getTokenFromCookies())); // token из кук
   }, []);
 
   return (

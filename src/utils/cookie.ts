@@ -1,13 +1,31 @@
-import cookies from 'js-cookie';
+import qs from 'qs';
 
-import { TOKEN } from "./consts"
+function parseCookie() {
+    const {cookie} = document;
+    try {  
+        if (!cookie) {
+            return;
+        }
 
-export function getTokenFromCookies() {
-    return TOKEN;
+        return qs.parse(cookie, {delimiter: '; '});
+    } catch(err) {
+        throw new Error();
+    }
 }
 
-export function setToken() {
-    return TOKEN;
+export const getTokenFromCookies = () => {
+    const cookieParsed = parseCookie();
+
+    if (!cookieParsed) {
+        return '';
+    }
+
+    return cookieParsed['auth_token'] as string || '';
+}
+
+export function setAuthToken(token: string) {
+    const authCookie = `auth_token=${token};`
+    document.cookie = authCookie;
 }
 
 

@@ -30,7 +30,7 @@ function Navbar() {
                         return (
                             <a
                                 key={index}
-                                className={cName('menu-point', {as_btn: point === NEW_PROJECT_POINT})}
+                                className={cName('menu-point')}
                                 href={url}
                                 target="_self"
                                 rel="noopener noreferrer"
@@ -42,7 +42,7 @@ function Navbar() {
                         return (
                             <a 
                                 key={index}
-                                className={cName('menu-point', {as_btn: point === NEW_PROJECT_POINT})}
+                                className={cName('menu-point')}
                                 href={url}
                                 target="_self"
                                 rel="noopener noreferrer"
