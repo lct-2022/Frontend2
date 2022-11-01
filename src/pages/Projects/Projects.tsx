@@ -35,7 +35,7 @@ function ProjectsPage() {
                         <ProjectsList projects={allProjects}/>
                     </div>
 
-                    <div>
+                    <div className={cName('filtration')}>
                         <Filtration 
                             projects={allProjects}
                             setProjects={setAllProjects}

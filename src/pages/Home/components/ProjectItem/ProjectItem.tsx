@@ -1,8 +1,12 @@
 import React, { memo} from 'react';
+import { cn } from '@bem-react/classname'
+
 
 import './ProjectItem.css';
 
 import {Props} from './types';
+
+const cName = cn('project-item');
 
 const ProjectItem: Props = ({
     title, 
@@ -12,28 +16,28 @@ const ProjectItem: Props = ({
     rating,
 }) => {
     return (
-        <div className="card-project-home">
-            <div className="card-project-left-block">
-                <div className="card-project-photo"/>
+        <div className={cName()}>
+            <div className={cName('left-block')}>
+                <div className={cName('logo')}/>
 
-                <div className="card-project-data">
-                    <div className="card-project-text">
+                <div className={cName('data')}>
+                    <div className={cName('text', {title: true})}>
                         {title}
                     </div>
 
-                    <div className="card-project-text">
+                    <div className={cName('text', {description: true})}>
                         {description}
                     </div>
 
                 </div>
 
-                <div className="card-project-detailes">
+                <div className={cName('details')}>
                     <span>{contest}</span>
                     <span>{url}</span>
                 </div>
             </div>
 
-            <div className="card-project-rating">
+            <div className={cName('rating')}>
                 rate: {rating}
             </div>
         </div>
