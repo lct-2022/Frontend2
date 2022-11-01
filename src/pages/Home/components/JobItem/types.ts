@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { IJob } from "../../../../types";
+import { Job } from "../../../../types";
 
 interface IProps {
-    title: IJob['title'],
-    description: IJob['description'],    
+    title: Job['title'],
+    description: Job['description'],    
 }
 
 export type Props = FC<IProps>;

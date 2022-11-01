@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { IProject } from "../../types";
+import { Project } from "../../types";
 
 interface IProps {
-    projects: IProject[];
+    projects: Project[];
 }
 
 export type Props = FC<IProps>;

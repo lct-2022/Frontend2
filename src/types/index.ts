@@ -9,7 +9,7 @@ interface ICommonData {
     id: number;
 }
 
-export type IUser = ICommonData & {
+export type User = ICommonData & {
     email: string,
     'password-hash': string,
     'avatar-url': string,
@@ -27,7 +27,7 @@ export type IUser = ICommonData & {
 }
 
 // TODO Добавить поле "получили поддержку"
-export type IProject = {
+export type Project = {
     project: ICommonData & {
         'author-id': number,
         title: string;
@@ -39,9 +39,9 @@ export type IProject = {
     hidden?: boolean;
 }
 
-export type ProjectData = IProject['project'];
+export type ProjectData = Project['project'];
 
-export type IJob = ICommonData & {
+export type Job = ICommonData & {
     'team-id': number;
     title: string;
     description: string;
@@ -49,7 +49,17 @@ export type IJob = ICommonData & {
     hidden?: boolean;
 }
 
-export type IEvents = ICommonData & {}
+type ApplicationStatus = 'applied' | 'accepted' | 'declined';
+
+export type Application = ICommonData & {
+    'user-id': number;
+    job: Job;
+    'job-id': {};
+    message: string;
+    starus: ApplicationStatus;
+};
+
+export type Event = ICommonData & {}
 
 export type CommonAction<T, P = never> = {
     type: T,

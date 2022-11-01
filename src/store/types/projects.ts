@@ -1,4 +1,4 @@
-import { IProject } from "../../types";
+import { Project } from "../../types";
 import { CommonAction } from '../../types';
 
 export enum ProjectsActions {
@@ -10,11 +10,11 @@ export enum ProjectsActions {
 
 interface IUpdateData {
     id: number,
-    project: IProject,
+    project: Project,
 }
 
-export type SetProjects = CommonAction<ProjectsActions.SET_PROJECTS, IProject[]>;
-type AddProject = CommonAction<ProjectsActions.ADD_PROJECT, IProject>
+export type SetProjects = CommonAction<ProjectsActions.SET_PROJECTS, Project[]>;
+type AddProject = CommonAction<ProjectsActions.ADD_PROJECT, Project>
 type DeleteProject = CommonAction<ProjectsActions.DELETE_PROJECT, string>
 type UpdateProjects = CommonAction<ProjectsActions.UPDATE_PROJECT, IUpdateData>
 

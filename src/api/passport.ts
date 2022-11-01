@@ -1,7 +1,7 @@
-import { IUser } from "../types";
+import { User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 
-export const checkAuthorization = async (token: string | undefined): Promise<IDataRPC<IUser>> => {
+export const checkAuthorization = async (token: string | undefined): Promise<IDataRPC<User>> => {
     return await request({
         method: 'my-profile',
         host: RPCHosts.Passport,
@@ -34,7 +34,7 @@ export const login = async (email: string, password: string): Promise<IDataRPC<s
     })
 };
 
-export const getPopularProfiles = async (token: string, limit?: number): Promise<IDataRPC<IUser[]>> => {
+export const getPopularProfiles = async (token: string, limit?: number): Promise<IDataRPC<User[]>> => {
     return await request({
         method: 'popular-profiles',
         host: RPCHosts.Passport,
@@ -47,7 +47,7 @@ export const getPopularProfiles = async (token: string, limit?: number): Promise
     });
 };
 
-export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<IUser>> => {
+export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<User>> => {
     return await request({
         method: 'my-profile',
         host: RPCHosts.Passport,

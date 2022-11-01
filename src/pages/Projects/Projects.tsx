@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
-import { IProject } from '../../types';
+import { Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
 
 import ProjectsList from './components/ProjectsList';
@@ -15,7 +15,7 @@ import './Projects.css';
 const cName = cn('projects-page')
 
 function ProjectsPage() {
-    const [allProjects, setAllProjects] = useState<IProject[]>([]);
+    const [allProjects, setAllProjects] = useState<Project[]>([]);
 
     useEffect(() => {
         getPopularProjects()

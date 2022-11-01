@@ -1,4 +1,4 @@
-import { IProject } from "../../types";
+import { Project } from "../../types";
 import { ProjectsAction, ProjectsActions } from "../types/projects";
 import { IBaseStore } from "../types/store";
 

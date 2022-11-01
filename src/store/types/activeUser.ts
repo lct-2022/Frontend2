@@ -1,4 +1,4 @@
-import { IUser } from "../../types";
+import { User } from "../../types";
 import { CommonAction } from '../../types';
 
 export enum ActiveUserActions {
@@ -7,7 +7,7 @@ export enum ActiveUserActions {
     SET_ROLES = 'SET_ROLES',
 };
 
-type SetUser = CommonAction<ActiveUserActions.SET_USER, IUser>
+type SetUser = CommonAction<ActiveUserActions.SET_USER, User>
 type LogoutUser = CommonAction<ActiveUserActions.UNSET_USER>
 type SetRoles = CommonAction<ActiveUserActions.SET_ROLES, string[]>
 

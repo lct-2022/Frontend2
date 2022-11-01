@@ -1,4 +1,4 @@
-import { IUser, Nullable } from "../../types";
+import { User, Nullable } from "../../types";
 
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { IBaseStore } from "../types/store";

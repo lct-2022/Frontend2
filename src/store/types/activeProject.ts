@@ -1,4 +1,4 @@
-import { IProject, IUser } from "../../types";
+import { Project, User } from "../../types";
 import { CommonAction } from '../../types';
 
 export enum ActiveProjectActions {
@@ -6,7 +6,7 @@ export enum ActiveProjectActions {
     UNSET_PROJECT = 'UNSET_PROJECT',
 };
 
-export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, IProject>
+export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, Project>
 export type UnsetProject = CommonAction<ActiveProjectActions.UNSET_PROJECT>
 
 export type ActiveProjectAction = 

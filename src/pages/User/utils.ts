@@ -1,7 +1,7 @@
-import { IUser } from "../../types";
+import { User } from "../../types";
 import omit from 'lodash/omit'; 
 
-const notPublicItems: Array<keyof IUser> = [
+const notPublicItems: Array<keyof User> = [
     'created-at',
     'updated-at',
     'password-hash',
@@ -10,6 +10,6 @@ const notPublicItems: Array<keyof IUser> = [
     'id',
 ]
 
-export const prepareProfileItems = (obj: IUser): Partial<IUser> => {
+export const prepareProfileItems = (obj: User): Partial<User> => {
     return omit({...obj}, notPublicItems);
 }

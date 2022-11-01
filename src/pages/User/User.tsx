@@ -10,12 +10,12 @@ import { currentUserSelector } from '../../store/selectors/activeUser';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
-import { IUser } from '../../types';
+import { User } from '../../types';
 import { prepareProfileItems } from './utils';
 import { ITEMS_MAP } from './consts';
-// IUser
+// User
 const TITLE = 'Профиль';
-const notPublicItems: Array<keyof IUser> = [
+const notPublicItems: Array<keyof User> = [
     'created-at',
     'updated-at',
     'password-hash',

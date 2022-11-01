@@ -1,4 +1,4 @@
-import { IUser, Nullable } from "../../types";
+import { User, Nullable } from "../../types";
 import { ActiveProjectActions, ActiveProjectAction } from "../types/activeProject";
 
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
