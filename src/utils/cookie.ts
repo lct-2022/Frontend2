@@ -1,4 +1,4 @@
-// import Cookies from 'js-cookie'; 
+import cookies from 'js-cookie';
 
 import { TOKEN } from "./consts"
 
