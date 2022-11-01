@@ -8,10 +8,10 @@ export enum ActiveUserActions {
 };
 
 type SetUser = CommonAction<ActiveUserActions.SET_USER, User>
-type LogoutUser = CommonAction<ActiveUserActions.UNSET_USER>
+type UnsetUser = CommonAction<ActiveUserActions.UNSET_USER>
 type SetRoles = CommonAction<ActiveUserActions.SET_ROLES, string[]>
 
 export type ActiveUserAction = 
     | SetUser
-    | LogoutUser
+    | UnsetUser
     | SetRoles;

@@ -19,5 +19,15 @@ export const allProjectsSupportedSelector = createSelector(
 
 export const currentProjectSelector = createSelector(
     (store: IBaseStore) => store.activeProject,
-    project => project,
+    ({project, team, vacancies}) => {
+        if (!project) {
+            return null;
+        }
+
+        return {
+            project,
+            teamAmount: team.length,
+            openVacanciesAmount: vacancies.length,
+        }
+    },
 );

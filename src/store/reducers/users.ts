@@ -4,12 +4,12 @@ import { UsersAction, UsersActions } from "../types/users";
 
 type UsersState = IBaseStore['users']
 
-export const initialStore: UsersState = {
+export const initialState: UsersState = {
     list: [],
     amount: 0,
 };
 
-export const usersReducer = (store: UsersState = initialStore, action: UsersAction) => {
+export const usersReducer = (store: UsersState = initialState, action: UsersAction) => {
     const {type, payload} = action;
 
     switch (type) {

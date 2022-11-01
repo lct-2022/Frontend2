@@ -5,12 +5,12 @@ import { IBaseStore } from "../types/store";
 
 type UserState = IBaseStore['activeUser']
 
-const initialStore: UserState = {
+const initialState: UserState = {
     user: null,
     roles: []
 };
 
-export const activeUserReducer = (store: UserState = initialStore, action: ActiveUserAction) => {
+export const activeUserReducer = (store: UserState = initialState, action: ActiveUserAction) => {
     const {type, payload} = action;
 
     switch (type) {

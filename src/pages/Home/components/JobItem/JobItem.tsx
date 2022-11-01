@@ -7,6 +7,7 @@ import './JobItem.css';
 
 import {Props} from './types';
 import { applyToJob } from '../../../../api/platform';
+import { getTokenFromCookies } from '../../../../utils/cookie';
 
 const cName = cn('vacancy-card');
 
@@ -16,7 +17,7 @@ const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
 
     const makeApply = useCallback(() => {
-        applyToJob(id);
+        applyToJob(id, getTokenFromCookies());
     }, [id]);
 
     return (

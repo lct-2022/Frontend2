@@ -41,15 +41,33 @@ export type Project = {
 
 export type ProjectData = Project['project'];
 
+export type Team = ICommonData & {
+    title: string;
+    'project-id': number | {};
+    project: Project;
+};
+
+export type ProjectTeamMember = ICommonData & {
+    'user-id': number;
+    'job-id': number;
+    job: Job;
+    title: string;
+};
+
 export type Job = ICommonData & {
     'team-id': number;
+    team: Team;
     title: string;
     description: string;
     open: boolean;
     hidden?: boolean;
 }
 
-type ApplicationStatus = 'applied' | 'accepted' | 'declined';
+enum ApplicationStatus {
+    APPLIED = 'applied',
+    ACCEPTED = 'accepted',
+    DECLINED = 'declined',
+};
 
 export type Application = ICommonData & {
     'user-id': number;

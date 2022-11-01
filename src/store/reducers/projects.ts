@@ -4,13 +4,13 @@ import { IBaseStore } from "../types/store";
 
 type ProjectsState = IBaseStore['projects'];
 
-export const initialStore: ProjectsState = {
+export const initialState: ProjectsState = {
     amount: 0,
     list: [],
 };
 
 // TODO - подумать, как исправить типы тут
-export const projectsReducer = (store: ProjectsState = initialStore, action: ProjectsAction) => {
+export const projectsReducer = (store: ProjectsState = initialState, action: ProjectsAction) => {
     const {type, payload} = action;
 
     switch (type) {

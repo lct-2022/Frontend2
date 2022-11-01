@@ -7,8 +7,7 @@ import Home from '../Home';
 import Application from '../Application';
 import ProjectCreate from '../ProjectCreate';
 import Projects from '../Projects';
-import ProjectCard from '../ProjectCard';
-
+import ProjectPage from '../ProjectPage';
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
@@ -41,7 +40,7 @@ function App() {
         <Route path={ROUTES.APPLICATION} element={<Application/>}/>
         <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
         <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
-        <Route path={ROUTES.PROJECT} element={<ProjectCard/>}/>
+        <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
 
 
         <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>

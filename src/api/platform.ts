@@ -1,4 +1,4 @@
-import { Application, Job, Project, User } from "../types";
+import { Application, Job, Project, ProjectTeamMember, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
@@ -32,15 +32,41 @@ export const getCurrentProject = async (id: number): Promise<IDataRPC<Project>> 
     });
 };
 
-//apply-to-job
+// get-project-team
+export const getProjectTeam = async (projectId: number): Promise<IDataRPC<ProjectTeamMember[]>> => {
+    return await request({
+        method: 'get-team-members',
+        host: RPCHosts.Platform,
+        params: {
+            'project-id': projectId,
+        },
+    });
+};
 
-export const applyToJob = async (jobId: number): Promise<IDataRPC<Application>> => {
+// get-project-vacancies
+export const getProjectVacancies = async (projectId: number): Promise<IDataRPC<Application[]>> => {
+    console.log('HERE ????????????');
+    
+    return await request({
+        method: 'get-job-applications',
+        host: RPCHosts.Platform,
+        params: {
+            'project-id': projectId,
+        },
+    });
+};
+
+//apply-to-job
+export const applyToJob = async (jobId: number, token: string): Promise<IDataRPC<Application>> => {
     return await request({
         method: 'get-project',
         host: RPCHosts.Platform,
         params: {
             'job-id': jobId,
         },
+        settings: {
+            authToken: token,
+        }
     });
 };
 

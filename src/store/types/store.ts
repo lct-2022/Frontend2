@@ -1,4 +1,4 @@
-import { Event, Job, Project, User, Nullable } from "../../types";
+import { Event, Job, Project, User, Nullable, ProjectTeamMember, Application } from "../../types";
 
 type NumerableItems<D> = {
     amount: number;
@@ -10,7 +10,11 @@ export interface IBaseStore {
         user: Nullable<User>;
         roles: string[],
     },
-    activeProject: Nullable<Project['project']>, 
+    activeProject: {
+        project: Nullable<Project['project']>;
+        team: ProjectTeamMember[];
+        vacancies: Application[];
+    }, 
     projects: NumerableItems<Project>;
     users: NumerableItems<User>;
     jobs: NumerableItems<Job>;

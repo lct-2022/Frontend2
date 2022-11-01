@@ -4,12 +4,12 @@ import { IBaseStore } from "../types/store";
 
 type JobsState = IBaseStore['jobs'];
 
-export const initialStore: JobsState = {
+export const initialState: JobsState = {
     amount: 0,
     list: [],
 };
 
-export const jobsReducer = (store: JobsState = initialStore, action: JobsAction) => {
+export const jobsReducer = (store: JobsState = initialState, action: JobsAction) => {
     const {type, payload} = action;
     // console.log(payload);
     // const openJobs = payload

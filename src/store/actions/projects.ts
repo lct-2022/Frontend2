@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
-import { getCurrentProject, getPopularProjects } from '../../api/platform';
+import { getCurrentProject, getPopularProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
 import { TOKEN } from "../../utils/consts";
-import { ActiveProjectActions, SetProject } from "../types/activeProject";
+import { ActiveProjectActions, SetProject, SetTeam, SetVAcancies } from "../types/activeProject";
 import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
 
 export const popularProjectsAction = (limit?: number) => {
@@ -25,6 +25,32 @@ export const getCurrentProjectAction = (id: number) => {
         dispatch({
             type: ActiveProjectActions.SET_PROJECT,
             payload: currentProjectResponse.result,
+        });
+    }
+}
+
+export const getProjectTeamAction = (id: number) => {
+    console.log('SENT =>', id);
+    
+    return async (dispatch: Dispatch<SetTeam>) => {
+
+        const projectTeamResponse = await getProjectTeam(id);
+        
+        dispatch({
+            type: ActiveProjectActions.SET_TEAM,
+            payload: projectTeamResponse.result,
+        });
+    }
+}
+
+export const getProjectVacanciesAction = (id: number) => {
+    return async (dispatch: Dispatch<SetVAcancies>) => {
+
+        const projectVacanciesResponse = await getProjectVacancies(id);
+        
+        dispatch({
+            type: ActiveProjectActions.SET_VACANCIES,
+            payload: projectVacanciesResponse.result,
         });
     }
 }

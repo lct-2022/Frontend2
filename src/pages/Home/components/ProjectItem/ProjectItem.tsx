@@ -6,8 +6,8 @@ import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../../utils/routes';
-import { getCurrentProject } from '../../../../api/platform';
-import { getCurrentProjectAction } from '../../../../store/actions/projects';
+import { getCurrentProject, getProjectTeam, getProjectVacancies } from '../../../../api/platform';
+import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../../store/actions/projects';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,8 +25,16 @@ const ProjectItem: Props = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log(title, 'ID ===>', id);
+    
+
     const passToProject = useCallback(() => {
-        dispatch<any>(getCurrentProjectAction(id))
+        Promise.all([
+            dispatch<any>(getCurrentProjectAction(id)),
+            dispatch<any>(getProjectTeamAction(id)),
+            // dispatch<any>(getProjectVacanciesAction(id)),
+        ])
             .then(() => {
                 navigate(ROUTES.PROJECT)
             });

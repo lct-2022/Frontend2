@@ -3,17 +3,19 @@ import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { currentProjectSelector } from '../../store/selectors/projects';
 
-import './ProjectCard.css';
+import './ProjectPage.css';
 
 const cName = cn('project-card')
 
-function ProjectCard() {
+function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
+    console.log(currentProject?.project?.id)
 
     if (!currentProject) return null;
 
-    const {title, description, contests} = currentProject
-    const createdAt = currentProject['created-at'];
+    const {project, teamAmount, openVacanciesAmount} = currentProject
+    const {title, description, contests} = project
+    const createdAt = project['created-at'];
 
     return (
         <div className={cName()}>
@@ -24,6 +26,8 @@ function ProjectCard() {
 
             <div className={cName('details')}>
                 <div className={cName('description-card')}>
+                    <p>{teamAmount} человек в команде</p>
+                    <p>{openVacanciesAmount} открытых вакансий</p>
                     <p className={cName('description')}>{description}</p>
                     <p className={cName('contests')}>{contests}</p>
                     <p className={cName('created')}>{createdAt}</p>
@@ -45,4 +49,4 @@ function ProjectCard() {
         </div>
     )
 }
-export default ProjectCard;
+export default ProjectPage;
