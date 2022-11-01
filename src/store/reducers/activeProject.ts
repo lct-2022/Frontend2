@@ -10,6 +10,7 @@ const initialState: ProjectState = {
     project: null,
     team: [],
     vacancies: [],
+    rating: 0,
 };
 
 export const activeProjectReducer = (store: ProjectState = initialState, action: ActiveProjectAction) => {
@@ -24,7 +25,9 @@ export const activeProjectReducer = (store: ProjectState = initialState, action:
             return {...store, team: payload};
         case ActiveProjectActions.SET_VACANCIES:
             return {...store, vacancies: payload};  
-            
+        case ActiveProjectActions.SET_RATING:
+            return {...store, rating: payload};  
+
         default:
             return store;
         }

@@ -34,7 +34,7 @@ export const login = async (email: string, password: string): Promise<IDataRPC<s
     })
 };
 
-export const getPopularProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => {
+export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => {
     return await request({
         method: 'popular-profiles',
         host: RPCHosts.Passport,
@@ -54,12 +54,14 @@ export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<Use
     });
 };
 
-export const getRoles = async (token: string): Promise<IDataRPC<string[]>> => {
+// rating
+export const getRating = async (subject: 'project' | 'user', id: number): Promise<IDataRPC<string[]>> => {
     return await request({
-        method: 'my-roles',
-        host: RPCHosts.Passport,
-        settings: {
-            authToken: token,
-        },
+        method: 'get-rating',
+        host: RPCHosts.Ratings,
+        params: {
+            'subject-type': subject,
+            'subject-id': id,
+        }
     });
 };

@@ -1,7 +1,7 @@
 import { request, RPCHosts } from "../../utils/api";
 import { TOKEN } from "../../utils/consts";
 
-export const getPopularProfiles = async (token: string) => {
+export const getProfiles = async (token: string) => {
     return await request({
         method: 'popular-profiles',
         host: RPCHosts.Passport,

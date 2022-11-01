@@ -7,7 +7,7 @@ import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
-import { currentUserSelector } from '../../store/selectors/activeUser';
+import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 

@@ -3,12 +3,16 @@ import { ADMIN, OPTIONS } from '../../consts';
 import classnames from 'classnames';
 import { Props } from './types';
 
-// import './Options.css';
+import './CommonInfo.css';
+
+import {cn} from '@bem-react/classname';
+
+const cName = cn('user-common-info');
 
 export const UserCommonInfo: Props = ({data}) => {
 
     return (
-        <div className="user-menu">
+        <div className={cName()}>
             {Object.entries(data).map(([key, value]) => (
                 <div
                     key={key}

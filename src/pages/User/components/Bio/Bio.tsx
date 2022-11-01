@@ -9,6 +9,10 @@ const cName = cn('bio')
 const Bio: Props = ({user}) => {
     const [editMode, setEditMode] = useState(false);
 
+    const editModeToggle = () => {
+        setEditMode(prev => !prev);
+    }
+
     const userBio = useMemo(() => {
         return (
              <div className={cName('data')}>
@@ -35,9 +39,31 @@ const Bio: Props = ({user}) => {
 
     return (
         <div className={cName()}>
-            {userBio}
+            <div className={cName('data')}>
+               
+                <img src={user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
 
-            <button className={cName('btn')}>{CHANGE_TITLE}</button>
+
+                <div className={cName('personal-info')}>
+                    <p>{user.fio}</p>
+                    
+                    <div className={cName('location')}>
+                        <p>{user.city}</p>
+                        <p>{user.country}</p>
+                    </div>
+
+                </div>
+                <div className={cName('status')}>
+
+                </div>
+                <div className={cName('hakatons-experience')}>
+
+                </div>
+            </div>
+
+            <div className={cName('settings')}>
+                
+            </div>
         </div>
     )
 }

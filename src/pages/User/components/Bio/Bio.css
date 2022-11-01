@@ -1,0 +1,15 @@
+.bio {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.bio-data {
+    display: flex;
+    align-items: flex-start;
+}
+
+.bio-location {
+    display: flex;
+    justify-content: space-between;
+}

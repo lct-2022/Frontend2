@@ -4,8 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { allJobsNumSelector, popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
 import { CARD_TITLES, TITLE } from './consts';
-import { allProjectsSupportedSelector, popularProjectsSelector } from '../../../../store/selectors/projects';
-import { allProfilesNumSelector } from '../../../../store/selectors/users';
+import { allProjectsSupportedSelector, allProjectsNumSelector } from '../../../../store/selectors/projects';
 import {cn} from '@bem-react/classname';
 
 import './Title.css';
@@ -14,7 +13,7 @@ import './Title.css';
 const cName = cn('title-home-page')
 
 const TitleHomePage = () => {
-    const projectsNum = useSelector(allProfilesNumSelector);
+    const projectsNum = useSelector(allProjectsNumSelector);
     const projectsSupportedNum = useSelector(allProjectsSupportedSelector);
     const jobsNum = useSelector(allJobsNumSelector);
 

@@ -11,14 +11,10 @@ export const initialState: JobsState = {
 
 export const jobsReducer = (store: JobsState = initialState, action: JobsAction) => {
     const {type, payload} = action;
-    // console.log(payload);
-    // const openJobs = payload
-    //     ?.filter(job => job.open)
-    //     ?.slice(0, LIMITS.JOBS);
 
     switch (type) {
         case JobsActions.SET_JOBS:
-            return {...store, list: payload || [], amount: payload?.length || 0};
+            return payload
 
         default:
             return store;

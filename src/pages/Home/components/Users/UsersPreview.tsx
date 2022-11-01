@@ -8,10 +8,6 @@ import { TOKEN } from '../../../../utils/consts';
 const UsersPreview = ({...props}) => {
     // const projects = useSelector(() => {});
 
-    const [popularJobs, setPopularJobs] = useState([]);
-    const [popularProjects, setPopularProjects] = useState([]);
-    const [popularProfiles, setPopularProfiles] = useState([]);
-    const [popularEvents, setPopularEvents] = useState([]);
 
     return (
         <div>

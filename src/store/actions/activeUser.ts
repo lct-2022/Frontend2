@@ -1,4 +1,4 @@
-import {checkAuthorization, getRoles} from '../../api/passport';
+import {checkAuthorization} from '../../api/passport';
 import { Dispatch } from "react";
 import { ActiveUserAction, ActiveUserActions } from '../types/activeUser';
 
@@ -7,7 +7,7 @@ export const isUserAuthorizedAction = (token: string) => {
 
         const signupResponse = await checkAuthorization(token);
         
-        return !!signupResponse.result
+        return signupResponse.result
             ? 
                 dispatch({
                     type: ActiveUserActions.SET_USER,

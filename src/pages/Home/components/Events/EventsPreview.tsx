@@ -7,32 +7,33 @@ import { TOKEN } from '../../../../utils/consts';
 import { useSelector } from 'react-redux';
 import { popularProjectsSelector } from '../../../../store/selectors/projects';
 import EventCard from '../EventItem';
+import { evensSelector } from '../../../../store/selectors/events';
 
 const TITLE = 'Предстоящие мероприятия';
 
 const ProjectsPreview = () => {
-    const pevents = useSelector(popularProjectsSelector);
+    const events = useSelector(evensSelector);
 
-    const projectsList = useMemo(() => {
+    const eventsList = useMemo(() => {
         return (
             <div className="vacancies-preview">
-                {pevents.map(({project: {title, description, contests, url}, rating}, index) => (
+                {/* {events.map(({project: {title, description, contests, url}, rating}, index) => (
                     <div key={index}>
                         <EventCard
                             title={title}
                             description={description}
                         />
                     </div>
-                ))}
+                ))} */}
             </div>
         )
-    }, [pevents]);
+    }, [events]);
 
     return (
         <div>
             {TITLE}
 
-            {projectsList}
+            {eventsList}
         </div>
     )
 }

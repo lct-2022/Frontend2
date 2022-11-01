@@ -10,6 +10,7 @@ import { getCurrentProject, getProjectTeam, getProjectVacancies } from '../../..
 import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../../store/actions/projects';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getRating } from '../../../../api/passport';
 
 const cName = cn('project-card');
 
@@ -31,6 +32,7 @@ const ProjectCard: Props = ({
             dispatch<any>(getCurrentProjectAction(id)),
             dispatch<any>(getProjectTeamAction(id)),
             dispatch<any>(getProjectVacanciesAction(id)),
+            getRating('project', id)
         ])
             .then(() => {
                 navigate(ROUTES.PROJECT)

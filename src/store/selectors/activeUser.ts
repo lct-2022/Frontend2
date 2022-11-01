@@ -17,7 +17,7 @@ export const usersAvatarSelector = createSelector(
     avatarUrl => avatarUrl || DEFAULT_AVATAR,
 )
 
-export const userRoleSelector = createSelector(
+export const isAdminSelector = createSelector(
     (store: IBaseStore) => store.activeUser?.admin,
     isAdmin => !!isAdmin,
 )
