@@ -8,6 +8,8 @@ import './JobItem.css';
 import {Props} from './types';
 import { applyToJob, getVacancy } from '../../../../api/platform';
 import { getTokenFromCookies } from '../../../../utils/cookie';
+import { useDispatch } from 'react-redux';
+import { getCurrentVacancyAction } from '../../../../store/actions/jobs';
 
 const cName = cn('vacancy-card');
 
@@ -15,12 +17,14 @@ const APPLY = 'Откликнуться';
 
 const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const makeApply = useCallback(() => {
         applyToJob(id, getTokenFromCookies());
     }, [id]);
 
     const passToVacancy = useCallback(() => {
+        dispatch<any>(getCurrentVacancyAction(id));
         getVacancy(id, getTokenFromCookies());
         navigate(ROUTES.JOB);
     }, [id]);
@@ -31,11 +35,11 @@ const JobCard: Props = ({title, description, id}) => {
                 <div className={cName('logo')}/>
 
                 <div className={cName('data')}>
-                    <div className={cName('text')} onClick={passToVacancy}>
+                    <div className={cName('text', {title: true})} onClick={passToVacancy}>
                         {title}
                     </div>
 
-                    <div className={cName('text')}>
+                    <div className={cName('text', {description: true})}>
                         {description}
                     </div>
                 </div>

@@ -28,6 +28,19 @@
     flex-wrap: wrap;
 }
 
+.vacancy-card-text_title {
+    font-size: 16px;
+}
+
+.vacancy-card-text_title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.vacancy-card-text_description {
+    font-size: 12px;
+}
+
 .vacancy-card-logo {
     width: 48px;
     height: 48px;

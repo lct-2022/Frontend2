@@ -10,3 +10,8 @@ export const allJobsNumSelector = createSelector(
     (store: IBaseStore) => store.jobs.amount,
     amount => amount,
 );
+
+export const currentJobSelector = createSelector(
+    (store: IBaseStore) => store.activeJob,
+    job => job,
+);

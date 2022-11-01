@@ -5,7 +5,7 @@ import { currentProjectSelector } from '../../store/selectors/projects';
 
 import './ProjectPage.css';
 
-const cName = cn('project-card')
+const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);

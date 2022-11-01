@@ -11,7 +11,7 @@ import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesActio
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const cName = cn('project-item');
+const cName = cn('project-card');
 
 const TITLE_RATE = 'Рейтинг';
 
@@ -25,10 +25,7 @@ const ProjectCard: Props = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    console.log(title, 'ID ===>', id);
     
-
     const passToProject = useCallback(() => {
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),

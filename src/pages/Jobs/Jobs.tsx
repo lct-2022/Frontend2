@@ -26,6 +26,8 @@ function Jobs() {
 
     return (
         <div className={cName()}>
+            <h1>Вакансии:</h1>
+
             {allJobs.map(({title, description, id}) => (
                 <div key={id}>
                     <JobCard

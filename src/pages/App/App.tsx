@@ -8,6 +8,8 @@ import Application from '../Application';
 import ProjectCreate from '../ProjectCreate';
 import Projects from '../Projects';
 import ProjectPage from '../ProjectPage';
+import Jobs from '../Jobs';
+import JobPage from '../JobPage';
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
@@ -41,6 +43,8 @@ function App() {
         <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
         <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
         <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
+        <Route path={ROUTES.JOBS} element={<Jobs/>}/>
+        <Route path={ROUTES.JOB} element={<JobPage/>}/>
 
 
         <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
