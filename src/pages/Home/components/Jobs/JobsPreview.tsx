@@ -15,11 +15,12 @@ const JobsPreview = () => {
     const jobsList = useMemo(() => {
         return (
             <div className="vacancies-preview">
-                {jobs.map(({title, description}, index) => (
+                {jobs.map(({title, description, id}, index) => (
                     <div key={index}>
                         <JobCard
                             title={title}
                             description={description}
+                            id={id}
                         />
                     </div>
                 ))}

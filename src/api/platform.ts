@@ -1,4 +1,4 @@
-import { Job, Project, User } from "../types";
+import { Application, Job, Project, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
@@ -34,7 +34,7 @@ export const getCurrentProject = async (id: number): Promise<IDataRPC<Project>> 
 
 //apply-to-job
 
-export const applyToJob = async (jobId: number): Promise<IDataRPC<Project>> => {
+export const applyToJob = async (jobId: number): Promise<IDataRPC<Application>> => {
     return await request({
         method: 'get-project',
         host: RPCHosts.Platform,
