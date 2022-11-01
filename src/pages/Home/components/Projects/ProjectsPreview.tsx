@@ -2,11 +2,11 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './ProjectsPreview.css';
-import { getPopularProjects } from '../../../../api/platform';
+import { getProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 import { useSelector } from 'react-redux';
 import { popularProjectsSelector } from '../../../../store/selectors/projects';
-import ProjectItem from '../ProjectItem';
+import ProjectCard from '../ProjectItem';
 
 const TITLE = 'Проекты';
 
@@ -18,7 +18,7 @@ const ProjectsPreview = () => {
             <div className="projects-preview">
                 {projects.map(({project: {title, description, contests, url, id}, rating}, index) => (
                     <div key={index}>
-                        <ProjectItem
+                        <ProjectCard
                             title={title}
                             description={description}
                             contest={contests}

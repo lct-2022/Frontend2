@@ -34,13 +34,10 @@ export const login = async (email: string, password: string): Promise<IDataRPC<s
     })
 };
 
-export const getPopularProfiles = async (token: string, limit?: number): Promise<IDataRPC<User[]>> => {
+export const getPopularProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => {
     return await request({
         method: 'popular-profiles',
         host: RPCHosts.Passport,
-        settings: {
-            authToken: token
-        },
         ...(limit && {
             params: {limit}
         })

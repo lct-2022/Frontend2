@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { getCurrentProject, getPopularProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
+import { getCurrentProject, getProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
 import { TOKEN } from "../../utils/consts";
 import { ActiveProjectActions, SetProject, SetTeam, SetVAcancies } from "../types/activeProject";
 import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
@@ -7,7 +7,7 @@ import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects'
 export const popularProjectsAction = (limit?: number) => {
     return async (dispatch: Dispatch<SetProjects>) => {
 
-        const popularProjectsResponse = await getPopularProjects(limit);
+        const popularProjectsResponse = await getProjects(limit);
 
         dispatch({
             type: ProjectsActions.SET_PROJECTS,

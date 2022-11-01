@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getPopularProjects } from '../../api/platform';
+import { getProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -14,11 +14,11 @@ import './Projects.css';
 
 const cName = cn('projects-page')
 
-function ProjectsPage() {
+function Projects() {
     const [allProjects, setAllProjects] = useState<Project[]>([]);
 
     useEffect(() => {
-        getPopularProjects()
+        getProjects()
             .then(data => {
                 setAllProjects(data.result.map(project => ({...project, hidden: false})));
             })
@@ -47,4 +47,4 @@ function ProjectsPage() {
             </div>
     )
 }
-export default ProjectsPage;
+export default Projects;

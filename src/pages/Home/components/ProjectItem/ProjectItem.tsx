@@ -2,7 +2,7 @@ import React, { memo, useCallback} from 'react';
 import { cn } from '@bem-react/classname'
 
 
-import './ProjectItem.css';
+import './ProjectCard.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../../utils/routes';
@@ -15,7 +15,7 @@ const cName = cn('project-item');
 
 const TITLE_RATE = 'Рейтинг';
 
-const ProjectItem: Props = ({
+const ProjectCard: Props = ({
     title, 
     description,
     contest,
@@ -70,4 +70,4 @@ const ProjectItem: Props = ({
     )
 }
 
-export default memo(ProjectItem);
+export default memo(ProjectCard);

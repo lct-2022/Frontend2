@@ -1,14 +1,12 @@
 import { getPopularProfiles } from "../../api/passport";
-import { getPopularJobs, getPopularProjects } from "../../api/platform";
-import { LIMITS, TOKEN } from "../../utils/consts";
+import { getJobs, getProjects } from "../../api/platform";
+import { LIMITS } from "../../utils/consts";
 
 export async function onLoad() {
-    console.log('CALL');
-    
     return await Promise.all([
-        getPopularProjects(LIMITS.PROJECTS),
-        getPopularJobs(LIMITS.JOBS),
-        getPopularProfiles(TOKEN, LIMITS.PROFILES),
+        getProjects(LIMITS.PROJECTS),
+        getJobs(LIMITS.JOBS),
+        getPopularProfiles(LIMITS.PROFILES),
     ])
-    .then(data => data);
+        .then(data => data);
 }

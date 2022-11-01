@@ -74,7 +74,7 @@ export type Application = ICommonData & {
     job: Job;
     'job-id': {};
     message: string;
-    starus: ApplicationStatus;
+    status: ApplicationStatus;
 };
 
 export type Event = ICommonData & {}

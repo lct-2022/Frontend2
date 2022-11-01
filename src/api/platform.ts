@@ -2,7 +2,7 @@ import { Application, Job, Project, ProjectTeamMember, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
-export const getPopularJobs = async (limit?: number): Promise<IDataRPC<Job[]>> => {
+export const getJobs = async (limit?: number): Promise<IDataRPC<Job[]>> => {
     return await request({
         method: 'popular-jobs',
         host: RPCHosts.Platform,
@@ -12,7 +12,7 @@ export const getPopularJobs = async (limit?: number): Promise<IDataRPC<Job[]>> =
     });
 };
 
-export const getPopularProjects = async (limit?: number): Promise<IDataRPC<Project[]>> => {
+export const getProjects = async (limit?: number): Promise<IDataRPC<Project[]>> => {
     return await request({
         method: 'popular-projects',
         host: RPCHosts.Platform,
@@ -73,3 +73,19 @@ export const applyToJob = async (jobId: number, token: string): Promise<IDataRPC
 //accept-application
 
 //decline-application
+
+// get-job
+export const getVacancy = async (jobId: number, token?: string): Promise<IDataRPC<Application>> => {
+    return await request({
+        method: 'get-job',
+        host: RPCHosts.Platform,
+        params: {
+            'job-id': jobId,
+        },
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
+    });
+};

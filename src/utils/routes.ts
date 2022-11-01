@@ -10,6 +10,7 @@ export const ROUTES = {
     PARTICIPANTS: '/users/participants',
     USER: '/profile',
     JOBS: '/vacancies',
+    JOB: '/vacancy',
     EVENTS: '/events',
     CHAT: '/chat',
     APPLICATION: '/apply',

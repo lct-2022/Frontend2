@@ -10,15 +10,16 @@ import ProjectsPreview from './components/Projects';
 import TitleHomePage from './components/Title';
 
 import './Home.css';
+import { LIMITS } from '../../utils/consts';
 
 function Home() {
     const dispatch = useDispatch();
      
     // TODO: add preloader
     useEffect(() => {
-        dispatch<any>(popularProjectsAction());
-        dispatch<any>(popularProfilesAction(getTokenFromCookies()));
-        dispatch<any>(popularJobsAction());
+        dispatch<any>(popularProjectsAction(LIMITS.PROJECTS));
+        dispatch<any>(popularProfilesAction(LIMITS.PROFILES));
+        dispatch<any>(popularJobsAction(LIMITS.JOBS));
     }, []);
 
     return (

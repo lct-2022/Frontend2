@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import ProjectItem from '../../../Home/components/ProjectItem';
+import ProjectCard from '../../../Home/components/ProjectItem';
 import { Props } from '../../types';
 import { cn } from '@bem-react/classname';
 
@@ -19,7 +19,7 @@ const ProjectsList: Props = ({projects}) => {
             <div className={cName('container')}>
                 {projects.map(({project: {title, description, contests, url, id}, rating, hidden}, index) => (
                     <div key={index} className={cName('project', {hidden})}>
-                        <ProjectItem
+                        <ProjectCard
                             title={title}
                             description={description}
                             contest={contests}
