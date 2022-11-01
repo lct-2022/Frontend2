@@ -15,7 +15,7 @@ export const projectsReducer = (store: ProjectsState = initialState, action: Pro
 
     switch (type) {
         case ProjectsActions.SET_PROJECTS:
-            return {...store, list: payload, amount: store.list}
+            return {...store, list: payload, amount: store.list.length}
         case ProjectsActions.ADD_PROJECT:
             return {...store, list: [...store.list, payload]}
 

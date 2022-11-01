@@ -19,10 +19,13 @@ import { checkAuthorization } from '../../api/passport';
 import { useDispatch } from 'react-redux';
 import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { getTokenFromCookies } from '../../utils/cookie';
+import { useSelector } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
   console.log('render');
+  const store = useSelector(store => store);
+  console.log('STORE =>', store)
   
   useEffect(() => {
     dispatch<any>(isUserAuthorizedAction(getTokenFromCookies())); // token из кук

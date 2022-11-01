@@ -80,7 +80,7 @@ export const getVacancy = async (jobId: number, token?: string): Promise<IDataRP
         method: 'get-job',
         host: RPCHosts.Platform,
         params: {
-            'job-id': jobId,
+            'id': jobId,
         },
         ...(token && {
             settings: {
