@@ -46,17 +46,9 @@ function Navbar() {
                         )
                     } else {
                         return (
-                            <a 
-                                key={index}
-                                className={cName('menu-point')}
-                                href={url}
-                                target="_self"
-                                rel="noopener noreferrer"
-                            >
-                                <button>
-                                    {point}
-                                </button>
-                            </a>
+                            <button onClick={() => navigate(url)}>
+                                {point}
+                            </button>
                         )
                     }
                 })
