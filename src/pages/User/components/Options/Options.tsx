@@ -1,20 +1,18 @@
 import React, { useState, ChangeEvent, useCallback, useEffect, memo } from 'react';
 import { ADMIN, OPTIONS } from '../../consts';
-import classnames from 'classnames';
-
+import {cn} from '@bem-react/classname';
 import './Options.css';
 
+const cName = cn('user-options');
+
+
 export function UserOptions() {
-    console.log(OPTIONS);
-    
     return (
-        <div className="user-menu">
+        <div className={cName()}>
             {[...OPTIONS].map((point, index) => (
                 <div
                     key={index}
-                    className={classnames('user-menu-point', {
-                        'admin-point': point === ADMIN,
-                    })}
+                    className={cName('point', {admin: point === ADMIN})}
                 >
                     {point}
                 </div>

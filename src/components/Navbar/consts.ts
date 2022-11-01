@@ -1,7 +1,6 @@
 import { ROUTES } from "../../utils/routes";
 
 const MENU_POINTS = {
-    'Главная': ROUTES.INDEX,
     'Эксперты': ROUTES.EXPERTS,
     'Проекты': ROUTES.PROJECTS,
     'Cервисы': ROUTES.SERVICES,

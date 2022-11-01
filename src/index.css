@@ -46,8 +46,9 @@ a:hover {
 }
 
 input {
-  font-weight: 800;
-  font-size: large;
+  height: 24px;
+  
+  border-radius: 8px;
 }
 
 p {

@@ -29,3 +29,5 @@ export const ITEMS_MAP: {[x in string]: string} = {
     about: 'Расскажите о себе',
     admin: 'Админ',
 }
+
+export const CHANGE_TITLE = 'Редактировать';

@@ -1,7 +1,7 @@
 import { User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 
-export const checkAuthorization = async (token: string | undefined): Promise<IDataRPC<User>> => {
+export const checkAuthorization = async (token: string): Promise<IDataRPC<User>> => {
     return await request({
         method: 'my-profile',
         host: RPCHosts.Passport,

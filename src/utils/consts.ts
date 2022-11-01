@@ -7,4 +7,5 @@ export const LIMITS = {
     EVENTS: 4,
 }
 
+export const DEFAULT_LOGO = 'https://sportishka.com/uploads/posts/2022-03/1646088782_53-sportishka-com-p-gori-kirgizstana-turizm-krasivo-foto-60.jpg';
 export const DEFAULT_AVATAR = 'https://sportishka.com/uploads/posts/2022-03/1646088782_53-sportishka-com-p-gori-kirgizstana-turizm-krasivo-foto-60.jpg';

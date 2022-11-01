@@ -1,13 +1,13 @@
-.user-menu {
+.user-options {
     display: flex;
     justify-content: space-around;
 }
 
-.user-menu-point {
+.user-options-point {
     cursor: pointer;
 }
 
-.user-menu-point:hover {
+.user-options-point:hover {
     color: green;
 }
 
