@@ -18,23 +18,27 @@ button {
   cursor: pointer;
   font-weight: 800;
 
-  padding: 0 16px;
-  width: auto;
-  height: 48px;
+  padding: 15px 35px;
+  width: 184px;
+  height: 54px;
 
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
 
-  background-color:#475468;
+  background-color:#6941C6;
   color: #ffffff;
 }
 
 button:hover {
-  background-color:#7193c5;
+  background-color:#49259e;
 }
 
 a {
   cursor: pointer;
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 a:hover {

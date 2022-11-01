@@ -9,7 +9,7 @@ import {Props} from './types';
 
 const cName = cn('vacancy-card');
 
-const TITLE = 'Отправить заявку';
+const TITLE = 'Откликнуться';
 
 const JobCard: Props = ({title, description}) => {
     const navigate = useNavigate();

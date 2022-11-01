@@ -6,6 +6,9 @@ import { usersAvatarSelector, isUserAuthorizedSelector } from '../../store/selec
 import { useSelector } from 'react-redux';
 // import { useSelector } from 'react-redux';
 import './Navbar.css';
+import {cn} from '@bem-react/classname';
+
+const cName = cn('navbar');
 
 function Navbar() {
     const location = useLocation();
@@ -19,11 +22,11 @@ function Navbar() {
             : {...MENU_POINTS, [LOGIN_POINT]: ROUTES.LOGIN}
 
         return (
-            <div className="navbar-menu">
+            <div className={cName('menu')}>
                 {Object.entries(menuWithLogin).map(([point, url], index) => (
                     <a
                         key={index}
-                        className="navbar-menu-point"
+                        className={cName('menu-point')}
                         href={url}
                         target="_self"
                         rel="noopener noreferrer"
@@ -40,8 +43,8 @@ function Navbar() {
     }
 
     return (
-        <div className="navbar">
-            <img src={usersAvatar} alt="" className="avatar"/>
+        <div className={cName()}>
+            <img src={usersAvatar} alt="" className={cName('avatar')}/>
 
             {menuPoints}
         </div>

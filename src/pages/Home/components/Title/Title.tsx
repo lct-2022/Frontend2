@@ -6,8 +6,12 @@ import { useSelector } from 'react-redux';
 import { CARD_TITLES, TITLE } from './consts';
 import { allProjectsSupportedSelector, popularProjectsSelector } from '../../../../store/selectors/projects';
 import { allProfilesNumSelector } from '../../../../store/selectors/users';
+import {cn} from '@bem-react/classname';
 
 import './Title.css';
+
+
+const cName = cn('title-home-page')
 
 const TitleHomePage = () => {
     const projectsNum = useSelector(allProfilesNumSelector);
@@ -22,12 +26,12 @@ const TitleHomePage = () => {
 
     const cards = useMemo(() => {
         return (
-            <div className="cards-title-home">
+            <div className={cName('container')}>
                 {dataToShow.map((item, index) => (
-                    <div key={index} className="card-title-home">
-                        <div className="card-title-home-text">{item}</div>
+                    <div key={index} className={cName('card')}>
+                        <div className={cName('val')}>{item}</div>
                         
-                        <div className="card-title-home-text">{CARD_TITLES[index]}</div>
+                        <div className={cName('item')}>{CARD_TITLES[index]}</div>
                     </div>
                 ))}
             </div>
@@ -35,7 +39,7 @@ const TitleHomePage = () => {
     }, [dataToShow])
 
     return (
-        <div>
+        <div className={cName()}>
             <h3>{TITLE}</h3>
 
             {cards}

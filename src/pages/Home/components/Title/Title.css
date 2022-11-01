@@ -1,21 +1,30 @@
-.cards-title-home {
+.title-home-page-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+
+    width: 100%;
 }
 
-.card-title-home {
-    background-color: #D0D5DD;
-    border-radius: 10px;
+.title-home-page-card {
+    background-color: #fff;
+    border-radius: 8px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    width: 200px;
+    width: calc(100vw / 3 - 36px);
     height: 100px;
 }
 
-.card-title-home-text {
-    margin: 4px 0;
+.title-home-page-val {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.title-home-page-item {
+    color: #667085;
+
+    font-size: 14px;
 }
