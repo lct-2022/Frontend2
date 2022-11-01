@@ -13,3 +13,15 @@ export const popularJobsAction = (limit?: number) => {
         });
     }
 }
+
+export const activeJobAction = (limit?: number) => {
+    return async (dispatch: Dispatch<JobsAction>) => {
+
+        const popularJobsResponse = await getJobs(limit);
+
+        dispatch({
+            type: JobsActions.SET_JOBS,
+            payload: popularJobsResponse.result,
+        });
+    }
+}

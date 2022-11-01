@@ -19,4 +19,5 @@ export interface IBaseStore {
     users: NumerableItems<User>;
     jobs: NumerableItems<Job>;
     // events?: NumerableItems<IEvents>;
+    activeJob: Nullable<Job>;
 }
