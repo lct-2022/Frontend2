@@ -11,10 +11,10 @@ export enum ActiveProjectActions {
 export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, Project>;
 export type UnsetProject = CommonAction<ActiveProjectActions.UNSET_PROJECT>;
 export type SetTeam = CommonAction<ActiveProjectActions.SET_TEAM, ProjectTeamMember[]>;
-export type SetVAcancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Application[]>;
+export type SetVacancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Application[]>;
 
 export type ActiveProjectAction = 
     | SetProject
     | UnsetProject
     | SetTeam
-    | SetVAcancies;
+    | SetVacancies;

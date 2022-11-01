@@ -5,12 +5,14 @@
 
     margin: 4px 0;
 
-    border: solid 2px #6D9AC3;
+    border: solid 1px #98A2B3;
     border-radius: 10px;
 
     padding: 8px;
     height: auto;
     min-height: 64px;
+
+    background-color: #fff;
 }
 
 .vacancy-card-left-block {

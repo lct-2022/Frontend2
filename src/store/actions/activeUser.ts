@@ -19,15 +19,3 @@ export const isUserAuthorizedAction = (token: string | undefined) => {
                 });
         }
 }
-
-export const getRolesAction = (token: string) => {
-    return async (dispatch: Dispatch<ActiveUserAction>) => {
-
-        const getRolesResponse = await getRoles(token);
-        
-        return dispatch({
-                type: ActiveUserActions.SET_ROLES,
-                payload: getRolesResponse.result,
-            })
-        }
-}

@@ -26,8 +26,8 @@ export const currentProjectSelector = createSelector(
 
         return {
             project,
-            teamAmount: team.length,
-            openVacanciesAmount: vacancies.length,
+            team: team || [],
+            openVacancies: vacancies || [],
         }
     },
 );

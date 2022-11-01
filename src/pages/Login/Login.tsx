@@ -8,7 +8,7 @@ import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
-import { isUserAuthorizedAction, getRolesAction } from '../../store/actions/activeUser';
+import { isUserAuthorizedAction } from '../../store/actions/activeUser';
 import { ROUTES } from '../../utils/routes';
 
 enum Labels {
@@ -47,8 +47,6 @@ export const LoginForm: Props = ({type = 'login'}) => {
         requestor(email, password)
             .then(({result}) => {
                 dispatch<any>(isUserAuthorizedAction(result));
-                // dispatch<any>(getRolesAction(result));
-
                 // Remove ???
                 setEmail('');
                 setPassword('');
@@ -65,7 +63,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
                 <div className="login-form-wrapper">
 
-                    <h3 className="login-form-title">{title}</h3>
+                    <p className="login-form-title">{title}</p>
 
                     <div className="login-form-input">
                         <label htmlFor="login-form-mail" className="login-label">

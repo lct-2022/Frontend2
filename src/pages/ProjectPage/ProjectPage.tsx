@@ -13,8 +13,8 @@ function ProjectPage() {
 
     if (!currentProject) return null;
 
-    const {project, teamAmount, openVacanciesAmount} = currentProject
-    const {title, description, contests} = project
+    const {project, team, openVacancies} = currentProject
+    const {title, description, url, contests} = project
     const createdAt = project['created-at'];
 
     return (
@@ -26,9 +26,19 @@ function ProjectPage() {
 
             <div className={cName('details')}>
                 <div className={cName('description-card')}>
-                    <p>{teamAmount} человек в команде</p>
-                    <p>{openVacanciesAmount} открытых вакансий</p>
+                    <div className={cName('team-info')}>
+                        <p className={cName('team-amount')}>{team.length} человек в команде</p>
+                        
+                        <p>{openVacancies.length} открытых вакансий</p>
+                    </div>
                     <p className={cName('description')}>{description}</p>
+                    <a 
+                        href={url}
+                        target="_blank"
+                        rel="noopener norefere"
+                    >
+                        {url || 'https://ya.ru/'}  
+                    </a>
                     <p className={cName('contests')}>{contests}</p>
                     <p className={cName('created')}>{createdAt}</p>
                 </div>
@@ -41,6 +51,7 @@ function ProjectPage() {
                             <li>Front</li>
                             <li>Back</li>
                             <li>PM</li>
+                            <li>Designer</li>
                         </ul>
                     </div>
                 </div>

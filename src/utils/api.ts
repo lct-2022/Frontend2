@@ -32,7 +32,7 @@ interface IRPCRequestArguments {
     }
 }
 
-export async function request(args: IRPCRequestArguments): Promise<IDataRPC<any>> {
+export async function request<D>(args: IRPCRequestArguments): Promise<IDataRPC<D>> {
     const {method, host, params, settings} = args;
 
     const url = `https://${host}.dev.lct.40ants.com`;

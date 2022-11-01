@@ -22,7 +22,7 @@ export type User = ICommonData & {
     education: Nullable<string>,
     job: Nullable<string>,
     about: Nullable<string>,
-    admin: Nullable<string>,
+    admin: boolean,
     hidden?: boolean;
 }
 
@@ -72,7 +72,7 @@ enum ApplicationStatus {
 export type Application = ICommonData & {
     'user-id': number;
     job: Job;
-    'job-id': {};
+    'job-id': number | {};
     message: string;
     status: ApplicationStatus;
 };

@@ -29,8 +29,8 @@ const ProjectCard: Props = ({
     const passToProject = useCallback(() => {
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),
-            // dispatch<any>(getProjectTeamAction(id)),
-            // dispatch<any>(getProjectVacanciesAction(id)),
+            dispatch<any>(getProjectTeamAction(id)),
+            dispatch<any>(getProjectVacanciesAction(id)),
         ])
             .then(() => {
                 navigate(ROUTES.PROJECT)

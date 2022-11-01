@@ -7,19 +7,34 @@ import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
+import { currentUserSelector } from '../../store/selectors/activeUser';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../utils/routes';
 
 const cName = cn('job-page')
 
 const APPLY = 'Откликнуться';
 
-
-
 function JobPage() {
     const currentJob = useSelector(currentJobSelector);
+    const currentUser = useSelector(currentUserSelector)
 
+    const navigate = useNavigate();
+
+    // TODO: remove possibilities of NULL in currentJob
     const makeApply = useCallback(() => {
-        applyToJob(currentJob?.id ?? 0, getTokenFromCookies());
-    }, [currentJob?.id]);
+        if (!currentUser) {
+            navigate(ROUTES.LOGIN);
+            return;
+        }
+        applyToJob(currentJob?.id ?? 0, getTokenFromCookies())
+            .then(() => {
+                navigate(ROUTES.APPLICATION);
+            })
+            .catch(() => {
+                throw new Error();
+            })
+    }, [currentJob?.id, currentUser]);
 
     const obligations = useMemo(() => {
         return (
@@ -46,13 +61,20 @@ function JobPage() {
     const {title, description, team, id} = currentJob;
     const teamId = currentJob['team-id']
     const createdAt = currentJob['created-at'];
+    
+    // const currentJobProject = team.project
 
     return (
         <div className={cName()}>
             <div className={cName('title-block')}>
-                <p className={cName('vacancy-title')}>{title}</p>
+                <div className={cName('vacancy-title-info')}>
+                    <p className={cName('vacancy-title')}>{title}</p>
+                    <p className={cName('vacancy-description')}>{description}</p>
+                </div>
 
-                <button onClick={makeApply}>{APPLY}</button>
+                <div className={cName('btn-container')}>
+                    <button onClick={makeApply}>{APPLY}</button>
+                </div>
             </div>
 
             <div className={cName('project')}>

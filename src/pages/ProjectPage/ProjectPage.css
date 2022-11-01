@@ -19,6 +19,15 @@
     font-weight: 600;
 }
 
+.project-page-team-info {
+    display: flex;
+}
+
+.project-page-team-amount {
+    margin-right: 24px;
+}
+
 .project-page-details {
     display: flex;
+    justify-content: space-between;
 }

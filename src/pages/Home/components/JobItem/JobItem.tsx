@@ -10,6 +10,8 @@ import { applyToJob, getVacancy } from '../../../../api/platform';
 import { getTokenFromCookies } from '../../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../../store/actions/jobs';
+import { useSelector } from 'react-redux';
+import { currentUserSelector } from '../../../../store/selectors/activeUser';
 
 const cName = cn('vacancy-card');
 
@@ -19,9 +21,21 @@ const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const currentUser = useSelector(currentUserSelector)
+
     const makeApply = useCallback(() => {
-        applyToJob(id, getTokenFromCookies());
-    }, [id]);
+        if (!currentUserSelector) {
+            navigate(ROUTES.LOGIN);
+            return;
+        }
+        applyToJob(id, getTokenFromCookies())
+            .then(() => {
+                navigate(ROUTES.APPLICATION);
+            })
+            .catch(() => {
+                throw new Error()
+            });
+    }, [id, currentUser]);
 
     const passToVacancy = useCallback(() => {
         dispatch<any>(getCurrentVacancyAction(id));

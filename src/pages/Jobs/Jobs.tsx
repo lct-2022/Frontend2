@@ -7,22 +7,20 @@ import { Job, Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
 import JobCard from '../../pages/Home/components/JobItem';
 
-
 import './Jobs.css';
 import { popularJobsAction } from '../../store/actions/jobs';
 
 const cName = cn('jobs-page')
 
 function Jobs() {
-    const [allJobs, setAllJobs] = useState<Job[]>([])
+    const [allJobs, setAllJobs] = useState<Job[]>([]);
 
     useEffect(() => {    
         getJobs()
             .then(data => {
-                setAllJobs(data.result);
+                setAllJobs(data.result.filter(el => el.open));
             })
     }, []);
-
 
     return (
         <div className={cName()}>

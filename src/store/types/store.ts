@@ -6,14 +6,11 @@ type NumerableItems<D> = {
 }
 
 export interface IBaseStore {
-    activeUser: {
-        user: Nullable<User>;
-        roles: string[],
-    },
+    activeUser:  Nullable<User>;
     activeProject: {
         project: Nullable<Project['project']>;
-        team: ProjectTeamMember[];
-        vacancies: Application[];
+        team: Nullable<ProjectTeamMember[]>;
+        vacancies: Nullable<Application[]>;
     }, 
     projects: NumerableItems<Project>;
     users: NumerableItems<User>;

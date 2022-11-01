@@ -1,3 +1,11 @@
+.job-page {
+    padding: 24px 32px;
+    border: 1px solid #98A2B3;
+    border-radius: 8px;
+
+    background-color: #fff;
+}
+
 .job-page-title-block {
     display: flex;
     justify-content: space-between;
@@ -9,4 +17,12 @@
 .job-page-vacancy-title {
     font-size: 30px;
     font-weight: 600;
+
+    margin-bottom: 16px;
+}
+
+.job-page-vacancy-description {
+    max-width: 500px;
+
+    color: grey;
 }
