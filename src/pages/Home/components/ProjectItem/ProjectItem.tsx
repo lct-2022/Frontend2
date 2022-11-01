@@ -5,8 +5,11 @@ import { cn } from '@bem-react/classname'
 import './ProjectItem.css';
 
 import {Props} from './types';
+import { ROUTES } from '../../../../utils/routes';
 
 const cName = cn('project-item');
+
+const TITLE_RATE = 'Рейтинг';
 
 const ProjectItem: Props = ({
     title, 
@@ -22,7 +25,7 @@ const ProjectItem: Props = ({
 
                 <div className={cName('data')}>
                     <div className={cName('text', {title: true})}>
-                        {title}
+                        <a href={ROUTES.PROJECT}>{title}</a>
                     </div>
 
                     <div className={cName('text', {description: true})}>
@@ -38,7 +41,8 @@ const ProjectItem: Props = ({
             </div>
 
             <div className={cName('rating')}>
-                rate: {rating}
+                <p>{TITLE_RATE}:&nbsp;</p>
+                <b>{rating}</b>
             </div>
         </div>
     )
