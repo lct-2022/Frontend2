@@ -2,7 +2,7 @@ import React, { memo, useCallback} from 'react';
 import { cn } from '@bem-react/classname'
 
 
-import './ProjectCard.css';
+import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../../utils/routes';
