@@ -67,7 +67,8 @@ function Navbar() {
                 className={cName('main-logo')}
                 onClick={passToHome}
             />
-            <a href="" target="_blank"></a>
+            <h3>Changed</h3>
+
             {menuPoints}
         </div>
   )
