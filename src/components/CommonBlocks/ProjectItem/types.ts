@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Project, ProjectData } from "../../../../types";
+import { Project, ProjectData } from "../../../types";
 
 interface IProps {
     title: ProjectData['title'],

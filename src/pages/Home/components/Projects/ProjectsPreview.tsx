@@ -6,7 +6,7 @@ import { getProjects } from '../../../../api/platform';
 import { TOKEN } from '../../../../utils/consts';
 import { useSelector } from 'react-redux';
 import { popularProjectsSelector } from '../../../../store/selectors/projects';
-import ProjectCard from '../ProjectItem';
+import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 
 const TITLE = 'Проекты';
 

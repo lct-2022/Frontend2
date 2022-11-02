@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Job } from "../../../../types";
+import { Job } from "../../../types";
 
 interface IProps {
     title: Job['title'],

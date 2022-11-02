@@ -5,13 +5,13 @@ import { cn } from '@bem-react/classname'
 import './ProjectItem.css';
 
 import {Props} from './types';
-import { ROUTES } from '../../../../utils/routes';
-import { getCurrentProject, getProjectTeam, getProjectVacancies } from '../../../../api/platform';
-import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../../store/actions/projects';
+import { ROUTES } from '../../../utils/routes';
+import { getCurrentProject, getProjectTeam, getProjectVacancies } from '../../../api/platform';
+import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../store/actions/projects';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getRating } from '../../../../api/passport';
-import { getProjectRatingAction } from '../../../../store/actions/rating';
+import { getRating } from '../../../api/passport';
+import { getProjectRatingAction } from '../../../store/actions/rating';
 
 const cName = cn('project-card');
 

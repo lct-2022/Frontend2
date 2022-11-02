@@ -78,17 +78,26 @@ export const applyToJob = async (jobId: number, token: string): Promise<IDataRPC
 //decline-application
 
 // get-job
-export const getVacancy = async (jobId: number, token?: string): Promise<IDataRPC<Job>> => {
+export const getVacancy = async (jobId: number): Promise<IDataRPC<Job>> => {
     return await request({
         method: 'get-job',
         host: RPCHosts.Platform,
         params: {
             'id': jobId,
         },
-        ...(token && {
-            settings: {
+    });
+};
+
+export const getJobApplication = async (jobId: number, token: string): Promise<IDataRPC<Application>> => {
+    return await request({
+        method: 'get-job-application',
+        host: RPCHosts.Platform,
+        params: {
+            'id': jobId,
+        },
+        
+        settings: {
                 authToken: token,
-            }
-        }),
+        }
     });
 };

@@ -5,7 +5,7 @@ import { getJobs, getProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Job, Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
-import JobCard from '../../pages/Home/components/JobItem';
+import JobCard from '../../components/CommonBlocks/JobItem';
 
 import './Jobs.css';
 import { popularJobsAction } from '../../store/actions/jobs';

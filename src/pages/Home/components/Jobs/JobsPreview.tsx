@@ -2,7 +2,7 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
  
 import { popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
-import JobCard from '../JobItem/JobItem';
+import JobCard from '../../../../components/CommonBlocks/JobItem';
 
 import './JobsPreview.css';
 

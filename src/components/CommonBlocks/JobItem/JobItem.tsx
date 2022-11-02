@@ -1,17 +1,17 @@
 import React, { memo, useCallback, useEffect, useMemo, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../../utils/routes';
+import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
 
 import './JobItem.css';
 
 import {Props} from './types';
-import { applyToJob, getProjectVacancies, getVacancy } from '../../../../api/platform';
-import { getTokenFromCookies } from '../../../../utils/cookie';
+import { applyToJob, getJobApplication, getProjectVacancies, getVacancy } from '../../../api/platform';
+import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { getCurrentVacancyAction } from '../../../../store/actions/jobs';
+import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
-import { currentUserSelector } from '../../../../store/selectors/activeUser';
+import { currentUserSelector } from '../../../store/selectors/activeUser';
 
 const cName = cn('vacancy-card');
 
@@ -32,6 +32,8 @@ const JobCard: Props = ({title, description, id}) => {
         })
     }, [])
     
+
+
     const makeApply = useCallback(() => {
         if (!currentUserSelector) {
             navigate(ROUTES.LOGIN);
@@ -39,9 +41,12 @@ const JobCard: Props = ({title, description, id}) => {
         }
         
         applyToJob(id, getTokenFromCookies())
-            .then(() => {
-                getProjectVacancies(id)
-                // navigate(ROUTES.APPLICATION);
+            // .then(() => {
+            //     getJobApplication(id, getTokenFromCookies())
+            //     // navigate(ROUTES.APPLICATION);
+            // })
+            .then(result => {
+                setIsApplication(!!result.result)
             })
             .catch(() => {
                 throw new Error()
@@ -49,9 +54,10 @@ const JobCard: Props = ({title, description, id}) => {
     }, [id, currentUser]);
 
     const passToVacancy = useCallback(() => {
-        dispatch<any>(getCurrentVacancyAction(id));
-        getVacancy(id, getTokenFromCookies());
-        navigate(ROUTES.JOB);
+        dispatch<any>(getCurrentVacancyAction(id))
+            .then(() => {
+                navigate(ROUTES.JOB);
+            })
     }, [id]);
 
     const btn = useMemo(() => {

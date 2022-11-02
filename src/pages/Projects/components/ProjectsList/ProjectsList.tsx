@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import ProjectCard from '../../../Home/components/ProjectItem';
+import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { Props } from '../../types';
 import { cn } from '@bem-react/classname';
 

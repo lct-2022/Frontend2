@@ -16,10 +16,10 @@ export const popularJobsAction = (limit?: number) => {
     }
 }
 
-export const getCurrentVacancyAction = (jobId: number, token?: string) => {
+export const getCurrentVacancyAction = (jobId: number) => {
     return async (dispatch: Dispatch<ActiveJobAction>) => {
 
-        const currentVacancyResponse = await getVacancy(jobId, token);
+        const currentVacancyResponse = await getVacancy(jobId);
 
         dispatch({
             type: ActiveJobActions.SET_ACTIVE_JOB,
