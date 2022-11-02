@@ -44,9 +44,9 @@ export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => 
     });
 };
 
-export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<User>> => {
+export const getUserProfile = async (token: string): Promise<IDataRPC<User>> => {
     return await request({
-        method: 'my-profile',
+        method: 'get-profile',
         host: RPCHosts.Passport,
         settings: {
             authToken: token,

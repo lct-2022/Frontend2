@@ -11,10 +11,10 @@ export const OPTIONS: Partial<Record<UserOption, string>> = {
     about: 'Биография',
     resume: 'Резюме',
     projects: 'Проекты',
-    teams: 'Список команд',
 }
 
 export const ADMIN_OPTION: Partial<Record<UserOption, string>> = {
+    teams: 'Список команд',
     admin: 'Админ',
 };
 

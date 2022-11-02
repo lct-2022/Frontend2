@@ -4,7 +4,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import LoginForm from '../Login';
 import Profile from '../User';
 import Home from '../Home';
-import Application from '../Application';
 import ProjectCreate from '../ProjectCreate';
 import Projects from '../Projects';
 import ProjectPage from '../ProjectPage';
@@ -44,7 +43,6 @@ function App() {
         <Route path={ROUTES.LOGIN} element={<LoginForm type="login"/>}/>
 
         <Route path={ROUTES.USER} element={<Profile/>}/>
-        <Route path={ROUTES.APPLICATION} element={<Application/>}/>
         <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
         <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
         <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>

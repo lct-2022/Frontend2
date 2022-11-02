@@ -32,3 +32,15 @@ export const popularProfilesAction = (limit?: number) => {
         });
     }
 }
+
+export const getUserProfileAction = () => {
+    // return async (dispatch: Dispatch<UsersAction>) => {
+
+    //     const popularProfilesResponse = await getProfiles(limit);
+
+    //     dispatch({
+    //         type: UsersActions.SET_USERS,
+    //         payload: popularProfilesResponse.result,
+    //     });
+    // }
+}
