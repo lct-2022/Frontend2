@@ -51,9 +51,6 @@ export function Profile() {
                 <UserRoutes user={currentUser}/>
                 <Contacts user={currentUser}/>
             </div>
-
-            {/* <UserBusinessInfo fio="currentUserData.fio"/> */}
-            {/* <UserCommonInfo data={}/> */}
         </div>
     );
 }

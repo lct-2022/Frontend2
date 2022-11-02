@@ -25,6 +25,13 @@ const JobCard: Props = ({title, description, id}) => {
     const [isApplication, setIsApplication] = useState(false);
 
     const currentUser = useSelector(currentUserSelector);
+
+    useEffect(() => {
+        getJobApplication(id, getTokenFromCookies())
+            .then(data => {
+                setIsApplication(!!data.result);
+            })
+    }, [id])
     
     const makeApply = useCallback(() => {
         if (!currentUserSelector) {

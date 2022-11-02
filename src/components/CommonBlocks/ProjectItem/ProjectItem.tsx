@@ -31,6 +31,7 @@ const ProjectCard: Props = ({
     const passToProject = useCallback(() => {
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),
+            // TODO - присылать бы это в ручке списка проектов
             dispatch<any>(getProjectTeamAction(id)),
             dispatch<any>(getProjectVacanciesAction(id)),
             dispatch<any>(getProjectRatingAction(id)),
