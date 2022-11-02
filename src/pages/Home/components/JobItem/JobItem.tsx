@@ -1,4 +1,4 @@
-import React, { memo, useCallback} from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../utils/routes';
 import { cn } from '@bem-react/classname'
@@ -6,7 +6,7 @@ import { cn } from '@bem-react/classname'
 import './JobItem.css';
 
 import {Props} from './types';
-import { applyToJob, getVacancy } from '../../../../api/platform';
+import { applyToJob, getProjectVacancies, getVacancy } from '../../../../api/platform';
 import { getTokenFromCookies } from '../../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../../store/actions/jobs';
@@ -15,14 +15,23 @@ import { currentUserSelector } from '../../../../store/selectors/activeUser';
 
 const cName = cn('vacancy-card');
 
-const APPLY = 'Откликнуться';
-
+const APPLY = 'Откликнуться'
 const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
+    const [isApplication, setIsApplication] = useState(false);
 
-    const currentUser = useSelector(currentUserSelector)
-
+    const currentUser = useSelector(currentUserSelector);
+    
+    useEffect(() => {
+        getProjectVacancies(id)
+        .then(data => {
+            console.log('appl', data)
+            setIsApplication(!!data.result)
+        })
+    }, [])
+    
     const makeApply = useCallback(() => {
         if (!currentUserSelector) {
             navigate(ROUTES.LOGIN);
@@ -31,7 +40,8 @@ const JobCard: Props = ({title, description, id}) => {
         
         applyToJob(id, getTokenFromCookies())
             .then(() => {
-                navigate(ROUTES.APPLICATION);
+                getProjectVacancies(id)
+                // navigate(ROUTES.APPLICATION);
             })
             .catch(() => {
                 throw new Error()
@@ -43,6 +53,14 @@ const JobCard: Props = ({title, description, id}) => {
         getVacancy(id, getTokenFromCookies());
         navigate(ROUTES.JOB);
     }, [id]);
+
+    const btn = useMemo(() => {
+        return (
+            <button className={cName('right-block')} onClick={makeApply}>
+                {isApplication ? 'Отозвать' : APPLY}
+            </button>
+        )
+    }, [isApplication])
 
     return (
         <div className={cName()}>
@@ -60,9 +78,7 @@ const JobCard: Props = ({title, description, id}) => {
                 </div>
             </div>
 
-            <button className={cName('right-block')} onClick={makeApply}>
-                {APPLY}
-            </button>
+            {btn}
         </div>
     )
 }

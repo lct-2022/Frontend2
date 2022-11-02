@@ -1,11 +1,10 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
-import './JobsPreview.css';
-
+ 
 import { popularJobsSelector } from '../../../../store/selectors/jobs';
 import { useSelector } from 'react-redux';
 import JobCard from '../JobItem/JobItem';
+
+import './JobsPreview.css';
 
 const TITLE = 'Cрочные вакансии';
 
@@ -15,7 +14,7 @@ const JobsPreview = () => {
     const jobsList = useMemo(() => {
         return (
             <div className="vacancies-preview">
-                {jobs.map(({title, description, id}, index) => (
+                {jobs?.map(({title, description, id}, index) => (
                     <div key={index}>
                         <JobCard
                             title={title}

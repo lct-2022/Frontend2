@@ -2,17 +2,27 @@ import React, { useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
 import { Props } from '../../components/About/types';
 
-import './About.css'
+import './Contacts.css'
 
 const cName = cn('contacts');
+
+const TITLE = 'Контакты';
 
 const Contacts: Props = ({user}) => {
 
     return (
-        <div className={cName()}>         
-            <div className={cName('phone')}>{user.phone}</div>
+        <div className={cName()}>    
+            <h3 className={cName('title')}>{TITLE}</h3>
 
-            <div className={cName('email')}>{user.email}</div>
+            <div className={cName('phone')}>
+                <p>Телефон</p>
+                <p>{user.phone}</p>    
+            </div>
+
+            <div className={cName('email')}>
+                <p>Почта</p>
+                <p>{user.email}</p>
+            </div>
         </div>
     )
 }

@@ -4,6 +4,8 @@ import { prepareProfileItems } from '../../utils';
 import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 
+import './Bio.css'
+
 const cName = cn('bio')
 
 const Bio: Props = ({user, rating}) => {
@@ -39,9 +41,9 @@ const Bio: Props = ({user, rating}) => {
                 </div>
             </div>
 
-            <div className={cName('settings')} onClick={editModeToggle}>
+            <button className={cName('settings')} onClick={editModeToggle}>
                 Редактировать профиль
-            </div>
+            </button>
         </div>
     )
 }

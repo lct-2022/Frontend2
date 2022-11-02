@@ -2,14 +2,19 @@ import { Application, Job, Project, ProjectTeamMember, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
-export const getJobs = async (limit?: number): Promise<IDataRPC<Job[]>> => {
+export const getJobs = async (limit?: number) => {
     return await request<Job[]>({
         method: 'popular-jobs',
         host: RPCHosts.Platform,
         ...(limit && {
             params: {limit}
         })
-    });
+    })
+    .then((data) => {
+        console.log(data);
+        return data
+        
+    })
 };
 
 export const getProjects = async (limit?: number): Promise<IDataRPC<Project[]>> => {

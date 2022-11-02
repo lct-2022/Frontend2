@@ -1,10 +1,10 @@
 import React, { useState, ChangeEvent, useCallback, useEffect, memo } from 'react';
 import { ADMIN, OPTIONS } from '../../consts';
 import {cn} from '@bem-react/classname';
+
 import './Options.css';
 
 const cName = cn('user-options');
-
 
 export function UserOptions() {
     return (

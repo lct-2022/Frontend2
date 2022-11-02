@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react';
 import UserOptions from './components/Options';
 import Bio from './components/Bio';
-
+import About from './components/About';
+import Contacts from './components/Contacts';
 
 import './User.css';
 import { currentUserSelector } from '../../store/selectors/users';
@@ -11,7 +12,11 @@ import { ROUTES } from '../../utils/routes';
 import { getUserRatingAction } from '../../store/actions/rating';
 import { getRating } from '../../api/passport';
 
+
+import {cn} from '@bem-react/classname';
 const TITLE = 'Профиль';
+
+const cName = cn('profile');
 
 export function Profile() {
     const currentUser = useSelector(currentUserSelector);
@@ -34,13 +39,18 @@ export function Profile() {
     }
 
     return (
-        <div className="profile">
+        <div className={cName()}>
             <h1>{TITLE}</h1>
 
             <Bio 
                 user={currentUser}
                 rating={userRating}
             />
+
+            <div className={cName('down')}>
+                <About user={currentUser}/>
+                <Contacts user={currentUser}/>
+            </div>
 
             {/* <UserBusinessInfo fio="currentUserData.fio"/> */}
             {/* <UserCommonInfo data={}/> */}

@@ -2,3 +2,9 @@
     margin: 4px 0;
     font-weight: 500;
 }
+
+.profile-down {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}

@@ -14,7 +14,7 @@ export const jobsReducer = (store: JobsState = initialState, action: JobsAction)
 
     switch (type) {
         case JobsActions.SET_JOBS:
-            return payload
+            return {...store, list: payload, amount: payload?.length || 0}
 
         default:
             return store;
