@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useCallback, useEffect, useMemo } from 'react';
 import UserOptions from './components/Options';
 import Bio from './components/Bio';
-import About from './components/About';
+import UserRoutes from './components/Routes';
 import Contacts from './components/Contacts';
 
 import './User.css';
@@ -48,7 +48,7 @@ export function Profile() {
             />
 
             <div className={cName('down')}>
-                <About user={currentUser}/>
+                <UserRoutes user={currentUser}/>
                 <Contacts user={currentUser}/>
             </div>
 

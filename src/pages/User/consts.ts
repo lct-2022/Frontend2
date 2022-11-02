@@ -1,10 +1,13 @@
-export const OPTIONS = [
-    'Биография',
-    'Резюме',
-    'Список команд',
-    'Проекты',
-    'Приглашения',
-]
+import { ROUTES } from "../../utils/routes";
+
+export type UserOption = 'about' | 'resume' | 'projects' | 'teams';
+
+export const OPTIONS: Record<UserOption, string> = {
+    about: 'Биография',
+    resume: 'Резюме',
+    projects: 'Проекты',
+    teams: 'Список команд',
+}
 
 export const ADMIN = 'Админ';
 

@@ -6,10 +6,14 @@ import { Props } from './types';
 
 const cName = cn('resume')
 
-const Resume: Props = () => {
+const Resume = () => {
     return (
         <div className={cName()}>
-            
+            <p>Resume...</p>
+            <p>Resume...</p>
+            <p>Resume...</p>
+            <p>Resume...</p>
+            <p>Resume...</p>
         </div>
     )
 }
