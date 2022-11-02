@@ -15,7 +15,9 @@ import { currentUserSelector } from '../../../store/selectors/activeUser';
 
 const cName = cn('vacancy-card');
 
-const APPLY = 'Откликнуться'
+const APPLY = 'Откликнуться';
+const CANCEL = 'Отозвать';
+
 const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -24,16 +26,6 @@ const JobCard: Props = ({title, description, id}) => {
 
     const currentUser = useSelector(currentUserSelector);
     
-    useEffect(() => {
-        getProjectVacancies(id)
-        .then(data => {
-            console.log('appl', data)
-            setIsApplication(!!data.result)
-        })
-    }, [])
-    
-
-
     const makeApply = useCallback(() => {
         if (!currentUserSelector) {
             navigate(ROUTES.LOGIN);
@@ -41,10 +33,6 @@ const JobCard: Props = ({title, description, id}) => {
         }
         
         applyToJob(id, getTokenFromCookies())
-            // .then(() => {
-            //     getJobApplication(id, getTokenFromCookies())
-            //     // navigate(ROUTES.APPLICATION);
-            // })
             .then(result => {
                 setIsApplication(!!result.result)
             })
@@ -62,8 +50,8 @@ const JobCard: Props = ({title, description, id}) => {
 
     const btn = useMemo(() => {
         return (
-            <button className={cName('right-block')} onClick={makeApply}>
-                {isApplication ? 'Отозвать' : APPLY}
+            <button className={cName('apply-btn', {applied: isApplication})} onClick={makeApply}>
+                {isApplication ? CANCEL : APPLY}
             </button>
         )
     }, [isApplication])
