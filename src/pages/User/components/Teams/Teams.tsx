@@ -1,5 +1,6 @@
 import {cn} from '@bem-react/classname';
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
+import { createTeam } from '../../../../api/platform';
 
 const cName = cn('teams');
 
@@ -12,10 +13,16 @@ const TeamCreate: FC<Props> = ({setTeams}) => {
 
     const changeTeamTitle = (event: ChangeEvent<HTMLInputElement>) => {
         setTeamTitle(event.target.value);
+
+        // const createTeamBtn = () => {
+        //     createTeam()
+        // }
     }
     return (
         <div>
             <input type="text" value={teamTitle} onChange={changeTeamTitle}/>
+            <input type="select" value={teamTitle} onChange={changeTeamTitle}/>
+
             <button onClick={() => setTeams(prev => [...prev, {title: teamTitle, id: Math.random()}])}>Добавить</button>
         </div>
     )

@@ -42,7 +42,6 @@ const UserRoutes: Props = ({user}) => {
 
             {shownData === 'teams' &&
                 <Teams/>
-
             }
         </div>
     )

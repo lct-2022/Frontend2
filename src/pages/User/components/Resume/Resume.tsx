@@ -13,14 +13,14 @@ const prepareDate = (birthday: string) => {
 
 const prepareText = (gender: Nullable<string>, birthday: Nullable<string>): string => {
     if (!gender || !birthday) {
-        return '';
+        return 'Родился';
     }
     return `${gender === 'm' ? 'Родился' : 'Родилась'} ${birthday}`
 }
 
 const prepareLocationText = (city: Nullable<string>, country: Nullable<string>): string => {
     if (!city || !country) {
-        return '';
+        return 'Живет в России, городе Москва';
     }
     return `Живет в ${country}, городе ${city}`
 }

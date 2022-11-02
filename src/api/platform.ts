@@ -1,4 +1,4 @@
-import { Application, Job, Project, ProjectData, ProjectTeamMember, User } from "../types";
+import { Application, Job, Project, ProjectData, ProjectTeamMember, Team, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
@@ -113,6 +113,21 @@ export const createProject = async (projectParams: createProjectArgs, token: str
         method: 'create-project',
         host: RPCHosts.Platform,
         params: projectParams,
+        settings: {
+            authToken: token,
+        }
+    });
+};
+
+// create-team
+export const createTeam = async (projectId: number, title: string, token: string): Promise<IDataRPC<Team>> => {
+    return await request({
+        method: 'create-team',
+        host: RPCHosts.Platform,
+        params: {
+            'project-id': projectId,
+            title,
+        },
         settings: {
             authToken: token,
         }
