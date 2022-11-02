@@ -8,6 +8,7 @@ interface IProps {
     url: ProjectData['url'],
     rating: Project['rating'],
     id: ProjectData['id'],
+    author_id?: ProjectData['author-id'],
 }
 
 export type Props = FC<IProps>;

@@ -37,6 +37,7 @@ const ProjectsList: Props = ({projects}) => {
                             url={url}
                             rating={rating}
                             id={id}
+                            author_id={id}
                         />
                     </div>
                 ))}
@@ -46,7 +47,7 @@ const ProjectsList: Props = ({projects}) => {
 
     return (
         <div>
-            <h1>Проекты все</h1>
+            <h1>{isFromProfile ? 'Проекты, в которых вы учатсвуете' : 'Проекты'}</h1>
 
             {projectsList}
         </div>

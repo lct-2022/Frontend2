@@ -9,10 +9,11 @@ import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
 import { getCurrentProject, getProjectTeam, getProjectVacancies, getTeamsAvailableForProject } from '../../../api/platform';
 import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../store/actions/projects';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { availableTeamsAction } from '../../../store/actions/teams';
+import { currentUserSelector } from '../../../store/selectors/users';
 
 const cName = cn('project-card');
 
@@ -25,12 +26,16 @@ const ProjectCard: Props = ({
     url,
     rating,
     id,
+    author_id,
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const location = useLocation()
+    const currentUser = useSelector(currentUserSelector);
+
     const isFromProfile = location.pathname === ROUTES.USER;
+    const canSearchTeam = isFromProfile && currentUser?.admin || currentUser?.id === author_id;
 
     const passToProject = useCallback(() => {
         Promise.all([
@@ -79,8 +84,8 @@ const ProjectCard: Props = ({
             <div className={cName('rating')}>
                 <p>{TITLE_RATE}:&nbsp;</p>
                 <b>{rating}</b>
-                {isFromProfile &&
-                    <button onClick={getTeamsForProject}>Выбрать команду для проекта</button>
+                {canSearchTeam &&
+                    <button onClick={getTeamsForProject}>Найти команду для проекта</button>
                 }
             </div>
         </div>

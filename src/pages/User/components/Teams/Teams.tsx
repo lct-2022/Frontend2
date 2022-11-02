@@ -1,6 +1,8 @@
 import {cn} from '@bem-react/classname';
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { createTeam } from '../../../../api/platform';
+import { currentUserSelector, isAdminSelector } from '../../../../store/selectors/users';
 
 const cName = cn('teams');
 
@@ -38,18 +40,23 @@ const TEAMS: {title: string; id: number}[] = [
 
 function Teams() {
     const [teams, setTeams] = useState<{title: string; id: number}[]>(TEAMS);
+    const currentUser = useSelector(currentUserSelector);
+    
+    const [isTeamCreate, setIsTeamCreate] = useState(false);
 
-    const [isTeamCreate, setisTeamCreate] = useState(false);
+    const createNewTeam = () => {
+        setIsTeamCreate(prev => !prev);
+    }
 
     return (
         <div>
             {teams.map(({title, id}) => (
                 <div key={id}>{title}</div>
             ))} 
+             
+            {currentUser?.admin && <button onClick={createNewTeam}>Создать команду</button>}
 
-            <button onClick={() => setisTeamCreate(prev => !prev)}>Создать команду</button>
-
-            {isTeamCreate && <TeamCreate setTeams={setTeams}/>}  
+            {isTeamCreate && currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>
     )
 }

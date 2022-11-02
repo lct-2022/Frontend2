@@ -28,7 +28,7 @@ function Main() {
                         <h4>{title}</h4>
 
                         <div className={cName('btns')}>
-                            <button>Предложить участие в проекте</button>
+                            <button onClick={() => {}}>Добавить команду</button>
                             <button>Связаться с командой</button>
                         </div>
                     </div>

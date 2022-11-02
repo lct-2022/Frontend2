@@ -3,7 +3,7 @@ import { IBaseStore } from "../types/store";
 
 export const popularProjectsSelector = createSelector(
     (store: IBaseStore) => store.projects.list,
-    projects => projects,
+    projects => projects || [],
 );
 
 export const allProjectsNumSelector = createSelector(
