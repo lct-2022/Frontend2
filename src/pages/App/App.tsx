@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {BrowserRouter, Routes, HashRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import LoginForm from '../Login';
 import Profile from '../User';
@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Navbar/>
       
       <Routes>
@@ -57,7 +57,7 @@ function App() {
       </Routes>
 
       {/* <Footer/> */}
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

@@ -36,7 +36,7 @@ function Navbar() {
                                 key={index}
                                 className={cName('menu-point')}
                                 href={url}
-                                target="_self"
+                                target="_top"
                                 rel="noopener noreferrer"
                             >
                                 {point}
