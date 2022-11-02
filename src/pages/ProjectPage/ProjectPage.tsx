@@ -32,7 +32,7 @@ function ProjectPage() {
                     </div>
                     <p className={cName('description')}>{description}</p>
                     <a 
-                        href={url}
+                        href={url || 'https://ya.ru/'}
                         target="_blank"
                         rel="noopener norefere"
                     >
