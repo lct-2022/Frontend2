@@ -12,8 +12,8 @@ const About: Props = ({user}) => {
 
     return (
         <div className={cName()}>
-            <div className={cName('description')}>{user.about || 'Описание описание описание...'}</div>
-            <div className={cName('education')}>{user.education || 'Образование...'} </div>
+            <div className={cName('description')}>{user.user.about || 'Описание описание описание...'}</div>
+            <div className={cName('education')}>{user.user.education || 'Образование...'} </div>
         </div>
     )
 }

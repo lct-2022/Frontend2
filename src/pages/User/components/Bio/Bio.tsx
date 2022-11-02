@@ -19,21 +19,21 @@ const Bio: Props = ({user, rating}) => {
         <div className={cName()}>
             <div className={cName('data')}>
                
-                <img src={user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
+                <img src={user.user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
 
                 <div className={cName('personal-info')}>
-                    <p>{user.fio}</p>
+                    <p>{user.user.fio}</p>
                     
                     <div className={cName('location')}>
-                        <p>{user.city}</p>
-                        <p>{user.country}</p>
+                        <p>{user.user.city}</p>
+                        <p>{user.user.country}</p>
                     </div>
 
                     <div className={cName('rating')}>{rating}</div>
                 </div>
 
                 <div className={cName('status')}>
-                    {user.admin ? 'Эксперт' : 'Неэксперт'}
+                    {user.user.admin ? 'Эксперт' : 'Неэксперт'}
                 </div>
 
                 <div className={cName('hakatons-experience')}>

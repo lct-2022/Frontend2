@@ -1,7 +1,7 @@
 import { User } from "../../types";
 import omit from 'lodash/omit'; 
 
-const notPublicItems: Array<keyof User> = [
+const notPublicItems: Array<keyof User['user']> = [
     'created-at',
     'updated-at',
     'password-hash',

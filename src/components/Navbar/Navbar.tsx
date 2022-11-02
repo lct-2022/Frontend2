@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
 import { LOGIN_POINT, NEW_PROJECT_POINT, MENU_POINTS } from './consts';
-import { usersAvatarSelector, isUserAuthorizedSelector } from '../../store/selectors/activeUser';
+import { usersAvatarSelector, isUserAuthorizedSelector } from '../../store/selectors/users';
 import { useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {cn} from '@bem-react/classname';
@@ -17,8 +17,6 @@ function Navbar() {
 
     const isAuthorized = useSelector(isUserAuthorizedSelector);
     console.log(isAuthorized);
-    
-    const usersAvatar = useSelector(usersAvatarSelector);
 
     const passToHome = () => {
         navigate(ROUTES.INDEX);    

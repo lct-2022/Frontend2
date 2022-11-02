@@ -27,7 +27,7 @@ export function Profile() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getRating('user', currentUser?.id ?? 0)
+        getRating('user', currentUser?.user?.id ?? 0)
             .then(rating => {
                 setUserRating(rating.result);
             })

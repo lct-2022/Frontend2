@@ -11,7 +11,7 @@ import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
-import { currentUserSelector } from '../../../store/selectors/activeUser';
+import { currentUserSelector } from '../../../store/selectors/users';
 
 const cName = cn('vacancy-card');
 

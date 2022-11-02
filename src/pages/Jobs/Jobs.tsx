@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getJobs, getProjects } from '../../api/platform';
@@ -22,20 +22,28 @@ function Jobs() {
             })
     }, []);
 
+    const jobsList = useMemo(() => {
+        return (
+            <div className={cName('list')}>
+                {allJobs.map(({title, description, id}) => (
+                    <div key={id}>
+                        <JobCard
+                            title={title}
+                            description={description}
+                            id={id}
+                        />
+                    </div>
+                ))}
+            </div>
+        )
+    }, [])
+
     return (
         <div className={cName()}>
             <h1>Вакансии:</h1>
-
-            {allJobs.map(({title, description, id}) => (
-                <div key={id}>
-                    <JobCard
-                        title={title}
-                        description={description}
-                        id={id}
-                    />
-                </div>
-            ))}
+            
+            {jobsList}
         </div>
     )
 }
-export default Jobs;
+export default memo(Jobs);

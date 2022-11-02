@@ -16,12 +16,12 @@ const Contacts: Props = ({user}) => {
 
             <div className={cName('phone')}>
                 <p>Телефон</p>
-                <p>{user.phone}</p>    
+                <p>{user.user.phone}</p>    
             </div>
 
             <div className={cName('email')}>
                 <p>Почта</p>
-                <p>{user.email}</p>
+                <p>{user.user.email}</p>
             </div>
         </div>
     )

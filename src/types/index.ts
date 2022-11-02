@@ -9,22 +9,27 @@ interface ICommonData {
     id: number;
 }
 
-export type User = ICommonData & {
-    email: string,
-    'password-hash': string,
-    'avatar-url': string,
-    fio: string,
-    birthday: Nullable<string>,
-    gender: Nullable<string>,
-    phone: Nullable<string>,
-    country: Nullable<string>,
-    city: Nullable<string>,
-    education: Nullable<string>,
-    job: Nullable<string>,
-    about: Nullable<string>,
-    admin: boolean,
-    hidden?: boolean;
+export type User = {
+    user: ICommonData & {
+        email: string,
+        'password-hash': string,
+        'avatar-url': string,
+        fio: string,
+        birthday: Nullable<string>,
+        gender: Nullable<string>,
+        phone: Nullable<string>,
+        country: Nullable<string>,
+        city: Nullable<string>,
+        education: Nullable<string>,
+        job: Nullable<string>,
+        about: Nullable<string>,
+        admin: boolean,
+        // для фильтрации
+        hidden?: boolean;
+    }
+    rating: boolean;
 }
+
 
 // TODO Добавить поле "получили поддержку"
 export type Project = {
@@ -36,6 +41,7 @@ export type Project = {
         contests: string;
     };
     rating: number;
+    // для фильтрации
     hidden?: boolean;
 }
 
