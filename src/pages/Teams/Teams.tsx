@@ -20,6 +20,10 @@ function Main() {
     const teams = useSelector(teamsSelector);
     const tempTeams = teams.length ? teams : TEAMS;
 
+    const addTeamToProject = () => {
+        // ...
+    }
+
     const allTeams = useMemo(() => {
         return (
             <div className={cName('list')}>
@@ -28,7 +32,7 @@ function Main() {
                         <h4>{title}</h4>
 
                         <div className={cName('btns')}>
-                            <button onClick={() => {}}>Добавить команду</button>
+                            <button onClick={addTeamToProject}>Добавить команду</button>
                             <button>Связаться с командой</button>
                         </div>
                     </div>

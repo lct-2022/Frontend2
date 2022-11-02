@@ -29,8 +29,8 @@ const Projects: FC<Props> = ({own}) => {
         getProjects()
             .then(data => {
                 if (currentUser && own) {
-                    setAllProjects(data.result.map(project => ({...project, hidden: false}))
-                        .filter(el => el.project['author-id'] === currentUser?.id)
+                    setAllProjects(data.result?.map(project => ({...project, hidden: false}))
+                        .filter(el => el.project['author-id'] === currentUser?.id) || []
                     )
                 } else {
                     setAllProjects(data.result.map(project => ({...project, hidden: false})))

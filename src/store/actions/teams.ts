@@ -1,5 +1,6 @@
 import { Dispatch } from "react";
 import { getTeamsAvailableForProject } from "../../api/platform";
+import { CommonAction, Team } from "../../types";
 import { TeamsAction, TeamsActions } from "../types/teams";
 
 export const availableTeamsAction = (projectId: number, token: string) => {
@@ -11,5 +12,12 @@ export const availableTeamsAction = (projectId: number, token: string) => {
             type: TeamsActions.SET_TEAMS,
             payload: availableTeamsResponse?.result || [],
         });
+    }
+}
+
+export const setActiveTeamAction = (team: {title: string, id: number}): CommonAction<TeamsActions.SET_TEAMS, {title: string, id: number}> => {
+    return {
+        type: TeamsActions.SET_TEAMS,
+        payload: team,
     }
 }

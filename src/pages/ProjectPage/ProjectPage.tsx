@@ -20,7 +20,7 @@ function ProjectPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const canSearchReam = currentUser?.admin && currentProject?.project['author-id'] === currentUser?.id;
+    const canSearchTeam = currentUser?.admin && currentProject?.project['author-id'] === currentUser?.id;
     
     const {project, team, openVacancies, rating} = currentProject ?? {}
     const {title, description, url, contests} = project ?? {}
@@ -83,7 +83,7 @@ function ProjectPage() {
                 </div>
             </div>
 
-            {canSearchReam && 
+            {canSearchTeam && 
                 <button onClick={getTeamsForProject}>Добавить команду</button>
             }
         </div>

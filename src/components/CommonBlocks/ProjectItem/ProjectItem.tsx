@@ -32,7 +32,7 @@ const ProjectCard: Props = ({
     const navigate = useNavigate();
     const location = useLocation();
 
-    const currentUser = useSelector(currentUserSelector);
+    const currentUser = useSelector(currentUserSelector)
 
     const isFromProfile = location.pathname === ROUTES.USER;
     const canSearchTeam = isFromProfile && currentUser?.admin || currentUser?.id === author_id;
@@ -85,7 +85,7 @@ const ProjectCard: Props = ({
                 <p>{TITLE_RATE}:&nbsp;</p>
 
                 <b>{rating}</b>
-                
+
                 {canSearchTeam &&
                     <button onClick={getTeamsForProject}>Найти команду для проекта</button>
                 }
