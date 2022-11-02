@@ -37,7 +37,10 @@ const ProjectCard: Props = ({
         ])
             .then(() => {
                 navigate(ROUTES.PROJECT)
-            });
+            })
+            .catch(() => {
+                // throw new Error();
+            })
     }, [id]);
 
     return (

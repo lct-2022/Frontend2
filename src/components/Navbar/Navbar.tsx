@@ -46,7 +46,7 @@ function Navbar() {
                         )
                     } else {
                         return (
-                            <button onClick={() => navigate(url)}>
+                            <button key={index} onClick={() => navigate(url)}>
                                 {point}
                             </button>
                         )
