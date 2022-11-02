@@ -6,14 +6,14 @@ const RedirectLoginBlock: Props = ({type}) => {
         return (
             <>
                 <p>need an account?</p>
-                <a href="/signup" target="_top" rel="noopener norefere">Sign up!</a>            
+                <a href="/signup" target="_blank" rel="noopener norefere">Sign up!</a>            
             </>
         )
     } else {
         return (
           <div>
             <p>Already a user?</p>
-            <a href="/login" target="_top" rel="noopener norefere">Log in!</a> 
+            <a href="/login" target="_blank" rel="noopener norefere">Log in!</a> 
           </div>
         )
     }

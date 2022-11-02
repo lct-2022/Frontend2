@@ -36,7 +36,7 @@ function Navbar() {
                                 key={index}
                                 className={cName('menu-point')}
                                 href={url}
-                                target="_top"
+                                target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 {point}
@@ -67,7 +67,7 @@ function Navbar() {
                 className={cName('main-logo')}
                 onClick={passToHome}
             />
-
+            <a href="" target="_blank"></a>
             {menuPoints}
         </div>
   )
