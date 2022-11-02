@@ -2,7 +2,8 @@
     background-color: #fff;
     border-radius: 8px;
     border: solid 1px #98A2B3;
-    
+
     padding: 24px;
     width: 100%;
+    height: auto;
 }
