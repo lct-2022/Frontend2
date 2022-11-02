@@ -5,6 +5,6 @@ RUN npm install --only=prod
 COPY . /app
 RUN npm run build
 FROM nginx:1.16.0-alpine
-COPY --from=build /build dev.lct.40ants.com:/var/www/html/
+COPY --from=build /build 37.18.100.144/var/www/html/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
