@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { TOKEN } from './consts';
 
 function parseCookie() {
     const {cookie} = document;
@@ -7,28 +8,46 @@ function parseCookie() {
             return;
         }
 
-        return qs.parse(cookie, {delimiter: '; '});
+        return qs.parse(cookie, {delimiter: ';'});
     } catch(err) {
         throw new Error();
     }
 }
 
 export const getTokenFromCookies = () => {
-    const cookieParsed = parseCookie();
+    return TOKEN;
+    // const cookieParsed = parseCookie();
 
-    if (!cookieParsed) {
-        return '';
-    }
+    // if (!cookieParsed) {
+    //     return '';
+    // }
 
-    return cookieParsed['auth_token'] as string || '';
+    // return cookieParsed['auth_token'] as string || '';
 }
 
 export function setAuthToken(token: string) {
-    const authCookie = `auth_token=${token};`
-    document.cookie = authCookie;
+    const cookieParsed = parseCookie();
+
+    if (!cookieParsed) {
+        return;
+    }
+
+    cookieParsed['auth_token'] = token;
+    document.cookie = qs.stringify(cookieParsed, {delimiter: ';'})
 }
 
+export function removeAuthToken() {
+    const cookieParsed = parseCookie();
+    
+    if (!cookieParsed) {
+        return;
+    }
 
+    delete cookieParsed['auth_token'];
+    document.cookie = qs.stringify(cookieParsed, {delimiter: ';'})
+
+    
+}
 
 
 

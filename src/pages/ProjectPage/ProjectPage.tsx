@@ -9,11 +9,10 @@ const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
-    console.log(currentProject?.project?.id)
 
     if (!currentProject) return null;
 
-    const {project, team, openVacancies} = currentProject
+    const {project, team, openVacancies, rating} = currentProject
     const {title, description, url, contests} = project
     const createdAt = project['created-at'];
 

@@ -28,6 +28,7 @@ const JobCard: Props = ({title, description, id}) => {
             navigate(ROUTES.LOGIN);
             return;
         }
+        
         applyToJob(id, getTokenFromCookies())
             .then(() => {
                 navigate(ROUTES.APPLICATION);

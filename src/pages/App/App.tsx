@@ -17,7 +17,7 @@ import Navbar from '../../components/Navbar';
 import ErrorBoundary from '../../components/Error-Boundary';
 import { checkAuthorization } from '../../api/passport';
 import { useDispatch } from 'react-redux';
-import { isUserAuthorizedAction } from '../../store/actions/activeUser';
+import { isUserAuthorizedAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
 

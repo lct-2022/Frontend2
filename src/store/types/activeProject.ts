@@ -13,7 +13,7 @@ export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, Project>
 export type UnsetProject = CommonAction<ActiveProjectActions.UNSET_PROJECT>;
 export type SetTeam = CommonAction<ActiveProjectActions.SET_TEAM, ProjectTeamMember[]>;
 export type SetVacancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Application[]>;
-export type SetRating = CommonAction<ActiveProjectActions.SET_RATING, number[]>;
+export type SetRating = CommonAction<ActiveProjectActions.SET_RATING, number>;
 
 export type ActiveProjectAction = 
     | SetProject

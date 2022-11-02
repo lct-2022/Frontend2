@@ -6,43 +6,18 @@ import { Props } from './types';
 
 const cName = cn('bio')
 
-const Bio: Props = ({user}) => {
+const Bio: Props = ({user, rating}) => {
     const [editMode, setEditMode] = useState(false);
 
     const editModeToggle = () => {
         setEditMode(prev => !prev);
     }
 
-    const userBio = useMemo(() => {
-        return (
-             <div className={cName('data')}>
-                {(Object.entries(prepareProfileItems(user))).map(([key, value]) => {
-                    if (editMode) {
-                        return (
-                            <div>
-                                <label htmlFor={cName('edit-item')}>{ITEMS_MAP[key]}</label>
-                                <input className={cName('edit-item')} type="text" value={value?.toString() || ''} />
-                            </div>
-                        )
-                    } else 
-                    return (
-                    <div
-                        key={ITEMS_MAP[key]}
-                        className={cName('item')}
-                    >
-                        {key}:&nbsp;{value}
-                    </div>
-                )})}
-            </div>
-        )
-    }, [user]);
-
     return (
         <div className={cName()}>
             <div className={cName('data')}>
                
                 <img src={user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
-
 
                 <div className={cName('personal-info')}>
                     <p>{user.fio}</p>
@@ -52,17 +27,20 @@ const Bio: Props = ({user}) => {
                         <p>{user.country}</p>
                     </div>
 
+                    <div className={cName('rating')}>{rating}</div>
                 </div>
+
                 <div className={cName('status')}>
-
+                    {user.admin ? 'Эксперт' : 'Неэксперт'}
                 </div>
-                <div className={cName('hakatons-experience')}>
 
+                <div className={cName('hakatons-experience')}>
+                    Опыт в хакатонах
                 </div>
             </div>
 
-            <div className={cName('settings')}>
-                
+            <div className={cName('settings')} onClick={editModeToggle}>
+                Редактировать профиль
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
-import { isUserAuthorizedAction } from '../../store/actions/activeUser';
+import { isUserAuthorizedAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { setAuthToken } from '../../utils/cookie';
 
