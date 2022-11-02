@@ -95,7 +95,24 @@ export const getJobApplication = async (jobId: number, token: string): Promise<I
         params: {
             'id': jobId,
         },
-        
+        settings: {
+            authToken: token,
+        }
+    });
+};
+
+interface createProjectArgs {
+    title: string;
+    descriotion: string;
+    contests?: string;
+    url?: string;
+}
+
+export const createProject = async (projectParams: createProjectArgs, token: string): Promise<IDataRPC<Project>> => {
+    return await request({
+        method: 'create-project',
+        host: RPCHosts.Platform,
+        params: projectParams,
         settings: {
                 authToken: token,
         }

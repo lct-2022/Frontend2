@@ -1,9 +1,73 @@
-import React from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+import { createProject } from '../../api/platform';
+import { getTokenFromCookies } from '../../utils/cookie';
+import {cn} from '@bem-react/classname';
+
+const cName = cn('project-create');
+
+const CREATE_TITLE = 'Создать проект';
 
 function ProjectCreate() {
+      //TODO Formik!!!
+  const [title, setTitle] = useState('');
+  const [descriotion, setDescription] = useState('');
+  const [url, setUrl] = useState('');
+
+  const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value)
+  } 
+  const changeDescription = (event: ChangeEvent<HTMLInputElement>) => {
+        setDescription(event.target.value)
+  }
+  const changeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+    setUrl(event.target.value)
+}
+
+  const createProjectBtn = useCallback(() => {
+    createProject({
+      title,
+      descriotion,
+      url,
+    }, getTokenFromCookies());
+  }, [title, descriotion, url])
     
   return (
-    <h1>Форма проекта</h1>
+    <div className={cName()}>
+      <h1>Форма проекта</h1>
+      <br/>
+
+      <div>
+        <div className={cName('title')}>
+          <label htmlFor={cName('title')} className={cName('title-label')}>
+            Название проекта
+          </label>
+
+          <input className={cName('title-input')} type="text" value={title} onChange={changeTitle}/>
+        </div>
+
+        <div className={cName('description')}>
+          <label htmlFor={cName('description')} className={cName('description-label')}>
+            Описание проекта
+          </label>
+
+          <input className={cName('description-input')} type="text" value={descriotion} onChange={changeDescription}/>
+        </div>
+
+        <div className={cName('url')}>
+          <label htmlFor={cName('url')} className={cName('url-label')}>
+            Ссылка на проект
+          </label>
+
+          <input className={cName('url-input')} type="text" value={url} onChange={changeUrl}/>
+        </div>
+
+      </div>
+
+      <button onClick={createProjectBtn}>
+        {CREATE_TITLE}
+      </button>
+    </div>
+
   )
 }
 export default ProjectCreate;
