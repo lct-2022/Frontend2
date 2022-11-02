@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import {cn} from '@bem-react/classname';
 import './Navbar.css';
 import { DEFAULT_LOGO } from '../../utils/consts';
+import { NavLink } from 'react-router-dom';
 
 const cName = cn('navbar');
 
@@ -28,19 +29,17 @@ function Navbar() {
             : {...MENU_POINTS, [LOGIN_POINT]: ROUTES.LOGIN}
 
         return (
-            <div className={cName('menu')}>
+            <nav className={cName('menu')}>
                 {Object.entries(menuWithLogin).map(([point, url], index) => {
                     if (point !== NEW_PROJECT_POINT) {
                         return (
-                            <a
+                            <NavLink
                                 key={index}
                                 className={cName('menu-point')}
-                                href={url}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                to={url}
                             >
                                 {point}
-                            </a>
+                            </NavLink>
                         )
                     } else {
                         return (
@@ -51,7 +50,7 @@ function Navbar() {
                     }
                 })
             }
-            </div>
+            </nav>
         )
     }, [isAuthorized]);
 
