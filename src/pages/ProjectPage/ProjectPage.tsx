@@ -31,7 +31,7 @@ function ProjectPage() {
             .then(() => {
                 navigate(ROUTES.TEAMS)
             });
-    }, [currentProject]);
+    }, [currentProject?.project?.id]);
     
     if (!currentProject) {
         return null;

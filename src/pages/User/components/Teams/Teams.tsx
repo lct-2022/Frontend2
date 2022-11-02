@@ -15,7 +15,7 @@ type Props = {
     team?: {title: string, id: number}
 }
 
-const TeamCreate: FC<Props> = ({setTeams}) => {
+export const TeamCreate: FC<Props> = ({setTeams}) => {
     const [teamTitle, setTeamTitle] = useState('');
 
     const changeTeamTitle = (event: ChangeEvent<HTMLInputElement>) => {

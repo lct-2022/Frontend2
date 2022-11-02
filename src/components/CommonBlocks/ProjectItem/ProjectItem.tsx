@@ -1,4 +1,4 @@
-import React, { memo, useCallback} from 'react';
+import React, { memo, useCallback, useState} from 'react';
 import { cn } from '@bem-react/classname'
 import {useLocation} from 'react-router-dom'
 
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { availableTeamsAction } from '../../../store/actions/teams';
 import { currentUserSelector } from '../../../store/selectors/users';
+import { TeamCreate } from '../../../pages/User/components/Teams/Teams';
 
 const cName = cn('project-card');
 
@@ -35,7 +36,7 @@ const ProjectCard: Props = ({
     const currentUser = useSelector(currentUserSelector)
 
     const isFromProfile = location.pathname === ROUTES.USER;
-    const canSearchTeam = isFromProfile && currentUser?.admin || currentUser?.id === author_id;
+    const canSearchTeam = isFromProfile && (currentUser?.admin || currentUser?.id === author_id);
 
     const passToProject = useCallback(() => {
         Promise.all([
@@ -58,6 +59,12 @@ const ProjectCard: Props = ({
                 navigate(ROUTES.TEAMS)
             });
     }, [id]);
+
+    const [isTeamCreate, setIsTeamCreate] = useState(false);
+
+    const createTeamForProject = () => {
+        setIsTeamCreate(prev => !prev);
+    };
     
     return (
         <div className={cName()}>
