@@ -2,7 +2,7 @@ import { FC } from "react";
 import { User } from "../../../../types";
 
 interface IProps {
-    data: any; //
+    user: User['user'];
 }
 
 export type Props = FC<IProps>;

@@ -20,36 +20,30 @@ const cName = cn('profile');
 
 export function Profile() {
     const currentUser = useSelector(currentUserSelector);
+    console.log('currentUser ===============>',currentUser);
 
     const [userRating, setUserRating] = useState(0);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        getRating('user', currentUser?.user?.id ?? 0)
-            .then(rating => {
-                setUserRating(rating.result);
-            })
-    }, [currentUser]);
     
     if (!currentUser) {
         navigate(ROUTES.LOGIN);
         return null;
     }
-
+    
     return (
         <div className={cName()}>
             <h1>{TITLE}</h1>
 
             <Bio 
-                user={currentUser}
+                user={currentUser.user}
                 rating={userRating}
             />
 
             <div className={cName('down')}>
-                <UserRoutes user={currentUser}/>
-                <Contacts user={currentUser}/>
+                <UserRoutes user={currentUser.user}/>
+                <Contacts user={currentUser.user}/>
             </div>
         </div>
     );

@@ -14,26 +14,27 @@ const Bio: Props = ({user, rating}) => {
     const editModeToggle = () => {
         setEditMode(prev => !prev);
     }
-
+    console.log(user);
+    
     return (
         <div className={cName()}>
             <div className={cName('data')}>
                
-                <img src={user.user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
+                <img src={user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
 
                 <div className={cName('personal-info')}>
-                    <p>{user.user.fio}</p>
+                    <p>{user.fio}</p>
                     
                     <div className={cName('location')}>
-                        <p>{user.user.city}</p>
-                        <p>{user.user.country}</p>
+                        <p>{user.city}</p>
+                        <p>{user.country}</p>
                     </div>
 
                     <div className={cName('rating')}>{rating}</div>
                 </div>
 
                 <div className={cName('status')}>
-                    {user.user.admin ? 'Эксперт' : 'Неэксперт'}
+                    {user.admin ? 'Эксперт' : 'Неэксперт'}
                 </div>
 
                 <div className={cName('hakatons-experience')}>

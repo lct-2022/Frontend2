@@ -32,7 +32,7 @@ const UserRoutes: Props = ({user}) => {
             }
 
             {shownData === 'resume' &&
-                <Resume/>
+                <Resume user={user}/>
             }
 
             {/* <Routes>
