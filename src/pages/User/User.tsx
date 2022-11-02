@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import {cn} from '@bem-react/classname';
+import { redirectToLogin, removeAuthToken } from '../../utils/cookie';
 const TITLE = 'Профиль';
 
 const cName = cn('profile');
@@ -21,11 +22,8 @@ export function Profile() {
 
     const [userRating, setUserRating] = useState(0);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    
     if (!currentUser) {
-        navigate(ROUTES.LOGIN);
+        // redirectToLogin();
         return null;
     }
     
@@ -42,6 +40,8 @@ export function Profile() {
                 <UserRoutes user={currentUser}/>
                 <Contacts user={currentUser}/>
             </div>
+
+            <button onClick={() => removeAuthToken('auth_token')}>Logout</button>
         </div>
     );
 }

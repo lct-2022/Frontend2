@@ -47,11 +47,13 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
         requestor(email, password)
             .then(({result}) => {
-                dispatch<any>(isUserAuthorizedAction(result));
+                dispatch<any>(isUserAuthorizedAction(result))
                 setAuthToken(result);
+            })
+            .then(() => {
                 // Remove ???
                 setEmail('');
-                setPassword('');
+                setPassword('')
                 navigate(ROUTES.USER);
             })
             .catch(() => {

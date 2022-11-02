@@ -1,6 +1,5 @@
 import { Application, Job, Project, ProjectData, ProjectTeamMember, Team, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
-import { TOKEN } from "../utils/consts";
 
 export const getJobs = async (limit?: number) => {
     return await request<Job[]>({

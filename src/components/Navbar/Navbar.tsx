@@ -7,20 +7,32 @@ import { useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {cn} from '@bem-react/classname';
 import './Navbar.css';
-import { DEFAULT_LOGO } from '../../utils/consts';
+import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
+import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
+import { isUserAuthorizedAction } from '../../store/actions/users';
+import { useDispatch } from 'react-redux';
+import { ActiveUserActions } from '../../store/types/activeUser';
 
 const cName = cn('navbar');
 
 function Navbar() {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const isAuthorized = useSelector(isUserAuthorizedSelector);
     console.log(isAuthorized);
 
     const passToHome = () => {
         navigate(ROUTES.INDEX);    
+    }
+
+    const logout = () => {
+        removeAuthToken(TOKEN_KEY);
+        dispatch({
+            type: ActiveUserActions.UNSET_USER,
+        });
     }
 
     const menuPoints = useMemo(() => {
@@ -66,6 +78,8 @@ function Navbar() {
                 className={cName('main-logo')}
                 onClick={passToHome}
             />
+            
+            <button onClick={logout}>Logout</button>
 
             {menuPoints}
         </div>

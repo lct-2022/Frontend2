@@ -6,7 +6,7 @@ import { currentProjectSelector } from '../../store/selectors/projects';
 import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob } from '../../api/platform';
-import { getTokenFromCookies } from '../../utils/cookie';
+import { getTokenFromCookies, redirectToLogin } from '../../utils/cookie';
 import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
@@ -24,7 +24,7 @@ function JobPage() {
     // TODO: remove possibilities of NULL in currentJob
     const makeApply = useCallback(() => {
         if (!currentUser) {
-            navigate(ROUTES.LOGIN);
+            redirectToLogin();
             return;
         }
         applyToJob(currentJob?.id ?? 0, getTokenFromCookies())

@@ -23,7 +23,7 @@ export type User = {
         education: Nullable<string>,
         job: Nullable<string>,
         about: Nullable<string>,
-        admin: boolean,
+        admin: Nullable<boolean>,
     }
     rating: number;
     // для фильтрации

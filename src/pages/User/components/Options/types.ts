@@ -4,7 +4,7 @@ import { User } from "../../../../types";
 import { UserOption } from "../../consts";
 
 interface IProps {
-    curentOption: UserOption,
+    currentOption: UserOption,
     setOptions: (point: UserOption) => void;
 }
 

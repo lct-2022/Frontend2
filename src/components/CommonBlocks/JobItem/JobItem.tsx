@@ -7,7 +7,7 @@ import './JobItem.css';
 
 import {Props} from './types';
 import { applyToJob, getJobApplication, getProjectVacancies, getVacancy } from '../../../api/platform';
-import { getTokenFromCookies } from '../../../utils/cookie';
+import { getTokenFromCookies, redirectToLogin } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
@@ -37,7 +37,7 @@ const JobCard: Props = ({title, description, id}) => {
     
     const makeApply = useCallback(() => {
         if (!currentUserSelector) {
-            navigate(ROUTES.LOGIN);
+            redirectToLogin();
             return;
         }
         

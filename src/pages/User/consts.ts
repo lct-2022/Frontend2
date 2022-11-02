@@ -1,15 +1,22 @@
 import { ROUTES } from "../../utils/routes";
 
-export type UserOption = 'about' | 'resume' | 'projects' | 'teams';
+export type UserOption = 
+    | 'about' 
+    | 'resume' 
+    | 'projects' 
+    | 'teams' 
+    | 'admin';
 
-export const OPTIONS: Record<UserOption, string> = {
+export const OPTIONS: Partial<Record<UserOption, string>> = {
     about: 'Биография',
     resume: 'Резюме',
     projects: 'Проекты',
     teams: 'Список команд',
 }
 
-export const ADMIN = 'Админ';
+export const ADMIN_OPTION: Partial<Record<UserOption, string>> = {
+    admin: 'Админ',
+};
 
 export const BUSINESS_INFO = [
     'Категория: Новый бизнесс',

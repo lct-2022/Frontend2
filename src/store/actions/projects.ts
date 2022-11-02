@@ -1,6 +1,5 @@
 import { Dispatch } from "react";
 import { getCurrentProject, getProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
-import { TOKEN } from "../../utils/consts";
 import { ActiveProjectActions, SetProject, SetTeam, SetVacancies } from "../types/activeProject";
 import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
 

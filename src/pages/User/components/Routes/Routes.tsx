@@ -24,7 +24,7 @@ const UserRoutes: Props = ({user}) => {
     return (
         <div className={cName()}>        
             <UserOptions 
-                curentOption={shownData}
+                currentOption={shownData}
                 setOptions={setOptions}
             />
 
