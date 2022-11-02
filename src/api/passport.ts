@@ -3,7 +3,7 @@ import { IDataRPC, request, RPCHosts } from "../utils/api";
 
 export const checkAuthorization = async (token: string): Promise<IDataRPC<UserData>> => {
     return await request({
-        method: 'my-profile',
+        method: 'my_profile',
         host: RPCHosts.Passport,
         settings: {
             authToken: token || '',
@@ -36,7 +36,7 @@ export const login = async (email: string, password: string): Promise<IDataRPC<s
 
 export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => {
     return await request({
-        method: 'popular-profiles',
+        method: 'popular_profiles',
         host: RPCHosts.Passport,
         ...(limit && {
             params: {limit}
@@ -46,7 +46,7 @@ export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => 
 
 export const getUserProfile = async (token: string): Promise<IDataRPC<User>> => {
     return await request({
-        method: 'get-profile',
+        method: 'get_profile',
         host: RPCHosts.Passport,
         settings: {
             authToken: token,

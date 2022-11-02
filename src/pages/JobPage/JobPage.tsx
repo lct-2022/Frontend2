@@ -11,7 +11,7 @@ import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
-const cName = cn('job-page')
+const cName = cn('job_page')
 
 const APPLY = 'Откликнуться';
 
@@ -59,20 +59,20 @@ function JobPage() {
     if (!currentJob) return null;
 
     const {title, description, team, id} = currentJob;
-    const teamId = currentJob['team-id']
-    const createdAt = currentJob['created-at'];
+    const teamId = currentJob['team_id']
+    const createdAt = currentJob['created_at'];
     
     // const currentJobProject = team.project
 
     return (
         <div className={cName()}>
-            <div className={cName('title-block')}>
-                <div className={cName('vacancy-title-info')}>
-                    <p className={cName('vacancy-title')}>{title}</p>
-                    <p className={cName('vacancy-description')}>{description}</p>
+            <div className={cName('title_block')}>
+                <div className={cName('vacancy_title_info')}>
+                    <p className={cName('vacancy_title')}>{title}</p>
+                    <p className={cName('vacancy_description')}>{description}</p>
                 </div>
 
-                <div className={cName('btn-container')}>
+                <div className={cName('btn_container')}>
                     <button onClick={makeApply}>{APPLY}</button>
                 </div>
             </div>
@@ -81,12 +81,12 @@ function JobPage() {
                 
             </div>
 
-            <div className={cName('requirements-block')}>
+            <div className={cName('requirements_block')}>
                 <div>Обязанности:</div>
                 {obligations}
             </div>
 
-            <div className={cName('requirements-block')}>
+            <div className={cName('requirements_block')}>
                 <div>Требования:</div>
                 {requirements}
             </div>

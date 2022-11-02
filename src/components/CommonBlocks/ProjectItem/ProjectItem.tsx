@@ -59,12 +59,6 @@ const ProjectCard: Props = ({
                 navigate(ROUTES.TEAMS)
             });
     }, [id]);
-
-    const [isTeamCreate, setIsTeamCreate] = useState(false);
-
-    const createTeamForProject = () => {
-        setIsTeamCreate(prev => !prev);
-    };
     
     return (
         <div className={cName()}>

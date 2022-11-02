@@ -20,9 +20,9 @@ const Bio: Props = ({user, rating}) => {
         <div className={cName()}>
             <div className={cName('data')}>
                
-                <img src={user['avatar-url']} alt="Аватар" className={cName('avatar')}/>
+                <img src={user['avatar_url']} alt="Аватар" className={cName('avatar')}/>
 
-                <div className={cName('personal-info')}>
+                <div className={cName('personal_info')}>
                     <p>{user.fio}</p>
                     
                     <div className={cName('location')}>
@@ -37,7 +37,7 @@ const Bio: Props = ({user, rating}) => {
                     {user.admin ? 'Эксперт' : 'Неэксперт'}
                 </div>
 
-                <div className={cName('hakatons-experience')}>
+                <div className={cName('hakatons_experience')}>
                     Опыт в хакатонах
                 </div>
             </div>

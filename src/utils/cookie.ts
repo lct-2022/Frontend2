@@ -27,8 +27,6 @@ export function removeAuthToken(token: string) {
 }
 
 export const redirectToLogin = () => {
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA !!!!!!!!!!!!!!!');
-    
     window.location.pathname = ROUTES.LOGIN
 }
 

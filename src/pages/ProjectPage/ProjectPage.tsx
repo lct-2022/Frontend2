@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
-const cName = cn('project-page')
+const cName = cn('project_page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
@@ -20,11 +20,11 @@ function ProjectPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const canSearchTeam = currentUser?.admin && currentProject?.project['author-id'] === currentUser?.id;
+    const canSearchTeam = currentUser?.admin && currentProject?.project['author_id'] === currentUser?.id;
     
     const {project, team, openVacancies, rating} = currentProject ?? {}
     const {title, description, url, contests} = project ?? {}
-    const createdAt = project?.['created-at'] ?? '';
+    const createdAt = project?.['created_at'] ?? '';
 
     const getTeamsForProject = useCallback(() => {
         dispatch<any>(availableTeamsAction(currentProject?.project?.id ?? 0, getTokenFromCookies()))
@@ -39,15 +39,15 @@ function ProjectPage() {
 
     return (
         <div className={cName()}>
-            <div className={cName('title-card')}>
+            <div className={cName('title_card')}>
                 <div className={cName('logo')}/>
                 <p className={cName('title')}>{title}</p>
             </div>
 
             <div className={cName('details')}>
-                <div className={cName('description-card')}>
-                    <div className={cName('team-info')}>
-                        <p className={cName('team-amount')}>{team?.length} человек в команде</p>
+                <div className={cName('description_card')}>
+                    <div className={cName('team_info')}>
+                        <p className={cName('team_amount')}>{team?.length} человек в команде</p>
                         
                         <p>{openVacancies?.length ? `${openVacancies?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
                     </div>

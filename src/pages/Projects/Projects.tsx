@@ -14,7 +14,7 @@ import './Projects.css';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../store/selectors/users';
 
-const cName = cn('projects-page')
+const cName = cn('projects_page')
 
 interface Props {
     own?: boolean;
@@ -30,7 +30,7 @@ const Projects: FC<Props> = ({own}) => {
             .then(data => {
                 if (currentUser && own) {
                     setAllProjects(data.result?.map(project => ({...project, hidden: false}))
-                        .filter(el => el.project['author-id'] === currentUser?.id) || []
+                        .filter(el => el.project['author_id'] === currentUser?.id) || []
                     )
                 } else {
                     setAllProjects(data.result.map(project => ({...project, hidden: false})))
