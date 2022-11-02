@@ -30,9 +30,7 @@ export const getCurrentProjectAction = (id: number) => {
 }
 
 export const getProjectTeamAction = (id: number) => {
-    console.log('SENT =>', id);
-    
-    return async (dispatch: Dispatch<SetTeam>) => {
+        return async (dispatch: Dispatch<SetTeam>) => {
 
         const projectTeamResponse = await getProjectTeam(id);
         

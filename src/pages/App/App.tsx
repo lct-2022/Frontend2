@@ -11,6 +11,7 @@ import ProjectPage from '../ProjectPage';
 import Jobs from '../Jobs';
 import JobPage from '../JobPage';
 import Experts from '../Experts';
+import Teams from '../Teams/Teams';
 
 import './App.css';
 import { ROUTES } from '../../utils/routes';
@@ -50,7 +51,7 @@ function App() {
         <Route path={ROUTES.JOBS} element={<Jobs/>}/>
         <Route path={ROUTES.JOB} element={<JobPage/>}/>
         <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
-
+        <Route path={ROUTES.TEAMS} element={<Teams/>}/>
 
         <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
         <Route path={ROUTES.CHAT} element={<LoginForm/>}/>

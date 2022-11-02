@@ -1,17 +1,18 @@
 import React, { memo, useCallback} from 'react';
 import { cn } from '@bem-react/classname'
+import {useLocation} from 'react-router-dom'
 
 
 import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
-import { getCurrentProject, getProjectTeam, getProjectVacancies } from '../../../api/platform';
+import { getCurrentProject, getProjectTeam, getProjectVacancies, getTeamsAvailableForProject } from '../../../api/platform';
 import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../store/actions/projects';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getRating } from '../../../api/passport';
-import { getProjectRatingAction } from '../../../store/actions/rating';
+import { getTokenFromCookies } from '../../../utils/cookie';
+import { availableTeamsAction } from '../../../store/actions/teams';
 
 const cName = cn('project-card');
 
@@ -27,7 +28,10 @@ const ProjectCard: Props = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
+    const location = useLocation()
+    const isFromProfile = location.pathname === ROUTES.USER;
+
     const passToProject = useCallback(() => {
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),
@@ -43,6 +47,13 @@ const ProjectCard: Props = ({
             })
     }, [id]);
 
+    const getTeamsForProject = useCallback(() => {
+        dispatch<any>(availableTeamsAction(id, getTokenFromCookies()))
+            .then(() => {
+                navigate(ROUTES.TEAMS)
+            });
+    }, [id]);
+    
     return (
         <div className={cName()}>
             <div className={cName('left-block')}>
@@ -68,6 +79,9 @@ const ProjectCard: Props = ({
             <div className={cName('rating')}>
                 <p>{TITLE_RATE}:&nbsp;</p>
                 <b>{rating}</b>
+                {isFromProfile &&
+                    <button onClick={getTeamsForProject}>Выбрать команду для проекта</button>
+                }
             </div>
         </div>
     )

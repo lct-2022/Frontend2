@@ -66,7 +66,6 @@ function Navbar() {
                 className={cName('main-logo')}
                 onClick={passToHome}
             />
-            <h3>Changed</h3>
 
             {menuPoints}
         </div>

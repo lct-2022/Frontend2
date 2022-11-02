@@ -9,9 +9,6 @@ import { currentUserSelector } from '../../store/selectors/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
-import { getUserRatingAction } from '../../store/actions/rating';
-import { getRating } from '../../api/passport';
-
 
 import {cn} from '@bem-react/classname';
 const TITLE = 'Профиль';

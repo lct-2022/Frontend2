@@ -18,9 +18,13 @@ button {
   cursor: pointer;
   font-weight: 800;
 
-  padding: 15px 35px;
-  width: 184px;
-  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 8px;
+  width: auto;
+  height: 42px;
 
   border-radius: 8px;
   border: none;

@@ -133,3 +133,17 @@ export const createTeam = async (projectId: number, title: string, token: string
         }
     });
 };
+
+//get-project-teams
+export const getTeamsAvailableForProject = async (projectId: number, token: string): Promise<IDataRPC<Team[] | null>> => {
+    return await request({
+        method: 'get-project-teams',
+        host: RPCHosts.Platform,
+        params: {
+            'project-id': projectId
+        },
+        settings: {
+            authToken: token,
+        }
+    });
+};

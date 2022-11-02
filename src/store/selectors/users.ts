@@ -24,5 +24,5 @@ export const isAdminSelector = createSelector(
 
 export const popularProfilesSelector = createSelector(
     (store: IBaseStore) => store.users.list,
-    users => users,
+    users => users || [],
 );

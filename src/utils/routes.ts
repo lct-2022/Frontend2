@@ -6,7 +6,7 @@ export const ROUTES = {
     PROJECT: '/project',
     PROJECT_CREATE: '/project/new',
     SERVICES: '/services',
-    EXPERTS: '/users/administrators',
+    EXPERTS: '/profiles',
     PARTICIPANTS: '/users/participants',
     USER: '/profile',
     JOBS: '/vacancies',
@@ -14,6 +14,7 @@ export const ROUTES = {
     EVENTS: '/events',
     CHAT: '/chat',
     APPLICATION: '/apply',
+    TEAMS: '/teams',
 }
 
 export const NOT_NAVBAR_ROUTES = [

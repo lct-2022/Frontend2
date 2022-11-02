@@ -49,7 +49,7 @@ export type UserData = User['user'];
 
 export type Team = ICommonData & {
     title: string;
-    'project-id': number | {};
+    'project-id': ProjectData['id'];
     project: Project;
 };
 
@@ -78,7 +78,7 @@ enum ApplicationStatus {
 export type Application = ICommonData & {
     'user-id': number;
     job: Job;
-    'job-id': number | {};
+    'job-id': Job['id'];
     message: string;
     status: ApplicationStatus;
 };

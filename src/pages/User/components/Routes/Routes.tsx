@@ -37,7 +37,7 @@ const UserRoutes: Props = ({user}) => {
             }
 
             {shownData === 'projects' &&
-                <Projects/>
+                <Projects own/>
             }
 
             {shownData === 'teams' &&

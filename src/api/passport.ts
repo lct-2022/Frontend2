@@ -53,15 +53,3 @@ export const getCurrentUserProfile = async (token: string): Promise<IDataRPC<Use
         },
     });
 };
-
-// rating
-export const getRating = async (subject: 'project' | 'user', id: number): Promise<IDataRPC<number>> => {
-    return await request({
-        method: 'get-rating',
-        host: RPCHosts.Ratings,
-        params: {
-            'subject-type': subject,
-            'subject-id': id,
-        }
-    });
-};

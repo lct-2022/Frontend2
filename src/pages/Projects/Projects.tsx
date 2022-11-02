@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getProjects } from '../../api/platform';
@@ -11,16 +11,30 @@ import Pagination from './components/Pagination';
 import Filtration from './components/Filtration';
 
 import './Projects.css';
+import { useSelector } from 'react-redux';
+import { currentUserSelector } from '../../store/selectors/users';
 
 const cName = cn('projects-page')
 
-function Projects() {
-    const [allProjects, setAllProjects] = useState<Project[]>([]);
+interface Props {
+    own?: boolean;
+}
 
+const Projects: FC<Props> = ({own}) => {
+    const currentUser = useSelector(currentUserSelector)
+
+    const [allProjects, setAllProjects] = useState<Project[]>([]);
+    
     useEffect(() => {
         getProjects()
             .then(data => {
-                setAllProjects(data.result.map(project => ({...project, hidden: false})));
+                if (currentUser && own) {
+                    setAllProjects(data.result.map(project => ({...project, hidden: false}))
+                        // .filter(el => el.project['author-id'] === currentUser?.id)
+                    )
+                } else {
+                    setAllProjects(data.result.map(project => ({...project, hidden: false})))
+                }  
             })
     }, []);
 
@@ -35,12 +49,12 @@ function Projects() {
                         <ProjectsList projects={allProjects}/>
                     </div>
 
-                    <div className={cName('filtration')}>
+                    {!own && <div className={cName('filtration')}>
                         <Filtration 
                             projects={allProjects}
                             setProjects={setAllProjects}
                         />
-                    </div>
+                    </div>}
                 </div>
 
                 {/* <Pagination projects={allProjects}/> */}
