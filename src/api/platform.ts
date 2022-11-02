@@ -1,4 +1,4 @@
-import { Application, Job, Project, ProjectTeamMember, User } from "../types";
+import { Application, Job, Project, ProjectData, ProjectTeamMember, User } from "../types";
 import { IDataRPC, request, RPCHosts } from "../utils/api";
 import { TOKEN } from "../utils/consts";
 
@@ -27,8 +27,8 @@ export const getProjects = async (limit?: number): Promise<IDataRPC<Project[]>> 
     });
 };
 
-export const getCurrentProject = async (id: number): Promise<IDataRPC<Project>> => {
-    return await request<Project>({
+export const getCurrentProject = async (id: number): Promise<IDataRPC<ProjectData>> => {
+    return await request<ProjectData>({
         method: 'get-project',
         host: RPCHosts.Platform,
         params: {
@@ -93,7 +93,7 @@ export const getJobApplication = async (jobId: number, token: string): Promise<I
         method: 'get-job-application',
         host: RPCHosts.Platform,
         params: {
-            'id': jobId,
+            'job-id': jobId,
         },
         settings: {
             authToken: token,
@@ -103,18 +103,18 @@ export const getJobApplication = async (jobId: number, token: string): Promise<I
 
 interface createProjectArgs {
     title: string;
-    descriotion: string;
+    description: string;
     contests?: string;
     url?: string;
 }
 
-export const createProject = async (projectParams: createProjectArgs, token: string): Promise<IDataRPC<Project>> => {
+export const createProject = async (projectParams: createProjectArgs, token: string): Promise<IDataRPC<ProjectData>> => {
     return await request({
         method: 'create-project',
         host: RPCHosts.Platform,
         params: projectParams,
         settings: {
-                authToken: token,
+            authToken: token,
         }
     });
 };

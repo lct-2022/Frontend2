@@ -37,13 +37,13 @@ export function Profile() {
             <h1>{TITLE}</h1>
 
             <Bio 
-                user={currentUser.user}
+                user={currentUser}
                 rating={userRating}
             />
 
             <div className={cName('down')}>
-                <UserRoutes user={currentUser.user}/>
-                <Contacts user={currentUser.user}/>
+                <UserRoutes user={currentUser}/>
+                <Contacts user={currentUser}/>
             </div>
         </div>
     );

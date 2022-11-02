@@ -24,12 +24,11 @@ export type User = {
         job: Nullable<string>,
         about: Nullable<string>,
         admin: boolean,
-        // для фильтрации
-        hidden?: boolean;
     }
-    rating: boolean;
+    rating: number;
+    // для фильтрации
+    hidden?: boolean;
 }
-
 
 // TODO Добавить поле "получили поддержку"
 export type Project = {
@@ -46,6 +45,7 @@ export type Project = {
 }
 
 export type ProjectData = Project['project'];
+export type UserData = User['user'];
 
 export type Team = ICommonData & {
     title: string;

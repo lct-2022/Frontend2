@@ -15,7 +15,7 @@ interface IUpdateData {
 
 export type SetProjects = CommonAction<ProjectsActions.SET_PROJECTS, Project[]>;
 type AddProject = CommonAction<ProjectsActions.ADD_PROJECT, Project>
-type DeleteProject = CommonAction<ProjectsActions.DELETE_PROJECT, string>
+type DeleteProject = CommonAction<ProjectsActions.DELETE_PROJECT, number>
 type UpdateProjects = CommonAction<ProjectsActions.UPDATE_PROJECT, IUpdateData>
 
 export type ProjectsAction = 

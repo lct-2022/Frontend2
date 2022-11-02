@@ -8,11 +8,13 @@
 }
 
 .user-options-point_current {
-    color: green;
+    color: #6941C6;
+    text-decoration: underline;
 }
 
+
 .user-options-point:hover {
-    color: green;
+    color: #6941C6;;
 }
 
 .user-menu-point:active {

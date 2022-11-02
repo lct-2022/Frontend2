@@ -28,7 +28,7 @@ function ProjectPage() {
                     <div className={cName('team-info')}>
                         <p className={cName('team-amount')}>{team.length} человек в команде</p>
                         
-                        <p>{openVacancies.length} открытых вакансий</p>
+                        <p>{openVacancies.length ? `${openVacancies.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
                     </div>
                     <p className={cName('description')}>{description}</p>
                     <a 

@@ -1,10 +1,11 @@
 import { FC } from "react";
-import { Job, User } from "../../../types";
+import { Job, User, UserData } from "../../../types";
 
 interface IProps {
-    fio: User['user']['fio'],
-    job: User['user']['job'], 
-    id: User['user']['id'],   
+    fio: UserData['fio'],
+    job: UserData['job'], 
+    id: UserData['id'], 
+    rating: number;  
 }
 
 export type Props = FC<IProps>;

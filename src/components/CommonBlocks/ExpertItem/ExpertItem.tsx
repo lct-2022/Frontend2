@@ -14,7 +14,7 @@ import './ExpertItem.css';
 
 const cName = cn('expert-card');
 
-const ExpertCard: Props = ({fio, job, id}) => {
+const ExpertCard: Props = ({fio, job, rating, id}) => {
     console.log(fio);
     
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const ExpertCard: Props = ({fio, job, id}) => {
             <div className={cName('data')}>
                 <div className={cName('fio')} onClick={() => {}}>{fio}</div>
                 <div className={cName('job')}>{job}</div>
+                <div className={cName('rate')}>rate:&nbsp;{rating}</div>
             </div>
         </div>
     )

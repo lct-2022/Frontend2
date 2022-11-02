@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { User } from "../../../../types";
+import { User, UserData } from "../../../../types";
 
 interface IProps {
-    user: User['user'];
-    rating: number
+    user: UserData;
+    rating?: number
 }
 
 export type Props = FC<IProps>;

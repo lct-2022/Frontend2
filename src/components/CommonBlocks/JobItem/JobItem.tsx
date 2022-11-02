@@ -27,6 +27,8 @@ const JobCard: Props = ({title, description, id}) => {
     const currentUser = useSelector(currentUserSelector);
 
     useEffect(() => {
+        console.log(id);
+        
         getJobApplication(id, getTokenFromCookies())
             .then(data => {
                 setIsApplication(!!data.result);

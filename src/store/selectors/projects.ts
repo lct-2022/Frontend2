@@ -7,7 +7,7 @@ export const popularProjectsSelector = createSelector(
 );
 
 export const allProjectsNumSelector = createSelector(
-    (store: IBaseStore) => store.projects.amount,
+    (store: IBaseStore) => store.projects.list.length,
     amount => amount,
 );
 

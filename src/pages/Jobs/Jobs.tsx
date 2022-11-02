@@ -36,7 +36,7 @@ function Jobs() {
                 ))}
             </div>
         )
-    }, [])
+    }, [allJobs])
 
     return (
         <div className={cName()}>

@@ -6,10 +6,11 @@ import { Props } from '../About/types';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import About from '../About';
 import Resume from '../Resume';
-
+import Teams from '../Teams/Teams';
 import UserOptions from '../../components/Options';
 import { ROUTES } from '../../../../utils/routes';
 import './Routes.css';
+import Projects from '../../../Projects';
 
 const cName = cn('user-routes');
 
@@ -35,13 +36,14 @@ const UserRoutes: Props = ({user}) => {
                 <Resume user={user}/>
             }
 
-            {/* <Routes>
-                <Route path={USER_ROUTES.COMMON} element={<About user={user}/>}/>
-                <Route path={USER_ROUTES.RESUME} element={<Resume/>}/>
-                <Route path={USER_ROUTES.PROJECTS} element={<Resume/>}/>
-                <Route path={USER_ROUTES.TEAMS} element={<Resume/>}/>
-            </Routes> */}
+            {shownData === 'projects' &&
+                <Projects/>
+            }
 
+            {shownData === 'teams' &&
+                <Teams/>
+
+            }
         </div>
     )
 }

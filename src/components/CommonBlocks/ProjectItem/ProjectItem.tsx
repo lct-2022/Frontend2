@@ -34,13 +34,12 @@ const ProjectCard: Props = ({
             // TODO - присылать бы это в ручке списка проектов
             dispatch<any>(getProjectTeamAction(id)),
             dispatch<any>(getProjectVacanciesAction(id)),
-            dispatch<any>(getProjectRatingAction(id)),
         ])
             .then(() => {
-                navigate(ROUTES.PROJECT)
+                navigate(ROUTES.PROJECT);
             })
             .catch(() => {
-                // throw new Error();
+                throw new Error();
             })
     }, [id]);
 

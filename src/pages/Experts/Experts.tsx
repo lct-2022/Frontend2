@@ -18,7 +18,7 @@ function Experts() {
     useEffect(() => {    
         getProfiles()
             .then(data => {
-                setAllExperts(data.result);
+                setAllExperts(data.result.map(el => ({...el, hidden: false})));
             })
     }, []);
     console.log(allExperts)
@@ -32,6 +32,7 @@ function Experts() {
                             fio={fio}
                             job={job}
                             id={id}
+                            rating={rating}
                         />
                     </div>
                 ))}

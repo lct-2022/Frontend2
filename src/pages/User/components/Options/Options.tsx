@@ -7,11 +7,10 @@ import './Options.css';
 const cName = cn('user-options');
 
 export const UserOptions: Props = ({curentOption, setOptions}) => {
-
     return (
         <div className={cName()}>
             {Object.entries(OPTIONS).map(([key, point], index) => (
-                <div
+                <p
                     key={index}
                     onClick={() => setOptions(key as UserOption)}
                     className={cName('point', {
@@ -20,7 +19,7 @@ export const UserOptions: Props = ({curentOption, setOptions}) => {
                     })}
                 >
                     {point}
-                </div>
+                </p>
             ))}
         </div>
     );

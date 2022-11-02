@@ -10,7 +10,7 @@ const CREATE_TITLE = 'Создать проект';
 function ProjectCreate() {
       //TODO Formik!!!
   const [title, setTitle] = useState('');
-  const [descriotion, setDescription] = useState('');
+  const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
 
   const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,10 +26,10 @@ function ProjectCreate() {
   const createProjectBtn = useCallback(() => {
     createProject({
       title,
-      descriotion,
+      description,
       url,
     }, getTokenFromCookies());
-  }, [title, descriotion, url])
+  }, [title, description, url])
     
   return (
     <div className={cName()}>
@@ -50,7 +50,7 @@ function ProjectCreate() {
             Описание проекта
           </label>
 
-          <input className={cName('description-input')} type="text" value={descriotion} onChange={changeDescription}/>
+          <input className={cName('description-input')} type="text" value={description} onChange={changeDescription}/>
         </div>
 
         <div className={cName('url')}>
