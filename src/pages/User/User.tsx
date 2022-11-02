@@ -18,12 +18,10 @@ const cName = cn('profile');
 
 export function Profile() {
     const currentUser = useSelector(currentUserSelector);
-    console.log('currentUser ===============>',currentUser);
-
     const [userRating, setUserRating] = useState(0);
 
     if (!currentUser) {
-        // redirectToLogin();
+        redirectToLogin();
         return null;
     }
     

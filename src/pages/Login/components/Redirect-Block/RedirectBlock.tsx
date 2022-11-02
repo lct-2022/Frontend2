@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Props } from './types';
 
 const RedirectLoginBlock: Props = ({type}) => {
@@ -6,14 +7,14 @@ const RedirectLoginBlock: Props = ({type}) => {
         return (
             <>
                 <p>need an account?</p>
-                <a href="/signup" target="_blank" rel="noopener norefere">Sign up!</a>            
+                <NavLink to="/signup">Sign up!</NavLink>            
             </>
         )
     } else {
         return (
           <div>
             <p>Already a user?</p>
-            <a href="/login" target="_blank" rel="noopener norefere">Log in!</a> 
+            <NavLink to="/login">Log in!</NavLink> 
           </div>
         )
     }

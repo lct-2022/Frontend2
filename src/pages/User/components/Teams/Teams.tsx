@@ -2,7 +2,7 @@ import {cn} from '@bem-react/classname';
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { createTeam } from '../../../../api/platform';
-import { currentUserSelector, isAdminSelector } from '../../../../store/selectors/users';
+import { currentUserSelector } from '../../../../store/selectors/users';
 
 const cName = cn('teams');
 

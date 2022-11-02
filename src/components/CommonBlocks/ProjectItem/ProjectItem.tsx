@@ -83,7 +83,9 @@ const ProjectCard: Props = ({
 
             <div className={cName('rating')}>
                 <p>{TITLE_RATE}:&nbsp;</p>
+
                 <b>{rating}</b>
+                
                 {canSearchTeam &&
                     <button onClick={getTeamsForProject}>Найти команду для проекта</button>
                 }
