@@ -48,7 +48,7 @@ function Navbar() {
                         return (
                             <NavLink
                                 key={index}
-                                className={cName('menu-point')}
+                                className={cName('menu-point', {hidden: point === 'Мой профиль' && !isAuthorized})}
                                 to={url}
                             >
                                 {point}

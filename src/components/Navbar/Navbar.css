@@ -34,3 +34,7 @@ a {
     font-weight: 500;
     text-decoration: none;
 }
+
+.navbar-menu-point_hidden {
+    display: none;
+}
