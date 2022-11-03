@@ -22,9 +22,10 @@ export const TeamCreate: FC<Props> = ({setTeams}) => {
         setTeamTitle(event.target.value);
     };
 
-    const addTeam = useCallback(() => {
-        setTeams(prev => [...prev, {title: teamTitle, id: Math.random()}])
-    }, [setTeams]);
+    const addTeam = () => {
+        setTeams(prev => [...prev, {title: teamTitle, id: Math.random()}]);
+        setTeamTitle('')
+    }
 
     return (
         <div>
@@ -38,7 +39,6 @@ export const TeamCreate: FC<Props> = ({setTeams}) => {
 const TeamChange: FC<Props> = ({setTeams, team}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
 
     const addUserToTeam = useCallback(() => {
         dispatch(setActiveTeamAction(team || {title: 'Team1', id:1}));
@@ -70,48 +70,41 @@ function Teams() {
     const currentUser = useSelector(currentUserSelector);
     
     const [isTeamCreate, setIsTeamCreate] = useState(false);
-    const [isShowSettings, setIsShowSettings] = useState(false);
 
     const createNewTeam = () => {
         setIsTeamCreate(prev => !prev);
     };
 
-    const showAdminSettings = useCallback(() => {
-        if (!currentUser?.admin) {
-            return;
-        }
-        setIsShowSettings(true);
-    }, [currentUser?.admin]);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const hideAdminSettings = useCallback(() => {
-        if (!currentUser?.admin) {
-            return;
-        }
-        setIsShowSettings(false);
-    }, [currentUser?.admin]);
+    const addUserToTeam = useCallback((id: number, title: string) => {
+        dispatch(setActiveTeamAction({title, id} || {title: 'Team1', id:1}));
+        navigate(ROUTES.EXPERTS);
+    }, [setTeams]);
+
+    const removeTeam = (id: number) => {
+        setTeams(prev => prev.filter(el => el.id !== id))
+    };
 
     return (
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
             {teams.map(({title, id}) => (
-                <div key={id} style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div key={id} style={{display: 'flex', justifyContent: 'space-between', gap: '8px'}}>
                     {title}
                     
-                    {currentUser?.admin &&
-                        <div
-                            onMouseEnter={showAdminSettings}
-                            onMouseLeave={hideAdminSettings}
-                        >
-                            Settings
+                    {!currentUser?.admin &&
+                        <div style={{display: 'flex', gap: '4px'}}>
+                            <button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</button>
+                            <button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</button>
                         </div>
                     }
-
-                    {isShowSettings && currentUser?.admin && <TeamChange setTeams={setTeams} team={{title, id}}/>}
                 </div>
             ))}
              
-            {currentUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
+            {!currentUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
 
-            {isTeamCreate && currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
+            {isTeamCreate && !currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>
     )
 }

@@ -33,6 +33,7 @@ function Navbar() {
         dispatch({
             type: ActiveUserActions.UNSET_USER,
         });
+        navigate(ROUTES.INDEX);
     }
 
     const menuPoints = useMemo(() => {

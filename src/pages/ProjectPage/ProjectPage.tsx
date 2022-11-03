@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
-const cName = cn('project_page')
+const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);

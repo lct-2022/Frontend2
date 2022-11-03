@@ -11,7 +11,7 @@ import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
-const cName = cn('job_page')
+const cName = cn('job-page')
 
 const APPLY = 'Откликнуться';
 

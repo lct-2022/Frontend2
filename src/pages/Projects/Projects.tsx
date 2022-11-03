@@ -14,7 +14,7 @@ import './Projects.css';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../store/selectors/users';
 
-const cName = cn('projects_page')
+const cName = cn('projects-page')
 
 interface Props {
     own?: boolean;
