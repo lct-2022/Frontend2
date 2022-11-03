@@ -93,7 +93,7 @@ function Teams() {
                 <div key={id} style={{display: 'flex', justifyContent: 'space-between', gap: '8px'}}>
                     {title}
                     
-                    {!currentUser?.admin &&
+                    {currentUser?.admin &&
                         <div style={{display: 'flex', gap: '4px'}}>
                             <button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</button>
                             <button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</button>
@@ -102,9 +102,9 @@ function Teams() {
                 </div>
             ))}
              
-            {!currentUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
+            {currentUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
 
-            {isTeamCreate && !currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
+            {isTeamCreate && currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>
     )
 }

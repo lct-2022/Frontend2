@@ -29,7 +29,7 @@ function JobPage() {
         }
         applyToJob(currentJob?.id ?? 0, getTokenFromCookies())
             .then(() => {
-                navigate(ROUTES.APPLICATION);
+                navigate(ROUTES.APPLICATIONS);
             })
             .catch(() => {
                 throw new Error();

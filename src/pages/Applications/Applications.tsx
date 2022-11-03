@@ -18,7 +18,7 @@ function Applications() {
         <div className={cName()}>
             {/* <h3></h3> */}
 
-            {applications.map(appl => <Application/>)}
+            {/* {applications.map(appl => <Application/>)} */}
 
         </div>
     )

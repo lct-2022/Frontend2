@@ -11,7 +11,7 @@ const cName = cn('user-options');
 export const UserOptions: Props = ({currentOption, setOptions}) => {
     const currentUser = useSelector(currentUserSelector);
 
-    const newOptions = !currentUser?.admin
+    const newOptions = currentUser?.admin
         ? Object.assign({}, OPTIONS, ADMIN_OPTION)
         : {...OPTIONS}
 

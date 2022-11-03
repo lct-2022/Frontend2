@@ -2,7 +2,6 @@ import React, { FC, memo, useCallback, useEffect, useMemo, useState} from 'react
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
-import {Props} from './types';
 import { applyToJob, getJobApplication, getProjectVacancies, getVacancy } from '../../../api/platform';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
@@ -22,7 +21,7 @@ type Props = {
     user?: User;
 }
 
-const Application: FC<Props> = () => {
+const Application: FC<Props> = ({application}) => {
     const [appliedUser, setAppliedUser] = useState<Nullable<UserData>>(null);
 
     const navigate = useNavigate();

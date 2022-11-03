@@ -37,7 +37,7 @@ const ProjectCard: Props = ({
     const currentUser = useSelector(currentUserSelector)
 
     const isFromProfile = location.pathname === ROUTES.USER;
-    const canSearchTeam = isFromProfile && (!currentUser?.admin || currentUser?.id === author_id);
+    const canSearchTeam = isFromProfile && (currentUser?.admin || currentUser?.id === author_id);
 
     const passToProject = useCallback(() => {
         Promise.all([
