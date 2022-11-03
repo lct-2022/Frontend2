@@ -11,6 +11,7 @@ import { ActiveUserActions } from '../../store/types/activeUser';
 import { isUserAuthorizedAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { setAuthToken } from '../../utils/cookie';
+import { ShownUserActions } from '../../store/types/shownUser';
 
 enum Labels {
     EMAIL = 'Email',
@@ -54,7 +55,11 @@ export const LoginForm: Props = ({type = 'login'}) => {
                 dispatch({
                     type: ActiveUserActions.SET_USER,
                     payload: result,
-                })
+                });
+                dispatch({
+                    type: ShownUserActions.SET_USER,
+                    payload: result,
+                });
                 // Remove ???
                 setEmail('');
                 setPassword('');

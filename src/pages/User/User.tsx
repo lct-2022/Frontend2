@@ -5,7 +5,7 @@ import UserRoutes from './components/Routes';
 import Contacts from './components/Contacts';
 
 import './User.css';
-import { currentUserSelector } from '../../store/selectors/users';
+import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
@@ -17,7 +17,7 @@ const TITLE = 'Профиль';
 const cName = cn('profile');
 
 export function Profile() {
-    const currentUser = useSelector(currentUserSelector);
+    const currentUser = useSelector(shownProfileSelector);
     const [userRating, setUserRating] = useState(0);
 
     const navigate = useNavigate();

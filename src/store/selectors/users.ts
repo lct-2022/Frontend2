@@ -21,3 +21,8 @@ export const popularProfilesSelector = createSelector(
     (store: IBaseStore) => store.users.list,
     users => users || [],
 );
+
+export const shownProfileSelector = createSelector(
+    (store: IBaseStore) => store.shownUser,
+    user => user,
+);

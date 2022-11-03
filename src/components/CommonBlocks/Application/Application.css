@@ -1,0 +1,23 @@
+.application {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 16px;
+    height: auto;
+
+    background-color: #fff;
+    border-radius: 8px;
+    border: solid 1px #98A2B3;
+}
+
+.application-left-block {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.application-applied-user {
+    display: flex;
+    gap: 12px;
+}

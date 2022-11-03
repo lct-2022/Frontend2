@@ -68,7 +68,7 @@ export type Job = ICommonData & {
     open: boolean;
     hidden?: boolean;
 }
-
+// job -> team -> project -> project.author_id
 enum ApplicationStatus {
     APPLIED = 'applied',
     ACCEPTED = 'accepted',

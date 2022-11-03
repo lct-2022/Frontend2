@@ -11,4 +11,4 @@ type UnsetUser = CommonAction<ActiveUserActions.UNSET_USER>
 
 export type ActiveUserAction = 
     | SetUser
-    | UnsetUser
+    | UnsetUser;

@@ -146,3 +146,17 @@ export const getTeamsAvailableForProject = async (projectId: number, token: stri
         }
     });
 };
+
+//get_project_teams
+export const getTeamJobs = async (projectId: number, token: string): Promise<IDataRPC<Team[] | null>> => {
+    return await request({
+        method: 'get_project_teams',
+        host: RPCHosts.Platform,
+        params: {
+            'project_id': projectId
+        },
+        settings: {
+            authToken: token,
+        }
+    });
+};

@@ -19,6 +19,7 @@ export interface IBaseStore {
     projects: NumerableItems<Project>;
     users: NumerableItems<User>;
     jobs: NumerableItems<Job>;
+    shownUser: Nullable<UserData>;
     // events?: NumerableItems<IEvents>;
     teams: Team[];
 }
