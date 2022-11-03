@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState} from 'react';
+import React, { FC, memo, useCallback, useEffect, useMemo, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
@@ -12,12 +12,17 @@ import { currentUserSelector } from '../../../store/selectors/users';
 import { DEFAULT_AVATAR } from '../../../utils/consts';
 import './Application.css';
 import { getUserProfile } from '../../../api/passport';
-import { Nullable, User, UserData } from '../../../types';
+import { Application, Nullable, User, UserData } from '../../../types';
 import { getUserProfileAction } from '../../../store/actions/users';
 
 const cName = cn('application');
 
-const Application: Props = () => {
+type Props = {
+    application: Application;
+    user?: User;
+}
+
+const Application: FC<Props> = () => {
     const [appliedUser, setAppliedUser] = useState<Nullable<UserData>>(null);
 
     const navigate = useNavigate();

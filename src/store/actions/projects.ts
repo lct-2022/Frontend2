@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { getCurrentProject, getProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
 import { ActiveProjectActions, SetProject, SetTeam, SetVacancies } from "../types/activeProject";
+import { ApplicationsActions, SetApplications } from "../types/applications";
 import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
 
 export const popularProjectsAction = (limit?: number) => {
@@ -47,7 +48,7 @@ export const getProjectVacanciesAction = (id: number) => {
         
         dispatch({
             type: ActiveProjectActions.SET_VACANCIES,
-            payload: projectVacanciesResponse.result,
+            payload: projectVacanciesResponse.result.map(el => el.job),
         });
     }
 }

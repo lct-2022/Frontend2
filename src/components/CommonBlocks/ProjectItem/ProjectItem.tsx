@@ -15,6 +15,7 @@ import { getTokenFromCookies } from '../../../utils/cookie';
 import { availableTeamsAction } from '../../../store/actions/teams';
 import { currentUserSelector } from '../../../store/selectors/users';
 import { TeamCreate } from '../../../pages/User/components/Teams/Teams';
+import { getJobApplicationsAction } from '../../../store/actions/jobs';
 
 const cName = cn('project-card');
 
@@ -59,6 +60,13 @@ const ProjectCard: Props = ({
                 navigate(ROUTES.TEAMS)
             });
     }, [id]);
+
+    const passToAppllications = useCallback(() => {
+        getProjectVacancies(id)
+            .then(data => {
+                dispatch<any>(getJobApplicationsAction(data.result))
+            })
+    }, [id]);
     
     return (
         <div className={cName()}>
@@ -88,7 +96,11 @@ const ProjectCard: Props = ({
                 <b>{rating}</b>
 
                 {canSearchTeam &&
-                    <button onClick={getTeamsForProject}>Найти команду для проекта</button>
+                    <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                        <button onClick={getTeamsForProject}>Найти команду для проекта</button>
+                        <button onClick={passToAppllications}>Отклики</button>
+                    </div>
+
                 }
             </div>
         </div>

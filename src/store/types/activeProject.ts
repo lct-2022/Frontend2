@@ -1,4 +1,4 @@
-import { Application, Project, ProjectData, ProjectTeamMember, User } from "../../types";
+import { Application, Job, Project, ProjectData, ProjectTeamMember, User } from "../../types";
 import { CommonAction } from '../../types';
 
 export enum ActiveProjectActions {
@@ -12,7 +12,7 @@ export enum ActiveProjectActions {
 export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, ProjectData>;
 export type UnsetProject = CommonAction<ActiveProjectActions.UNSET_PROJECT>;
 export type SetTeam = CommonAction<ActiveProjectActions.SET_TEAM, ProjectTeamMember[]>;
-export type SetVacancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Application[]>;
+export type SetVacancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Job[]>;
 export type SetRating = CommonAction<ActiveProjectActions.SET_RATING, number>;
 
 export type ActiveProjectAction = 

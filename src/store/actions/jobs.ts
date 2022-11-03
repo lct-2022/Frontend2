@@ -1,6 +1,8 @@
 import { Dispatch } from "react";
-import { getJobs, getVacancy } from "../../api/platform";
+import { getJobs, getProjectVacancies, getVacancy } from "../../api/platform";
+import { Application } from "../../types";
 import { ActiveJobAction, ActiveJobActions } from "../types/activeJob";
+import { ApplicationsActions, SetApplications } from "../types/applications";
 import { JobsAction, JobsActions } from "../types/jobs";
 
 export const popularJobsAction = (limit?: number) => {
@@ -24,6 +26,16 @@ export const getCurrentVacancyAction = (jobId: number) => {
         dispatch({
             type: ActiveJobActions.SET_ACTIVE_JOB,
             payload: currentVacancyResponse.result,
+        });
+    }
+}
+
+export const getJobApplicationsAction = (applications: Application[] | null) => {
+    return async (dispatch: Dispatch<SetApplications>) => {
+
+        dispatch({
+            type: ApplicationsActions.SET_APPLICATIONS,
+            payload: applications || [],
         });
     }
 }

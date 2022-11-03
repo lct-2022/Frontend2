@@ -23,7 +23,7 @@ export const UserOptions: Props = ({currentOption, setOptions}) => {
                     onClick={() => setOptions(key as UserOption)}
                     className={cName('point', {
                         current: key === currentOption,
-                        admin: point === ADMIN_OPTION.admin,
+                        admin: point === ADMIN_OPTION.application,
                     })}
                 >
                     {point}

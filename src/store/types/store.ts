@@ -8,7 +8,7 @@ type NumerableItems<D> = {
 export type ActiveProject = {
     project: Nullable<Project['project']>;
     team: Nullable<ProjectTeamMember[]>;
-    vacancies: Nullable<Application[]>;
+    vacancies: Nullable<Job[]>;
     rating: number;
 }
 
@@ -20,6 +20,8 @@ export interface IBaseStore {
     users: NumerableItems<User>;
     jobs: NumerableItems<Job>;
     shownUser: Nullable<UserData>;
+    applications: Nullable<Application[]>;
+
     // events?: NumerableItems<IEvents>;
     teams: Team[];
 }

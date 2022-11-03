@@ -50,6 +50,7 @@ function App() {
         <Route path={ROUTES.JOB} element={<JobPage/>}/>
         <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
         <Route path={ROUTES.TEAMS} element={<Teams/>}/>
+        <Route path={ROUTES.APPLICATIONS} element={<Teams/>}/>
 
         <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
         <Route path={ROUTES.CHAT} element={<LoginForm/>}/>

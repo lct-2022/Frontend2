@@ -5,7 +5,7 @@ export type UserOption =
     | 'resume' 
     | 'projects' 
     | 'teams' 
-    | 'admin';
+    | 'application';
 
 export const OPTIONS: Partial<Record<UserOption, string>> = {
     about: 'Биография',
@@ -15,7 +15,7 @@ export const OPTIONS: Partial<Record<UserOption, string>> = {
 
 export const ADMIN_OPTION: Partial<Record<UserOption, string>> = {
     teams: 'Список команд',
-    admin: 'Админ',
+    application: 'Отклики',
 };
 
 export const BUSINESS_INFO = [
