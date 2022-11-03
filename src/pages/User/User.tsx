@@ -20,8 +20,11 @@ export function Profile() {
     const currentUser = useSelector(currentUserSelector);
     const [userRating, setUserRating] = useState(0);
 
+    const navigate = useNavigate();
+
     if (!currentUser) {
-        redirectToLogin();
+        navigate(ROUTES.LOGIN)
+        // redirectToLogin();
         return null;
     }
     
@@ -38,8 +41,6 @@ export function Profile() {
                 <UserRoutes user={currentUser}/>
                 <Contacts user={currentUser}/>
             </div>
-
-            <button onClick={() => removeAuthToken('auth_token')}>Logout</button>
         </div>
     );
 }

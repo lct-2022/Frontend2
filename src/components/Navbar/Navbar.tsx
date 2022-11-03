@@ -80,7 +80,7 @@ function Navbar() {
                 onClick={passToHome}
             />
             
-            <button onClick={logout}>Logout</button>
+            {currentUser && <button onClick={logout}>Logout</button>}
 
             {menuPoints}
         </div>
