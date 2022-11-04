@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { createProject } from '../../api/platform';
+import { createProject, getProjects } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
 import { useDispatch } from 'react-redux';
@@ -20,7 +20,6 @@ function ProjectCreate() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-
   const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
   } 
@@ -38,11 +37,12 @@ function ProjectCreate() {
       url,
     }, getTokenFromCookies())
       .then(project => {
+        getProjects();
         dispatch({
           type: ActiveProjectActions.SET_PROJECT,
           payload: project,
         });
-        navigate(ROUTES.PROJECT);
+        navigate(`${ROUTES.PROJECT}/created`);
       })
   }, [title, description, url])
     

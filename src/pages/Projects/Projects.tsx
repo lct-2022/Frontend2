@@ -41,23 +41,21 @@ const Projects: FC<Props> = ({fromProfile}) => {
 
     return (
         <div className={cName()}>
-            <h1>Projects</h1>
-
-                <div className={cName('options')}>
-                    <div className={cName('list')}>
-                        <ProjectsList projects={allProjects}/>
-                    </div>
-
-                    {!fromProfile && <div className={cName('filtration')}>
-                        <Filtration 
-                            projects={allProjects}
-                            setProjects={setAllProjects}
-                        />
-                    </div>}
+            <div className={cName('options')}>
+                <div className={cName('list')}>
+                    <ProjectsList projects={allProjects}/>
                 </div>
 
-                {/* <Pagination projects={allProjects}/> */}
+                {!fromProfile && <div className={cName('filtration')}>
+                    <Filtration 
+                        projects={allProjects}
+                        setProjects={setAllProjects}
+                    />
+                </div>}
             </div>
+
+                {/* <Pagination projects={allProjects}/> */}
+        </div>
     )
 }
 export default Projects;

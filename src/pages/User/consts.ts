@@ -3,12 +3,12 @@ import { ROUTES } from "../../utils/routes";
 export type UserOption = 
     | 'about' 
     | 'resume' 
-    | 'projects' 
+    | 'ideas' 
     | 'teams' 
     | 'application';
 
 export const OPTIONS: Partial<Record<UserOption, string>> = {
-    projects: 'Идеи',
+    ideas: 'Идеи',
     about: 'Об эксперте',
     resume: 'Резюме',
 }

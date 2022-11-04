@@ -15,7 +15,7 @@ import Projects from '../../../Projects';
 const cName = cn('user-routes');
 
 const UserRoutes: Props = ({user}) => {
-    const [shownData, setShowData] = useState<UserOption>('about')
+    const [shownData, setShowData] = useState<UserOption>('ideas');
 
     const setOptions = useCallback((point: UserOption) => {
         setShowData(point)
@@ -36,7 +36,7 @@ const UserRoutes: Props = ({user}) => {
                 <Resume user={user}/>
             }
 
-            {shownData === 'projects' &&
+            {shownData === 'ideas' &&
                 <Projects fromProfile/>
             }
 

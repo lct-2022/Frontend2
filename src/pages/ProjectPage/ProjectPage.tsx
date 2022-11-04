@@ -8,7 +8,7 @@ import { currentUserSelector } from '../../store/selectors/users';
 import { availableTeamsAction } from '../../store/actions/teams';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import Button from '../../components/Button'
@@ -21,6 +21,7 @@ function ProjectPage() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const params = useParams();
 
     const canSearchTeam = currentProject?.project['author_id'] === currentUser?.id;
     
@@ -34,6 +35,10 @@ function ProjectPage() {
                 navigate(ROUTES.TEAMS)
             });
     }, [currentProject?.project?.id]);
+
+    const goBackToMyIdeas = () => {
+        navigate(ROUTES.USER);
+    }
     
     if (!currentProject) {
         return null;
@@ -85,8 +90,14 @@ function ProjectPage() {
                 </div>
             </div>
 
-            {canSearchTeam && 
-                <button onClick={getTeamsForProject}>Добавить команду</button>
+            {canSearchTeam &&
+                <div>
+                    <button onClick={getTeamsForProject}>Найти чеоовека в команду</button>
+                </div>
+            }
+
+            {params.created && 
+                <button onClick={goBackToMyIdeas}>К списку идей</button>
             }
         </div>
     )

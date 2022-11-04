@@ -53,6 +53,7 @@ function App() {
               <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
               <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
               <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
+              <Route path={ROUTES.PROJECT_CREATED} element={<ProjectPage/>}/>
               <Route path={ROUTES.JOBS} element={<Jobs/>}/>
               <Route path={ROUTES.JOB} element={<JobPage/>}/>
               <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
