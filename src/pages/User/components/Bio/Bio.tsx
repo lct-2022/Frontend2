@@ -5,7 +5,7 @@ import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 
 import './Bio.css'
-const avatarIcon = require('../../../../assets/avatar.svg').default
+const avatarIcon = require('../../../../assets/avatar.svg')
 
 const cName = cn('bio')
 

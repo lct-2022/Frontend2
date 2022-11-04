@@ -30,14 +30,10 @@ function App() {
   console.log('STORE =>', store);
   
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
       dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
   }, []);
-
-  // useEffect(() => {
-  //   authorize(getTokenFromCookies());
-  // }, []);
 
   return (  
     <ErrorBoundary>
@@ -63,9 +59,10 @@ function App() {
               <Route path={ROUTES.TEAMS} element={<Teams/>}/>
               <Route path={ROUTES.APPLICATIONS} element={<Applications/>}/>
 
-              <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
-              <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
+              <Route path={ROUTES.EVENTS} element={<h1>Мероприятия</h1>}/>
+              <Route path={ROUTES.SERVICES} element={<h1>Сервисы</h1>}/>
             </Routes>
+
           {/* <Footer/> */}
         </BrowserRouter>
      </ErrorBoundary>

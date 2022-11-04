@@ -27,10 +27,10 @@ const Projects: FC<Props> = ({fromProfile}) => {
     const [allProjects, setAllProjects] = useState<Project[]>([]);
 
     useEffect(() => {
-        // if (currentUser && fromProfile) {
-        //     setAllProjects(currentUser.projects || []);
-        //     return;
-        // }
+        if (currentUser && fromProfile) {
+            setAllProjects(currentUser.projects || []);
+            return;
+        }
         getProjects()
             .then(data => {
                 setAllProjects(data?.map(project => ({...project, hidden: false})))

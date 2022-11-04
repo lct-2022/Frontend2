@@ -12,9 +12,10 @@ import { authorizeAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
+import { cn } from '@bem-react/classname';
 
 enum Labels {
-    EMAIL = 'Email',
+    EMAIL = 'E-mail',
     PASSWORD = 'Password',
     NAME = 'Name',
     LASTNAME = 'Lastname',
@@ -27,7 +28,11 @@ enum Placeholders {
     LASTNAME = 'Ваша фамилия',
 }
 
+const cName = cn('login-form')
+
 export const LoginForm: Props = ({type = 'login'}) => {
+    console.log('LOG !!!!!!');
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -49,7 +54,8 @@ export const LoginForm: Props = ({type = 'login'}) => {
     const changeLastname = (event: ChangeEvent<HTMLInputElement>) => {
         setLastname(event.target.value)
     }
-
+    console.log(type);
+    
     const btnName = type === 'login'
         ? 'Войти'
         : 'Зарегистрироваться'
@@ -81,14 +87,14 @@ export const LoginForm: Props = ({type = 'login'}) => {
     }, [email, password, type]);
 
     return (
-        <div className="login">
+        <div className={cName()}>
             {/* <div className="login-form"> */}
 
                 {/* <div className="login-form-wrapper"> */}
 
-                    <p className="login-form-title">{title}</p>
+                    <p className={cName('title')}>{title}</p>
 
-                    <div className="login-form-input">
+                    <div className={cName('input', {hidden: type === 'login'})}>
                         <label htmlFor="login-form-name" className="login-label">
                             {Labels.NAME}
                         </label>
@@ -96,24 +102,24 @@ export const LoginForm: Props = ({type = 'login'}) => {
                         <input className="login-form-mail login-input" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeName}/>
                     </div>
 
-                    <div className="login-form-input">
-                        <label htmlFor="login-form-lastname" className="login-label">
+                    <div className={cName('input', {hidden: type === 'login'})}>
+                        <label htmlFor="login-form-lastname" className={cName('label')}>
                             {Labels.LASTNAME}
                         </label>
 
                         <input className="login-form-mail login-input" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeLastname}/>
                     </div>
 
-                    <div className="login-form-input">
-                        <label htmlFor="login-form-mail" className="login-label">
+                    <div className={cName('input')}>
+                        <label htmlFor="login-form-mail" className={cName('label')}>
                             {Labels.EMAIL}
                         </label>
 
                         <input className="login-form-mail login-input" type="text" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
                     </div>
 
-                    <div className="login-form-input">
-                        <label htmlFor="login-form-password" className="login-label">
+                    <div className={cName('input')}>
+                        <label htmlFor="login-form-password" className={cName('label')}>
                             {Labels.PASSWORD}
                         </label>
 
@@ -121,7 +127,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                     </div>
 
                     <button
-                        className="login-form-btn"
+                        className={cName('btn')}
                         onClick={submit}
                     >
                         {btnName}
