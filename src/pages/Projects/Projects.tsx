@@ -13,7 +13,6 @@ import Filtration from './components/Filtration';
 import './Projects.css';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../store/selectors/users';
-import { useSearchParams } from 'react-router-dom';
 
 const cName = cn('projects-page')
 

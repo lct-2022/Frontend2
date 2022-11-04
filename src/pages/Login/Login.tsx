@@ -14,6 +14,7 @@ import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
 import { cn } from '@bem-react/classname';
 import { lsSaveAuthorizedUser } from '../../utils/storage';
+import { EMAIL_REGEXP } from '../../utils/consts';
 
 enum Labels {
     EMAIL = 'E-mail',
@@ -62,6 +63,14 @@ export const LoginForm: Props = ({type = 'login'}) => {
         : 'Регистрация'
 
     const submit = useCallback(() => {
+        if (!email.match(EMAIL_REGEXP)) {
+            alert('Невалидный адрес электронный почты')
+            return;
+        }
+        if (!email || !password || (type === 'signup' && (!name || !lastname))) {
+            alert('Пожалуйста, заполните все поля!')
+            return;
+        }
         const requestor = type === 'login'
             ? login(email, password)
             : signup(email, password, `${name} ${lastname}`)
@@ -81,7 +90,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
             .catch(() => {
                 throw new Error();
             })
-    }, [email, password, type]);
+    }, [email, password, name, lastname, type]);
 
     return (
         <div className={cName()}>

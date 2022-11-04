@@ -65,7 +65,7 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D> {
 export enum RPCHosts {
     Passport = 'passport',
     Platform = 'platform',
-    Ratings = 'ratings',
+    Ratings = 'rating',
     Chat = 'chat',
     Events = 'events',
 }

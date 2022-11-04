@@ -36,18 +36,16 @@ const ProjectCard: Props = ({
     const currentUser = useSelector(currentUserSelector);
 
     const passToProject = useCallback(() => {
-        
         Promise.all([
-            dispatch<any>(getCurrentProjectAction(id)),
-            // TODO - присылать бы это в ручке списка проектов
-            dispatch<any>(getProjectTeamAction(id)),
+            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
+            new Promise((res) => res(dispatch<any>(getProjectTeamAction(id)))),
             // dispatch<any>(getProjectVacanciesAction(id)),
         ])
             .then(() => {
                 navigate(ROUTES.PROJECT);
             })
             .catch((err) => {
-                throw new Error();
+                throw new Error(err);
             })
     }, [id]);
 
@@ -64,8 +62,7 @@ const ProjectCard: Props = ({
     }, [id]);
 
     const makeVote = useCallback(() => {
-        if (!currentUser) {
-            
+        if (!currentUser) { 
             return;
         }
         vote({
@@ -101,9 +98,13 @@ const ProjectCard: Props = ({
             </div>
 
             <div className={cName('rating')}>
-                <p>{TITLE_RATE}:&nbsp;</p>
-
-                <b>{rating}</b>
+                {rating && 
+                    <>
+                        <p>{TITLE_RATE}:&nbsp;</p>
+        
+                        <b>{rating}</b>
+                    </>
+                }
 
                 <p style={{fontSize: '10px', cursor: 'pointer'}} onClick={makeVote}>Проголосовать</p>
 
