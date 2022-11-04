@@ -10,9 +10,9 @@ import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../../store/selectors/users';
 import { DEFAULT_AVATAR } from '../../../utils/consts';
-import './ExpertItem.css';
 import { getUserProfileAction } from '../../../store/actions/users';
 import { getUserProfile } from '../../../api/passport';
+import './ExpertItem.css';
 
 const cName = cn('expert-card');
 
@@ -29,7 +29,7 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
                 dispatch(getUserProfileAction(user));
                 navigate(`${ROUTES.USER}/search`);
             })
-    }, [id])
+    }, [id]);
 
     return (
         <div className={cName()}>

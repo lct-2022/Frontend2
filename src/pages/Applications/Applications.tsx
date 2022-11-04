@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { getJobs } from '../../api/platform';
 import { getOwnJobs } from '../../utils/jobsAuthor';
 import { currentUserSelector } from '../../store/selectors/users';
 import { ApplicationStatus, Job } from '../../types';
+import { useNavigate } from 'react-router-dom';
 const cName = cn('applications');
 
 const APPLICATIONS = [
@@ -30,21 +31,26 @@ const APPLICATIONS = [
     }
 ]
 
-
 function Applications() {
     const applications = APPLICATIONS
-    useSelector(applicationsSelector);
-    console.log('applications ====>', applications);
+    // useSelector(applicationsSelector);
+
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    }
     
     return (
         <div className={cName()}>
             {/* <h3></h3> */}
 
-            {applications.map(application => <Application application={application}/>)}
-
-            <button>Назад к профилю</button>
-
+            {applications.map(application => <Application key={application.user_id} application={application}/>)}
+            
+            
+            <button onClick={goBack}>Назад к профилю</button>
         </div>
     )
 }
+
 export default Applications;

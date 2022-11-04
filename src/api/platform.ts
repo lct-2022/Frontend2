@@ -160,3 +160,17 @@ export const getTeamJobs = async (projectId: number, token?: string): Promise<Te
         }
     });
 };
+
+// cancel-application
+export const cancelApplication = async (applId: number, token?: string): Promise<Application> => {
+    return await request({
+        method: 'cancel_application',
+        host: RPCHosts.Platform,
+        params: {
+            id: applId,
+        },
+        settings: {
+            authToken: token,
+        }
+    });
+};

@@ -6,7 +6,7 @@ import { cn } from '@bem-react/classname'
 import './JobItem.css';
 
 import {Props} from './types';
-import { applyToJob, getJobApplication, getApplications, getVacancy } from '../../../api/platform';
+import { applyToJob, getJobApplication, getApplications, getVacancy, cancelApplication } from '../../../api/platform';
 import { getTokenFromCookies, redirectToLogin } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
@@ -35,20 +35,26 @@ const JobCard: Props = ({title, description, id}) => {
             })
     }, [id])
     
-    const makeApply = useCallback(() => {
+    const applicationAction = useCallback(() => {
+        
         if (!currentUserSelector) {
             redirectToLogin();
             return;
         }
+        console.log('QWERT');
+
+        const applicationRequestor = !isApplication
+            ? applyToJob
+            : cancelApplication
         
-        applyToJob(id, getTokenFromCookies())
+        applicationRequestor(id, getTokenFromCookies())
             .then(result => {
                 setIsApplication(!!result)
             })
             .catch(() => {
                 throw new Error()
             });
-    }, [id, currentUser]);
+    }, [id, currentUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
 
@@ -59,13 +65,16 @@ const JobCard: Props = ({title, description, id}) => {
             })
     }, [id]);
 
+    console.log(isApplication);
+    
+
     const btn = useMemo(() => {
         return (
-            <button className={cName('apply-btn', {applied: isApplication})} onClick={makeApply}>
+            <button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
                 {isApplication ? CANCEL : APPLY}
             </button>
         )
-    }, [isApplication])
+    }, [isApplication, applicationAction])
 
     return (
         <div className={cName()}>
