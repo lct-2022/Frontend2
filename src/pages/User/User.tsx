@@ -11,7 +11,7 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import {cn} from '@bem-react/classname';
-import { getTokenFromCookies, redirectToLogin, removeAuthToken } from '../../utils/cookie';
+import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
 import { getOwnJobs } from '../../utils/jobsAuthor';
 import { getJobs } from '../../api/platform';
 import { popularJobsAction } from '../../store/actions/jobs';

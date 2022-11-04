@@ -13,6 +13,7 @@ import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 import Drop from './components/Drop';
+import { lsRemoveAuthorizedUser } from '../../utils/storage';
 const userIcon = require('../../assets/user-icon.svg').default;
 
 const cName = cn('navbar');
@@ -42,6 +43,7 @@ function Navbar() {
 
     const logout = () => {
         removeAuthToken(TOKEN_KEY);
+        lsRemoveAuthorizedUser();
         dispatch({
             type: ActiveUserActions.UNSET_USER,
         });

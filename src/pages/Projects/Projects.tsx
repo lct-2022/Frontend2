@@ -25,7 +25,6 @@ const Projects: FC<Props> = ({fromProfile}) => {
     const currentUser = useSelector(currentUserSelector)
 
     const [allProjects, setAllProjects] = useState<Project[]>([]);
-    console.log(fromProfile);
     
     useEffect(() => {
         // if (currentUser && fromProfile) {
@@ -37,8 +36,6 @@ const Projects: FC<Props> = ({fromProfile}) => {
                 setAllProjects(data?.map(project => ({...project, hidden: false})))
             })
     }, []);
-
-    console.log(allProjects.map(el => el.project.id));
 
     return (
         <div className={cName()}>

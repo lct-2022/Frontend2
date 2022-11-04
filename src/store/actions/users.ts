@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { getAuthorizedUser, getProfiles } from "../../api/passport";
 import { CommonAction, UserData } from "../../types";
+import { lsSaveAuthorizedUser } from "../../utils/storage";
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { ShownUserActions } from "../types/shownUser";
 import { UsersAction, UsersActions } from '../types/users';
@@ -9,7 +10,11 @@ export const getAuthorizedUserAction = (token?: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
         const signupResponse = await getAuthorizedUser(token);
-        
+
+        if (signupResponse) {
+            lsSaveAuthorizedUser(signupResponse)
+        }
+
         return signupResponse
             ? 
                 dispatch({

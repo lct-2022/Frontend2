@@ -14,7 +14,6 @@ const Bio: Props = ({user, rating}) => {
     const editModeToggle = () => {
         setEditMode(prev => !prev);
     }
-    console.log(avatarIcon);
     
     return (
         <div className={cName()}>

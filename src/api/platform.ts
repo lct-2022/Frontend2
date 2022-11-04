@@ -10,7 +10,6 @@ export const getJobs = async (limit?: number) => {
         })
     })
     .then((data) => {
-        console.log(data);
         return data
         
     })

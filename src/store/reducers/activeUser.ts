@@ -1,11 +1,12 @@
 import { User, Nullable } from "../../types";
+import { lsGetAuthorizedUser } from "../../utils/storage";
 
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { IBaseStore } from "../types/store";
 
 type UserState = IBaseStore['activeUser']
 
-const initialState: UserState = null;
+const initialState: UserState = lsGetAuthorizedUser() || null;
 
 export const activeUserReducer = (store: UserState = initialState, action: ActiveUserAction) => {
     const {type, payload} = action;

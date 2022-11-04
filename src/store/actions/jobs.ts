@@ -9,7 +9,6 @@ export const popularJobsAction = (limit?: number) => {
     return async (dispatch: Dispatch<JobsAction>) => {
 
         const popularJobsResponse = await getJobs(limit);
-        console.log('action =>', popularJobsResponse);
         
         dispatch({
             type: JobsActions.SET_JOBS,

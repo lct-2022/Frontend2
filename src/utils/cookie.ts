@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { User, UserData } from '../types';
 import { DELETE_COOKIE_STR } from './consts';
 import { ROUTES } from './routes';
 
@@ -7,7 +8,7 @@ function parseCookie() {
     try {
         return qs.parse(cookie, {delimiter: ';'});
     } catch(err) {
-        throw new Error();
+        // pass
     }
 }
 
@@ -24,9 +25,6 @@ export function removeAuthToken(token?: string) {
     document.cookie = (token || '') + DELETE_COOKIE_STR;
 }
 
-export const redirectToLogin = () => {
+export function redirectToLogin() {
     window.location.pathname = ROUTES.LOGIN
 }
-
-
-

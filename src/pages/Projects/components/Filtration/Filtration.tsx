@@ -15,8 +15,6 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
 
         setProjects(prev => {
             const {min, max} = parseStringForDiapazon(value);
-            console.log(checked, min, max);
-            console.log(prev.map(el => el.project.id))
             
             return prev.map(project => checked && (project.project.id <= min || project.project.id >= max)
                 ? {...project, hidden: true} 
@@ -34,8 +32,6 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
             );
         });
     }, [setProjects]);
-
-    console.log(projects);
     
     return (
         <div className={cName()}>

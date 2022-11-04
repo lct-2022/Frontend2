@@ -36,7 +36,6 @@ const ProjectCard: Props = ({
     const currentUser = useSelector(currentUserSelector);
 
     const passToProject = useCallback(() => {
-        console.log('qwertyu');
         
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),
@@ -45,13 +44,9 @@ const ProjectCard: Props = ({
             // dispatch<any>(getProjectVacanciesAction(id)),
         ])
             .then(() => {
-                console.log('qwertyui');
-                
                 navigate(ROUTES.PROJECT);
             })
             .catch((err) => {
-                console.log(err);
-                
                 throw new Error();
             })
     }, [id]);
@@ -69,7 +64,6 @@ const ProjectCard: Props = ({
     }, [id]);
 
     const makeVote = useCallback(() => {
-        console.log('not ');
         if (!currentUser) {
             
             return;

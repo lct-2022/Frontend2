@@ -58,10 +58,7 @@ const JobCard: Props = ({title, description, id}) => {
             .then(() => {
                 navigate(ROUTES.JOB);
             })
-    }, [id]);
-
-    console.log(isApplication);
-    
+    }, [id]);    
 
     const btn = useMemo(() => {
         return (

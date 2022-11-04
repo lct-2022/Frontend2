@@ -19,7 +19,6 @@ export const getCurrentProjectAction = (id: number) => {
     return async (dispatch: Dispatch<SetProject>) => {
 
         const currentProjectResponse = await getCurrentProject(id);
-        console.log('====>', currentProjectResponse);
         
         dispatch({
             type: ActiveProjectActions.SET_PROJECT,

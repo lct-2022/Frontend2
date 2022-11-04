@@ -13,6 +13,7 @@ import { ROUTES } from '../../utils/routes';
 import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
 import { cn } from '@bem-react/classname';
+import { lsSaveAuthorizedUser } from '../../utils/storage';
 
 enum Labels {
     EMAIL = 'E-mail',
@@ -30,9 +31,7 @@ enum Placeholders {
 
 const cName = cn('login-form')
 
-export const LoginForm: Props = ({type = 'login'}) => {
-    console.log('LOG !!!!!!');
-    
+export const LoginForm: Props = ({type = 'login'}) => {    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -54,8 +53,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
     const changeLastname = (event: ChangeEvent<HTMLInputElement>) => {
         setLastname(event.target.value)
     }
-    console.log(type);
-    
+
     const btnName = type === 'login'
         ? 'Войти'
         : 'Зарегистрироваться'
@@ -74,7 +72,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                 setAuthToken(token);
                 return new Promise((res) => {
                     res(dispatch<any>(getAuthorizedUserAction(token)))
-                })
+                });
             })
             .then(() => {
                 setEmail('');
