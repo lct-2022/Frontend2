@@ -5,7 +5,7 @@ import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 
 import './Bio.css'
-const avatarIcon = require('../../../../assets/avatar.svg')
+const avatarIcon = require('../../../../assets/avatar.svg').default;
 
 const cName = cn('bio')
 
@@ -22,7 +22,6 @@ const Bio: Props = ({user, rating}) => {
             <div className={cName('data')}>
                
                 <img 
-                    // src={user['avatar_url']}
                     src={avatarIcon}
                     alt="Аватар" 
                     className={cName('avatar')}

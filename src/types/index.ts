@@ -83,7 +83,13 @@ export type Application = ICommonData & {
     status: ApplicationStatus;
 };
 
-export type Event = ICommonData & {}
+export type Event = ICommonData & {};
+
+export type Vote = ICommonData & {
+    user_id: number;
+    subject_type: 'project' | 'user';
+    subject_id: number;
+};
 
 export type CommonAction<T, P = never> = {
     type: T,

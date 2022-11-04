@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { ActiveProjectActions } from '../../store/types/activeProject';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../utils/routes';
+import { getAuthorizedUser } from '../../api/passport';
+import { getAuthorizedUserAction } from '../../store/actions/users';
 
 const cName = cn('project-create');
 
@@ -31,20 +33,24 @@ function ProjectCreate() {
 }
 
   const createProjectBtn = useCallback(() => {
-    createProject({
-      title,
-      description,
-      url,
-    }, getTokenFromCookies())
-      .then(project => {
-        getProjects();
-        dispatch({
-          type: ActiveProjectActions.SET_PROJECT,
-          payload: project,
-        });
-        navigate(`${ROUTES.PROJECT}/created`);
-      })
-  }, [title, description, url])
+      createProject({
+        title,
+        description,
+        url,
+      }, getTokenFromCookies())
+        .then(project => {
+            dispatch({
+              type: ActiveProjectActions.SET_PROJECT,
+              payload: project,
+            });
+            new Promise((res) => {
+              res(dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())))
+            })
+        })
+        .then(() => {
+          navigate(`${ROUTES.PROJECT}/created`);
+        })
+  }, [title, description, url]);
     
   return (
     <div className={cName()}>

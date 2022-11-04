@@ -10,7 +10,7 @@ import './Navbar.css';
 import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
-import { authorizeAction } from '../../store/actions/users';
+import { getAuthorizedUserAction } from '../../store/actions/users';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 

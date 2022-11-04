@@ -46,6 +46,7 @@ function ProjectPage() {
 
     return (
         <div className={cName()}>
+            {params.created && <h3>Проект создан!</h3>}
             <div className={cName('title_card')}>
                 <div className={cName('logo')}/>
                 <p className={cName('title')}>{title}</p>

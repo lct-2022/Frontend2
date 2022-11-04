@@ -1,14 +1,14 @@
 import { Dispatch } from "react";
-import { authorize, getProfiles } from "../../api/passport";
+import { getAuthorizedUser, getProfiles } from "../../api/passport";
 import { CommonAction, UserData } from "../../types";
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { ShownUserActions } from "../types/shownUser";
 import { UsersAction, UsersActions } from '../types/users';
 
-export const authorizeAction = (token?: string) => {
+export const getAuthorizedUserAction = (token?: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
-        const signupResponse = await authorize(token);
+        const signupResponse = await getAuthorizedUser(token);
         
         return signupResponse
             ? 

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { Props } from './types';
-import { authorize, login, signup } from '../../api/passport';
+import { getAuthorizedUser, login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
-import { authorizeAction } from '../../store/actions/users';
+import { getAuthorizedUserAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
@@ -73,7 +73,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
             .then(token => {
                 setAuthToken(token);
                 return new Promise((res) => {
-                    res(dispatch<any>(authorizeAction(token)))
+                    res(dispatch<any>(getAuthorizedUserAction(token)))
                 })
             })
             .then(() => {

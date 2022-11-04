@@ -1,7 +1,7 @@
 import { User, UserData } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
-export const authorize = async (token?: string): Promise< UserData> => {
+export const getAuthorizedUser = async (token?: string): Promise< UserData> => {
     return await request<UserData>({
         method: 'my_profile',
         host: RPCHosts.Passport,

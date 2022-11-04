@@ -16,8 +16,8 @@ import { getOwnJobs } from '../../utils/jobsAuthor';
 import { getJobs } from '../../api/platform';
 import { popularJobsAction } from '../../store/actions/jobs';
 import { UserData } from '../../types';
-import { authorizeAction } from '../../store/actions/users';
-import { authorize } from '../../api/passport';
+import { getAuthorizedUserAction } from '../../store/actions/users';
+import { getAuthorizedUser } from '../../api/passport';
 const TITLE = 'Профиль';
 
 const cName = cn('profile');

@@ -1,20 +1,14 @@
 import React, { memo, useCallback, useState} from 'react';
 import { cn } from '@bem-react/classname'
-import {useLocation, useParams} from 'react-router-dom'
-
-
+import {useLinkClickHandler, useLocation, useParams} from 'react-router-dom';
 import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
-import { getCurrentProject, getProjectTeam, getApplications, getTeamsAvailableForProject } from '../../../api/platform';
-import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../store/actions/projects';
+import { getApplications } from '../../../api/platform';
+import { getCurrentProjectAction, getProjectTeamAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getTokenFromCookies } from '../../../utils/cookie';
-import { availableTeamsAction } from '../../../store/actions/teams';
-import { currentUserSelector } from '../../../store/selectors/users';
-import { TeamCreate } from '../../../pages/User/components/Teams/Teams';
 import { getJobApplicationsAction } from '../../../store/actions/jobs';
 
 const cName = cn('project-card');
@@ -68,6 +62,10 @@ const ProjectCard: Props = ({
                 navigate(ROUTES.APPLICATIONS);
             })
     }, [id]);
+
+    const vote = useCallback(() => {
+
+    }, []);
     
     return (
         <div className={cName()}>
@@ -95,16 +93,18 @@ const ProjectCard: Props = ({
 
                 <b>{rating}</b>
 
+                <p style={{fontSize: '10px'}} onClick={vote}>Проголосовать</p>
+
                 {canSearchPeople &&
-                    <div>
+                    <>
                         <button onClick={searchPeople}>Найти человека в команду</button>
-                    </div>
+
+                        <button onClick={searchPeople}>Создать вакансию</button>
+                    </>
                 }
 
                 {canSeeApplications &&
-                    <div>
-                        <button onClick={passToAppllications}>Отклики</button>
-                    </div>
+                    <button onClick={passToAppllications}>Отклики</button>
                 }       
             </div>
         </div>

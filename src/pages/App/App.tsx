@@ -16,9 +16,9 @@ import './App.css';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
 import ErrorBoundary from '../../components/Error-Boundary';
-import { authorize } from '../../api/passport';
+import { getAuthorizedUser } from '../../api/passport';
 import { useDispatch } from 'react-redux';
-import { authorizeAction } from '../../store/actions/users';
+import { getAuthorizedUserAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
@@ -26,7 +26,7 @@ import { currentUserSelector, shownProfileSelector } from '../../store/selectors
 import { IBaseStore } from '../../store/types/store';
 import { antiadblock } from '../../utils/antiblock';
 
-antiadblock();
+// antiadblock();
 
 function App() {
   const store = useSelector((store: IBaseStore) => store);
@@ -35,7 +35,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
+      dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())); // token из кук
   }, []);
 
   return (  
