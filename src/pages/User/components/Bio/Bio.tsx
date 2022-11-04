@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
-import { prepareProfileItems } from '../../utils';
-import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 
-import './Bio.css'
+import './Bio.css';
+
 const avatarIcon = require('../../../../assets/avatar.svg').default;
 
 const cName = cn('bio')

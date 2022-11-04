@@ -1,0 +1,20 @@
+.drop {
+    position: absolute;
+    top: 92px;
+    right: 32px;
+
+    padding: 19px 28px;
+
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.drop-point {
+    cursor: pointer;
+}
+
+.drop-divider {
+    border: solid 1px #000;
+    margin: 6px 0;
+}
+

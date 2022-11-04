@@ -114,12 +114,12 @@ const ProjectCard: Props = ({
                 <p style={{fontSize: '10px', cursor: 'pointer'}} onClick={makeVote}>Проголосовать</p>
 
                 {canSearchPeople &&
-                    <>
-                        <button onClick={searchPeople}>Найти человека в команду</button>
-
-                        <button onClick={searchPeople}>Создать вакансию</button>
-                    </>
+                    <button onClick={searchPeople}>Найти человека в команду</button>
                 }
+
+                {currentUser?.admin &&
+                    <button>Создать вакансию</button>
+                }           
 
                 {canSeeApplications &&
                     <button onClick={passToAppllications}>Отклики</button>

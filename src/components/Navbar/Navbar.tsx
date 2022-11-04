@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
 import { LOGIN_POINT, NEW_PROJECT_POINT, MENU_POINTS } from './consts';
@@ -10,9 +10,10 @@ import './Navbar.css';
 import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
-import { getAuthorizedUserAction } from '../../store/actions/users';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
+import Drop from './components/Drop';
+const userIcon = require('../../assets/user-icon.svg').default;
 
 const cName = cn('navbar');
 
@@ -22,10 +23,21 @@ function Navbar() {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(currentUserSelector);
+
+    const [isDropped, setIsDropped] = useState(false);
+
     const isAuthorized = !!currentUser;
+
+    const drop = () => {
+        setIsDropped(prev => !prev);
+    }
 
     const passToHome = () => {
         navigate(ROUTES.INDEX);    
+    }
+
+    const passToMyProfile = () => {
+        navigate(ROUTES.USER);
     }
 
     const logout = () => {
@@ -80,9 +92,22 @@ function Navbar() {
                 onClick={passToHome}
             />
             
-            {currentUser && <button onClick={logout}>Logout</button>}
+            <div className={cName('right-block')}>
+                {menuPoints}
 
-            {menuPoints}
+                {currentUser && 
+                    <>
+                        <img 
+                            src={userIcon} 
+                            alt="В мой профиль"
+                            onClick={drop}
+                            className={cName('user-icon')}
+                        />
+
+                        {isDropped && <Drop passToMyProfile={passToMyProfile} logout={logout}/>}
+                    </>
+                }
+            </div>
         </div>
   )
 }
