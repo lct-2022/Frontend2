@@ -1,42 +1,48 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { currentProjectSelector } from '../../store/selectors/projects';
 
 import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
-import { applyToJob } from '../../api/platform';
+import { applyToJob, cancelApplication } from '../../api/platform';
 import { getTokenFromCookies, redirectToLogin } from '../../utils/cookie';
 import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
-const cName = cn('job-page')
+const cName = cn('vacancy-page')
 
 const APPLY = 'Откликнуться';
+const CANCEL = 'Отозвать';
 
 function JobPage() {
     const currentJob = useSelector(currentJobSelector);
-    const currentUser = useSelector(currentUserSelector)
+    const currentUser = useSelector(currentUserSelector);
+
+    const [isApplication, setIsApplication] = useState(false);
 
     const navigate = useNavigate();
 
     // TODO: remove possibilities of NULL in currentJob
-    const makeApply = useCallback(() => {
-        if (!currentUser) {
+    const applicationAction = useCallback(() => {       
+        if (!currentUserSelector || !currentJob) {
             redirectToLogin();
             return;
         }
-        console.log('here');
+
+        const applicationRequestor = !isApplication
+            ? applyToJob
+            : cancelApplication;
         
-        applyToJob(currentJob?.id ?? 0, getTokenFromCookies())
-            .then(() => {
-                navigate(ROUTES.APPLICATIONS);
+        applicationRequestor(id, getTokenFromCookies())
+            .then(result => {
+                setIsApplication(!!result)
             })
             .catch(() => {
-                throw new Error();
-            })
-    }, [currentJob?.id, currentUser]);
+                throw new Error()
+            });
+    }, [currentJob?.id, currentUser, isApplication]);
 
     const obligations = useMemo(() => {
         return (
@@ -60,22 +66,21 @@ function JobPage() {
 
     if (!currentJob) return null;
 
-    const {title, description, team, id} = currentJob;
-    const teamId = currentJob['team_id']
-    const createdAt = currentJob['created_at'];
-    
+    const {title, description, team, team_id, id} = currentJob;    
     // const currentJobProject = team.project
 
     return (
         <div className={cName()}>
             <div className={cName('title-block')}>
-                <div className={cName('vacancy-title_info')}>
-                    <p className={cName('vacancy-title')}>{title}</p>
-                    <p className={cName('vacancy-description')}>{description}</p>
+                <div className={cName('title_info')}>
+                    <p className={cName('title')}>{title}</p>
+                    <p className={cName('description')}>{description}</p>
                 </div>
 
                 <div className={cName('btn-container')}>
-                    <button onClick={makeApply}>{APPLY}</button>
+                    <button onClick={applicationAction} className={cName('apply-btn', {applied: isApplication})}>
+                        {isApplication ? CANCEL : APPLY}
+                    </button>
                 </div>
             </div>
 

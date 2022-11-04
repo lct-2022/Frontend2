@@ -19,29 +19,24 @@ const APPLY = 'Откликнуться';
 const CANCEL = 'Отозвать';
 
 const JobCard: Props = ({title, description, id}) => {
+    const currentUser = useSelector(currentUserSelector);
+    const [isApplication, setIsApplication] = useState(false);
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
-    const [isApplication, setIsApplication] = useState(false);
-
-    const currentUser = useSelector(currentUserSelector);
-
     useEffect(() => {
-        console.log(id);
-        
         getJobApplication(id, getTokenFromCookies())
             .then(data => {
                 setIsApplication(!!data);
             })
     }, [id])
     
-    const applicationAction = useCallback(() => {
-        
+    const applicationAction = useCallback(() => {       
         if (!currentUserSelector) {
             redirectToLogin();
             return;
         }
-        console.log('QWERT');
 
         const applicationRequestor = !isApplication
             ? applyToJob
