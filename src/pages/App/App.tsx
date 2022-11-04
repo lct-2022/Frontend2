@@ -16,11 +16,12 @@ import './App.css';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
 import ErrorBoundary from '../../components/Error-Boundary';
-import { checkAuthorization } from '../../api/passport';
+import { authorize } from '../../api/passport';
 import { useDispatch } from 'react-redux';
-import { isUserAuthorizedAction } from '../../store/actions/users';
+import { authorizeAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
+import Applications from '../Applications/Applications';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,36 +29,43 @@ function App() {
   const store = useSelector(store => store);
   console.log('STORE =>', store)
   
+  // useEffect(() => {
+  //     dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
+  // }, []);
+
   useEffect(() => {
-      dispatch<any>(isUserAuthorizedAction(getTokenFromCookies())); // token из кук
+    authorize({projects: true}, getTokenFromCookies());
   }, []);
 
-  return (
-    <BrowserRouter>
-      <Navbar/>
-      
-      <Routes>
-        <Route path={ROUTES.INDEX} element={<Home/>}/>
+  return (  
+    <ErrorBoundary>
+      <BrowserRouter>
+          <Navbar/>
+            <Routes>
+              <Route path={ROUTES.INDEX} element={<Home/>}/>
 
-        <Route path={ROUTES.SIGNUP} element={<LoginForm type="signup"/>}/>
-        <Route path={ROUTES.LOGIN} element={<LoginForm type="login"/>}/>
+              <Route path={ROUTES.SIGNUP} element={<LoginForm type="signup"/>}/>
+              <Route path={ROUTES.LOGIN} element={<LoginForm type="login"/>}/>
 
-        <Route path={ROUTES.USER} element={<Profile/>}/>
-        <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
-        <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
-        <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
-        <Route path={ROUTES.JOBS} element={<Jobs/>}/>
-        <Route path={ROUTES.JOB} element={<JobPage/>}/>
-        <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
-        <Route path={ROUTES.TEAMS} element={<Teams/>}/>
-        <Route path={ROUTES.APPLICATIONS} element={<Teams/>}/>
+              <Route path={ROUTES.USER} element={<Profile/>}/>
+              <Route path={ROUTES.USER_SEARCH} element={<Profile/>}/>
+              <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
+              <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
+              <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
+              <Route path={ROUTES.JOBS} element={<Jobs/>}/>
+              <Route path={ROUTES.JOB} element={<JobPage/>}/>
+              <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
+              <Route path={ROUTES.EXPERTS_SEARCH} element={<Experts/>}/>
 
-        <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
-        <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
-      </Routes>
+              <Route path={ROUTES.TEAMS} element={<Teams/>}/>
+              <Route path={ROUTES.APPLICATIONS} element={<Applications/>}/>
 
-      {/* <Footer/> */}
-    </BrowserRouter>
+              <Route path={ROUTES.SERVICES} element={<LoginForm/>}/>
+              <Route path={ROUTES.CHAT} element={<LoginForm/>}/>
+            </Routes>
+          {/* <Footer/> */}
+        </BrowserRouter>
+     </ErrorBoundary>
   );
 }
 

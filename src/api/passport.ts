@@ -1,18 +1,23 @@
 import { User, UserData } from "../types";
-import { IDataRPC, request, RPCHosts } from "../utils/api";
+import { request, RequestOptions, RPCHosts } from "../utils/api";
 
-export const checkAuthorization = async (token: string): Promise<IDataRPC<UserData>> => {
-    return await request({
+export const authorize = async (requestData: RequestOptions, token: string): Promise<UserData> => {
+    return await request<UserData>({
         method: 'my_profile',
         host: RPCHosts.Passport,
+        ...(requestData.projects && {
+            params: {
+                additional_fields: ['projects'],
+            }
+        }),
         settings: {
-            authToken: token || '',
+            authToken: token,
         }
     });
 }
 
-export const signup = async (email: string, password: string, fio: string = ''): Promise<IDataRPC<string>> => {
-    return await request({
+export const signup = async (email: string, password: string, fio: string = ''): Promise<string> => {
+    return await request<string>({
         method: 'signup',
         host: RPCHosts.Passport,
         params: {
@@ -23,8 +28,8 @@ export const signup = async (email: string, password: string, fio: string = ''):
     })
 };
 
-export const login = async (email: string, password: string): Promise<IDataRPC<string>> => {
-    return await request({
+export const login = async (email: string, password: string): Promise<string> => {
+    return await request<string>({
         method: 'login',
         host: RPCHosts.Passport,
         params: {
@@ -34,8 +39,9 @@ export const login = async (email: string, password: string): Promise<IDataRPC<s
     })
 };
 
-export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => {
-    return await request({
+// with rate !!!
+export const getProfiles = async (limit?: number): Promise<User[]> => {
+    return await request<User[]>({
         method: 'popular_profiles',
         host: RPCHosts.Passport,
         ...(limit && {
@@ -44,12 +50,15 @@ export const getProfiles = async (limit?: number): Promise<IDataRPC<User[]>> => 
     });
 };
 
-export const getUserProfile = async (userId: number): Promise<IDataRPC<UserData>> => {
+export const getUserProfile = async (requestData: RequestOptions, userId: number): Promise<UserData> => {
     return await request({
         method: 'get_profile',
         host: RPCHosts.Passport,
         params: {
             id: userId,
+            ...(requestData.projects && {
+                additional_fields: ['projects'],
+            })
         },
     });
 };

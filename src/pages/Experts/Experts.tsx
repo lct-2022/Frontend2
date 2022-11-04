@@ -9,36 +9,36 @@ import ExpertCard from '../../components/CommonBlocks/ExpertItem';
 import { getProfiles } from '../../api/passport';
 
 import './Experts.css';
+import { useParams } from 'react-router';
 
 const cName = cn('experts')
 
 function Experts() {
     const [allExperts, setAllExperts] = useState<User[]>([]);
+    const params = useParams();
 
     useEffect(() => {    
         getProfiles()
             .then(data => {
-                setAllExperts(data.result.map(el => ({...el, hidden: false})));
+                setAllExperts(data.map(el => ({...el, hidden: false})));
             })
     }, []);
-    console.log(allExperts)
     
     const expertsList = useMemo(() => {
         return (
             <div className={cName('list')}>
-                {allExperts.map(({user: {fio, job, id}, rating}) => (
-                    <div key={id}>
+                {allExperts.map(({user, rating}) => (
+                    <div key={user.id}>
                         <ExpertCard
-                            fio={fio}
-                            job={job}
-                            id={id}
+                            user={user}
                             rating={rating}
+                            canBeInvited={params.search}
                         />
                     </div>
                 ))}
             </div>
         )
-    }, [allExperts])
+    }, [allExperts, params.search])
 
     return (
         <div className={cName()}>

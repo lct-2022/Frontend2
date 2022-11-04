@@ -6,5 +6,5 @@
 .profile-down {
     display: flex;
     justify-content: space-between;
-    gap: 32px;
+    gap: 16px;
 }

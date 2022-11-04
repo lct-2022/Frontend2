@@ -24,6 +24,7 @@ export type User = {
         job: Nullable<string>,
         about: Nullable<string>,
         admin: Nullable<boolean>,
+        projects?: Project[],
     }
     rating: number;
     // для фильтрации
@@ -50,7 +51,7 @@ export type UserData = User['user'];
 export type Team = ICommonData & {
     title: string;
     'project_id': ProjectData['id'];
-    project: Project;
+    project: ProjectData;
 };
 
 export type ProjectTeamMember = ICommonData & {
@@ -69,6 +70,7 @@ export type Job = ICommonData & {
     hidden?: boolean;
 }
 // job -> team -> project -> project.author_id
+
 enum ApplicationStatus {
     APPLIED = 'applied',
     ACCEPTED = 'accepted',

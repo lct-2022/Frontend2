@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { getJobs, getProjectVacancies, getVacancy } from "../../api/platform";
+import { getJobs, getApplications, getVacancy } from "../../api/platform";
 import { Application } from "../../types";
 import { ActiveJobAction, ActiveJobActions } from "../types/activeJob";
 import { ApplicationsActions, SetApplications } from "../types/applications";
@@ -13,7 +13,7 @@ export const popularJobsAction = (limit?: number) => {
         
         dispatch({
             type: JobsActions.SET_JOBS,
-            payload: popularJobsResponse.result,
+            payload: popularJobsResponse,
         });
     }
 }
@@ -25,7 +25,7 @@ export const getCurrentVacancyAction = (jobId: number) => {
 
         dispatch({
             type: ActiveJobActions.SET_ACTIVE_JOB,
-            payload: currentVacancyResponse.result,
+            payload: currentVacancyResponse,
         });
     }
 }

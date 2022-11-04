@@ -1,20 +1,20 @@
 import { Dispatch } from "react";
-import { checkAuthorization, getProfiles } from "../../api/passport";
+import { authorize, getProfiles } from "../../api/passport";
 import { CommonAction, UserData } from "../../types";
 import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { ShownUserActions } from "../types/shownUser";
 import { UsersAction, UsersActions } from '../types/users';
 
-export const isUserAuthorizedAction = (token: string) => {
+export const authorizeAction = (token: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
-        const signupResponse = await checkAuthorization(token);
+        const signupResponse = await authorize({projects: true}, token);
         
-        return signupResponse.result
+        return signupResponse
             ? 
                 dispatch({
                     type: ActiveUserActions.SET_USER,
-                    payload: signupResponse.result,
+                    payload: signupResponse,
                 })
             : 
                 dispatch({
@@ -30,7 +30,7 @@ export const popularProfilesAction = (limit?: number) => {
 
         dispatch({
             type: UsersActions.SET_USERS,
-            payload: popularProfilesResponse.result,
+            payload: popularProfilesResponse,
         });
     }
 }
@@ -50,5 +50,4 @@ export const getUserProfileAction = (user: UserData): CommonAction<ShownUserActi
     //         payload: popularProfilesResponse.result,
     //     });
     // }
-    
 }

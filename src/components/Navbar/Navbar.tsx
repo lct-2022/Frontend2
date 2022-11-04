@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
 import { LOGIN_POINT, NEW_PROJECT_POINT, MENU_POINTS } from './consts';
-import { usersAvatarSelector, isUserAuthorizedSelector, currentUserSelector } from '../../store/selectors/users';
+import { usersAvatarSelector, currentUserSelector } from '../../store/selectors/users';
 import { useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {cn} from '@bem-react/classname';
@@ -10,7 +10,7 @@ import './Navbar.css';
 import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
-import { isUserAuthorizedAction } from '../../store/actions/users';
+import { authorizeAction } from '../../store/actions/users';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 

@@ -10,7 +10,7 @@ export const availableTeamsAction = (projectId: number, token: string) => {
 
         dispatch({
             type: TeamsActions.SET_TEAMS,
-            payload: availableTeamsResponse?.result || [],
+            payload: availableTeamsResponse || [],
         });
     }
 }

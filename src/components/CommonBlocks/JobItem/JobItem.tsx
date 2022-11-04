@@ -6,7 +6,7 @@ import { cn } from '@bem-react/classname'
 import './JobItem.css';
 
 import {Props} from './types';
-import { applyToJob, getJobApplication, getProjectVacancies, getVacancy } from '../../../api/platform';
+import { applyToJob, getJobApplication, getApplications, getVacancy } from '../../../api/platform';
 import { getTokenFromCookies, redirectToLogin } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
@@ -31,7 +31,7 @@ const JobCard: Props = ({title, description, id}) => {
         
         getJobApplication(id, getTokenFromCookies())
             .then(data => {
-                setIsApplication(!!data.result);
+                setIsApplication(!!data);
             })
     }, [id])
     
@@ -43,7 +43,7 @@ const JobCard: Props = ({title, description, id}) => {
         
         applyToJob(id, getTokenFromCookies())
             .then(result => {
-                setIsApplication(!!result.result)
+                setIsApplication(!!result)
             })
             .catch(() => {
                 throw new Error()
@@ -51,7 +51,9 @@ const JobCard: Props = ({title, description, id}) => {
     }, [id, currentUser]);
 
     const passToVacancy = useCallback(() => {
-        dispatch<any>(getCurrentVacancyAction(id))
+
+            dispatch<any>(getCurrentVacancyAction(id))
+    
             .then(() => {
                 navigate(ROUTES.JOB);
             })

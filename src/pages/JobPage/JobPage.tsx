@@ -27,6 +27,8 @@ function JobPage() {
             redirectToLogin();
             return;
         }
+        console.log('here');
+        
         applyToJob(currentJob?.id ?? 0, getTokenFromCookies())
             .then(() => {
                 navigate(ROUTES.APPLICATIONS);
@@ -66,13 +68,13 @@ function JobPage() {
 
     return (
         <div className={cName()}>
-            <div className={cName('title_block')}>
-                <div className={cName('vacancy_title_info')}>
-                    <p className={cName('vacancy_title')}>{title}</p>
-                    <p className={cName('vacancy_description')}>{description}</p>
+            <div className={cName('title-block')}>
+                <div className={cName('vacancy-title_info')}>
+                    <p className={cName('vacancy-title')}>{title}</p>
+                    <p className={cName('vacancy-description')}>{description}</p>
                 </div>
 
-                <div className={cName('btn_container')}>
+                <div className={cName('btn-container')}>
                     <button onClick={makeApply}>{APPLY}</button>
                 </div>
             </div>
@@ -81,12 +83,12 @@ function JobPage() {
                 
             </div>
 
-            <div className={cName('requirements_block')}>
+            <div className={cName('requirements-block')}>
                 <div>Обязанности:</div>
                 {obligations}
             </div>
 
-            <div className={cName('requirements_block')}>
+            <div className={cName('requirements-block')}>
                 <div>Требования:</div>
                 {requirements}
             </div>

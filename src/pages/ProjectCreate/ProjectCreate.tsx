@@ -2,6 +2,10 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { createProject } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
+import { useDispatch } from 'react-redux';
+import { ActiveProjectActions } from '../../store/types/activeProject';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '../../utils/routes';
 
 const cName = cn('project-create');
 
@@ -12,6 +16,10 @@ function ProjectCreate() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
 
   const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -28,7 +36,14 @@ function ProjectCreate() {
       title,
       description,
       url,
-    }, getTokenFromCookies());
+    }, getTokenFromCookies())
+      .then(project => {
+        dispatch({
+          type: ActiveProjectActions.SET_PROJECT,
+          payload: project,
+        });
+        navigate(ROUTES.PROJECT);
+      })
   }, [title, description, url])
     
   return (

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 import { Props } from './types';
-import { checkAuthorization, login, signup } from '../../api/passport';
+import { authorize, login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
-import { isUserAuthorizedAction } from '../../store/actions/users';
+import { authorizeAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
@@ -47,9 +47,9 @@ export const LoginForm: Props = ({type = 'login'}) => {
             : signup
 
         requestor(email, password)
-            .then(({result}) => {
-                setAuthToken(result);
-                return checkAuthorization(result)
+            .then(token => {
+                setAuthToken(token);
+                return authorize({projects: true}, token)
             })
             .then(result => {
                 dispatch({
@@ -64,11 +64,10 @@ export const LoginForm: Props = ({type = 'login'}) => {
                 setEmail('');
                 setPassword('');
                 navigate(ROUTES.USER);
-                
             })
-            .catch(() => {
-                throw new Error();
-            })
+            // .catch(() => {
+            //     throw new Error();
+            // })
     }, [email, password, type]);
 
     return (

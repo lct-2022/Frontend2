@@ -1,5 +1,5 @@
 import { Application, Job, Project, ProjectData, ProjectTeamMember, Team, User } from "../types";
-import { IDataRPC, request, RPCHosts } from "../utils/api";
+import { request, RPCHosts } from "../utils/api";
 
 export const getJobs = async (limit?: number) => {
     return await request<Job[]>({
@@ -16,7 +16,7 @@ export const getJobs = async (limit?: number) => {
     })
 };
 
-export const getProjects = async (limit?: number): Promise<IDataRPC<Project[]>> => {
+export const getProjects = async (limit?: number): Promise<Project[]> => {
     return await request<Project[]>({
         method: 'popular_projects',
         host: RPCHosts.Platform,
@@ -26,7 +26,7 @@ export const getProjects = async (limit?: number): Promise<IDataRPC<Project[]>> 
     });
 };
 
-export const getCurrentProject = async (id: number): Promise<IDataRPC<ProjectData>> => {
+export const getCurrentProject = async (id: number): Promise<ProjectData> => {
     return await request<ProjectData>({
         method: 'get_project',
         host: RPCHosts.Platform,
@@ -37,7 +37,7 @@ export const getCurrentProject = async (id: number): Promise<IDataRPC<ProjectDat
 };
 
 // get_project_team
-export const getProjectTeam = async (projectId: number): Promise<IDataRPC<ProjectTeamMember[]>> => {
+export const getProjectTeam = async (projectId: number): Promise<ProjectTeamMember[]> => {
     return await request<ProjectTeamMember[]>({
         method: 'get_team_members',
         host: RPCHosts.Platform,
@@ -48,7 +48,7 @@ export const getProjectTeam = async (projectId: number): Promise<IDataRPC<Projec
 };
 
 // get_project_vacancies
-export const getProjectVacancies = async (projectId: number): Promise<IDataRPC<Application[]>> => {
+export const getApplications = async (projectId: number): Promise<Application[]> => {
     return await request<Application[]>({
         method: 'get_job_applications',
         host: RPCHosts.Platform,
@@ -59,7 +59,7 @@ export const getProjectVacancies = async (projectId: number): Promise<IDataRPC<A
 };
 
 //apply_to_job
-export const applyToJob = async (jobId: number, token: string): Promise<IDataRPC<Application>> => {
+export const applyToJob = async (jobId: number, token?: string): Promise<Application> => {
     return await request({
         method: 'apply_to_job',
         host: RPCHosts.Platform,
@@ -77,7 +77,7 @@ export const applyToJob = async (jobId: number, token: string): Promise<IDataRPC
 //decline_application
 
 // get_job
-export const getVacancy = async (jobId: number): Promise<IDataRPC<Job>> => {
+export const getVacancy = async (jobId: number): Promise<Job> => {
     return await request({
         method: 'get_job',
         host: RPCHosts.Platform,
@@ -87,7 +87,7 @@ export const getVacancy = async (jobId: number): Promise<IDataRPC<Job>> => {
     });
 };
 
-export const getJobApplication = async (jobId: number, token: string): Promise<IDataRPC<Application>> => {
+export const getJobApplication = async (jobId: number, token?: string): Promise<Application> => {
     return await request({
         method: 'get_job_application',
         host: RPCHosts.Platform,
@@ -107,7 +107,7 @@ interface createProjectArgs {
     url?: string;
 }
 
-export const createProject = async (projectParams: createProjectArgs, token: string): Promise<IDataRPC<ProjectData>> => {
+export const createProject = async (projectParams: createProjectArgs, token?: string): Promise<ProjectData> => {
     return await request({
         method: 'create_project',
         host: RPCHosts.Platform,
@@ -119,7 +119,7 @@ export const createProject = async (projectParams: createProjectArgs, token: str
 };
 
 // create_team
-export const createTeam = async (projectId: number, title: string, token: string): Promise<IDataRPC<Team>> => {
+export const createTeam = async (projectId: number, title: string, token?: string): Promise<Team> => {
     return await request({
         method: 'create_team',
         host: RPCHosts.Platform,
@@ -134,7 +134,7 @@ export const createTeam = async (projectId: number, title: string, token: string
 };
 
 //get_project_teams
-export const getTeamsAvailableForProject = async (projectId: number, token: string): Promise<IDataRPC<Team[] | null>> => {
+export const getTeamsAvailableForProject = async (projectId: number, token?: string): Promise<Team[] | null> => {
     return await request({
         method: 'get_project_teams',
         host: RPCHosts.Platform,
@@ -148,7 +148,7 @@ export const getTeamsAvailableForProject = async (projectId: number, token: stri
 };
 
 //get_project_teams
-export const getTeamJobs = async (projectId: number, token: string): Promise<IDataRPC<Team[] | null>> => {
+export const getTeamJobs = async (projectId: number, token?: string): Promise<Team[] | null> => {
     return await request({
         method: 'get_project_teams',
         host: RPCHosts.Platform,

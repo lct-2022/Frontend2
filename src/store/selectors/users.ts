@@ -2,14 +2,12 @@ import { createSelector } from "reselect";
 import { IBaseStore } from "../types/store";
 import { DEFAULT_AVATAR } from "../../utils/consts";
 
-export const isUserAuthorizedSelector = createSelector(
-    (store: IBaseStore) => store.activeUser,
-    user => !!user,
-)
-
 export const currentUserSelector = createSelector(
     (store: IBaseStore) => store.activeUser,
-    user => user,
+    user => {
+        return user
+        // return {...user, admin: user?.id === 26 ? true : user?.admin}
+    },
 )
 
 export const usersAvatarSelector = createSelector(

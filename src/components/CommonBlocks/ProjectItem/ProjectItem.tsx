@@ -1,13 +1,13 @@
 import React, { memo, useCallback, useState} from 'react';
 import { cn } from '@bem-react/classname'
-import {useLocation} from 'react-router-dom'
+import {useLocation, useParams} from 'react-router-dom'
 
 
 import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
-import { getCurrentProject, getProjectTeam, getProjectVacancies, getTeamsAvailableForProject } from '../../../api/platform';
+import { getCurrentProject, getProjectTeam, getApplications, getTeamsAvailableForProject } from '../../../api/platform';
 import { getCurrentProjectAction, getProjectTeamAction, getProjectVacanciesAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,43 +28,42 @@ const ProjectCard: Props = ({
     url,
     rating,
     id,
-    author_id,
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-
-    const currentUser = useSelector(currentUserSelector)
-
-    const isFromProfile = location.pathname === ROUTES.USER;
-    const canSearchTeam = isFromProfile && (currentUser?.admin || currentUser?.id === author_id);
+    
+    const canSearchPeople = location.pathname === ROUTES.USER;
 
     const passToProject = useCallback(() => {
+        console.log('qwertyu');
+        
         Promise.all([
             dispatch<any>(getCurrentProjectAction(id)),
             // TODO - присылать бы это в ручке списка проектов
             dispatch<any>(getProjectTeamAction(id)),
-            dispatch<any>(getProjectVacanciesAction(id)),
+            // dispatch<any>(getProjectVacanciesAction(id)),
         ])
             .then(() => {
+                console.log('qwertyui');
+                
                 navigate(ROUTES.PROJECT);
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
+                
                 throw new Error();
             })
     }, [id]);
 
-    const getTeamsForProject = useCallback(() => {
-        dispatch<any>(availableTeamsAction(id, getTokenFromCookies()))
-            .then(() => {
-                navigate(ROUTES.TEAMS)
-            });
-    }, [id]);
+    const searchPeople = () => {
+        navigate(`${ROUTES.EXPERTS}/1`);
+    }
 
     const passToAppllications = useCallback(() => {
-        getProjectVacancies(id)
+        getApplications(id)
             .then(data => {
-                dispatch<any>(getJobApplicationsAction(data.result))
+                dispatch<any>(getJobApplicationsAction(data))
             })
     }, [id]);
     
@@ -81,7 +80,6 @@ const ProjectCard: Props = ({
                     <p className={cName('text', {description: true})}>
                         {description}
                     </p>
-
                 </div>
 
                 <div className={cName('details')}>
@@ -95,12 +93,10 @@ const ProjectCard: Props = ({
 
                 <b>{rating}</b>
 
-                {canSearchTeam &&
+                {canSearchPeople &&
                     <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
-                        <button onClick={getTeamsForProject}>Найти команду для проекта</button>
-                        <button onClick={passToAppllications}>Отклики</button>
+                        <button onClick={searchPeople}>Найти человека в команду</button>
                     </div>
-
                 }
             </div>
         </div>

@@ -13,28 +13,27 @@ import Filtration from './components/Filtration';
 import './Projects.css';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../store/selectors/users';
+import { useSearchParams } from 'react-router-dom';
 
 const cName = cn('projects-page')
 
 interface Props {
-    own?: boolean;
+    fromProfile?: boolean;
 }
 
-const Projects: FC<Props> = ({own}) => {
+const Projects: FC<Props> = ({fromProfile}) => {
     const currentUser = useSelector(currentUserSelector)
 
     const [allProjects, setAllProjects] = useState<Project[]>([]);
-    
+
     useEffect(() => {
+        // if (currentUser && fromProfile) {
+        //     setAllProjects(currentUser.projects || []);
+        //     return;
+        // }
         getProjects()
             .then(data => {
-                if (currentUser && own) {
-                    setAllProjects(data.result?.map(project => ({...project, hidden: false}))
-                        // .filter(el => el.project['author_id'] === currentUser?.id) || []
-                    )
-                } else {
-                    setAllProjects(data.result.map(project => ({...project, hidden: false})))
-                }  
+                setAllProjects(data?.map(project => ({...project, hidden: false})))
             })
     }, []);
 
@@ -49,7 +48,7 @@ const Projects: FC<Props> = ({own}) => {
                         <ProjectsList projects={allProjects}/>
                     </div>
 
-                    {!own && <div className={cName('filtration')}>
+                    {!fromProfile && <div className={cName('filtration')}>
                         <Filtration 
                             projects={allProjects}
                             setProjects={setAllProjects}

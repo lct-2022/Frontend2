@@ -1,8 +1,7 @@
 import { Dispatch } from "react";
-import { getCurrentProject, getProjects, getProjectTeam, getProjectVacancies } from '../../api/platform';
+import { getApplications, getCurrentProject, getProjects, getProjectTeam } from '../../api/platform';
 import { ActiveProjectActions, SetProject, SetTeam, SetVacancies } from "../types/activeProject";
-import { ApplicationsActions, SetApplications } from "../types/applications";
-import { ProjectsAction, ProjectsActions, SetProjects } from '../types/projects';
+import { ProjectsActions, SetProjects } from '../types/projects';
 
 export const popularProjectsAction = (limit?: number) => {
     return async (dispatch: Dispatch<SetProjects>) => {
@@ -11,7 +10,7 @@ export const popularProjectsAction = (limit?: number) => {
 
         dispatch({
             type: ProjectsActions.SET_PROJECTS,
-            payload: popularProjectsResponse.result,
+            payload: popularProjectsResponse,
         });
     }
 }
@@ -20,11 +19,11 @@ export const getCurrentProjectAction = (id: number) => {
     return async (dispatch: Dispatch<SetProject>) => {
 
         const currentProjectResponse = await getCurrentProject(id);
-        console.log(currentProjectResponse.result);
+        console.log('====>', currentProjectResponse);
         
         dispatch({
             type: ActiveProjectActions.SET_PROJECT,
-            payload: currentProjectResponse.result,
+            payload: currentProjectResponse,
         });
     }
 }
@@ -36,7 +35,7 @@ export const getProjectTeamAction = (id: number) => {
         
         dispatch({
             type: ActiveProjectActions.SET_TEAM,
-            payload: projectTeamResponse.result,
+            payload: projectTeamResponse,
         });
     }
 }
@@ -44,11 +43,11 @@ export const getProjectTeamAction = (id: number) => {
 export const getProjectVacanciesAction = (id: number) => {
     return async (dispatch: Dispatch<SetVacancies>) => {
 
-        const projectVacanciesResponse = await getProjectVacancies(id);
+        const projectVacanciesResponse = await getApplications(id);
         
         dispatch({
             type: ActiveProjectActions.SET_VACANCIES,
-            payload: projectVacanciesResponse.result.map(el => el.job),
+            payload: projectVacanciesResponse.map(el => el.job),
         });
     }
 }

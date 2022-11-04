@@ -18,7 +18,7 @@ function Jobs() {
     useEffect(() => {    
         getJobs()
             .then(data => {
-                setAllJobs(data.result.filter(el => el.open));
+                setAllJobs(data.filter(el => el.open));
             })
     }, []);
 

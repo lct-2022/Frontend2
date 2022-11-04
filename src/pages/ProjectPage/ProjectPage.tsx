@@ -11,6 +11,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
+import Button from '../../components/Button'
+
 const cName = cn('project-page')
 
 function ProjectPage() {
@@ -20,7 +22,7 @@ function ProjectPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const canSearchTeam = currentUser?.admin && currentProject?.project['author_id'] === currentUser?.id;
+    const canSearchTeam = currentProject?.project['author_id'] === currentUser?.id;
     
     const {project, team, openVacancies, rating} = currentProject ?? {}
     const {title, description, url, contests} = project ?? {}

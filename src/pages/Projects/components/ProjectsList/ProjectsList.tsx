@@ -47,7 +47,7 @@ const ProjectsList: Props = ({projects}) => {
 
     return (
         <div>
-            <h1>{isFromProfile ? 'Проекты, в которых вы учатсвуете' : 'Проекты'}</h1>
+            <h1>{isFromProfile ? 'Ваши проекты:' : 'Проекты'}</h1>
 
             {projectsList}
         </div>
