@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import React, { memo, useEffect } from 'react';
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom';
 
 import LoginForm from '../Login';
 import Profile from '../User';
@@ -22,13 +22,14 @@ import { authorizeAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
+import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
+import { IBaseStore } from '../../store/types/store';
 
 function App() {
-  const dispatch = useDispatch();
-  console.log('render');
-  const store = useSelector(store => store);
-  console.log('STORE =>', store)
+  const store = useSelector((store: IBaseStore) => store);
+  console.log('STORE FIO !!!!!!!!!!!!! =>', store.activeUser?.fio);
   
+  const dispatch = useDispatch();
   // useEffect(() => {
   //     dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
   // }, []);

@@ -9,7 +9,7 @@ export const shownUserReducer = (store: ShownUserState = initialState, action: S
     const {type, payload} = action;
 
     switch (type) {
-        case ShownUserActions.SET_USER:
+        case ShownUserActions.SET_USER_SHOWN:
             return payload;
     
         default:

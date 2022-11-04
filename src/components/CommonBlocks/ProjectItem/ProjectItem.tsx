@@ -57,7 +57,7 @@ const ProjectCard: Props = ({
     }, [id]);
 
     const searchPeople = () => {
-        navigate(`${ROUTES.EXPERTS}/1`);
+        navigate(`${ROUTES.EXPERTS}/search`);
     }
 
     const passToAppllications = useCallback(() => {

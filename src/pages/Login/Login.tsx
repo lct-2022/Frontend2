@@ -16,6 +16,15 @@ import { ShownUserActions } from '../../store/types/shownUser';
 enum Labels {
     EMAIL = 'Email',
     PASSWORD = 'Password',
+    NAME = 'Name',
+    LASTNAME = 'Lastname',
+}
+
+enum Placeholders {
+    EMAIL = 'Ваш e-mail',
+    PASSWORD = 'Ваш пароль',
+    NAME = 'Ваше имя',
+    LASTNAME = 'Ваша фамилия',
 }
 
 export const LoginForm: Props = ({type = 'login'}) => {
@@ -25,12 +34,20 @@ export const LoginForm: Props = ({type = 'login'}) => {
     //TODO Formik!!!
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
 
     const changeMail = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value)
     }
     const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value)
+    }
+    const changeName = (event: ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value)
+    }
+    const changeLastname = (event: ChangeEvent<HTMLInputElement>) => {
+        setLastname(event.target.value)
     }
 
     const btnName = type === 'login'
@@ -57,7 +74,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                     payload: result,
                 });
                 dispatch({
-                    type: ShownUserActions.SET_USER,
+                    type: ShownUserActions.SET_USER_SHOWN,
                     payload: result,
                 });
                 // Remove ???
@@ -72,18 +89,34 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
     return (
         <div className="login">
-            <div className="login-form">
+            {/* <div className="login-form"> */}
 
-                <div className="login-form-wrapper">
+                {/* <div className="login-form-wrapper"> */}
 
                     <p className="login-form-title">{title}</p>
+
+                    <div className="login-form-input">
+                        <label htmlFor="login-form-name" className="login-label">
+                            {Labels.NAME}
+                        </label>
+
+                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeMail}/>
+                    </div>
+
+                    <div className="login-form-input">
+                        <label htmlFor="login-form-lastname" className="login-label">
+                            {Labels.LASTNAME}
+                        </label>
+
+                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeMail}/>
+                    </div>
 
                     <div className="login-form-input">
                         <label htmlFor="login-form-mail" className="login-label">
                             {Labels.EMAIL}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" value={email} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
                     </div>
 
                     <div className="login-form-input">
@@ -91,7 +124,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                             {Labels.PASSWORD}
                         </label>
 
-                        <input className="login-form-password login-input" type="password" value={password} onChange={changePassword}/>
+                        <input className="login-form-password login-input" type="password" placeholder={Placeholders.PASSWORD} value={password} onChange={changePassword}/>
                     </div>
 
                     <button
@@ -104,9 +137,9 @@ export const LoginForm: Props = ({type = 'login'}) => {
                     <div id="divider"/>
 
                     <RedirectLoginBlock type={type}/>
-                </div>
+                {/* </div> */}
 
-            </div>
+            {/* </div> */}
         </div>
     );
 }

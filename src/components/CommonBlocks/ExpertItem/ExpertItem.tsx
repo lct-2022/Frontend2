@@ -27,7 +27,7 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
         getUserProfile({projects: true}, id)
             .then(() => {
                 dispatch(getUserProfileAction(user));
-                navigate(`${ROUTES.USER}/1`);
+                navigate(`${ROUTES.USER}/search`);
             })
     }, [id])
 

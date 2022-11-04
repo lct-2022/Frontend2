@@ -8,9 +8,9 @@ export type UserOption =
     | 'application';
 
 export const OPTIONS: Partial<Record<UserOption, string>> = {
-    about: 'Биография',
-    resume: 'Резюме',
     projects: 'Идеи',
+    about: 'Об эксперте',
+    resume: 'Резюме',
 }
 
 // export const ADMIN_OPTION: Partial<Record<UserOption, string>> = {

@@ -35,9 +35,9 @@ export const popularProfilesAction = (limit?: number) => {
     }
 }
 
-export const getUserProfileAction = (user: UserData): CommonAction<ShownUserActions.SET_USER, UserData> => {
+export const getUserProfileAction = (user: UserData): CommonAction<ShownUserActions.SET_USER_SHOWN, UserData> => {
     return {
-        type: ShownUserActions.SET_USER,
+        type: ShownUserActions.SET_USER_SHOWN,
         payload: user,
     }
 
