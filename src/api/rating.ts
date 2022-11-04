@@ -1,8 +1,16 @@
 import { Vote } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
+interface voteArgs {
+    method: 'vote' | 'get_vote',
+    subjectType: 'project' | 'user',
+    subjectId: number;
+    token: string;
+
+}
 // rating
-export const vote = async (method: 'vote' | 'get_vote', subjectType: 'project' | 'user', subjectId: number, token: string): Promise<Vote> => {
+export const vote = async (voteArgs: voteArgs): Promise<Vote> => {
+    const {method, subjectId, subjectType, token} = voteArgs;
     return await request({
         method,
         host: RPCHosts.Ratings,

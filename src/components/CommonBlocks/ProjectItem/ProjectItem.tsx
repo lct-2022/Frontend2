@@ -5,11 +5,14 @@ import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
-import { getApplications } from '../../../api/platform';
+import { getApplications, getCurrentProject } from '../../../api/platform';
 import { getCurrentProjectAction, getProjectTeamAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getJobApplicationsAction } from '../../../store/actions/jobs';
+import { vote } from '../../../api/rating';
+import { getTokenFromCookies } from '../../../utils/cookie';
+import { currentUserSelector } from '../../../store/selectors/users';
 
 const cName = cn('project-card');
 
@@ -29,6 +32,8 @@ const ProjectCard: Props = ({
     
     const canSearchPeople = location.pathname === ROUTES.USER;
     const canSeeApplications = location.pathname === ROUTES.USER;
+
+    const currentUser = useSelector(currentUserSelector);
 
     const passToProject = useCallback(() => {
         console.log('qwertyu');
@@ -63,9 +68,22 @@ const ProjectCard: Props = ({
             })
     }, [id]);
 
-    const vote = useCallback(() => {
-
-    }, []);
+    const makeVote = useCallback(() => {
+        console.log('not ');
+        if (!currentUser) {
+            
+            return;
+        }
+        vote({
+            method: 'vote',
+            subjectType: 'project',
+            subjectId: id,
+            token: getTokenFromCookies()
+        })
+            .then(() => {
+                getCurrentProject(id);
+            })
+    }, [id, currentUser]);
     
     return (
         <div className={cName()}>
@@ -93,7 +111,7 @@ const ProjectCard: Props = ({
 
                 <b>{rating}</b>
 
-                <p style={{fontSize: '10px'}} onClick={vote}>Проголосовать</p>
+                <p style={{fontSize: '10px', cursor: 'pointer'}} onClick={makeVote}>Проголосовать</p>
 
                 {canSearchPeople &&
                     <>
