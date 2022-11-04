@@ -71,7 +71,7 @@ export type Job = ICommonData & {
 }
 // job -> team -> project -> project.author_id
 
-enum ApplicationStatus {
+export enum ApplicationStatus {
     APPLIED = 'applied',
     ACCEPTED = 'accepted',
     DECLINED = 'declined',

@@ -27,7 +27,7 @@ import { IBaseStore } from '../../store/types/store';
 
 function App() {
   const store = useSelector((store: IBaseStore) => store);
-  console.log('STORE FIO !!!!!!!!!!!!! =>', store.activeUser?.fio);
+  console.log('STORE =>', store);
   
   const dispatch = useDispatch();
   // useEffect(() => {

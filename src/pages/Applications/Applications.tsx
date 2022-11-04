@@ -1,24 +1,48 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { applicationsSelector } from '../../store/selectors/applications';
 import Application from '../../components/CommonBlocks/Application/Application';
+import { getJobs } from '../../api/platform';
+import { getOwnJobs } from '../../utils/jobsAuthor';
+import { currentUserSelector } from '../../store/selectors/users';
+import { ApplicationStatus, Job } from '../../types';
 const cName = cn('applications');
 
-type Props = {
+const APPLICATIONS = [
+    {
+        user_id: 7,
+        message: 'Отклик',
+        status: ApplicationStatus.ACCEPTED,
+        job: {
+            title: 'Fresh',
+        }
+    },
+    {
+        user_id: 6,
+        message: 'Отклик',
+        status: ApplicationStatus.ACCEPTED,
+        job: {
+            title: 'Argument',
+        }
+    }
+]
 
-}
 
 function Applications() {
-    const applications = useSelector(applicationsSelector);
-
+    const applications = APPLICATIONS
+    useSelector(applicationsSelector);
+    console.log('applications ====>', applications);
+    
     return (
         <div className={cName()}>
             {/* <h3></h3> */}
 
-            {/* {applications.map(appl => <Application/>)} */}
+            {applications.map(application => <Application application={application}/>)}
+
+            <button>Назад к профилю</button>
 
         </div>
     )

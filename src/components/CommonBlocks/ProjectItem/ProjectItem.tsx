@@ -34,6 +34,7 @@ const ProjectCard: Props = ({
     const location = useLocation();
     
     const canSearchPeople = location.pathname === ROUTES.USER;
+    const canSeeApplications = location.pathname === ROUTES.USER;
 
     const passToProject = useCallback(() => {
         console.log('qwertyu');
@@ -63,7 +64,8 @@ const ProjectCard: Props = ({
     const passToAppllications = useCallback(() => {
         getApplications(id)
             .then(data => {
-                dispatch<any>(getJobApplicationsAction(data))
+                dispatch<any>(getJobApplicationsAction(data));
+                navigate(ROUTES.APPLICATIONS);
             })
     }, [id]);
     
@@ -94,10 +96,16 @@ const ProjectCard: Props = ({
                 <b>{rating}</b>
 
                 {canSearchPeople &&
-                    <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                    <div>
                         <button onClick={searchPeople}>Найти человека в команду</button>
                     </div>
                 }
+
+                {canSeeApplications &&
+                    <div>
+                        <button onClick={passToAppllications}>Отклики</button>
+                    </div>
+                }       
             </div>
         </div>
     )

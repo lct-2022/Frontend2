@@ -9,38 +9,40 @@ import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../../store/selectors/users';
 import { DEFAULT_AVATAR } from '../../../utils/consts';
-import './Application.css';
 import { getUserProfile } from '../../../api/passport';
 import { Application, Nullable, User, UserData } from '../../../types';
 import { getUserProfileAction } from '../../../store/actions/users';
+import './Application.css';
 
 const cName = cn('application');
 
 type Props = {
-    application: Application;
+    application: Application | any;
     user?: User;
 }
 
-const Application: FC<Props> = ({application}) => {
+const ApplicationComp: FC<Props> = ({application}) => {
     const [appliedUser, setAppliedUser] = useState<Nullable<UserData>>(null);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const {user_id, job, message, status} = application;
+
     useEffect(() => {
-        getUserProfile({projects: true}, 69)
+        getUserProfile({projects: true}, user_id)
             .then(data => {
                 setAppliedUser(data); 
             })
     }, []);
 
-    const passToProfile = useCallback(() => {
+    const passToProfileFromApplication = useCallback(() => {
         if (!appliedUser) {
             return;
         }
 
         dispatch(getUserProfileAction(appliedUser));
-        navigate(ROUTES.USER);
+        navigate(`${ROUTES.USER}/search`);
     }, [appliedUser]);
 
     if (!appliedUser) {
@@ -50,21 +52,23 @@ const Application: FC<Props> = ({application}) => {
     return (
         <div className={cName()}>
             <div className={cName('left-block')}>
-                <p>Отклик на вакансию: ВАКАНСИЯ</p>
+                <p>Отклик на вакансию: {job.title}</p>
 
                 <div className={cName('applied-user')}>
                     <span>
-                        <p>:профиль:</p>
+                        <p>профиль:</p>
                     </span>
 
                     <span>
-                        <h1 onClick={passToProfile}>{appliedUser.fio}</h1>
+                        <h1 onClick={passToProfileFromApplication}>{appliedUser.fio}</h1>
                     </span>
                 </div>
+
+                <p>{message}</p>
             </div>
 
             <div className={cName('btns')}>
-                <button>Согласиться</button>
+                <button>Принять</button>
 
                 <button>Отклонить</button>
                 
@@ -74,4 +78,4 @@ const Application: FC<Props> = ({application}) => {
     )
 }
 
-export default memo(Application);
+export default memo(ApplicationComp);

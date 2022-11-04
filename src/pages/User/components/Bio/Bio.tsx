@@ -5,6 +5,7 @@ import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 
 import './Bio.css'
+const avatarIcon = require('../../../../assets/avatar.svg').default
 
 const cName = cn('bio')
 
@@ -14,13 +15,18 @@ const Bio: Props = ({user, rating}) => {
     const editModeToggle = () => {
         setEditMode(prev => !prev);
     }
-    console.log(user);
+    console.log(avatarIcon);
     
     return (
         <div className={cName()}>
             <div className={cName('data')}>
                
-                <img src={user['avatar_url']} alt="Аватар" className={cName('avatar')}/>
+                <img 
+                    // src={user['avatar_url']}
+                    src={avatarIcon}
+                    alt="Аватар" 
+                    className={cName('avatar')}
+                />
 
                 <div className={cName('personal_info')}>
                     <p>{user.fio}</p>
