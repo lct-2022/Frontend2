@@ -30,13 +30,14 @@ function App() {
   console.log('STORE =>', store);
   
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //     dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
-  // }, []);
-
+  
   useEffect(() => {
-    authorize({projects: true}, getTokenFromCookies());
+      dispatch<any>(authorizeAction(getTokenFromCookies())); // token из кук
   }, []);
+
+  // useEffect(() => {
+  //   authorize(getTokenFromCookies());
+  // }, []);
 
   return (  
     <ErrorBoundary>

@@ -1,22 +1,3 @@
-// class API {
-    // headers: any;
-    // uri: string;
-    // timeout?: number;
-    // body: any;
-    // protocol: string;
-
-    // constructor(host: string, body: any) {
-    //     this.headers = {};
-    //     this.uri = RPC_URL;
-    //     this.body = {};
-    //     this.protocol = RPC_PROTOCOL;
-    // }
-
-    // private getUrl(host: string) {
-    //     return `${this.protocol}://${host}${this.uri}`;
-    // }
-// }
-
 interface IDataRPC<D> {
     result?: D,
     error?: {
@@ -74,12 +55,10 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D> {
     
     const result: IDataRPC<D> = await response.json();
     
-    if (result.error || result.result === undefined) {
-        
+    if (result.error || result.result === undefined) {   
         throw new Error();
     }
     
-
     return result.result;
 }
 

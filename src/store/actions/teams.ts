@@ -3,7 +3,7 @@ import { getTeamsAvailableForProject } from "../../api/platform";
 import { CommonAction, Team } from "../../types";
 import { TeamsAction, TeamsActions } from "../types/teams";
 
-export const availableTeamsAction = (projectId: number, token: string) => {
+export const availableTeamsAction = (projectId: number, token?: string) => {
     return async (dispatch: Dispatch<TeamsAction>) => {
 
         const availableTeamsResponse = await getTeamsAvailableForProject(projectId, token);

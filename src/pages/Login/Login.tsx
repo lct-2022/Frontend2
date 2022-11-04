@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 import { authorizeAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
-import { setAuthToken } from '../../utils/cookie';
+import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { ShownUserActions } from '../../store/types/shownUser';
 
 enum Labels {
@@ -66,25 +66,18 @@ export const LoginForm: Props = ({type = 'login'}) => {
         requestor(email, password)
             .then(token => {
                 setAuthToken(token);
-                return authorize({projects: true}, token)
+                return new Promise((res) => {
+                    res(dispatch<any>(authorizeAction(token)))
+                })
             })
-            .then(result => {
-                dispatch({
-                    type: ActiveUserActions.SET_USER,
-                    payload: result,
-                });
-                dispatch({
-                    type: ShownUserActions.SET_USER_SHOWN,
-                    payload: result,
-                });
-                // Remove ???
+            .then(() => {
                 setEmail('');
                 setPassword('');
                 navigate(ROUTES.USER);
             })
-            // .catch(() => {
-            //     throw new Error();
-            // })
+            .catch(() => {
+                throw new Error();
+            })
     }, [email, password, type]);
 
     return (
@@ -100,7 +93,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                             {Labels.NAME}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeName}/>
                     </div>
 
                     <div className="login-form-input">
@@ -108,7 +101,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                             {Labels.LASTNAME}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeLastname}/>
                     </div>
 
                     <div className="login-form-input">

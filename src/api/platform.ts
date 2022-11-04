@@ -1,4 +1,4 @@
-import { Application, Job, Project, ProjectData, ProjectTeamMember, Team, User } from "../types";
+import { Application, Job, Project, ProjectData, ProjectTeamMember, Team } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
 export const getJobs = async (limit?: number) => {
@@ -66,9 +66,11 @@ export const applyToJob = async (jobId: number, token?: string): Promise<Applica
         params: {
             'job_id': jobId,
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -94,9 +96,11 @@ export const getJobApplication = async (jobId: number, token?: string): Promise<
         params: {
             'job_id': jobId,
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -112,9 +116,11 @@ export const createProject = async (projectParams: createProjectArgs, token?: st
         method: 'create_project',
         host: RPCHosts.Platform,
         params: projectParams,
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -127,9 +133,11 @@ export const createTeam = async (projectId: number, title: string, token?: strin
             'project_id': projectId,
             title,
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -141,9 +149,11 @@ export const getTeamsAvailableForProject = async (projectId: number, token?: str
         params: {
             'project_id': projectId
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -153,11 +163,13 @@ export const getTeamJobs = async (projectId: number, token?: string): Promise<Te
         method: 'get_project_teams',
         host: RPCHosts.Platform,
         params: {
-            'project_id': projectId
+            project_id: projectId
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };
 
@@ -169,8 +181,10 @@ export const cancelApplication = async (applId: number, token?: string): Promise
         params: {
             id: applId,
         },
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };

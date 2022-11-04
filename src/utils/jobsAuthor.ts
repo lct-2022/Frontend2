@@ -1,6 +1,6 @@
-import { Application, Job, Undefinedable, User } from "../types";
+import { Application, Job, User } from "../types";
 
-export const getOwnJobs = (jobs: Job[], authUserId: Undefinedable<number>) => {
+export const getOwnJobs = (jobs: Job[], authUserId: number | undefined) => {
     if (authUserId === undefined) {
         return [];
     }

@@ -11,11 +11,13 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import {cn} from '@bem-react/classname';
-import { redirectToLogin, removeAuthToken } from '../../utils/cookie';
+import { getTokenFromCookies, redirectToLogin, removeAuthToken } from '../../utils/cookie';
 import { getOwnJobs } from '../../utils/jobsAuthor';
 import { getJobs } from '../../api/platform';
 import { popularJobsAction } from '../../store/actions/jobs';
 import { UserData } from '../../types';
+import { authorizeAction } from '../../store/actions/users';
+import { authorize } from '../../api/passport';
 const TITLE = 'Профиль';
 
 const cName = cn('profile');
@@ -35,7 +37,7 @@ export const Profile: FC<Props> = () => {
     const [currentUser, setCurrentUser] = useState(authUser);
     
     useEffect(() => {
-        setCurrentUser(params.search ? shownUser : authUser)
+        setCurrentUser(params.search ? shownUser : authUser);
     }, [params.search]);
 
     useEffect(() => {

@@ -21,7 +21,7 @@ export interface IBaseStore {
     jobs: NumerableItems<Job>;
     shownUser: Nullable<UserData>;
     applications: Nullable<Application[]>;
-
     // events?: NumerableItems<IEvents>;
     teams: Team[];
+    isAuth: boolean;
 }

@@ -7,6 +7,7 @@ import { activeProjectReducer } from "./activeProject";
 import { activeJobReducer } from "./activeJob";
 import { shownUserReducer } from "./shownUser";
 import { ApplicationsReducer } from "./applications";
+import { isAuthReducer } from "./isAuth";
 
 export const rootReducer = combineReducers({
     activeUser: activeUserReducer,
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
     jobs: jobsReducer,
     shownUser: shownUserReducer,
     applications: ApplicationsReducer,
+    isAuth: isAuthReducer,
 });
 
 export type RootType = ReturnType<typeof rootReducer>

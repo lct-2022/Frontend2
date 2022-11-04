@@ -5,10 +5,10 @@ import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
 import { ShownUserActions } from "../types/shownUser";
 import { UsersAction, UsersActions } from '../types/users';
 
-export const authorizeAction = (token: string) => {
+export const authorizeAction = (token?: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
-        const signupResponse = await authorize({projects: true}, token);
+        const signupResponse = await authorize(token);
         
         return signupResponse
             ? 

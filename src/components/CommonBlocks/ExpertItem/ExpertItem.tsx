@@ -24,7 +24,7 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
 
     const passToProfile = useCallback(() => {
         // dispatch(getUserProfileAction());
-        getUserProfile({projects: true}, id)
+        getUserProfile(id)
             .then(() => {
                 dispatch(getUserProfileAction(user));
                 navigate(`${ROUTES.USER}/search`);

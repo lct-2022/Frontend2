@@ -1,18 +1,20 @@
 import { User, UserData } from "../types";
-import { request, RequestOptions, RPCHosts } from "../utils/api";
+import { request, RPCHosts } from "../utils/api";
 
-export const authorize = async (requestData: RequestOptions, token: string): Promise<UserData> => {
+export const authorize = async (token?: string): Promise< UserData> => {
     return await request<UserData>({
         method: 'my_profile',
         host: RPCHosts.Passport,
-        ...(requestData.projects && {
-            params: {
-                additional_fields: ['projects'],
+        params: {
+            additional_fields: [
+                'pojects',
+            ],
+        },
+        ...(token && {
+            settings: {
+                authToken: token,
             }
         }),
-        settings: {
-            authToken: token,
-        }
     });
 }
 
@@ -39,7 +41,6 @@ export const login = async (email: string, password: string): Promise<string> =>
     })
 };
 
-// with rate !!!
 export const getProfiles = async (limit?: number): Promise<User[]> => {
     return await request<User[]>({
         method: 'popular_profiles',
@@ -50,15 +51,15 @@ export const getProfiles = async (limit?: number): Promise<User[]> => {
     });
 };
 
-export const getUserProfile = async (requestData: RequestOptions, userId: number): Promise<UserData> => {
+export const getUserProfile = async (userId: number): Promise<UserData> => {
     return await request({
         method: 'get_profile',
         host: RPCHosts.Passport,
         params: {
             id: userId,
-            ...(requestData.projects && {
-                additional_fields: ['projects'],
-            })
+            additional_fields: [
+                'projects',
+            ],
         },
     });
 };

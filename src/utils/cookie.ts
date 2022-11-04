@@ -13,17 +13,15 @@ function parseCookie() {
 
 export const getTokenFromCookies = () => {
     const cookieParsed = parseCookie() || {};
-    return cookieParsed['auth_token'] as string || '';
+    return cookieParsed['auth_token'] as string;
 }
 
-export function setAuthToken(token: string) {
-    const cookieParsed = parseCookie() || {};
-    cookieParsed['auth_token'] = token;
-    document.cookie = qs.stringify(cookieParsed, {delimiter: ';'})
+export function setAuthToken(token?: string) {
+    document.cookie = `auth_token=${token}; max-age=3600*24*365`;
 }
 
-export function removeAuthToken(token: string) {
-    document.cookie = token + DELETE_COOKIE_STR;
+export function removeAuthToken(token?: string) {
+    document.cookie = (token || '') + DELETE_COOKIE_STR;
 }
 
 export const redirectToLogin = () => {

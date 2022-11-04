@@ -30,7 +30,7 @@ const ApplicationComp: FC<Props> = ({application}) => {
     const {user_id, job, message, status} = application;
 
     useEffect(() => {
-        getUserProfile({projects: true}, user_id)
+        getUserProfile(user_id)
             .then(data => {
                 setAppliedUser(data); 
             })

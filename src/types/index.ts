@@ -1,10 +1,8 @@
 export type Nullable<D> = D | null;
-export type Undefinedable<D> = D | undefined;
-// export type Map<D> = {[x in any]: D};
 
 interface ICommonData {
-    'created_at': string;
-    'updated_at': string;
+    created_at: string;
+    updated_at: string;
     synced: boolean;
     id: number;
 }
@@ -12,8 +10,8 @@ interface ICommonData {
 export type User = {
     user: ICommonData & {
         email: string,
-        'password_hash': string,
-        'avatar_url': string,
+        password_hash: string,
+        avatar_url: string,
         fio: string,
         birthday: Nullable<string>,
         gender: Nullable<string>,
@@ -34,7 +32,7 @@ export type User = {
 // TODO Добавить поле "получили поддержку"
 export type Project = {
     project: ICommonData & {
-        'author_id': number,
+        author_id: number,
         title: string;
         description: string;
         url: string;
@@ -50,19 +48,19 @@ export type UserData = User['user'];
 
 export type Team = ICommonData & {
     title: string;
-    'project_id': ProjectData['id'];
+    project_id: ProjectData['id'];
     project: ProjectData;
 };
 
 export type ProjectTeamMember = ICommonData & {
-    'user_id': number;
-    'job_id': number;
+    user_id: number;
+    job_id: number;
     job: Job;
     title: string;
 };
 
 export type Job = ICommonData & {
-    'team_id': number;
+    team_id: number;
     team: Team;
     title: string;
     description: string;
@@ -78,9 +76,9 @@ export enum ApplicationStatus {
 };
 
 export type Application = ICommonData & {
-    'user_id': number;
+    user_id: number;
     job: Job;
-    'job_id': Job['id'];
+    job_id: Job['id'];
     message: string;
     status: ApplicationStatus;
 };
