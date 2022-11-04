@@ -12,6 +12,7 @@ export const ROUTES = {
     PARTICIPANTS: '/users/participants',
     USER: '/profile',
     USER_SEARCH: '/profile/:search',
+    USER_EDIT: '/profile/edit',
     JOBS: '/vacancies',
     JOB: '/vacancy',
     EVENTS: '/events',

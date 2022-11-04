@@ -22,7 +22,8 @@ export type User = {
         job: Nullable<string>,
         about: Nullable<string>,
         admin: Nullable<boolean>,
-        projects?: Project[],
+        projects?: ProjectData[],
+        hidden?: boolean;
     }
     rating: number;
     // для фильтрации
@@ -37,6 +38,7 @@ export type Project = {
         description: string;
         url: string;
         contests: string;
+        hidden?: boolean;
     };
     rating: number;
     // для фильтрации

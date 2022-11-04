@@ -35,7 +35,6 @@ export const LoginForm: Props = ({type = 'login'}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    //TODO Formik!!!
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -64,10 +63,10 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
     const submit = useCallback(() => {
         const requestor = type === 'login'
-            ? login
-            : signup
+            ? login(email, password)
+            : signup(email, password, `${name} ${lastname}`)
 
-        requestor(email, password)
+        requestor
             .then(token => {
                 setAuthToken(token);
                 return new Promise((res) => {
@@ -86,11 +85,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
     return (
         <div className={cName()}>
-            {/* <div className="login-form"> */}
-
-                {/* <div className="login-form-wrapper"> */}
-
-                    <p className={cName('title')}>{title}</p>
+                <p className={cName('title')}>{title}</p>
 
                     <div className={cName('input', {hidden: type === 'login'})}>
                         <label htmlFor="login-form-name" className="login-label">
@@ -113,7 +108,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                             {Labels.EMAIL}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="email" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
                     </div>
 
                     <div className={cName('input')}>
@@ -133,10 +128,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
                     <div id="divider"/>
 
-                    <RedirectLoginBlock type={type}/>
-                {/* </div> */}
-
-            {/* </div> */}
+                <RedirectLoginBlock type={type}/>
         </div>
     );
 }

@@ -6,7 +6,7 @@ interface IProps {
     description: ProjectData['description'], 
     contest: ProjectData['contests'],
     url: ProjectData['url'],
-    rating: Project['rating'],
+    rating?: Project['rating'],
     id: ProjectData['id'],
     author_id?: ProjectData['author_id'],
 }

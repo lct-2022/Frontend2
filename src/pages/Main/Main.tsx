@@ -24,6 +24,7 @@ import { currentUserSelector, shownProfileSelector } from '../../store/selectors
 import { IBaseStore } from '../../store/types/store';
 import { antiadblock } from '../../utils/antiblock';
 import { lsGetAuthorizedUser } from '../../utils/storage';
+import EditForm from '../User/components/EditForm/EditForm';
 
 // antiadblock();
 
@@ -31,6 +32,9 @@ function Main() {
   const store = useSelector((store: IBaseStore) => store);
   console.log('STORE =>', store);
   const currentUser = useSelector(currentUserSelector);
+
+  console.log(currentUser?.projects);
+  
   
   const dispatch = useDispatch();
   const location = useLocation();
@@ -38,16 +42,16 @@ function Main() {
 
   useEffect(() => {
       const isUserAuthorizedInit = currentUser || getTokenFromCookies() || lsGetAuthorizedUser();
-    
+
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {
         navigate(ROUTES.INDEX)
       }
+
       dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())); // token из кук
   }, []);
 
-
   return (  
-    <ErrorBoundary>
+      <>
           <Navbar/>
             <Routes>
               <Route path={ROUTES.INDEX} element={<Home/>}/>
@@ -57,6 +61,8 @@ function Main() {
 
               <Route path={ROUTES.USER} element={<Profile/>}/>
               <Route path={ROUTES.USER_SEARCH} element={<Profile/>}/>
+              <Route path={ROUTES.USER_EDIT} element={<EditForm/>}/>
+
               <Route path={ROUTES.PROJECT_CREATE} element={<ProjectCreate/>}/>
               <Route path={ROUTES.PROJECTS} element={<Projects/>}/>
               <Route path={ROUTES.PROJECT} element={<ProjectPage/>}/>
@@ -72,9 +78,8 @@ function Main() {
               <Route path={ROUTES.EVENTS} element={<h1>Мероприятия</h1>}/>
               <Route path={ROUTES.SERVICES} element={<h1>Сервисы</h1>}/>
             </Routes>
-
-          {/* <Footer/> */}
-     </ErrorBoundary>
+            {/* <Footer/> */}
+        </>
   );
 }
 

@@ -3,6 +3,8 @@ import {cn} from '@bem-react/classname';
 import { Props } from './types';
 
 import './Bio.css';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '../../../../utils/routes';
 
 const avatarIcon = require('../../../../assets/avatar.svg').default;
 
@@ -10,6 +12,12 @@ const cName = cn('bio')
 
 const Bio: Props = ({user, rating}) => {
     const [editMode, setEditMode] = useState(false);
+
+    const navigate = useNavigate();
+
+    const passEditProfile = () => {
+        navigate(ROUTES.USER_EDIT)
+    }
 
     const editModeToggle = () => {
         setEditMode(prev => !prev);
@@ -45,7 +53,7 @@ const Bio: Props = ({user, rating}) => {
                 </div>
             </div>
 
-            <button className={cName('settings')} onClick={editModeToggle}>
+            <button className={cName('settings')} onClick={passEditProfile}>
                 Редактировать профиль
             </button>
         </div>

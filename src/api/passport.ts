@@ -7,7 +7,7 @@ export const getAuthorizedUser = async (token?: string): Promise< UserData> => {
         host: RPCHosts.Passport,
         params: {
             additional_fields: [
-                'pojects',
+                'projects',
             ],
         },
         ...(token && {
@@ -61,5 +61,16 @@ export const getUserProfile = async (userId: number): Promise<UserData> => {
                 'projects',
             ],
         },
+    });
+};
+
+export const updateUserProfile = async (newData: Partial<UserData>, token: string): Promise<UserData> => {
+    return await request({
+        method: 'update_profile',
+        host: RPCHosts.Passport,
+        params: newData,
+        settings: {
+            authToken: token,
+        }
     });
 };

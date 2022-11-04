@@ -25,10 +25,14 @@ const ProjectsList: Props = ({projects}) => {
                 <h3>Проектов, удовлетворяющих заданным условиям, нет</h3>
             )
         }
+        
+        if (!projects) {
+            return null;
+        }
 
         return (
             <div className={cName('container')}>
-                {projects.map(({project: {title, description, contests, url, id}, rating, hidden}, index) => (
+                {projects?.map(({project: {title, description, contests, url, id}, rating, hidden}, index) => (
                     <div key={index} className={cName('project', {hidden})}>
                         <ProjectCard
                             title={title}

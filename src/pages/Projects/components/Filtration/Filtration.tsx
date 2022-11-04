@@ -8,8 +8,6 @@ import './Filtration.css';
 const cName = cn('project-filters');
 
 const ProjectFilters: Props = ({projects, setProjects}) => {
-    const min = 1
-    const max = 5
     const filterByLimitsProject = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
 

@@ -10,7 +10,7 @@ import Teams from '../Teams/Teams';
 import UserOptions from '../../components/Options';
 import { ROUTES } from '../../../../utils/routes';
 import './Routes.css';
-import Projects from '../../../Projects';
+import Projects from '../ProjectsListProfile/ProjectsListProfile';
 
 const cName = cn('user-routes');
 
@@ -37,7 +37,7 @@ const UserRoutes: Props = ({user}) => {
             }
 
             {shownData === 'ideas' &&
-                <Projects fromProfile/>
+                <Projects />
             }
 
             {shownData === 'teams' &&

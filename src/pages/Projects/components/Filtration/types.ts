@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from "react";
-import { Project } from "../../../../types";
+import { Project, ProjectData } from "../../../../types";
 
 
 interface IProps {

@@ -43,7 +43,7 @@ function ProjectCreate() {
               type: ActiveProjectActions.SET_PROJECT,
               payload: project,
             });
-            new Promise((res) => {
+            return new Promise((res) => {
               res(dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())))
             })
         })

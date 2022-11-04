@@ -5,11 +5,11 @@ import ErrorBoundary from '../../components/Error-Boundary';
 
 function App() {
   return (  
-    <ErrorBoundary>
+    // <ErrorBoundary>
       <BrowserRouter>
           <Main/>
         </BrowserRouter>
-     </ErrorBoundary>
+    //  </ErrorBoundary>
   );
 }
 
