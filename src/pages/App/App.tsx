@@ -24,6 +24,9 @@ import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
 import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
 import { IBaseStore } from '../../store/types/store';
+import { antiadblock } from '../../utils/antiblock';
+
+antiadblock();
 
 function App() {
   const store = useSelector((store: IBaseStore) => store);
