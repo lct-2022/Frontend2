@@ -1,3 +1,9 @@
+.project-filters {
+    flex-direction: column;
+
+    padding: 0;
+}
+
 .project-filters-block {
     display: flex;
     flex-direction: column;

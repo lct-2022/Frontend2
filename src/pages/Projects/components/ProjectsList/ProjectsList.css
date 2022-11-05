@@ -1,3 +1,25 @@
 .projects-list-project_hidden {
     display: none;
 }
+
+.projects-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.projects-list-search {
+    width: 100%;
+    margin-bottom: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.projects-list-search-input {
+
+    width: 100%;
+}

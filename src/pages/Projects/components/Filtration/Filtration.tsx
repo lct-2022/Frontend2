@@ -2,6 +2,8 @@ import React, { ChangeEvent, useCallback } from 'react';
 import { cn } from '@bem-react/classname';
 import { parseStringForDiapazon } from '../../../../utils/parse';
 import { Props } from './types';
+import Card from '../../../../components/Card';
+import Text from '../../../../components/Text';
 
 import './Filtration.css';
 
@@ -32,9 +34,7 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
     }, [setProjects]);
     
     return (
-        <div className={cName()}>
-            <h3>ProjectFilters</h3>
-            
+        <Card className={cName()}>            
             <div className={cName('block')}>
                 <h5 className={cName('field-title')}>Размер команды</h5>
 
@@ -71,7 +71,7 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Card>
     )
 }
 export default ProjectFilters;
