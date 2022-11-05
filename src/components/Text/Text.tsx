@@ -5,11 +5,11 @@ import {Props} from './types';
 
 import './Text.css';
 
-const cName = cn('card');
+const cName = cn('text');
 
 const Card: Props = ({
     children,
-    type = 'ordinary',
+    type,
     ...props
 }) => {
     return (
