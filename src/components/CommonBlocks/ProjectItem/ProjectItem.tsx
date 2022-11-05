@@ -100,7 +100,7 @@ const ProjectCard: Props = ({
                             </Text>
                         </div>
 
-                        <Text type="light">{description}</Text>
+                        <Text className={cName('description')} type="light">{description}</Text>
                     </div>
 
                     <div className={cName('data-down')}>

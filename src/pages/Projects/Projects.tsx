@@ -27,17 +27,18 @@ interface Props {
 const Projects: FC<Props> = () => {
     const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
 
-    const {isLoading, error, data} = useQuery('allProjects', () => getAllProjects('*'));
+    const allProjectsResponce = useQuery('allProjects', () => getAllProjects('*'));
+    const innovationTypesResponce = useQuery('getInnovationtypes', () => getAllProjects('*'));
 
     useEffect(() => {
-        setAllProjects(data?.items?.map(project => ({...project, hidden: false})) || []);
-    }, [data]);
+        setAllProjects(allProjectsResponce.data?.items?.map(project => ({...project, hidden: false})) || []);
+    }, [allProjectsResponce.data]);
 
-    if (isLoading) {
+    if (allProjectsResponce.isLoading) {
         return <Spinner/>
     } 
 
-    if (error) {
+    if (allProjectsResponce.error) {
         throw new Error();
     } 
 

@@ -14,7 +14,7 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    max-width: 680px;
+    width: 500px;
     height: 88px;
 }
 
@@ -42,6 +42,11 @@
 
 .project-card-text_description {
     font-size: 12px;
+
+    max-width: 500px;
+
+    flex-wrap: wrap;
+    
 }
 
 .project-card-logo {

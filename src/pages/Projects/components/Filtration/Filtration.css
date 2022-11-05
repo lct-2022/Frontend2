@@ -1,26 +1,25 @@
 .project-filters {
     flex-direction: column;
-
-    padding: 0;
+    align-items: flex-start;
 }
 
 .project-filters-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    margin: 16px 0;
 }
 
 .project-filters-field-title {
-    margin: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;    
 }
 
 .project-filters-field {
     display: flex;
     align-items: center;
 
-    margin: 8px 0;
+    margin: 4px 0;
 }
 
 .project-filters-boxes {
