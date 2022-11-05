@@ -2,7 +2,7 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import './App.css';
-import { getProjects } from '../../../../api/platform';
+import { getPopularProjects } from '../../../../api/platform';
 import { useSelector } from 'react-redux';
 import { popularProjectsSelector } from '../../../../store/selectors/projects';
 import EventCard from '../EventItem';

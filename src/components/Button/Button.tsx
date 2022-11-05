@@ -9,11 +9,12 @@ const cName = cn('btn');
 
 const Button: Props = ({
     children,
+    className,
     as: Component = 'button',
     ...props
 }) => {
     return (
-        <Component {...props} className={cName()}>
+        <Component {...props} className={cName({}, [className])}>
             {children}
         </Component>
     );

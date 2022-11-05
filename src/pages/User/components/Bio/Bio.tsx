@@ -28,7 +28,7 @@ const Bio: Props = ({user, rating}) => {
             <div className={cName('data')}>
                
                 <img 
-                    src={avatarIcon}
+                    src={user.avatar_url || avatarIcon}
                     alt="Аватар" 
                     className={cName('avatar')}
                 />

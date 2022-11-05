@@ -9,11 +9,12 @@ const cName = cn('text');
 
 const Card: Props = ({
     children,
-    type,
+    className,
+    type = 'ordinary',
     ...props
 }) => {
     return (
-        <p {...props} className={cName({type})}>
+        <p {...props} className={cName({type}, [className])}>
             {children}
         </p>
     );

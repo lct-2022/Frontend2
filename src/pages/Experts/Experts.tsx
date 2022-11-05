@@ -3,7 +3,7 @@ import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getJobs, getProjects } from '../../api/platform';
+import { getPopularJobs, getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { UserData } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';

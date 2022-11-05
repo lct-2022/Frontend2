@@ -8,11 +8,12 @@ const cName = cn('card');
 const Card: Props = ({
     children,
     as: Component = 'div', 
-    withFrame = true,
+    withoutFrame = false,
+    className,
     ...props
 }) => {
     return (
-        <Component {...props} className={cName({frame: withFrame})}>
+        <Component {...props} className={cName({without_frame: withoutFrame}, [className])}>
             {children}
         </Component>
     );

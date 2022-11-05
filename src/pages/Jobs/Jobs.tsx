@@ -3,7 +3,7 @@ import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getAllJobs, getJobs, getProjects } from '../../api/platform';
+import { getAllJobs, getPopularJobs, getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Job, Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -20,7 +20,7 @@ const queryClient = new QueryClient();
 function Jobs() {
     const [allJobs, setAllJobs] = useState<Job[]>([]);
 
-    const {isLoading, error, data} = useQuery('allJobss', () => getAllJobs('*'));
+    const {isLoading, error, data} = useQuery('allJobs', () => getAllJobs('*'));
 
     useEffect(() => {
         setAllJobs(data?.items?.filter(el => el.open) || []);

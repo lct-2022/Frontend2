@@ -13,17 +13,20 @@ import { getJobApplicationsAction } from '../../../store/actions/jobs';
 import { vote } from '../../../api/rating';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { currentUserSelector } from '../../../store/selectors/users';
+import Card from '../../Card';
+import Text from '../../Text';
+import { validateNumberPeople } from '../../../utils/grammar';
 
 const cName = cn('project-card');
-
-const TITLE_RATE = 'Рейтинг';
 
 const ProjectCard: Props = ({
     title, 
     description,
-    contest,
-    url,
+    industry,
+    teamSize,
+    jobs,
     rating,
+    additonalInfo = 'В проработке',
     id,
 }) => {
     const dispatch = useDispatch();
@@ -78,36 +81,45 @@ const ProjectCard: Props = ({
     }, [id, currentUser]);
     
     return (
-        <div className={cName()}>
+        <Card className={cName()}>
             <div className={cName('left-block')}>
-                <div className={cName('logo')}/>
-
-                <div className={cName('data')}>
-                    <p className={cName('text', {title: true})} onClick={passToProject}>
-                        {title}
-                    </p>
-
-                    <p className={cName('text', {description: true})}>
-                        {description}
-                    </p>
+                <div className={cName('logo')}>
+                    <Text className={cName('title-in-logo')}>{title}</Text>
                 </div>
+                
+                <div className={cName('data')}>
+                    <div className={cName('data-upper')}>
+                        <div className={cName('titles')}>
+                            <Text className={cName('title')} onClick={passToProject}>
+                                {title}
+                            </Text>
 
-                <div className={cName('details')}>
-                    <span>{contest}</span>
-                    <span>{url}</span>
+                            <Text type="violet">
+                                {industry}
+                            </Text>
+                        </div>
+
+                        <Text type="light">{description}</Text>
+                    </div>
+
+                    <div className={cName('data-down')}>
+                        {teamSize !== undefined && teamSize !== null &&  <Text>{validateNumberPeople(teamSize)}</Text>}
+
+                        {jobs && <Text type="light">{jobs?.length ? 'Идет найм' : 'Найма нет'}</Text>}
+
+                        {additonalInfo && <Text>{additonalInfo}</Text>}
+                    </div>
                 </div>
             </div>
 
             <div className={cName('rating')}>
                 {rating !== undefined && 
                     <>
-                        <p>{TITLE_RATE}:&nbsp;</p>
+                        <div className={cName('triangle')}/>
         
-                        <b>{rating}</b>
+                        <div className={cName('num-votes')}>{rating}</div>
                     </>
                 }
-
-                <p style={{fontSize: '10px', cursor: 'pointer'}} onClick={makeVote}>Проголосовать</p>
 
                 {canSearchPeople &&
                     <button onClick={searchPeople}>Найти человека в команду</button>
@@ -121,7 +133,7 @@ const ProjectCard: Props = ({
                     <button onClick={passToAppllications}>Отклики</button>
                 }        */}
             </div>
-        </div>
+        </Card>
     )
 }
 

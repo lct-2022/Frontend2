@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getAllProjects, getProjects } from '../../api/platform';
+import { getAllProjects, getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Project, ProjectData } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';

@@ -4,8 +4,12 @@
     border: solid 1px #98A2B3;
     padding: 16px;
     height: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.card_frame {
+.card_without_frame {
     border: none;
 }

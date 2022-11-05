@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { getJobs, getProjects } from '../../../../api/platform';
+import { getPopularJobs, getPopularProjects } from '../../../../api/platform';
 // import { useSelector } from 'react-redux';
 
 

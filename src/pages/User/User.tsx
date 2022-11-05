@@ -13,7 +13,7 @@ import { ROUTES } from '../../utils/routes';
 import {cn} from '@bem-react/classname';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
 import { getOwnJobs } from '../../utils/jobsAuthor';
-import { getJobs } from '../../api/platform';
+import { getPopularJobs } from '../../api/platform';
 import { popularJobsAction } from '../../store/actions/jobs';
 import { UserData } from '../../types';
 import { getAuthorizedUserAction } from '../../store/actions/users';

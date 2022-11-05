@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { getJobs, getApplications, getVacancy } from "../../api/platform";
+import { getPopularJobs, getApplications, getVacancy } from "../../api/platform";
 import { Application } from "../../types";
 import { ActiveJobAction, ActiveJobActions } from "../types/activeJob";
 import { ApplicationsActions, SetApplications } from "../types/applications";
@@ -8,7 +8,7 @@ import { JobsAction, JobsActions } from "../types/jobs";
 export const popularJobsAction = (limit?: number) => {
     return async (dispatch: Dispatch<JobsAction>) => {
 
-        const popularJobsResponse = await getJobs(limit);
+        const popularJobsResponse = await getPopularJobs(limit);
         
         dispatch({
             type: JobsActions.SET_JOBS,

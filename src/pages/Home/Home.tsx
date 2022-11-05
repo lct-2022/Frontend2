@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { useDispatch } from 'react-redux';
 import { popularProjectsAction } from '../../store/actions/projects';
@@ -11,10 +12,15 @@ import TitleHomePage from './components/Title';
 
 import './Home.css';
 import { LIMITS } from '../../utils/consts';
+import { getPopularProjects, getPopularJobs } from '../../api/platform';
+const queryClient = new QueryClient();
 
 function Home() {
     const dispatch = useDispatch();
-     
+
+    const queryResultProjects = useQuery('popularProjects', () => getPopularProjects((LIMITS.PROJECTS)));
+    const queryResultJobs = useQuery('popularJobs', () => getPopularJobs((LIMITS.PROJECTS)));
+
     // TODO: add preloader
     useEffect(() => {
         dispatch<any>(popularProjectsAction(LIMITS.PROJECTS));
@@ -28,8 +34,8 @@ function Home() {
 
             <TitleHomePage/>
 
-            <ProjectsPreview/>
-            <JobsPreview/>
+            <ProjectsPreview projects={queryResultProjects.data || []}/>
+            <JobsPreview jobs={queryResultJobs.data || []}/>
         </div>
 
         // <Navbar/>

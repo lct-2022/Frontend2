@@ -4,12 +4,12 @@ type Text =
     | 'ordinary' 
     | 'header' 
     | 'light' 
-    | 'vilet'
+    | 'violet'
     | 'wrapped'
     | 'large'
 
 export type TextProps = {
-    type: Text;
+    type?: Text;
 } & HTMLAttributes<HTMLParagraphElement>;
 
 export type Props = FC<TextProps>;

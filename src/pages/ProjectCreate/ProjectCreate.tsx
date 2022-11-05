@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { createProject, getProjects } from '../../api/platform';
+import { createProject, getPopularProjects } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
 import { useDispatch } from 'react-redux';

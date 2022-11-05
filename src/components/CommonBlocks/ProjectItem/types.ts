@@ -3,12 +3,13 @@ import { Project, ProjectData } from "../../../types";
 
 interface IProps {
     title: ProjectData['title'],
-    description: ProjectData['description'], 
-    contest: ProjectData['contests'],
-    url: ProjectData['url'],
+    description: ProjectData['description'],
+    industry: ProjectData['industry'],
+    teamSize: ProjectData['team_size'],
+    id: ProjectData['id'];
+    jobs? :ProjectData['jobs'];
     rating?: Project['rating'],
-    id: ProjectData['id'],
-    author_id?: ProjectData['author_id'],
+    additonalInfo?: string;
 }
 
 export type Props = FC<IProps>;

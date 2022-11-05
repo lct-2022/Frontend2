@@ -5,7 +5,7 @@ import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { applicationsSelector } from '../../store/selectors/applications';
 import Application from '../../components/CommonBlocks/Application/Application';
-import { getJobs } from '../../api/platform';
+import { getPopularJobs } from '../../api/platform';
 import { getOwnJobs } from '../../utils/jobsAuthor';
 import { currentUserSelector } from '../../store/selectors/users';
 import { ApplicationStatus, Job } from '../../types';

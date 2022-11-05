@@ -38,13 +38,13 @@ export type ProjectData = ICommonData & {
     description: string;
     url: string;
     contests: string;
-    jobs?: Job;
+    jobs?: Job[];
     stage_title: string;
     stage_id: number;
     industry: string;
     innovations: string;
     innovation_type: string;
-    team_size: Nullable<number>;
+    team_size?: Nullable<number>;
     // для фильтрации
     hidden?: boolean;
 };

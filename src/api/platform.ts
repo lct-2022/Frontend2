@@ -27,11 +27,11 @@ export const getAllProjects = async (query: string): Promise<Undefinedable<Proje
     });
 };
 
-export const getJobs = async (limit?: number): Promise<Undefinedable<Job[]>> => {
+export const getPopularJobs = async (limit?: number): Promise<Undefinedable<Job[]>> => {
     return await request<Job[]>({
         method: 'popular_jobs',
         host: RPCHosts.Platform,
-        ...(limit && {
+        ...(limit !== undefined && {
             params: {
                 limit,
             }
@@ -39,13 +39,19 @@ export const getJobs = async (limit?: number): Promise<Undefinedable<Job[]>> => 
     })
 };
 
-export const getProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
+export const getPopularProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
     return await request<Project[]>({
         method: 'popular_projects',
         host: RPCHosts.Platform,
-        ...(limit && {
-            params: {limit}
-        })
+        params: {
+            additional_fields: [
+                'jobs',
+                'team-size',
+            ],
+            ...(limit !== undefined && {
+                limit,
+            })
+        }
     });
 };
 
