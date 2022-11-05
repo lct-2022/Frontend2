@@ -21,7 +21,7 @@ import { getAuthorizedUserAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
-import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
+import { authUserSelector, currentUserSelector } from '../../store/selectors/users';
 import { IBaseStore } from '../../store/types/store';
 import { lsGetAuthorizedUser } from '../../utils/storage';
 import EditForm from '../User/components/EditForm/EditForm';
@@ -30,7 +30,7 @@ import { getAllJobs, getAllProjects } from '../../api/platform';
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
   console.log('STORE =>', store);
-  const currentUser = useSelector(currentUserSelector);
+  const activeUser = useSelector(authUserSelector);
 
   const queryClient = new QueryClient();
 
@@ -39,7 +39,7 @@ function Main() {
   const location = useLocation();
 
   useEffect(() => {
-      const isUserAuthorizedInit = currentUser || getTokenFromCookies() || lsGetAuthorizedUser();
+      const isUserAuthorizedInit = activeUser || getTokenFromCookies() || lsGetAuthorizedUser();
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {
         navigate(ROUTES.INDEX);
       }

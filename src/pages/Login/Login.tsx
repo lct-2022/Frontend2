@@ -7,11 +7,11 @@ import { getAuthorizedUser, login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
-import { ActiveUserActions } from '../../store/types/activeUser';
+import { AuthUserActions } from '../../store/types/activeUser';
 import { getAuthorizedUserAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
-import { ShownUserActions } from '../../store/types/shownUser';
+import { CurrentUserActions } from '../../store/types/shownUser';
 import { cn } from '@bem-react/classname';
 import { lsSaveAuthorizedUser } from '../../utils/storage';
 import { EMAIL_REGEXP } from '../../utils/consts';
@@ -82,13 +82,16 @@ export const LoginForm: Props = ({type = 'login'}) => {
                     res(dispatch<any>(getAuthorizedUserAction(token)))
                 });
             })
+            .then(data => {
+                dispatch({
+                    type: CurrentUserActions.SET_USER_SHOWN,
+                    payload: data,
+                })
+            })
             .then(() => {
                 setEmail('');
                 setPassword('');
                 navigate(ROUTES.USER);
-            })
-            .catch(() => {
-                throw new Error();
             })
     }, [email, password, name, lastname, type]);
 

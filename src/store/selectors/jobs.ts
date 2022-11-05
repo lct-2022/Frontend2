@@ -12,6 +12,6 @@ export const allJobsNumSelector = createSelector(
 );
 
 export const currentJobSelector = createSelector(
-    (store: IBaseStore) => store.activeJob,
+    (store: IBaseStore) => store.currentJob,
     job => job,
 );

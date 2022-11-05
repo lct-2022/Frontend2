@@ -11,7 +11,7 @@ import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
-import { currentUserSelector } from '../../../store/selectors/users';
+import { authUserSelector } from '../../../store/selectors/users';
 import Button from '../../Button';
 
 const cName = cn('vacancy-card');
@@ -20,7 +20,7 @@ const APPLY = 'Откликнуться';
 const CANCEL = 'Отозвать';
 
 const JobCard: Props = ({title, description, application, id}) => {
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
     const [isApplication, setIsApplication] = useState(false);
 
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const JobCard: Props = ({title, description, application, id}) => {
     }, [application]);
     
     const applicationAction = useCallback(() => {       
-        if (!currentUser) {
+        if (!activeUser) {
             alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
@@ -54,7 +54,7 @@ const JobCard: Props = ({title, description, application, id}) => {
             .catch(() => {
                 throw new Error()
             });
-    }, [id, currentUser, isApplication]);
+    }, [id, activeUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
         dispatch<any>(getCurrentVacancyAction(id))

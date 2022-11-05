@@ -2,29 +2,36 @@ import { Dispatch } from "react";
 import { getAuthorizedUser, getProfiles } from "../../api/passport";
 import { CommonAction, UserData } from "../../types";
 import { lsSaveAuthorizedUser } from "../../utils/storage";
-import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
-import { ShownUserActions } from "../types/shownUser";
+import { AuthUserAction, AuthUserActions } from "../types/activeUser";
+import { CurrentUserAction, CurrentUserActions } from "../types/shownUser";
 import { UsersAction, UsersActions } from '../types/users';
 
 export const getAuthorizedUserAction = (token?: string) => {
-    return async (dispatch: Dispatch<ActiveUserAction>) => {
+    return async (dispatch: Dispatch<AuthUserAction | CurrentUserAction>) => {
+
+        function dispatchUser(data: UserData) {
+            dispatch({
+                type: AuthUserActions.SET_USER,
+                payload: data,
+            })
+            dispatch({
+                type: CurrentUserActions.SET_USER_SHOWN,
+                payload: data,
+            })
+        } 
 
         const authorizeResponse = await getAuthorizedUser(token);
 
         if (authorizeResponse) {
             lsSaveAuthorizedUser(authorizeResponse)
         }
-        console.log('authorizeResponse', authorizeResponse);
         
         return authorizeResponse
             ? 
-                dispatch({
-                    type: ActiveUserActions.SET_USER,
-                    payload: authorizeResponse,
-                })
+                dispatchUser(authorizeResponse)
             : 
                 dispatch({
-                    type: ActiveUserActions.UNSET_USER,
+                    type: AuthUserActions.UNSET_USER,
                 });
         }
 }
@@ -41,9 +48,9 @@ export const popularProfilesAction = (limit?: number) => {
     }
 }
 
-export const getUserProfileAction = (user: UserData): CommonAction<ShownUserActions.SET_USER_SHOWN, UserData> => {
+export const getUserProfileAction = (user: UserData): CommonAction<CurrentUserActions.SET_USER_SHOWN, UserData> => {
     return {
-        type: ShownUserActions.SET_USER_SHOWN,
+        type: CurrentUserActions.SET_USER_SHOWN,
         payload: user,
     }
 

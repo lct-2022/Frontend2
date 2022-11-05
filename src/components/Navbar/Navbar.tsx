@@ -2,7 +2,7 @@ import React, { memo, useMemo, useState } from 'react';
 import {useLocation} from 'react-router-dom'
 import { NOT_NAVBAR_ROUTES, ROUTES } from '../../utils/routes';
 import { LOGIN_POINT, NEW_PROJECT_POINT, MENU_POINTS } from './consts';
-import { usersAvatarSelector, currentUserSelector } from '../../store/selectors/users';
+import { usersAvatarSelector, authUserSelector } from '../../store/selectors/users';
 import { useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import {cn} from '@bem-react/classname';
@@ -11,7 +11,7 @@ import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { ActiveUserActions } from '../../store/types/activeUser';
+import { AuthUserActions } from '../../store/types/activeUser';
 import Drop from './components/Drop';
 import { lsRemoveAuthorizedUser } from '../../utils/storage';
 import Button from '../Button';
@@ -24,11 +24,11 @@ function Navbar() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
 
     const [isDropped, setIsDropped] = useState(false);
 
-    const isAuthorized = !!currentUser;
+    const isAuthorized = !!activeUser;
 
     const drop = () => {
         setIsDropped(prev => !prev);
@@ -46,7 +46,7 @@ function Navbar() {
         removeAuthToken(TOKEN_KEY);
         lsRemoveAuthorizedUser();
         dispatch({
-            type: ActiveUserActions.UNSET_USER,
+            type: AuthUserActions.UNSET_USER,
         });
         navigate(ROUTES.INDEX);
     }
@@ -98,7 +98,7 @@ function Navbar() {
             <div className={cName('right-block')}>
                 {menuPoints}
 
-                {currentUser && 
+                {activeUser && 
                     <>
                         <img 
                             src={userIcon} 

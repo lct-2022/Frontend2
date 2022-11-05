@@ -8,7 +8,7 @@ import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
-import { currentUserSelector } from '../../../store/selectors/users';
+import { authUserSelector } from '../../../store/selectors/users';
 import { DEFAULT_AVATAR } from '../../../utils/consts';
 import { getUserProfileAction } from '../../../store/actions/users';
 import { getUserProfile } from '../../../api/passport';

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import { cn } from "@bem-react/classname";
 import { useDispatch, useSelector } from "react-redux";
-import { currentUserSelector } from "../../../../store/selectors/users";
+import { authUserSelector } from "../../../../store/selectors/users";
 import {  updateUserProfile } from "../../../../api/passport";
 import { getTokenFromCookies } from "../../../../utils/cookie";
 import { getAuthorizedUserAction } from "../../../../store/actions/users";
@@ -14,15 +14,15 @@ import './EditProfile.css';
 const cName = cn('edit-profile');
 
 function EditProfile() {
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
 
-    const [nameValue, setNameValue] = useState(currentUser?.fio.split(' ')[0] || '');
-    const [lastnameValue, setLastnameValue] = useState(currentUser?.fio.split(' ')[1] || '');
-    const [phoneValue, setPhoneValue] = useState(currentUser?.phone || '');
-    const [cityValue, setCityValue] = useState(currentUser?.city || '');
-    const [countryValue, setCountryValue] = useState(currentUser?.country || '');
-    const [aboutValue, setAboutalue] = useState(currentUser?.about || '');
-    const [educationValue, setEducationValue] = useState(currentUser?.education || '');
+    const [nameValue, setNameValue] = useState(activeUser?.fio.split(' ')[0] || '');
+    const [lastnameValue, setLastnameValue] = useState(activeUser?.fio.split(' ')[1] || '');
+    const [phoneValue, setPhoneValue] = useState(activeUser?.phone || '');
+    const [cityValue, setCityValue] = useState(activeUser?.city || '');
+    const [countryValue, setCountryValue] = useState(activeUser?.country || '');
+    const [aboutValue, setAboutalue] = useState(activeUser?.about || '');
+    const [educationValue, setEducationValue] = useState(activeUser?.education || '');
     const [avatarValue, setAvatarValue] = useState('');
 
     const changeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ function EditProfile() {
             return;
         }
         updateUserProfile({
-            ...currentUser,
+            ...activeUser,
             fio: `${nameValue} ${lastnameValue}`,
             phone: phoneValue,
             country: countryValue,
@@ -81,7 +81,7 @@ function EditProfile() {
             })
     }, [nameValue, lastnameValue, phoneValue, countryValue, cityValue, educationValue, aboutValue])
 
-    if (!currentUser) return null;
+    if (!activeUser) return null;
 
     return (
         <div className={cName()}>

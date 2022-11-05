@@ -1,24 +1,21 @@
 import { combineReducers, Reducer } from "redux";
-import { activeUserReducer } from './activeUser';
+import { currentUserReducer } from './currentUser';
 import { usersReducer } from "./users";
 import { projectsReducer } from './projects';
 import { jobsReducer } from "./jobs";
-import { activeProjectReducer } from "./activeProject";
-import { activeJobReducer } from "./activeJob";
-import { shownUserReducer } from "./shownUser";
-import { ApplicationsReducer } from "./applications";
-import { isAuthReducer } from "./isAuth";
+import { currentProjectReducer } from "./currentProject";
+import { currentJobReducer } from "./currentJob";
+import { currentApplicationsReducer } from "./applications";
 
 export const rootReducer = combineReducers({
-    activeUser: activeUserReducer,
-    activeProject: activeProjectReducer,
-    activeJob: activeJobReducer,
+    authUser: currentUserReducer,
+    currentProject: currentProjectReducer,
+    currentJob: currentJobReducer,
     projects: projectsReducer,
     users: usersReducer,
     jobs: jobsReducer,
-    shownUser: shownUserReducer,
-    applications: ApplicationsReducer,
-    isAuth: isAuthReducer,
+    currentUser: currentUserReducer,
+    currentApplications: currentApplicationsReducer,
 });
 
 export type RootType = ReturnType<typeof rootReducer>

@@ -1,23 +1,14 @@
 import { Application, Job, Project, ProjectData, ProjectTeamMember, User } from "../../types";
 import { CommonAction } from '../../types';
 
-export enum ActiveProjectActions {
+export enum CurrentProjectActions {
     SET_PROJECT = 'SET_PROJECT',
     UNSET_PROJECT = 'UNSET_PROJECT',
-    SET_TEAM = 'SET_TEAM',
-    SET_VACANCIES = 'SET_VACANCIES',
-    SET_RATING = 'SET_RATING',
 };
 
-export type SetProject = CommonAction<ActiveProjectActions.SET_PROJECT, ProjectData>;
-export type UnsetProject = CommonAction<ActiveProjectActions.UNSET_PROJECT>;
-export type SetTeam = CommonAction<ActiveProjectActions.SET_TEAM, ProjectTeamMember[]>;
-export type SetVacancies = CommonAction<ActiveProjectActions.SET_VACANCIES, Job[]>;
-export type SetRating = CommonAction<ActiveProjectActions.SET_RATING, number>;
+export type SetProject = CommonAction<CurrentProjectActions.SET_PROJECT, ProjectData>;
+export type UnsetProject = CommonAction<CurrentProjectActions.UNSET_PROJECT>;
 
-export type ActiveProjectAction = 
+export type CurrentProjectAction = 
     | SetProject
     | UnsetProject
-    | SetTeam
-    | SetVacancies
-    | SetRating;

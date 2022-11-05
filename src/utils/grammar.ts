@@ -6,7 +6,7 @@ export function validateNumberPeople(num: number): string {
         || (stringifiedNum.endsWith('3') && !stringifiedNum.endsWith('13'))
         || (stringifiedNum.endsWith('4') && !stringifiedNum.endsWith('14'))
     ) {
-        return  `${num} человека`;
+        return `${num} человека`;
     }
 
     return `${num} человек`;

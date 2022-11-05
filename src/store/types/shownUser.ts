@@ -1,8 +1,8 @@
 import { CommonAction, UserData } from "../../types";
 
-export enum ShownUserActions {
+export enum CurrentUserActions {
     SET_USER_SHOWN = 'SET_USER_SHOWN',
 };
 
-type SetShowUser = CommonAction<ShownUserActions.SET_USER_SHOWN, UserData>
-export type ShownUserAction = SetShowUser;
+type SetShowUser = CommonAction<CurrentUserActions.SET_USER_SHOWN, UserData>
+export type CurrentUserAction = SetShowUser;

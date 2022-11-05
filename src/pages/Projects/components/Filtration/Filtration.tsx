@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useMemo } from 'react';
+import React, { ChangeEvent, memo, useCallback, useMemo } from 'react';
 import { cn } from '@bem-react/classname';
 import { parseStringForDiapazon } from '../../../../utils/parse';
 import { Props } from './types';
@@ -10,14 +10,14 @@ import './Filtration.css';
 
 const cName = cn('project-filters');
 
-const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
+const ProjectFilters: Props = ({projects, setProjects, industries, innovationTypes}) => {
     const filterIndustries = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
 
         setProjects(prev => {
             return prev.map(project => checked && project.industry !== value
                 ? {...project, hidden: true} 
-                : {...project, hidden: false}    
+                : project   
             );
         });
     }, [setProjects]);
@@ -33,7 +33,7 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
                 ))}
             </div>
         )
-    }, [industries, filterIndustries]);
+    }, [industries, projects, filterIndustries, setProjects]);
 
     const filterInnivationTypes = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
@@ -41,7 +41,7 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
         setProjects(prev => {
             return prev.map(project => checked && project.innovation_type !== value
                 ? {...project, hidden: true} 
-                : {...project, hidden: false}    
+                : project   
             );
         });
     }, [setProjects]);
@@ -57,20 +57,27 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
                 ))}
             </div>
         )
-    }, [innovationTypes, filterInnivationTypes]);
+    }, [innovationTypes, filterInnivationTypes, setProjects]);
 
     const filterTags = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
 
         setProjects(prev => {
-            return prev.map(project => checked && 
-                (project.innovations.includes(value) 
-                || project.description.includes(value) 
-                || project.title.includes(value)
-                || project.industry.includes(value))
-                    ? {...project, hidden: false} 
-                    : {...project, hidden: true}    
-            );
+            return prev.map(project => {
+                if (!checked) {
+                    return project;
+                } else {
+                    if ((project.innovations.includes(value) 
+                        || project.description.includes(value) 
+                        || project.title.includes(value)
+                        || project.industry.includes(value))
+                    ) {
+                        return project;
+                    } else {
+                        return {...project, hidden: true};
+                    }
+                }  
+            });
         });
     }, [setProjects]);
 
@@ -88,20 +95,14 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
     }, [filterTags]);
 
     const filterIsActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-
         setProjects(prev => {
-            if (value === NAIM) {
-                return prev.map(project => checked && project.jobs?.length
-                    ? {...project, hidden: false} 
-                    : {...project, hidden: true}    
-                );   
-            } else {
-                return prev.map(project => checked && project.jobs?.length
-                    ? {...project, hidden: true} 
-                    : {...project, hidden: false}    
-                ); 
-            }
+            return prev.map(project => !project.jobs?.length ? {...project, hidden: true} : project);   
+        });
+    }, [setProjects]);
+
+    const filterIsNotActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        setProjects(prev => {
+            return prev.map(project => project.jobs?.length ? {...project, hidden: true} : project);   
         });
     }, [setProjects]);
 
@@ -111,12 +112,12 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
                 {STATUSES.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={filterIsActive}/>
+                        <input name={el} value={el} type="checkbox" onChange={el === NAIM ? filterIsActive : filterIsNotActive}/>
                     </div>
                 ))}
             </div>
         )
-    }, [filterIsActive]);
+    }, [projects, filterIsActive, setProjects]);
 
     const filterTeamSize = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
@@ -126,7 +127,7 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
             
             return prev.map(project => checked && ((project.team_size || 0) <= min || (project.team_size || 0) >= max)
                 ? {...project, hidden: true} 
-                : {...project, hidden: false}    
+                : project   
             );
         });
     }, [setProjects]);
@@ -142,7 +143,7 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
                 ))}
             </div>
         )
-    }, [filterTeamSize]);
+    }, [filterTeamSize, setProjects]);
     
     return (
         <Card className={cName()}>
@@ -174,4 +175,4 @@ const ProjectFilters: Props = ({setProjects, industries, innovationTypes}) => {
     )
 }
 
-export default ProjectFilters;
+export default memo(ProjectFilters);

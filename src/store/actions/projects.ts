@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { getApplications, getCurrentProject, getPopularProjects, getProjectTeam } from '../../api/platform';
-import { ActiveProjectActions, SetProject, SetTeam, SetVacancies } from "../types/activeProject";
+import { getCurrentProject, getPopularProjects } from '../../api/platform';
+import { CurrentProjectAction, CurrentProjectActions } from "../types/activeProject";
 import { ProjectsActions, SetProjects } from '../types/projects';
 
 export const popularProjectsAction = (limit?: number) => {
@@ -16,37 +16,19 @@ export const popularProjectsAction = (limit?: number) => {
 }
 
 export const getCurrentProjectAction = (id: number) => {
-    return async (dispatch: Dispatch<SetProject>) => {
+    return async (dispatch: Dispatch<CurrentProjectAction>) => {
 
         const currentProjectResponse = await getCurrentProject(id);
-        
-        dispatch({
-            type: ActiveProjectActions.SET_PROJECT,
-            payload: currentProjectResponse,
-        });
-    }
-}
 
-export const getProjectTeamAction = (id: number) => {
-        return async (dispatch: Dispatch<SetTeam>) => {
-
-        const projectTeamResponse = await getProjectTeam(id);
-        
-        dispatch({
-            type: ActiveProjectActions.SET_TEAM,
-            payload: projectTeamResponse,
-        });
-    }
-}
-
-export const getProjectVacanciesAction = (id: number) => {
-    return async (dispatch: Dispatch<SetVacancies>) => {
-
-        const projectVacanciesResponse = await getApplications(id);
-        
-        dispatch({
-            type: ActiveProjectActions.SET_VACANCIES,
-            payload: projectVacanciesResponse?.map(el => el.job) || [],
-        });
+        return currentProjectResponse
+            ?
+                dispatch({
+                    type: CurrentProjectActions.SET_PROJECT,
+                    payload: currentProjectResponse,
+                })
+            : 
+                dispatch({
+                    type: CurrentProjectActions.UNSET_PROJECT,
+                })
     }
 }

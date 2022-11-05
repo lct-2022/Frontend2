@@ -1,7 +1,5 @@
 import qs from 'qs';
-import { User, UserData } from '../types';
-import { DELETE_COOKIE_STR } from './consts';
-import { ROUTES } from './routes';
+import { DELETE_COOKIE_STR, SET_AGE_COOKIE_STR } from './consts';
 
 function parseCookie() {
     const cookie = document.cookie ?? '';
@@ -18,7 +16,7 @@ export const getTokenFromCookies = () => {
 }
 
 export function setAuthToken(token?: string) {
-    document.cookie = `auth_token=${token}; max-age=3600*24*365`;
+    document.cookie = `auth_token=${token}; ${SET_AGE_COOKIE_STR}`;
 }
 
 export function removeAuthToken(token?: string) {

@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { getJobApplicationsAction } from '../../../store/actions/jobs';
 import { vote } from '../../../api/rating';
 import { getTokenFromCookies } from '../../../utils/cookie';
-import { currentUserSelector } from '../../../store/selectors/users';
+import { authUserSelector } from '../../../store/selectors/users';
 import Card from '../../Card';
 import Text from '../../Text';
 import { validateNumberPeople } from '../../../utils/grammar';
@@ -33,11 +33,10 @@ const ProjectCard: Props = ({
     const navigate = useNavigate();
     const location = useLocation();
     
-    const canSearchPeople = location.pathname === ROUTES.USER;
-    const canSeeApplications = location.pathname === ROUTES.USER;
-    console.log('rating =>',rating);
-    
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
+
+    // const canSearchPeople = location.pathname === ROUTES.USER;
+    const canSeeApplications = location.pathname === ROUTES.USER || (activeUser?.admin && location.pathname !== ROUTES.INDEX);
 
     const passToProject = useCallback(() => {
         Promise.all([
@@ -67,7 +66,8 @@ const ProjectCard: Props = ({
     }, [id]);
 
     const makeVote = useCallback(() => {
-        if (!currentUser) { 
+        if (!activeUser) {
+            alert('')
             return;
         }
         vote({
@@ -78,8 +78,9 @@ const ProjectCard: Props = ({
         })
             .then(() => {
                 getCurrentProject(id);
+                //
             })
-    }, [id, currentUser]);
+    }, [id, activeUser]);
     
     return (
         <Card className={cName()}>
@@ -116,23 +117,19 @@ const ProjectCard: Props = ({
                 {rating !== undefined && 
                     <div className={cName('rating')}>
                         <>
-                            <div className={cName('triangle')}/>
+                            <div className={cName('triangle')} onClick={makeVote}/>
                             <div className={cName('num-votes')}>{rating}</div>
                         </>
                     </div>
                 }
 
-                {canSearchPeople &&
-                    <button onClick={searchPeople}>Найти человека в команду</button>
-                }
-
-                {currentUser?.admin &&
+                {canSeeApplications &&
                     <button>Создать вакансию</button>
                 }           
 
-                {/* {canSeeApplications &&
+                {canSeeApplications &&
                     <button onClick={passToAppllications}>Отклики</button>
-                }        */}
+                }       
         </Card>
     )
 }

@@ -7,7 +7,7 @@ import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob, cancelApplication } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
-import { currentUserSelector } from '../../store/selectors/users';
+import { authUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
@@ -18,7 +18,7 @@ const CANCEL = 'Отозвать';
 
 function JobPage() {
     const currentJob = useSelector(currentJobSelector);
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
 
     const [isApplication, setIsApplication] = useState(false);
 
@@ -26,7 +26,7 @@ function JobPage() {
 
     // TODO: remove possibilities of NULL in currentJob
     const applicationAction = useCallback(() => {       
-        if (!currentUserSelector || !currentJob) {
+        if (!authUserSelector || !currentJob) {
             alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
@@ -42,7 +42,7 @@ function JobPage() {
             .catch(() => {
                 throw new Error()
             });
-    }, [currentJob?.id, currentUser, isApplication]);
+    }, [currentJob?.id, activeUser, isApplication]);
 
     const obligations = useMemo(() => {
         return (

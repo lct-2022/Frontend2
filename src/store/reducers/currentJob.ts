@@ -1,14 +1,14 @@
 import { User, Nullable } from "../../types";
 import { ActiveJobAction, ActiveJobActions } from "../types/activeJob";
 
-import { ActiveUserAction, ActiveUserActions } from "../types/activeUser";
+import { AuthUserAction, AuthUserActions } from "../types/activeUser";
 import { IBaseStore } from "../types/store";
 
-type UserState = IBaseStore['activeJob'];
+type CurrentJobState = IBaseStore['currentJob'];
 
-const initialState: UserState = null;
+const initialState: CurrentJobState = null;
 
-export const activeJobReducer = (store: UserState = initialState, action: ActiveJobAction) => {
+export const currentJobReducer = (store: CurrentJobState = initialState, action: ActiveJobAction) => {
     const {type, payload} = action;
 
     switch (type) {

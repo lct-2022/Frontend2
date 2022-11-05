@@ -7,7 +7,7 @@ import { applicationsSelector } from '../../store/selectors/applications';
 import Application from '../../components/CommonBlocks/Application/Application';
 import { getPopularJobs } from '../../api/platform';
 import { getOwnJobs } from '../../utils/jobsAuthor';
-import { currentUserSelector } from '../../store/selectors/users';
+import { authUserSelector } from '../../store/selectors/users';
 import { ApplicationStatus, Job } from '../../types';
 import { useNavigate } from 'react-router-dom';
 const cName = cn('applications');

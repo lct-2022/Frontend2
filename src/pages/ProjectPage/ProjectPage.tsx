@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { currentProjectSelector } from '../../store/selectors/projects';
 
 import './ProjectPage.css';
-import { currentUserSelector } from '../../store/selectors/users';
+import { authUserSelector } from '../../store/selectors/users';
 import { availableTeamsAction } from '../../store/actions/teams';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
@@ -17,13 +17,13 @@ const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
 
-    const canSearchTeam = currentProject?.project['author_id'] === currentUser?.id;
+    const canSearchTeam = currentProject?.project['author_id'] === activeUser?.id;
     
     const {project, team, openVacancies, rating} = currentProject ?? {}
     const {title, description, url, contests} = project ?? {}

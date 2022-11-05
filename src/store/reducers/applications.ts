@@ -2,11 +2,11 @@ import { Project } from "../../types";
 import { IBaseStore } from "../types/store";
 import { ApplicationsAction, ApplicationsActions } from "../types/applications";
 
-type ApplicationsState = IBaseStore['applications']
+type ApplicationsState = IBaseStore['currentApplications'];
 
 export const initialState: ApplicationsState = [];
 
-export const ApplicationsReducer = (store: ApplicationsState = initialState, action: ApplicationsAction) => {
+export const currentApplicationsReducer = (store: ApplicationsState = initialState, action: ApplicationsAction) => {
     const {type, payload} = action;
 
     switch (type) {

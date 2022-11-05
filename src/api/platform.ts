@@ -1,6 +1,20 @@
 import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
+export const getAllProjects = async (query: string): Promise<Undefinedable<ProjectsList>> => {
+    return await request<ProjectsList>({
+        method: 'search_projects',
+        host: RPCHosts.Platform,
+        params: {
+            query,
+            additional_fields: [
+                'jobs',
+                'team-size',
+            ],
+        }
+    });
+};
+
 export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>> => {
     return await request<JobsList>({
         method: 'search_jobs',
@@ -14,15 +28,18 @@ export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>
     });
 };
 
-export const getAllProjects = async (query: string): Promise<Undefinedable<ProjectsList>> => {
-    return await request<ProjectsList>({
-        method: 'search_projects',
+export const getPopularProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
+    return await request<Project[]>({
+        method: 'popular_projects',
         host: RPCHosts.Platform,
         params: {
-            query,
             additional_fields: [
                 'jobs',
+                'team-size',
             ],
+            ...(limit !== undefined && {
+                limit,
+            })
         }
     });
 };
@@ -31,11 +48,14 @@ export const getPopularJobs = async (limit?: number): Promise<Undefinedable<Job[
     return await request<Job[]>({
         method: 'popular_jobs',
         host: RPCHosts.Platform,
-        ...(limit !== undefined && {
-            params: {
+        params: {
+            additional_fields: [
+                'job-application',
+            ],
+            ...(limit !== undefined && {
                 limit,
-            }
-        })
+            })
+        }
     })
 };
 
@@ -62,25 +82,16 @@ export const getProjectStages = async (): Promise<Undefinedable<string[]>> => {
 
 export const getSkills = async (): Promise<Undefinedable<string[]>> => {
     return await request<string[]>({
-        method: 'get_stages',
+        method: 'get_skills',
         host: RPCHosts.Platform,
     })
 };
 
-export const getPopularProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
-    return await request<Project[]>({
-        method: 'popular_projects',
+export const getStats = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_skills',
         host: RPCHosts.Platform,
-        params: {
-            additional_fields: [
-                'jobs',
-                'team-size',
-            ],
-            ...(limit !== undefined && {
-                limit,
-            })
-        }
-    });
+    })
 };
 
 export const getCurrentProject = async (id: number): Promise<Undefinedable<ProjectData>> => {
@@ -89,6 +100,10 @@ export const getCurrentProject = async (id: number): Promise<Undefinedable<Proje
         host: RPCHosts.Platform,
         params: {
             id,
+            additional_fields: [
+                'jobs',
+                'team-size',
+            ],
         },
     });
 };
@@ -99,7 +114,7 @@ export const getProjectTeam = async (projectId: number): Promise<Undefinedable<P
         method: 'get_team_members',
         host: RPCHosts.Platform,
         params: {
-            'project_id': projectId,
+            project_id: projectId,
         },
     });
 };
@@ -110,7 +125,7 @@ export const getApplications = async (projectId: number): Promise<Undefinedable<
         method: 'get_job_applications',
         host: RPCHosts.Platform,
         params: {
-            'project_id': projectId,
+            project_id: projectId,
         },
     })
 };
@@ -121,7 +136,7 @@ export const applyToJob = async (jobId: number, token?: string): Promise<Undefin
         method: 'apply_to_job',
         host: RPCHosts.Platform,
         params: {
-            'job_id': jobId,
+            job_id: jobId,
         },
         ...(token && {
             settings: {
@@ -132,8 +147,15 @@ export const applyToJob = async (jobId: number, token?: string): Promise<Undefin
 };
 
 //accept_application
-
-//decline_application
+export const replyApplication = async (type: 'accept' | 'decline', applicationId: number): Promise<Undefinedable<Application>> => {
+    return await request({
+        method: type === 'accept' ? 'accept_application' : 'decline_application',
+        host: RPCHosts.Platform,
+        params: {
+            id: applicationId,
+        },
+    });
+};
 
 // get_job
 export const getVacancy = async (jobId: number): Promise<Undefinedable<Job>> => {
@@ -141,7 +163,10 @@ export const getVacancy = async (jobId: number): Promise<Undefinedable<Job>> => 
         method: 'get_job',
         host: RPCHosts.Platform,
         params: {
-            'id': jobId,
+            id: jobId,
+            additional_fields: [
+                'job-application',
+            ],
         },
     });
 };
@@ -237,6 +262,22 @@ export const cancelApplication = async (applId: number, token?: string): Promise
         host: RPCHosts.Platform,
         params: {
             id: applId,
+        },
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
+    });
+};
+
+// user_projects
+export const getUsersProjects = async (userId: number, token?: string): Promise<Undefinedable<Application>> => {
+    return await request({
+        method: 'user_projects',
+        host: RPCHosts.Platform,
+        params: {
+            user_id: userId,
         },
         ...(token && {
             settings: {

@@ -13,7 +13,7 @@ import Filtration from './components/Filtration';
 
 import './Projects.css';
 import { useSelector } from 'react-redux';
-import { currentUserSelector } from '../../store/selectors/users';
+import { authUserSelector } from '../../store/selectors/users';
 import Spinner from '../../components/Spinner';
 
 const cName = cn('projects-page');

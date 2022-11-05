@@ -1,15 +1,15 @@
 import { Undefinedable, Vote } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
-interface voteArgs {
+interface IVoteArgs {
     method: 'vote' | 'get_vote',
     subjectType: 'project' | 'user',
     subjectId: number;
     token: string;
-
 }
+
 // rating
-export const vote = async (voteArgs: voteArgs): Promise<Undefinedable<Vote>> => {
+export const vote = async (voteArgs: IVoteArgs): Promise<Undefinedable<Vote>> => {
     const {method, subjectId, subjectType, token} = voteArgs;
     return await request({
         method,

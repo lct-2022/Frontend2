@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { createTeam } from '../../../../api/platform';
 import { setActiveTeamAction } from '../../../../store/actions/teams';
-import { currentUserSelector } from '../../../../store/selectors/users';
+import { authUserSelector } from '../../../../store/selectors/users';
 import { ROUTES } from '../../../../utils/routes';
 
 const cName = cn('teams');
@@ -67,7 +67,7 @@ const TEAMS: {title: string; id: number}[] = [
 
 function Teams() {
     const [teams, setTeams] = useState<{title: string; id: number}[]>(TEAMS);
-    const currentUser = useSelector(currentUserSelector);
+    const activeUser = useSelector(authUserSelector);
     
     const [isTeamCreate, setIsTeamCreate] = useState(false);
 
@@ -93,7 +93,7 @@ function Teams() {
                 <div key={id} style={{display: 'flex', justifyContent: 'space-between', gap: '8px'}}>
                     {title}
                     
-                    {currentUser?.admin &&
+                    {activeUser?.admin &&
                         <div style={{display: 'flex', gap: '4px'}}>
                             <button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</button>
                             <button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</button>
@@ -102,9 +102,9 @@ function Teams() {
                 </div>
             ))}
              
-            {currentUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
+            {activeUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
 
-            {isTeamCreate && currentUser?.admin && <TeamCreate setTeams={setTeams}/>}  
+            {isTeamCreate && activeUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>
     )
 }

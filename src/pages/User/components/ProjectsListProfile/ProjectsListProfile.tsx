@@ -7,17 +7,17 @@
 // import { ROUTES } from '../../../../utils/routes';
 // import { ProjectData } from '../../../../types';
 // import { useSelector } from 'react-redux';
-// import { currentUserSelector } from '../../../../store/selectors/users';
+// import { authUserSelector } from '../../../../store/selectors/users';
 
 // const cName = cn('projects-list-profile');
 
 // const ProjectsListProfile = () => {
-//     const currentUser = useSelector(currentUserSelector)
+//     const activeUser = useSelector(authUserSelector)
 //     const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
 
 //     useEffect(() => {
-//         setAllProjects(currentUser?.projects || [])
-//     }, [currentUser?.projects])
+//         setAllProjects(activeUser?.projects || [])
+//     }, [activeUser?.projects])
 
 //     const projectsList = useMemo(() => {
 //         if (!allProjects.length) {

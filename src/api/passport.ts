@@ -80,13 +80,15 @@ export const getUserProfile = async (userId: number): Promise<Undefinedable<User
     });
 };
 
-export const updateUserProfile = async (newData: Partial<UserData>, token: string): Promise<Undefinedable<UserData>> => {
+export const updateUserProfile = async (newData: Partial<UserData>, token?: string): Promise<Undefinedable<UserData>> => {
     return await request({
         method: 'update_profile',
         host: RPCHosts.Passport,
         params: newData,
-        settings: {
-            authToken: token,
-        }
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
     });
 };

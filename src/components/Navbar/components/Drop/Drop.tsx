@@ -7,7 +7,7 @@ import { ROUTES } from '../../../../utils/routes';
 import { removeAuthToken } from '../../../../utils/cookie';
 import { TOKEN_KEY } from '../../../../utils/consts';
 import { useDispatch } from 'react-redux';
-import { ActiveUserActions } from '../../../../store/types/activeUser';
+import { AuthUserActions } from '../../../../store/types/activeUser';
 
 const cName = cn('drop');
 

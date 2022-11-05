@@ -5,7 +5,7 @@ import UserRoutes from './components/Routes';
 import Contacts from './components/Contacts';
 
 import './User.css';
-import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
+import { authUserSelector, currentUserSelector } from '../../store/selectors/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
@@ -27,26 +27,25 @@ interface Props {
 }
 
 export const Profile: FC<Props> = () => {
-    const shownUser = useSelector(shownProfileSelector);
-    const authUser = useSelector(currentUserSelector);
+    const shownUser = useSelector(currentUserSelector);
+    const authUser = useSelector(authUserSelector);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const params = useParams()
 
-    const [currentUser, setCurrentUser] = useState(authUser);
+    const [activeUser, setactiveUser] = useState(authUser);
     
     useEffect(() => {
-        setCurrentUser(params.search ? shownUser : authUser);
+        setactiveUser(params.search ? shownUser : authUser);
     }, [params.search]);
 
     useEffect(() => {
         dispatch<any>(popularJobsAction())
     }, []);
 
-    if (!currentUser) {
+    if (!activeUser) {
         navigate(ROUTES.LOGIN)
-        // redirectToLogin();
         return null;
     }
     
@@ -55,13 +54,13 @@ export const Profile: FC<Props> = () => {
             <h1>{TITLE}</h1>
 
             <Bio 
-                user={currentUser}
+                user={activeUser}
                 rating={1}
             />
 
             <div className={cName('down')}>
-                <UserRoutes user={currentUser}/>
-                <Contacts user={currentUser}/>
+                <UserRoutes user={activeUser}/>
+                <Contacts user={activeUser}/>
             </div>
 
             {params.search &&

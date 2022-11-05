@@ -1,14 +1,14 @@
-import { User, UserData } from "../../types";
+import { UserData } from "../../types";
 import { CommonAction } from '../../types';
 
-export enum ActiveUserActions {
+export enum AuthUserActions {
     SET_USER = 'SET_USER',
     UNSET_USER = 'UNSET_USER',
 };
 
-type SetUser = CommonAction<ActiveUserActions.SET_USER, UserData>
-type UnsetUser = CommonAction<ActiveUserActions.UNSET_USER>
+type SetUser = CommonAction<AuthUserActions.SET_USER, UserData>
+type UnsetUser = CommonAction<AuthUserActions.UNSET_USER>
 
-export type ActiveUserAction = 
+export type AuthUserAction = 
     | SetUser
     | UnsetUser;

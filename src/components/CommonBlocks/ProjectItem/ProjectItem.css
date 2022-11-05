@@ -93,6 +93,11 @@
     border-color: transparent transparent #475467 transparent;
 }
 
+.project-card-triangle:hover {
+    cursor: pointer;
+    border-color: transparent transparent #283548 transparent;
+}
+
 .project-card-num-votes {
     font-size: 14px;
     margin-top: 4px;
