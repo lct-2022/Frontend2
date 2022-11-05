@@ -7,6 +7,9 @@ import './ProjectsList.css';
 import { useLocation } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
 
+import Card from '../../../../components/Card';
+import Text from '../../../../components/Text';
+
 const cName = cn('projects-list')
 
 const ProjectsList: Props = ({projects}) => {
@@ -48,8 +51,8 @@ const ProjectsList: Props = ({projects}) => {
 
     return (
         <div>
-            <h1>{isFromProfile ? 'Ваши проекты:' : 'Проекты'}</h1>
-
+            {/* <h1>{isFromProfile ? 'Ваши проекты:' : 'Проекты'}</h1> */}
+            <Card as="input"></Card>
             {projectsList}
         </div>
     )

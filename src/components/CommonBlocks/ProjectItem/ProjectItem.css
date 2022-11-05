@@ -48,6 +48,7 @@
     width: 88px;
     height: 88px;
     margin-right: 8px;
+    padding: 8px;
 
     display: flex;
     justify-content: center;
@@ -59,7 +60,7 @@
 
 .project-card-title-in-logo {
     text-align: center;
-    font-size: 16px;
+    font-size: 32px;
     font-weight: 800;
 }
 
