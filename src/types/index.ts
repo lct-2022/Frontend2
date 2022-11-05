@@ -7,44 +7,45 @@ interface ICommonData {
     id: number;
 }
 
+export type UserData = ICommonData & {
+    email: string,
+    password_hash: string,
+    avatar_url: string,
+    fio: string,
+    birthday: Nullable<string>,
+    gender: Nullable<string>,
+    phone: Nullable<string>,
+    country: Nullable<string>,
+    city: Nullable<string>,
+    education: Nullable<string>,
+    job: Nullable<string>,
+    about: Nullable<string>,
+    admin: Nullable<boolean>,
+    projects?: ProjectData[],
+    // для фильтрации
+    hidden?: boolean;
+}
+
+export type ProjectData = ICommonData & {
+    author_id: number,
+    title: string;
+    description: string;
+    url: string;
+    contests: string;
+    // для фильтрации
+    hidden?: boolean;
+};
+
 export type User = {
-    user: ICommonData & {
-        email: string,
-        password_hash: string,
-        avatar_url: string,
-        fio: string,
-        birthday: Nullable<string>,
-        gender: Nullable<string>,
-        phone: Nullable<string>,
-        country: Nullable<string>,
-        city: Nullable<string>,
-        education: Nullable<string>,
-        job: Nullable<string>,
-        about: Nullable<string>,
-        admin: Nullable<boolean>,
-        projects?: ProjectData[],
-        // для фильтрации
-        hidden?: boolean;
-    }
+    user: UserData;
     rating: number;
 }
 
 // TODO Добавить поле "получили поддержку"
 export type Project = {
-    project: ICommonData & {
-        author_id: number,
-        title: string;
-        description: string;
-        url: string;
-        contests: string;
-        // для фильтрации
-        hidden?: boolean;
-    };
+    project: ProjectData;
     rating: number;
 }
-
-export type ProjectData = Project['project'];
-export type UserData = User['user'];
 
 export type ProjectsList = {
     items: ProjectData[];

@@ -13,11 +13,6 @@ export const OPTIONS: Partial<Record<UserOption, string>> = {
     resume: 'Резюме',
 }
 
-// export const ADMIN_OPTION: Partial<Record<UserOption, string>> = {
-//     teams: 'Список команд',
-//     application: 'Отклики',
-// };
-
 export const BUSINESS_INFO = [
     'Категория: Новый бизнесс',
     'Критерии: Инновационный',

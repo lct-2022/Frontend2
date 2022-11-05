@@ -26,9 +26,6 @@ function Experts() {
     useEffect(() => {
         setAllExperts(data?.items?.map(el => ({...el, hidden: false})) || []);
     }, [data]);
-
-    if (isLoading) return <h1>Loading</h1>
-    if (error) return <h1>error</h1>
     
     const expertsList = useMemo(() => {
         return (
@@ -43,7 +40,10 @@ function Experts() {
                 ))}
             </div>
         )
-    }, [allExperts, params.search])
+    }, [allExperts, params.search]);
+
+    if (isLoading) return <h1>Loading</h1>
+    if (error) return <h1>error</h1>
 
     return (
         <QueryClientProvider client={queryClient}>

@@ -24,10 +24,7 @@ function Jobs() {
     useEffect(() => {
         setAllJobs(data?.items?.filter(el => el.open) || []);
     }, [data]);
-
-    if (isLoading) return <h1>Loading</h1>
-    if (error) return <h1>error</h1>
-
+    
     const jobsList = useMemo(() => {
         return (
             <div className={cName('list')}>
@@ -43,6 +40,9 @@ function Jobs() {
             </div>
         )
     }, [allJobs]);
+
+    if (isLoading) return <h1>Loading</h1>
+    if (error) return <h1>error</h1>
 
     return (
         <QueryClientProvider client={queryClient}>

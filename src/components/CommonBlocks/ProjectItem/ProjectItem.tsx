@@ -46,7 +46,7 @@ const ProjectCard: Props = ({
             })
             .catch((err) => {
                 throw new Error(err);
-            })
+            });
     }, [id]);
 
     const searchPeople = () => {
@@ -98,7 +98,7 @@ const ProjectCard: Props = ({
             </div>
 
             <div className={cName('rating')}>
-                {rating && 
+                {rating !== undefined && 
                     <>
                         <p>{TITLE_RATE}:&nbsp;</p>
         
@@ -116,9 +116,9 @@ const ProjectCard: Props = ({
                     <button>Создать вакансию</button>
                 }           
 
-                {canSeeApplications &&
+                {/* {canSeeApplications &&
                     <button onClick={passToAppllications}>Отклики</button>
-                }       
+                }        */}
             </div>
         </div>
     )
