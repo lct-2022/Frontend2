@@ -1,20 +1,21 @@
 import React, { memo } from 'react';
 import { cn } from '@bem-react/classname';
-import {Props} from './types'
-import './Card.css';
+
+import {Props} from './types';
+
+import './Text.css';
 
 const cName = cn('card');
 
 const Card: Props = ({
     children,
-    as: Component = 'div', 
-    withFrame = true,
+    type = 'ordinary',
     ...props
 }) => {
     return (
-        <Component {...props} className={cName({frame: withFrame})}>
+        <p {...props} className={cName({type})}>
             {children}
-        </Component>
+        </p>
     );
 };
 

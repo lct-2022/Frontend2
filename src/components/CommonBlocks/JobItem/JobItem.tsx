@@ -26,6 +26,7 @@ const JobCard: Props = ({title, description, id}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
+    // REMOVE (?)
     useEffect(() => {
         getJobApplication(id, getTokenFromCookies())
             .then(data => {

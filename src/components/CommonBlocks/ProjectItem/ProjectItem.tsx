@@ -54,6 +54,7 @@ const ProjectCard: Props = ({
     }
 
     const passToAppllications = useCallback(() => {
+        // THUNK
         getApplications(id)
             .then(data => {
                 dispatch<any>(getJobApplicationsAction(data));
