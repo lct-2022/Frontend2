@@ -32,13 +32,11 @@ const ProjectCard: Props = ({
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-
-    console.log(industry);
-    
     
     const canSearchPeople = location.pathname === ROUTES.USER;
     const canSeeApplications = location.pathname === ROUTES.USER;
-
+    console.log('rating =>',rating);
+    
     const currentUser = useSelector(currentUserSelector);
 
     const passToProject = useCallback(() => {
@@ -115,13 +113,13 @@ const ProjectCard: Props = ({
                 </div>
             </div>
 
-            <div className={cName('rating')}>
                 {rating !== undefined && 
-                    <>
-                        <div className={cName('triangle')}/>
-        
-                        <div className={cName('num-votes')}>{rating}</div>
-                    </>
+                    <div className={cName('rating')}>
+                        <>
+                            <div className={cName('triangle')}/>
+                            <div className={cName('num-votes')}>{rating}</div>
+                        </>
+                    </div>
                 }
 
                 {canSearchPeople &&
@@ -135,7 +133,6 @@ const ProjectCard: Props = ({
                 {/* {canSeeApplications &&
                     <button onClick={passToAppllications}>Отклики</button>
                 }        */}
-            </div>
         </Card>
     )
 }
