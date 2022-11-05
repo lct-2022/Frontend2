@@ -53,25 +53,10 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D | undefi
     const result: IDataRPC<D> = await response.json();
     
     if (!result.result) {   
-        return;
+        return undefined;
     }
     
     return result.result;
-}
-
-function isAuthorizationMissingPassed(data: IDataRPC<any>): boolean {
-    if (data.result) {
-        return true;
-    }
-
-    if (data.error) {
-        const {error} = data;
-        if (error.code === 3 && error.message === 'Этот метод требует аутентификации.') {
-            return true
-        }
-    }
-
-    return false;
 }
 
 export enum RPCHosts {
