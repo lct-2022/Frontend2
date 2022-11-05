@@ -11,6 +11,7 @@ import JobCard from '../../components/CommonBlocks/JobItem';
 
 import './Jobs.css';
 import { popularJobsAction } from '../../store/actions/jobs';
+import Spinner from '../../components/Spinner';
 
 const cName = cn('jobs-page');
 
@@ -24,7 +25,7 @@ function Jobs() {
     useEffect(() => {
         setAllJobs(data?.items?.filter(el => el.open) || []);
     }, [data]);
-    
+
     const jobsList = useMemo(() => {
         return (
             <div className={cName('list')}>
@@ -42,8 +43,13 @@ function Jobs() {
         )
     }, [allJobs]);
 
-    if (isLoading) return <h1>Loading</h1>
-    if (error) return <h1>error</h1>
+    if (isLoading) {
+        return <Spinner/>
+    } 
+
+    if (error) {
+        throw new Error();
+    }
 
     return (
         <QueryClientProvider client={queryClient}>

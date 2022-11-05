@@ -14,6 +14,7 @@ import Filtration from './components/Filtration';
 import './Projects.css';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../store/selectors/users';
+import Spinner from '../../components/Spinner';
 
 const cName = cn('projects-page');
 
@@ -32,8 +33,13 @@ const Projects: FC<Props> = () => {
         setAllProjects(data?.items?.map(project => ({...project, hidden: false})) || []);
     }, [data]);
 
-    if (isLoading) return <h1>Loading</h1>
-    if (error) return <h1>error</h1>
+    if (isLoading) {
+        return <Spinner/>
+    } 
+
+    if (error) {
+        throw new Error();
+    } 
 
     return (
         <QueryClientProvider client={queryClient}>

@@ -12,6 +12,7 @@ import { getAllProfiles, getProfiles } from '../../api/passport';
 
 import './Experts.css';
 import { useParams } from 'react-router';
+import Spinner from '../../components/Spinner';
 
 const cName = cn('experts');
 const queryClient = new QueryClient();
@@ -42,8 +43,13 @@ function Experts() {
         )
     }, [allExperts, params.search]);
 
-    if (isLoading) return <h1>Loading</h1>
-    if (error) return <h1>error</h1>
+    if (isLoading) {
+        return <Spinner/>
+    } 
+
+    if (error) {
+        throw new Error();
+    }
 
     return (
         <QueryClientProvider client={queryClient}>
