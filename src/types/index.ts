@@ -48,6 +48,21 @@ export type Project = {
 export type ProjectData = Project['project'];
 export type UserData = User['user'];
 
+export type ProjectsList = {
+    items: ProjectData[];
+    'next-page-key': string;
+}
+
+export type JobsList = {
+    items: Job[];
+    'next-page-key': string;
+}
+
+export type UsersList = {
+    items: UserData[];
+    'next-page-key': string;
+}
+
 export type Team = ICommonData & {
     title: string;
     project_id: ProjectData['id'];
@@ -60,16 +75,6 @@ export type ProjectTeamMember = ICommonData & {
     job: Job;
     title: string;
 };
-
-export type Job = ICommonData & {
-    team_id: number;
-    team: Team;
-    title: string;
-    description: string;
-    open: boolean;
-    hidden?: boolean;
-}
-// job -> team -> project -> project.author_id
 
 export enum ApplicationStatus {
     APPLIED = 'applied',
@@ -84,6 +89,16 @@ export type Application = ICommonData & {
     message: string;
     status: ApplicationStatus;
 };
+
+export type Job = ICommonData & {
+    team_id: number;
+    team: Team;
+    title: string;
+    description: string;
+    open: boolean;
+    job_application: Application;
+    hidden?: boolean;
+}
 
 export type Event = ICommonData & {};
 

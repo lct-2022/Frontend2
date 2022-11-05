@@ -1,17 +1,41 @@
-import { Application, Job, Project, ProjectData, ProjectTeamMember, Team } from "../types";
+import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
-export const getJobs = async (limit?: number) => {
+export const getAllJobs = async (query: string): Promise<JobsList> => {
+    return await request<JobsList>({
+        method: 'search_jobs',
+        host: RPCHosts.Platform,
+        params: {
+            query,
+            additional_fields: [
+                'job_application',
+            ],
+        }
+    });
+};
+
+export const getAllProjects = async (query: string): Promise<ProjectsList> => {
+    return await request<ProjectsList>({
+        method: 'search_projects',
+        host: RPCHosts.Platform,
+        params: {
+            query,
+            additional_fields: [
+                'jobs',
+            ],
+        }
+    });
+};
+
+export const getJobs = async (limit?: number): Promise<Job[]> => {
     return await request<Job[]>({
         method: 'popular_jobs',
         host: RPCHosts.Platform,
         ...(limit && {
-            params: {limit}
+            params: {
+                limit,
+            }
         })
-    })
-    .then((data) => {
-        return data
-        
     })
 };
 

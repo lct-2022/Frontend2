@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import {BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {QueryClientProvider, QueryClient, useQuery} from 'react-query';
 
 import LoginForm from '../Login';
 import Profile from '../User';
@@ -14,7 +15,7 @@ import Teams from '../Teams/Teams';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
 import ErrorBoundary from '../../components/Error-Boundary';
-import { getAuthorizedUser } from '../../api/passport';
+import { getAllProfiles, getAuthorizedUser } from '../../api/passport';
 import { useDispatch } from 'react-redux';
 import { getAuthorizedUserAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -25,33 +26,43 @@ import { IBaseStore } from '../../store/types/store';
 import { antiadblock } from '../../utils/antiblock';
 import { lsGetAuthorizedUser } from '../../utils/storage';
 import EditForm from '../User/components/EditForm/EditForm';
-
-// antiadblock();
+import { getAllJobs, getAllProjects } from '../../api/platform';
 
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
   console.log('STORE =>', store);
   const currentUser = useSelector(currentUserSelector);
 
-  console.log(currentUser?.projects);
-  
-  
+  const queryClient = new QueryClient();
+
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { isLoading, error, data } = useQuery(
+    'data',
+    () =>
+      Promise.all([
+        getAllProjects('*'),
+        getAllJobs('*'),
+        getAllProfiles('*'),
+      ])
+  );
+
+  console.log('ISLOADING =>', isLoading);
+  console.log('data =>', data);
+
 
   useEffect(() => {
       const isUserAuthorizedInit = currentUser || getTokenFromCookies() || lsGetAuthorizedUser();
-
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {
-        navigate(ROUTES.INDEX)
+        navigate(ROUTES.INDEX);
       }
-
       dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())); // token из кук
   }, []);
 
   return (  
-      <>
+      <QueryClientProvider client={queryClient}>
           <Navbar/>
             <Routes>
               <Route path={ROUTES.INDEX} element={<Home/>}/>
@@ -79,7 +90,7 @@ function Main() {
               <Route path={ROUTES.SERVICES} element={<h1>Сервисы</h1>}/>
             </Routes>
             {/* <Footer/> */}
-        </>
+        </QueryClientProvider>
   );
 }
 

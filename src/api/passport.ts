@@ -1,4 +1,4 @@
-import { User, UserData } from "../types";
+import { User, UserData, UsersList } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
 export const getAuthorizedUser = async (token?: string): Promise< UserData> => {
@@ -41,12 +41,28 @@ export const login = async (email: string, password: string): Promise<string> =>
     })
 };
 
+// search-users
+export const getAllProfiles = async (query: string): Promise<UsersList> => {
+    return await request<UsersList>({
+        method: 'search_users',
+        host: RPCHosts.Passport,
+        params: {
+            query,
+            additional_fields: [
+                'projects',
+            ],
+        }
+    });
+};
+
 export const getProfiles = async (limit?: number): Promise<User[]> => {
     return await request<User[]>({
         method: 'popular_profiles',
         host: RPCHosts.Passport,
         ...(limit && {
-            params: {limit}
+            params: {
+                limit
+            },
         })
     });
 };
