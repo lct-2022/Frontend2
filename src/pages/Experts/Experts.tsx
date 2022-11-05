@@ -1,37 +1,42 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getJobs, getProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
-import { Job, Project, User } from '../../types';
+import { UserData } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
 import ExpertCard from '../../components/CommonBlocks/ExpertItem';
-import { getProfiles } from '../../api/passport';
+import { getAllProfiles, getProfiles } from '../../api/passport';
 
 import './Experts.css';
 import { useParams } from 'react-router';
 
-const cName = cn('experts')
+const cName = cn('experts');
+const queryClient = new QueryClient();
+
 
 function Experts() {
-    const [allExperts, setAllExperts] = useState<User[]>([]);
+    const [allExperts, setAllExperts] = useState<UserData[]>([]);
     const params = useParams();
 
-    useEffect(() => {    
-        getProfiles()
-            .then(data => {
-                setAllExperts(data.map(el => ({...el, hidden: false})));
-            })
-    }, []);
+    const {isLoading, error, data} = useQuery('allExperts', () => getAllProfiles('*'));
+
+    useEffect(() => {
+        setAllExperts(data?.items?.map(el => ({...el, hidden: false})) || []);
+    }, [data]);
+
+    if (isLoading) return <h1>Loading</h1>
+    if (error) return <h1>error</h1>
     
     const expertsList = useMemo(() => {
         return (
             <div className={cName('list')}>
-                {allExperts.map(({user, rating}) => (
+                {allExperts.map((user) => (
                     <div key={user.id}>
                         <ExpertCard
                             user={user}
-                            rating={rating}
                             canBeInvited={params.search}
                         />
                     </div>
@@ -41,11 +46,13 @@ function Experts() {
     }, [allExperts, params.search])
 
     return (
-        <div className={cName()}>
-            <h1>Эксперты:</h1>
+        <QueryClientProvider client={queryClient}>
+            <div className={cName()}>
+                <h1>Эксперты:</h1>
 
-            {expertsList}
-        </div>
+                {expertsList}
+            </div>
+        </QueryClientProvider>
     )
 }
 export default memo(Experts);

@@ -23,11 +23,10 @@ export type User = {
         about: Nullable<string>,
         admin: Nullable<boolean>,
         projects?: ProjectData[],
+        // для фильтрации
         hidden?: boolean;
     }
     rating: number;
-    // для фильтрации
-    hidden?: boolean;
 }
 
 // TODO Добавить поле "получили поддержку"
@@ -38,11 +37,10 @@ export type Project = {
         description: string;
         url: string;
         contests: string;
+        // для фильтрации
         hidden?: boolean;
     };
     rating: number;
-    // для фильтрации
-    hidden?: boolean;
 }
 
 export type ProjectData = Project['project'];

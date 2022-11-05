@@ -38,7 +38,7 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
             <div className={cName('data')}>
                 <div className={cName('fio')} onClick={() => {}}>{fio}</div>
                 <div className={cName('job')}>{job}</div>
-                <div className={cName('rate')}>rate:&nbsp;{rating}</div>
+                {rating !== undefined && <div className={cName('rate')}>rate:&nbsp;{rating}</div>}
             </div>
 
             {/* Уведомления потом */}

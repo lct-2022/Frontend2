@@ -3,7 +3,7 @@ import { Job, User, UserData } from "../../../types";
 
 interface IProps {
     user:  User['user'];
-    rating: User['rating'];
+    rating?: User['rating'];
     canBeInvited?: string 
 }
 

@@ -1,9 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import {
-    QueryClient,
-    QueryClientProvider,
-    useQuery,
-  } from 'react-query';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getAllProjects, getProjects } from '../../api/platform';
