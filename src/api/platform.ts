@@ -8,7 +8,7 @@ export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>
         params: {
             query,
             additional_fields: [
-                'job_application',
+                'job-application',
             ],
         }
     });

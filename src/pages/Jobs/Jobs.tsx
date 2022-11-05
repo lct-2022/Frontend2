@@ -28,11 +28,12 @@ function Jobs() {
     const jobsList = useMemo(() => {
         return (
             <div className={cName('list')}>
-                {allJobs.map(({title, description, id}) => (
+                {allJobs.map(({title, description, job_application, id}) => (
                     <div key={id}>
                         <JobCard
                             title={title}
                             description={description}
+                            application={job_application} 
                             id={id}
                         />
                     </div>

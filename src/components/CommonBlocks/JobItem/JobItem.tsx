@@ -7,7 +7,7 @@ import './JobItem.css';
 
 import {Props} from './types';
 import { applyToJob, getJobApplication, getApplications, getVacancy, cancelApplication } from '../../../api/platform';
-import { getTokenFromCookies, redirectToLogin } from '../../../utils/cookie';
+import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
@@ -19,24 +19,27 @@ const cName = cn('vacancy-card');
 const APPLY = 'Откликнуться';
 const CANCEL = 'Отозвать';
 
-const JobCard: Props = ({title, description, id}) => {
+const JobCard: Props = ({title, description, application, id}) => {
     const currentUser = useSelector(currentUserSelector);
     const [isApplication, setIsApplication] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-    // REMOVE (?)
+
     useEffect(() => {
         getJobApplication(id, getTokenFromCookies())
             .then(data => {
                 setIsApplication(!!data);
             })
-    }, [id])
+    }, [id]);
+    //-----//
+    useEffect(() => {
+        setIsApplication(!!application);
+    }, [application]);
     
     const applicationAction = useCallback(() => {       
-        if (!currentUserSelector) {
-            redirectToLogin();
+        if (!currentUser) {
+            alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
 
@@ -62,9 +65,9 @@ const JobCard: Props = ({title, description, id}) => {
 
     const btn = useMemo(() => {
         return (
-            <Button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
+            <button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
                 {isApplication ? CANCEL : APPLY}
-            </Button>
+            </button>
         )
     }, [isApplication, applicationAction])
 

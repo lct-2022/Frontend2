@@ -24,7 +24,3 @@ export function setAuthToken(token?: string) {
 export function removeAuthToken(token?: string) {
     document.cookie = (token || '') + DELETE_COOKIE_STR;
 }
-
-export function redirectToLogin() {
-    window.location.pathname = ROUTES.LOGIN
-}

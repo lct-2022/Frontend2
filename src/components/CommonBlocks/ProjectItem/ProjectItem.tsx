@@ -57,7 +57,7 @@ const ProjectCard: Props = ({
         // THUNK
         getApplications(id)
             .then(data => {
-                dispatch<any>(getJobApplicationsAction(data));
+                dispatch<any>(getJobApplicationsAction(data || []));
                 navigate(ROUTES.APPLICATIONS);
             })
     }, [id]);

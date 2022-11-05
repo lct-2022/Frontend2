@@ -6,7 +6,7 @@ import { currentProjectSelector } from '../../store/selectors/projects';
 import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob, cancelApplication } from '../../api/platform';
-import { getTokenFromCookies, redirectToLogin } from '../../utils/cookie';
+import { getTokenFromCookies } from '../../utils/cookie';
 import { currentUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
@@ -27,7 +27,7 @@ function JobPage() {
     // TODO: remove possibilities of NULL in currentJob
     const applicationAction = useCallback(() => {       
         if (!currentUserSelector || !currentJob) {
-            redirectToLogin();
+            alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
 

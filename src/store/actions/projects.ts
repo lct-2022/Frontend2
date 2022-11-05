@@ -46,7 +46,7 @@ export const getProjectVacanciesAction = (id: number) => {
         
         dispatch({
             type: ActiveProjectActions.SET_VACANCIES,
-            payload: projectVacanciesResponse.map(el => el.job),
+            payload: projectVacanciesResponse?.map(el => el.job) || [],
         });
     }
 }

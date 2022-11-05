@@ -23,6 +23,11 @@ export type UserData = ICommonData & {
     about: Nullable<string>,
     admin: Nullable<boolean>,
     projects?: ProjectData[],
+    profession_id: number;
+    skill_ids: number[];
+    skills: string[];
+    looking_for_job: boolean;
+    looking_for_hackathon: boolean;
     // для фильтрации
     hidden?: boolean;
 }
@@ -33,6 +38,13 @@ export type ProjectData = ICommonData & {
     description: string;
     url: string;
     contests: string;
+    jobs?: Job;
+    stage_title: string;
+    stage_id: number;
+    industry: string;
+    innovations: string;
+    innovation_type: string;
+    team_size: Nullable<number>;
     // для фильтрации
     hidden?: boolean;
 };
@@ -50,17 +62,17 @@ export type Project = {
 
 export type ProjectsList = {
     items: ProjectData[];
-    'next-page-key': string;
+    next_page_key: string;
 }
 
 export type JobsList = {
     items: Job[];
-    'next-page-key': string;
+    next_page_key: string;
 }
 
 export type UsersList = {
     items: UserData[];
-    'next-page-key': string;
+    next_page_key: string;
 }
 
 export type Team = ICommonData & {
@@ -96,7 +108,7 @@ export type Job = ICommonData & {
     title: string;
     description: string;
     open: boolean;
-    job_application: Application;
+    job_application?: Application;
     hidden?: boolean;
 }
 

@@ -32,7 +32,7 @@ const ApplicationComp: FC<Props> = ({application}) => {
     useEffect(() => {
         getUserProfile(user_id)
             .then(data => {
-                setAppliedUser(data); 
+                setAppliedUser(data || null); 
             })
     }, []);
 
