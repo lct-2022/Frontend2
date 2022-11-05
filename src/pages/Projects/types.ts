@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Project, ProjectData } from "../../types";
 
 interface IProps {
-    projects: Project[];
+    projects: ProjectData[];
 }
 
 export type Props = FC<IProps>;

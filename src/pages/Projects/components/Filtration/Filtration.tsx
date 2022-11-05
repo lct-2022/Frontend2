@@ -14,7 +14,7 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
         setProjects(prev => {
             const {min, max} = parseStringForDiapazon(value);
             
-            return prev.map(project => checked && (project.project.id <= min || project.project.id >= max)
+            return prev.map(project => checked && (project.id <= min || project.id >= max)
                 ? {...project, hidden: true} 
                 : {...project, hidden: false}    
             );
@@ -24,7 +24,7 @@ const ProjectFilters: Props = ({projects, setProjects}) => {
     const filterByLimitsRating = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setProjects(prev => {
             const {min, max} = parseStringForDiapazon(event.target.value);
-            return prev.map(project => project.rating <= min && project.rating >= max 
+            return prev.map(project => project.id <= min && project.id >= max 
                 ? {...project, hidden: false} 
                 : project   
             );

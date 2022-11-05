@@ -39,20 +39,6 @@ function Main() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoading, error, data } = useQuery(
-    'data',
-    () =>
-      Promise.all([
-        getAllProjects('*'),
-        getAllJobs('*'),
-        getAllProfiles('*'),
-      ])
-  );
-
-  console.log('ISLOADING =>', isLoading);
-  console.log('data =>', data);
-
-
   useEffect(() => {
       const isUserAuthorizedInit = currentUser || getTokenFromCookies() || lsGetAuthorizedUser();
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {

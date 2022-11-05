@@ -3,8 +3,8 @@ import { Project, ProjectData } from "../../../../types";
 
 
 interface IProps {
-    projects: Project[];
-    setProjects: Dispatch<SetStateAction<Project[]>>;
+    projects: ProjectData[];
+    setProjects: Dispatch<SetStateAction<ProjectData[]>>;
 }
 
 export type Props = FC<IProps>;

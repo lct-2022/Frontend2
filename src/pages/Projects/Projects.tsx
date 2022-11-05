@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getProjects } from '../../api/platform';
+import { getAllProjects, getProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Project, ProjectData } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -23,12 +23,12 @@ interface Props {
 const Projects: FC<Props> = () => {
     const currentUser = useSelector(currentUserSelector)
 
-    const [allProjects, setAllProjects] = useState<Project[]>([]);
+    const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
     
     useEffect(() => {
-        getProjects()
+        getAllProjects('*')
             .then(data => {
-                setAllProjects(data?.map(project => ({...project, hidden: false})) || []);
+                setAllProjects(data?.items?.map(project => ({...project, hidden: false})) || []);
             })
     }, []);
 

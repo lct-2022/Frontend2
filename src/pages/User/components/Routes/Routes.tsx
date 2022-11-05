@@ -11,6 +11,8 @@ import UserOptions from '../../components/Options';
 import { ROUTES } from '../../../../utils/routes';
 import './Routes.css';
 import Projects from '../ProjectsListProfile/ProjectsListProfile';
+import { useSelector } from 'react-redux';
+import ProjectsList from '../../../Projects/components/ProjectsList';
 
 const cName = cn('user-routes');
 
@@ -37,7 +39,7 @@ const UserRoutes: Props = ({user}) => {
             }
 
             {shownData === 'ideas' &&
-                <Projects />
+                <ProjectsList projects={user?.projects || []}/>
             }
 
             {shownData === 'teams' &&
