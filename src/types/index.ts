@@ -1,4 +1,5 @@
 export type Nullable<D> = D | null;
+export type Undefinedable<D> = D | undefined;
 
 interface ICommonData {
     created_at: string;

@@ -9,17 +9,18 @@ import { UsersAction, UsersActions } from '../types/users';
 export const getAuthorizedUserAction = (token?: string) => {
     return async (dispatch: Dispatch<ActiveUserAction>) => {
 
-        const signupResponse = await getAuthorizedUser(token);
+        const authorizeResponse = await getAuthorizedUser(token);
 
-        if (signupResponse) {
-            lsSaveAuthorizedUser(signupResponse)
+        if (authorizeResponse) {
+            lsSaveAuthorizedUser(authorizeResponse)
         }
-
-        return signupResponse
+        console.log('authorizeResponse', authorizeResponse);
+        
+        return authorizeResponse
             ? 
                 dispatch({
                     type: ActiveUserActions.SET_USER,
-                    payload: signupResponse,
+                    payload: authorizeResponse,
                 })
             : 
                 dispatch({

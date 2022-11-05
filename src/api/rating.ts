@@ -1,4 +1,4 @@
-import { Vote } from "../types";
+import { Undefinedable, Vote } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
 interface voteArgs {
@@ -9,7 +9,7 @@ interface voteArgs {
 
 }
 // rating
-export const vote = async (voteArgs: voteArgs): Promise<Vote> => {
+export const vote = async (voteArgs: voteArgs): Promise<Undefinedable<Vote>> => {
     const {method, subjectId, subjectType, token} = voteArgs;
     return await request({
         method,
@@ -24,7 +24,7 @@ export const vote = async (voteArgs: voteArgs): Promise<Vote> => {
     });
 };
 
-export const getRating = async (subjectType: 'project' | 'user', subjectId: number): Promise<number> => {
+export const getRating = async (subjectType: 'project' | 'user', subjectId: number): Promise<Undefinedable<number>> => {
     return await request({
         method: 'get_rating',
         host: RPCHosts.Ratings,

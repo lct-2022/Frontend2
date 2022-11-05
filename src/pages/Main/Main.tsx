@@ -23,7 +23,6 @@ import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
 import { currentUserSelector, shownProfileSelector } from '../../store/selectors/users';
 import { IBaseStore } from '../../store/types/store';
-import { antiadblock } from '../../utils/antiblock';
 import { lsGetAuthorizedUser } from '../../utils/storage';
 import EditForm from '../User/components/EditForm/EditForm';
 import { getAllJobs, getAllProjects } from '../../api/platform';

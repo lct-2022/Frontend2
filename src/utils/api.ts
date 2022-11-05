@@ -1,3 +1,5 @@
+import { result } from "lodash";
+
 interface IDataRPC<D> {
     result?: D,
     error?: {
@@ -21,7 +23,7 @@ export interface RequestOptions {
     projects: boolean;
 }
 
-export async function request<D>(args: IRPCRequestArguments): Promise<D> {
+export async function request<D>(args: IRPCRequestArguments): Promise<D | undefined> {
     const {method, host, params, settings} = args;
     
     const url = `https://${host}.dev.lct.40ants.com`;
@@ -47,19 +49,29 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D> {
         body: JSON.stringify(body),
     }
     
-    const response = await fetch(url, options);
-    
-    if (!response.ok) {
-        throw new Error();
-    }
-    
+    const response = await fetch(url, options);    
     const result: IDataRPC<D> = await response.json();
     
-    if (result.error || result.result === undefined) {   
-        throw new Error();
+    if (!result.result) {   
+        return;
     }
     
     return result.result;
+}
+
+function isAuthorizationMissingPassed(data: IDataRPC<any>): boolean {
+    if (data.result) {
+        return true;
+    }
+
+    if (data.error) {
+        const {error} = data;
+        if (error.code === 3 && error.message === 'Этот метод требует аутентификации.') {
+            return true
+        }
+    }
+
+    return false;
 }
 
 export enum RPCHosts {

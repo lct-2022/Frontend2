@@ -1,7 +1,7 @@
-import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team } from "../types";
+import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
-export const getAllJobs = async (query: string): Promise<JobsList> => {
+export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>> => {
     return await request<JobsList>({
         method: 'search_jobs',
         host: RPCHosts.Platform,
@@ -14,7 +14,7 @@ export const getAllJobs = async (query: string): Promise<JobsList> => {
     });
 };
 
-export const getAllProjects = async (query: string): Promise<ProjectsList> => {
+export const getAllProjects = async (query: string): Promise<Undefinedable<ProjectsList>> => {
     return await request<ProjectsList>({
         method: 'search_projects',
         host: RPCHosts.Platform,
@@ -27,7 +27,7 @@ export const getAllProjects = async (query: string): Promise<ProjectsList> => {
     });
 };
 
-export const getJobs = async (limit?: number): Promise<Job[]> => {
+export const getJobs = async (limit?: number): Promise<Undefinedable<Job[]>> => {
     return await request<Job[]>({
         method: 'popular_jobs',
         host: RPCHosts.Platform,
@@ -39,7 +39,7 @@ export const getJobs = async (limit?: number): Promise<Job[]> => {
     })
 };
 
-export const getProjects = async (limit?: number): Promise<Project[]> => {
+export const getProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
     return await request<Project[]>({
         method: 'popular_projects',
         host: RPCHosts.Platform,
@@ -49,7 +49,7 @@ export const getProjects = async (limit?: number): Promise<Project[]> => {
     });
 };
 
-export const getCurrentProject = async (id: number): Promise<ProjectData> => {
+export const getCurrentProject = async (id: number): Promise<Undefinedable<ProjectData>> => {
     return await request<ProjectData>({
         method: 'get_project',
         host: RPCHosts.Platform,
@@ -60,7 +60,7 @@ export const getCurrentProject = async (id: number): Promise<ProjectData> => {
 };
 
 // get_project_team
-export const getProjectTeam = async (projectId: number): Promise<ProjectTeamMember[]> => {
+export const getProjectTeam = async (projectId: number): Promise<Undefinedable<ProjectTeamMember[]>> => {
     return await request<ProjectTeamMember[]>({
         method: 'get_team_members',
         host: RPCHosts.Platform,
@@ -71,7 +71,7 @@ export const getProjectTeam = async (projectId: number): Promise<ProjectTeamMemb
 };
 
 // get_project_vacancies
-export const getApplications = async (projectId: number): Promise<Application[]> => {
+export const getApplications = async (projectId: number): Promise<Undefinedable<Application[]>> => {
     return await request<Application[]>({
         method: 'get_job_applications',
         host: RPCHosts.Platform,
@@ -82,7 +82,7 @@ export const getApplications = async (projectId: number): Promise<Application[]>
 };
 
 //apply_to_job
-export const applyToJob = async (jobId: number, token?: string): Promise<Application> => {
+export const applyToJob = async (jobId: number, token?: string): Promise<Undefinedable<Application>> => {
     return await request({
         method: 'apply_to_job',
         host: RPCHosts.Platform,
@@ -102,7 +102,7 @@ export const applyToJob = async (jobId: number, token?: string): Promise<Applica
 //decline_application
 
 // get_job
-export const getVacancy = async (jobId: number): Promise<Job> => {
+export const getVacancy = async (jobId: number): Promise<Undefinedable<Job>> => {
     return await request({
         method: 'get_job',
         host: RPCHosts.Platform,
@@ -112,7 +112,7 @@ export const getVacancy = async (jobId: number): Promise<Job> => {
     });
 };
 
-export const getJobApplication = async (jobId: number, token?: string): Promise<Application> => {
+export const getJobApplication = async (jobId: number, token?: string): Promise<Undefinedable<Application>> => {
     return await request({
         method: 'get_job_application',
         host: RPCHosts.Platform,
@@ -134,7 +134,7 @@ interface createProjectArgs {
     url?: string;
 }
 
-export const createProject = async (projectParams: createProjectArgs, token?: string): Promise<ProjectData> => {
+export const createProject = async (projectParams: createProjectArgs, token?: string): Promise<Undefinedable<ProjectData>> => {
     return await request({
         method: 'create_project',
         host: RPCHosts.Platform,
@@ -148,7 +148,7 @@ export const createProject = async (projectParams: createProjectArgs, token?: st
 };
 
 // create_team
-export const createTeam = async (projectId: number, title: string, token?: string): Promise<Team> => {
+export const createTeam = async (projectId: number, title: string, token?: string): Promise<Undefinedable<Team>> => {
     return await request({
         method: 'create_team',
         host: RPCHosts.Platform,
@@ -165,7 +165,7 @@ export const createTeam = async (projectId: number, title: string, token?: strin
 };
 
 //get_project_teams
-export const getTeamsAvailableForProject = async (projectId: number, token?: string): Promise<Team[] | null> => {
+export const getTeamsAvailableForProject = async (projectId: number, token?: string): Promise<Undefinedable<Team[] | null>> => {
     return await request({
         method: 'get_project_teams',
         host: RPCHosts.Platform,
@@ -181,7 +181,7 @@ export const getTeamsAvailableForProject = async (projectId: number, token?: str
 };
 
 //get_project_teams
-export const getTeamJobs = async (projectId: number, token?: string): Promise<Team[] | null> => {
+export const getTeamJobs = async (projectId: number, token?: string): Promise<Undefinedable<Team[] | null>> => {
     return await request({
         method: 'get_project_teams',
         host: RPCHosts.Platform,
@@ -197,7 +197,7 @@ export const getTeamJobs = async (projectId: number, token?: string): Promise<Te
 };
 
 // cancel-application
-export const cancelApplication = async (applId: number, token?: string): Promise<Application> => {
+export const cancelApplication = async (applId: number, token?: string): Promise<Undefinedable<Application>> => {
     return await request({
         method: 'cancel_application',
         host: RPCHosts.Platform,
