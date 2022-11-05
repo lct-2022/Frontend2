@@ -23,18 +23,16 @@ function ProjectPage() {
     const navigate = useNavigate();
     const params = useParams();
 
-    const canSearchTeam = currentProject?.project['author_id'] === activeUser?.id;
+    const canSearchTeam = currentProject?.['author_id'] === activeUser?.id;
     
-    const {project, team, openVacancies, rating} = currentProject ?? {}
-    const {title, description, url, contests} = project ?? {}
-    const createdAt = project?.['created_at'] ?? '';
+    const {team_size, jobs, title, description, url, contests, created_at} = currentProject ?? {};
 
     const getTeamsForProject = useCallback(() => {
-        dispatch<any>(availableTeamsAction(currentProject?.project?.id ?? 0, getTokenFromCookies()))
+        dispatch<any>(availableTeamsAction(currentProject?.id ?? 0, getTokenFromCookies()))
             .then(() => {
                 navigate(ROUTES.TEAMS)
             });
-    }, [currentProject?.project?.id]);
+    }, [currentProject?.id]);
 
     const goBackToMyIdeas = () => {
         navigate(ROUTES.USER);
@@ -55,9 +53,9 @@ function ProjectPage() {
             <div className={cName('details')}>
                 <div className={cName('description_card')}>
                     <div className={cName('team_info')}>
-                        <p className={cName('team_amount')}>{team?.length} человек в команде</p>
+                        <p className={cName('team_amount')}>{team_size} человек в команде</p>
                         
-                        <p>{openVacancies?.length ? `${openVacancies?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
+                        <p>{jobs?.length ? `${jobs?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
                     </div>
 
                     <p className={cName('description')}>{description}</p>
@@ -67,14 +65,12 @@ function ProjectPage() {
                         target="_blank"
                         rel="noopener norefere"
                     >
-                        {url || 'https://ya.ru/'}  
+                        {url || ''}  
                     </a>
 
                     <p className={cName('contests')}>{contests}</p>
 
-                    <p className={cName('created')}>{createdAt}</p>
-
-                    <div>Rate:&nbsp;{rating}</div>
+                    <p className={cName('created')}>{created_at}</p>
                 </div>
 
                 <div className={cName('vacancies')}>

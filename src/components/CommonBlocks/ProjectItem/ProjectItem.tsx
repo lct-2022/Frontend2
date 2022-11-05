@@ -6,7 +6,7 @@ import './ProjectItem.css';
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
 import { getApplications, getCurrentProject } from '../../../api/platform';
-import { getCurrentProjectAction, getProjectTeamAction } from '../../../store/actions/projects';
+import { getCurrentProjectAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getJobApplicationsAction } from '../../../store/actions/jobs';
@@ -16,6 +16,7 @@ import { authUserSelector } from '../../../store/selectors/users';
 import Card from '../../Card';
 import Text from '../../Text';
 import { validateNumberPeople } from '../../../utils/grammar';
+import Spinner from '../../Spinner';
 
 const cName = cn('project-card');
 
@@ -35,21 +36,18 @@ const ProjectCard: Props = ({
     
     const activeUser = useSelector(authUserSelector);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     // const canSearchPeople = location.pathname === ROUTES.USER;
     const canSeeApplications = location.pathname === ROUTES.USER || (activeUser?.admin && location.pathname !== ROUTES.INDEX);
 
     const passToProject = useCallback(() => {
-        Promise.all([
-            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
-            new Promise((res) => res(dispatch<any>(getProjectTeamAction(id)))),
-            // dispatch<any>(getProjectVacanciesAction(id)),
-        ])
+        setIsLoading(true);
+        new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id))))
             .then(() => {
                 navigate(ROUTES.PROJECT);
+                setIsLoading(false);
             })
-            .catch((err) => {
-                throw new Error(err);
-            });
     }, [id]);
 
     const searchPeople = () => {
@@ -81,6 +79,10 @@ const ProjectCard: Props = ({
                 //
             })
     }, [id, activeUser]);
+
+    if (isLoading) {
+        return <Spinner/>
+    }
     
     return (
         <Card className={cName()}>

@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const Profile: FC<Props> = () => {
-    const shownUser = useSelector(currentUserSelector);
+    const currentUser = useSelector(currentUserSelector);
     const authUser = useSelector(authUserSelector);
     
     const navigate = useNavigate();
@@ -37,8 +37,8 @@ export const Profile: FC<Props> = () => {
     const [activeUser, setactiveUser] = useState(authUser);
     
     useEffect(() => {
-        setactiveUser(params.search ? shownUser : authUser);
-    }, [params.search]);
+        setactiveUser(params.search ? currentUser : authUser);
+    }, [params.search, currentUser, authUser]);
 
     useEffect(() => {
         dispatch<any>(popularJobsAction())
