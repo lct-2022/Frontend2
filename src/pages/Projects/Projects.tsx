@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getAllProjects, getPopularProjects } from '../../api/platform';
+import { getAllProjects, getIndustries, getInnovationTypes, getPopularProjects } from '../../api/platform';
 import { popularProjectsAction } from '../../store/actions/projects';
 import { Project, ProjectData } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -28,22 +28,24 @@ const Projects: FC<Props> = () => {
     const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
 
     const allProjectsResponce = useQuery('allProjects', () => getAllProjects('*'));
-    const innovationTypesResponce = useQuery('getInnovationtypes', () => getAllProjects('*'));
+    const innovationTypesResponce = useQuery('getInnovationtypes', () => getInnovationTypes());
+    const industriesTypesResponce = useQuery('getInnovationtypes', () => getIndustries());
 
     useEffect(() => {
         setAllProjects(allProjectsResponce.data?.items?.map(project => ({...project, hidden: false})) || []);
     }, [allProjectsResponce.data]);
 
-    if (allProjectsResponce.isLoading) {
+    if (allProjectsResponce.isLoading || innovationTypesResponce.isLoading || industriesTypesResponce.isLoading) {
         return <Spinner/>
     } 
 
-    if (allProjectsResponce.error) {
+    if (allProjectsResponce.error || innovationTypesResponce.error || industriesTypesResponce.error) {
         throw new Error();
     } 
 
     return (
         <QueryClientProvider client={queryClient}>
+
             <div className={cName()}>
                 <div className={cName('options')}>
                     <div className={cName('list')}>
@@ -54,6 +56,8 @@ const Projects: FC<Props> = () => {
                         <Filtration 
                             projects={allProjects}
                             setProjects={setAllProjects}
+                            innovationTypes={innovationTypesResponce.data || []}
+                            industries={industriesTypesResponce.data || []}
                         />
                     </div>}
                 </div>

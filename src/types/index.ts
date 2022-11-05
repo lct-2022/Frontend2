@@ -47,6 +47,8 @@ export type ProjectData = ICommonData & {
     team_size?: Nullable<number>;
     // для фильтрации
     hidden?: boolean;
+    // test
+    test?: number;
 };
 
 export type User = {

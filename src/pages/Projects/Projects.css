@@ -10,4 +10,8 @@
 
 .projects-page-filtration {
     width: 25%;
- }
+}
+
+.projects-page-my_hidden {
+    display: none;
+}

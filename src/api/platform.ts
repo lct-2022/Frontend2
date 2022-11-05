@@ -39,6 +39,34 @@ export const getPopularJobs = async (limit?: number): Promise<Undefinedable<Job[
     })
 };
 
+export const getIndustries = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_industries',
+        host: RPCHosts.Platform,
+    })
+};
+
+export const getInnovationTypes = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_innovation_types',
+        host: RPCHosts.Platform,
+    })
+};
+
+export const getProjectStages = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_stages',
+        host: RPCHosts.Platform,
+    })
+};
+
+export const getSkills = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_stages',
+        host: RPCHosts.Platform,
+    })
+};
+
 export const getPopularProjects = async (limit?: number): Promise<Undefinedable<Project[]>> => {
     return await request<Project[]>({
         method: 'popular_projects',
