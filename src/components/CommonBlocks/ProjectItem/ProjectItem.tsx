@@ -22,8 +22,8 @@ const cName = cn('project-card');
 const ProjectCard: Props = ({
     title, 
     description,
-    industry,
-    teamSize,
+    industry = 'Artificial intellegence',
+    teamSize = 3,
     jobs,
     rating,
     additonalInfo = 'В проработке',
@@ -32,6 +32,9 @@ const ProjectCard: Props = ({
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+
+    console.log(industry);
+    
     
     const canSearchPeople = location.pathname === ROUTES.USER;
     const canSeeApplications = location.pathname === ROUTES.USER;
@@ -84,7 +87,7 @@ const ProjectCard: Props = ({
         <Card className={cName()}>
             <div className={cName('left-block')}>
                 <div className={cName('logo')}>
-                    <Text className={cName('title-in-logo')}>{title}</Text>
+                    <Text type="violet" className={cName('title-in-logo')}>{title}</Text>
                 </div>
                 
                 <div className={cName('data')}>

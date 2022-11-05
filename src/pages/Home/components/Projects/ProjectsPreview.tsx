@@ -9,21 +9,22 @@ import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import {Props} from './types'
 
 import './ProjectsPreview.css';
-const TITLE = 'Проекты';
 
+const TITLE = 'Проекты';
 
 
 const ProjectsPreview: Props = ({projects}) => {
     const projectsList = useMemo(() => {
         return (
             <div className="projects-preview">
-                {projects.map(({project: {title, description, contests, url, id}, rating}, index) => (
+                {projects.map(({project: {title, description, industry, team_size, jobs, id}, rating}, index) => (
                     <ProjectCard
                         title={title}
                         key={index}
                         description={description}
-                        contest={contests}
-                        url={url}
+                        industry={industry}
+                        teamSize={team_size}
+                        jobs={jobs}
                         rating={rating}
                         id={id}
                     />

@@ -11,7 +11,6 @@ export function lsSaveAuthorizedUser(user: UserData) {
 export function lsGetAuthorizedUser(): UserData | undefined {
     try {
         const user = localStorage.getItem('authorised_user_ideahunt');
-        console.log('userFromSs =>', user);
         
         if (user) {
             return JSON.parse(user);

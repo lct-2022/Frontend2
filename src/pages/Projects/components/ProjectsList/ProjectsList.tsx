@@ -32,15 +32,13 @@ const ProjectsList: Props = ({projects}) => {
 
         return (
             <div className={cName('container')}>
-                {projects?.map(({title, description, contests, url, id, hidden}, index) => (
+                {projects?.map(({title, description, industry, id, hidden}, index) => (
                     <div key={index} className={cName('project', {hidden})}>
                         <ProjectCard
                             title={title}
                             description={description}
-                            contest={contests}
-                            url={url}
+                            industry={industry}
                             id={id}
-                            author_id={id}
                         />
                     </div>
                 ))}

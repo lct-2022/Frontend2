@@ -15,11 +15,18 @@
     align-items: flex-start;
 
     width: 680px;
+    height: 88px;
 }
 
 .project-card-titles {
     display: flex;
-    gap: 8px;
+    gap: 16px;
+}
+
+.project-card-data-upper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .project-card-title {
@@ -50,9 +57,15 @@
     background-color: #E4CCFF;
 }
 
+.project-card-title-in-logo {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 800;
+}
+
 .project-card-data-down {
     display: flex;
-    gap: 8px;
+    gap: 16px;
 }
 
 .project-card-rating {
