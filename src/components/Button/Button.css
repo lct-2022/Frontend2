@@ -1,25 +1,22 @@
 .btn {
     cursor: pointer;
-}
-
-.btn-primary {
-    border-radius: 10%;
-    border: none;
-
-    color: #ffffff;
-    background-color: green;
-
-    font-size: large;
-    font-weight: 500;
-}
-
-.btn-secondary {
-    background-color: palevioletred;
-    color: #ffffff;
-    border-radius: 15px;
-    
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .5);
-    
-    font-size: large;
     font-weight: 800;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    padding: 0 8px;
+    width: 180px;
+    height: 42px;
+    flex-wrap: wrap;
+  
+    border-radius: 8px;
+    border: none;
+  
+    background-color:#6941C6;
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 400;
 }

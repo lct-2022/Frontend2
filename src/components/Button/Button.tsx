@@ -3,15 +3,17 @@ import classname from 'classnames';
 import { Props } from './types';
 
 import './Button.css';
+import { cn } from '@bem-react/classname';
+
+const cName = cn('btn');
 
 const Button: Props = ({
     children,
     as: Component = 'button',
-    type = 'ordinary',
     ...props
 }) => {
     return (
-        <Component {...props} className={classname('btn', `btn-${type}`)}>
+        <Component {...props} className={cName()}>
             {children}
         </Component>
     );

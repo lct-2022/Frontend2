@@ -63,14 +63,14 @@ export const LoginForm: Props = ({type = 'login'}) => {
         : 'Регистрация'
 
     const submit = useCallback(() => {
-        if (!email.match(EMAIL_REGEXP)) {
-            alert('Невалидный адрес электронный почты')
-            return;
-        }
-        if (!email || !password || (type === 'signup' && (!name || !lastname))) {
-            alert('Пожалуйста, заполните все поля!')
-            return;
-        }
+        // if (!email.match(EMAIL_REGEXP)) {
+        //     alert('Невалидный адрес электронный почты')
+        //     return;
+        // }
+        // if (!email || !password || (type === 'signup' && (!name || !lastname))) {
+        //     alert('Пожалуйста, заполните все поля!')
+        //     return;
+        // }
         const requestor = type === 'login'
             ? login(email, password)
             : signup(email, password, `${name} ${lastname}`)

@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
 import { currentUserSelector } from '../../../store/selectors/users';
+import Button from '../../Button';
 
 const cName = cn('vacancy-card');
 
@@ -52,9 +53,7 @@ const JobCard: Props = ({title, description, id}) => {
     }, [id, currentUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
-
-            dispatch<any>(getCurrentVacancyAction(id))
-    
+        dispatch<any>(getCurrentVacancyAction(id))
             .then(() => {
                 navigate(ROUTES.JOB);
             })
@@ -62,9 +61,9 @@ const JobCard: Props = ({title, description, id}) => {
 
     const btn = useMemo(() => {
         return (
-            <button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
+            <Button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
                 {isApplication ? CANCEL : APPLY}
-            </button>
+            </Button>
         )
     }, [isApplication, applicationAction])
 

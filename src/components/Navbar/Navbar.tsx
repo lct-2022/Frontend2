@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { ActiveUserActions } from '../../store/types/activeUser';
 import Drop from './components/Drop';
 import { lsRemoveAuthorizedUser } from '../../utils/storage';
+import Button from '../Button';
 const userIcon = require('../../assets/user-icon.svg').default;
 
 const cName = cn('navbar');
@@ -70,9 +71,9 @@ function Navbar() {
                         )
                     } else {
                         return (
-                            <button key={index} onClick={() => navigate(url)}>
+                            <Button key={index} onClick={() => navigate(url)}>
                                 {point}
-                            </button>
+                            </Button>
                         )
                     }
                 })
