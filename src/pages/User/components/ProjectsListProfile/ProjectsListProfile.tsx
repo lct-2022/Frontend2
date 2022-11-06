@@ -11,7 +11,11 @@ import { authUserSelector, currentUserSelector } from '../../../../store/selecto
 
 const cName = cn('projects-list-profile');
 
-const ProjectsListProfile = () => {
+interface IProps {
+    projects: ProjectData[];
+}
+
+const ProjectsListProfile: FC<IProps> = ({projects}) => {
     const params = useParams();
 
     const currentUser = useSelector(currentUserSelector)
@@ -23,19 +27,19 @@ const ProjectsListProfile = () => {
     }, [currentUser?.projects])
 
     const projectsList = useMemo(() => {
-        if (!allProjects.length) {
+        if (!projects.length) {
             return (
                 <h3>{params.search ? 'У эксперта нет проектов' : 'У Вас пока нет проектов'}</h3>
             )
         }
         
-        if (!allProjects) {
+        if (!projects) {
             return null;
         }
 
         return (
             <div className={cName('container')}>
-                {allProjects.map(({title, description, industry, team_size, jobs, id}, index) => (
+                {projects.map(({title, description, industry, team_size, jobs, id}, index) => (
                     <div key={index} className={cName('project')}>
                         <ProjectCard
                             title={title}
@@ -49,7 +53,7 @@ const ProjectsListProfile = () => {
                 ))}
             </div>
         )
-    }, [allProjects]);
+    }, [projects, params.search]);
 
     return (
         <div>

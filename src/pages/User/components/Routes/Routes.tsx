@@ -40,7 +40,7 @@ const UserRoutes: Props = ({user}) => {
 
             {shownData === 'ideas' &&
                 // <Projects projects={user?.projects || []}/>
-                <Projects />
+                <Projects projects={user.projects || []}/>
             }
 
             {shownData === 'teams' &&
