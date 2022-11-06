@@ -33,15 +33,12 @@ function Main() {
   const location = useLocation();
 
   const [isDropped, setIsDropped] = useState(false);
-  console.log(isDropped);
   
   const cancelDrop = () => {
     setIsDropped(false);
   }
   const changeDrop = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-
-    console.log('HERE');
     setIsDropped(prev => !prev);
   }
 
