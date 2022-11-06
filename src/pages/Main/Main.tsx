@@ -25,6 +25,7 @@ import EditForm from '../User/components/EditForm/EditForm';
 import Spinner from '../../components/Spinner';
 
 import './Main.css';
+import { allIndustriesAction, allInnovationsAction, allStagessAction } from '../../store/actions/projects';
 
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
@@ -46,14 +47,16 @@ function Main() {
   }
 
   useEffect(() => {
+      dispatch<any>(allIndustriesAction());
+      dispatch<any>(allInnovationsAction())
+      dispatch<any>(allStagessAction());
+
       const isUserAuthorizedInit = authUser || getTokenFromCookies() || lsGetAuthorizedUser();
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {
         navigate(ROUTES.INDEX);
       }
       dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())); // token из кук
   }, []);
-
-  // return <Spinner/>
 
   return (  
         <div className="main" onClick={cancelDrop}>

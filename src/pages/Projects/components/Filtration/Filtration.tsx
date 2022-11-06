@@ -28,7 +28,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                 {industries.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={filterIndustries}/>
+                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterIndustries}/>
                     </div>
                 ))}
             </div>
@@ -52,7 +52,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                 {innovationTypes.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={filterInnivationTypes}/>
+                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterInnivationTypes}/>
                     </div>
                 ))}
             </div>
@@ -64,18 +64,14 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
 
         setProjects(prev => {
             return prev.map(project => {
-                if (!checked) {
-                    return project;
+                if (checked && !(project.innovations.includes(value) 
+                    || project.description.includes(value) 
+                    || project.title.includes(value)
+                    || project.industry.includes(value))
+                ) {
+                    return {...project, hidden: true};
                 } else {
-                    if ((project.innovations.includes(value) 
-                        || project.description.includes(value) 
-                        || project.title.includes(value)
-                        || project.industry.includes(value))
-                    ) {
-                        return {...project, hidden: false};
-                    } else {
-                        return {...project, hidden: true};
-                    }
+                    return {...project, hidden: false}
                 }  
             });
         });
@@ -87,7 +83,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                 {TAGS.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={filterTags}/>
+                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterTags}/>
                     </div>
                 ))}
             </div>
@@ -95,16 +91,18 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
     }, [filterTags]);
 
     const filterIsActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const {value, checked} = event.target;
         setProjects(prev => {
-            return prev.map(project => !project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
+            return prev.map(project => checked && !project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
         });
-    }, [setProjects]);
+    }, [setProjects, projects]);
 
     const filterIsNotActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+        const {value, checked} = event.target;
         setProjects(prev => {
-            return prev.map(project => project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
+            return prev.map(project => checked && project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
         });
-    }, [setProjects]);
+    }, [setProjects, projects]);
 
     const isActiveCriterias = useMemo(() => {
         return (
@@ -112,12 +110,12 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                 {STATUSES.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={el === NAIM ? filterIsActive : filterIsNotActive}/>
+                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={el === NAIM ? filterIsActive : filterIsNotActive}/>
                     </div>
                 ))}
             </div>
         )
-    }, [projects, filterIsActive, setProjects]);
+    }, [projects, filterIsActive, filterIsActive, setProjects]);
 
     const filterTeamSize = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
@@ -138,7 +136,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                 {TEAM_SIZES.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} type="checkbox" onChange={filterTeamSize}/>
+                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterTeamSize}/>
                     </div>
                 ))}
             </div>
