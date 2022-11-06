@@ -100,3 +100,9 @@
     font-size: 14px;
     margin-top: 4px;
 }
+
+.project-card-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

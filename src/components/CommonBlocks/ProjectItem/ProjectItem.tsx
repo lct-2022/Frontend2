@@ -125,13 +125,15 @@ const ProjectCard: Props = ({
                     </div>
                 }
 
-                {canSeeApplications &&
-                    <Button>Создать вакансию</Button>
-                }           
+                <div className={cName('btns')}>
+                    {canSeeApplications &&
+                        <Button>Создать вакансию</Button>
+                    }           
 
-                {canSeeApplications &&
-                    <Button onClick={passToAppllications}>Отклики</Button>
-                }       
+                    {canSeeApplications &&
+                        <Button onClick={passToAppllications}>Отклики</Button>
+                    }       
+                </div>
         </Card>
     )
 }

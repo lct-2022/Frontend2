@@ -42,7 +42,7 @@ const Bio: Props = ({user, rating}) => {
                         <Text className={cName('location')}>Живет в городе {user.city}</Text>
                     </div>
 
-                    <Text className={cName('rating')}>место в рейтинге{rating || 0}</Text>
+                    <Text className={cName('rating')} type="violet">место в рейтинге - {rating || 0}</Text>
 
                     {user.looking_for_job && <Text className={cName('status')}>Ищет команду</Text>}
                     {user.looking_for_hackathon && <div className={cName('looking-hackathon')}>Хочет в хакатон</div>}
