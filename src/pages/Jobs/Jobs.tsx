@@ -4,13 +4,11 @@ import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
 import { getAllJobs, getPopularJobs, getPopularProjects } from '../../api/platform';
-import { popularProjectsAction } from '../../store/actions/projects';
 import { Job, Project } from '../../types';
 import { getTokenFromCookies } from '../../utils/cookie';
 import JobCard from '../../components/CommonBlocks/JobItem';
 
 import './Jobs.css';
-import { popularJobsAction } from '../../store/actions/jobs';
 import Spinner from '../../components/Spinner';
 import { LIMITS } from '../../utils/consts';
 

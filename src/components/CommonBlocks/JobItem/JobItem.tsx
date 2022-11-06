@@ -57,7 +57,7 @@ const JobCard: Props = ({title, description, application, id}) => {
     }, [id, authUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
-        dispatch<any>(getCurrentVacancyAction(id))
+        new Promise(res => res(dispatch<any>(getCurrentVacancyAction(id)))) 
             .then(() => {
                 navigate(ROUTES.JOB);
             })

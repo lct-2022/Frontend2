@@ -44,10 +44,7 @@ const ProjectCard: Props = ({
 
     const passToProject = useCallback(() => {
         setIsLoading(true);
-        Promise.all([
-            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
-            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
-        ])
+        new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id))))
             .then(() => {
                 navigate(ROUTES.PROJECT);
                 setIsLoading(false);
@@ -68,7 +65,7 @@ const ProjectCard: Props = ({
 
     const makeVote = useCallback(() => {
         if (!authUser) {
-            alert('')
+            alert('Чтобы проголосовать, пожалуйста, войдите или зарегистрируйтесь')
             return;
         }
         vote({

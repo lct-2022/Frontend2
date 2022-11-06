@@ -2,18 +2,14 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import { cn } from '@bem-react/classname'
 import { useDispatch } from 'react-redux';
-import { getAllProjects, getIndustries, getInnovationTypes, getPopularProjects } from '../../api/platform';
-import { popularProjectsAction } from '../../store/actions/projects';
+import { getAllProjects, getIndustries, getInnovationTypes } from '../../api/platform';
 import { Project, ProjectData } from '../../types';
-import { getTokenFromCookies } from '../../utils/cookie';
 
 import ProjectsList from './components/ProjectsList';
 import Pagination from './components/Pagination';
 import Filtration from './components/Filtration';
 
 import './Projects.css';
-import { useSelector } from 'react-redux';
-import { authUserSelector } from '../../store/selectors/users';
 import Spinner from '../../components/Spinner';
 import { LIMITS } from '../../utils/consts';
 

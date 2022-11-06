@@ -14,18 +14,12 @@ const avatarIcon = require('../../../../assets/avatar.svg').default;
 const cName = cn('bio')
 
 const Bio: Props = ({user, rating}) => {
-    const [editMode, setEditMode] = useState(false);
-
     const navigate = useNavigate();
 
     const passEditProfile = () => {
         navigate(ROUTES.USER_EDIT)
     }
 
-    const editModeToggle = () => {
-        setEditMode(prev => !prev);
-    }
-    
     return (
         <Card className={cName()}>
             <div className={cName('data')}>              
@@ -48,7 +42,7 @@ const Bio: Props = ({user, rating}) => {
                         <Text className={cName('location')}>{user.city}</Text>
                     </div>
 
-                    <Text className={cName('rating')}>{rating}</Text>
+                    <Text className={cName('rating')}>{rating || 0}</Text>
 
                     <Text className={cName('status')}>{user.looking_for_job}</Text>
 

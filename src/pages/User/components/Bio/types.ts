@@ -3,7 +3,7 @@ import { User, UserData } from "../../../../types";
 
 interface IProps {
     user: UserData;
-    rating?: number
+    rating?: number | null;
 }
 
 export type Props = FC<IProps>;

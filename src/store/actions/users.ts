@@ -1,10 +1,10 @@
 import { Dispatch } from "react";
-import { getAuthorizedUser, getProfiles } from "../../api/passport";
+import { getAuthorizedUser, getProfiles, getUserProfile } from "../../api/passport";
+import { getRating } from "../../api/rating";
 import { CommonAction, UserData } from "../../types";
 import { lsSaveAuthorizedUser } from "../../utils/storage";
 import { AuthUserAction, AuthUserActions } from "../types/authUser";
-import { CurrentUserAction, CurrentUserActions } from "../types/currentUser";
-import { UsersAction, UsersActions } from '../types/users';
+import { CurrentUserAction, CurrentUserActions, RatingUserAction, RatingUserActions } from "../types/currentUser";
 
 export const getAuthorizedUserAction = (token?: string) => {
     return async (dispatch: Dispatch<AuthUserAction | CurrentUserAction>) => {
@@ -14,44 +14,39 @@ export const getAuthorizedUserAction = (token?: string) => {
             lsSaveAuthorizedUser(authorizeResponse)
         }
         
-        return authorizeResponse
-            ? 
-                dispatch({
-                    type: AuthUserActions.SET_USER,
-                    payload: authorizeResponse,
-                })
-            : 
-                dispatch({
-                    type: AuthUserActions.UNSET_USER,
-                });
+        authorizeResponse
+            ? dispatch({
+                type: AuthUserActions.SET_USER,
+                payload: authorizeResponse,
+            })
+            : dispatch({
+                type: AuthUserActions.UNSET_USER,
+            });
         }
 }
 
-export const popularProfilesAction = (limit?: number) => {
-    return async (dispatch: Dispatch<UsersAction>) => {
+export const getUserProfileAction = (userId: number) => {
+    return async (dispatch: Dispatch<CurrentUserAction>) => {
+        const currentProfileResponse = await getUserProfile(userId);
 
-        const popularProfilesResponse = await getProfiles(limit);
-
-        dispatch({
-            type: UsersActions.SET_USERS,
-            payload: popularProfilesResponse,
-        });
+        currentProfileResponse
+            ? dispatch({
+                type: CurrentUserActions.SET_USER_SHOWN,
+                payload: currentProfileResponse,
+            })
+            : dispatch({
+                type: CurrentUserActions.SET_USER_SHOWN,
+                payload: currentProfileResponse,
+            })
     }
 }
 
-export const getUserProfileAction = (user: UserData): CommonAction<CurrentUserActions.SET_USER_SHOWN, UserData> => {
-    return {
-        type: CurrentUserActions.SET_USER_SHOWN,
-        payload: user,
+export const getUserRatingAction = (userId: number) => {
+    return async (dispatch: Dispatch<RatingUserAction>) => {
+        const ratingResponse = await getRating('user', userId);
+        dispatch({
+            type: RatingUserActions.SET_USER_RATING,
+            payload: ratingResponse || null,
+        })
     }
-
-    // return async (dispatch: Dispatch<UsersAction>) => {
-
-    //     const popularProfilesResponse = await getProfiles(limit);
-
-    //     dispatch({
-    //         type: UsersActions.SET_USERS,
-    //         payload: popularProfilesResponse.result,
-    //     });
-    // }
 }

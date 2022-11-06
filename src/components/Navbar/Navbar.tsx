@@ -27,6 +27,7 @@ const Navbar: Props = ({changeDrop, isDropped}) => {
     const dispatch = useDispatch();
 
     const authUser = useSelector(authUserSelector);
+    const [isLoading, setIsloading] = useState(false);
 
     const isAuthorized = !!authUser;
 

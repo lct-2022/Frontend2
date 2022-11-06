@@ -16,3 +16,8 @@ export const currentUserSelector = createSelector(
     (store: IBaseStore) => store.currentUser,
     user => user,
 );
+
+export const userRatingSelector = createSelector(
+    (store: IBaseStore) => store.currentUserRating,
+    rating => rating,
+);

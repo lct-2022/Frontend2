@@ -4,5 +4,15 @@ export enum CurrentUserActions {
     SET_USER_SHOWN = 'SET_USER_SHOWN',
 };
 
-type SetShowUser = CommonAction<CurrentUserActions.SET_USER_SHOWN, UserData>
-export type CurrentUserAction = SetShowUser;
+export enum RatingUserActions {
+    SET_USER_RATING = 'SET_USER_RATING',
+};
+
+type SetCurrentUser = CommonAction<CurrentUserActions.SET_USER_SHOWN, UserData | null>;
+type SetRatingUser = CommonAction<RatingUserActions.SET_USER_RATING, number | null>
+
+export type CurrentUserAction = 
+    | SetCurrentUser;
+
+export type RatingUserAction = 
+    | SetRatingUser;

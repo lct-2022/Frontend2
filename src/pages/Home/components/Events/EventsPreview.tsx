@@ -4,7 +4,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
 import { getPopularProjects } from '../../../../api/platform';
 import { useSelector } from 'react-redux';
-import { popularProjectsSelector } from '../../../../store/selectors/projects';
 import EventCard from '../EventItem';
 import { evensSelector } from '../../../../store/selectors/events';
 

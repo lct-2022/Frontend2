@@ -14,6 +14,7 @@ import { Application, Nullable, User, UserData } from '../../../types';
 import { getUserProfileAction } from '../../../store/actions/users';
 import './Application.css';
 import Button from '../../Button';
+import { CurrentUserActions } from '../../../store/types/currentUser';
 
 const cName = cn('application');
 
@@ -42,7 +43,10 @@ const ApplicationComp: FC<Props> = ({application}) => {
             return;
         }
 
-        dispatch(getUserProfileAction(appliedUser));
+        dispatch({
+            type: CurrentUserActions.SET_USER_SHOWN,
+            payload: appliedUser,
+        });
         navigate(`${ROUTES.USER}/search`);
     }, [appliedUser]);
 

@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { useDispatch } from 'react-redux';
-import { popularProjectsAction } from '../../store/actions/projects';
-import { popularProfilesAction } from '../../store/actions/users';
-import { popularJobsAction } from '../../store/actions/jobs';
-import { getTokenFromCookies } from '../../utils/cookie';
 import JobsPreview from './components/Jobs';
 import ProjectsPreview from './components/Projects';
 import TitleHomePage from './components/Title';

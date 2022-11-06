@@ -18,11 +18,11 @@
 .vacancy-card-left-block {
     display: flex;
     align-items: center;
-    max-width: 50%;
 }
 
 .vacancy-card-data {
     flex-wrap: wrap;
+    width: 800px;
 }
 
 .vacancy-card-text {
