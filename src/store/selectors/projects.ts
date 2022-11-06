@@ -11,12 +11,12 @@ export const currentProjectStagesSelector = createSelector(
     stages => stages,
 );
 
-export const industriesStagesSelector = createSelector(
+export const industriesSelector = createSelector(
     (store: IBaseStore) => store.currentIndustries,
     industries => industries,
 );
 
-export const innnovationsSelector = createSelector(
+export const innovationsSelector = createSelector(
     (store: IBaseStore) => store.currentInnovations,
     innovations => innovations,
 );

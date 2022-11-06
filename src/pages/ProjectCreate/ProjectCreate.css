@@ -13,3 +13,18 @@
     flex-direction: column;
     gap: 12px;
 }
+
+.project-create-chbx {
+    height: 13px;
+}
+
+.project-create-innovations, .project-create-industries {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.project-create-checkboxes {
+    display: flex;
+    justify-content: space-evenly;
+}
