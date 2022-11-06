@@ -12,11 +12,6 @@ export const usersAvatarSelector = createSelector(
     avatarUrl => avatarUrl || DEFAULT_AVATAR,
 )
 
-export const popularProfilesSelector = createSelector(
-    (store: IBaseStore) => store.users.list,
-    users => users || [],
-);
-
 export const currentUserSelector = createSelector(
     (store: IBaseStore) => store.currentUser,
     user => user,

@@ -125,6 +125,12 @@ export type Vote = ICommonData & {
     subject_id: number;
 };
 
+export interface IStats {
+    num_projects: number,
+    supported_projects: number,
+    num_jobs: number,
+}
+
 export type CommonAction<T, P = never> = {
     type: T,
     payload?: P,
@@ -134,3 +140,4 @@ export interface ISearchParams {
     pageKey?: string;
     limit?: number;
 }
+

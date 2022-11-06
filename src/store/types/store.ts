@@ -7,12 +7,10 @@ type NumerableItems<D> = {
 
 export interface IBaseStore {
     authUser:  Nullable<UserData>;
+    currentUser: Nullable<UserData>;
     currentProject: Nullable<ProjectData>;
     currentJob: Nullable<Job>;
     projects: NumerableItems<Project>;
-    users: NumerableItems<User>;
-    jobs: NumerableItems<Job>;
-    currentUser: Nullable<UserData>;
     currentApplications: Nullable<Application[]>;
     // events?: NumerableItems<IEvents>;
     teams: Team[];

@@ -78,14 +78,16 @@ export const LoginForm: Props = ({type = 'login'}) => {
         requestor
             .then(token => {
                 setAuthToken(token);
-                return new Promise((res) => {
-                    res(dispatch<any>(getAuthorizedUserAction(token)))
-                });
+                return getAuthorizedUser(token);
             })
             .then(data => {
                 dispatch({
+                    type: AuthUserActions.SET_USER,
+                    payload: data || null,
+                })
+                dispatch({
                     type: CurrentUserActions.SET_USER_SHOWN,
-                    payload: data,
+                    payload: data || null,
                 })
             })
             .then(() => {
@@ -100,35 +102,35 @@ export const LoginForm: Props = ({type = 'login'}) => {
                 <p className={cName('title')}>{title}</p>
 
                     <div className={cName('input', {hidden: type === 'login'})}>
-                        <label htmlFor="login-form-name" className="login-label">
+                        <label htmlFor="name" className="login-label">
                             {Labels.NAME}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeName}/>
+                        <input className="login-form-mail login-input" name="name" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeName}/>
                     </div>
 
                     <div className={cName('input', {hidden: type === 'login'})}>
-                        <label htmlFor="login-form-lastname" className={cName('label')}>
+                        <label htmlFor="lastname" className={cName('label')}>
                             {Labels.LASTNAME}
                         </label>
 
-                        <input className="login-form-mail login-input" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeLastname}/>
+                        <input className="login-form-mail login-input" name="lastname" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeLastname}/>
                     </div>
 
                     <div className={cName('input')}>
-                        <label htmlFor="login-form-mail" className={cName('label')}>
+                        <label htmlFor="email" className={cName('label')}>
                             {Labels.EMAIL}
                         </label>
 
-                        <input className="login-form-mail login-input" type="email" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
+                        <input className="login-form-mail login-input" type="email" name="email" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
                     </div>
 
                     <div className={cName('input')}>
-                        <label htmlFor="login-form-password" className={cName('label')}>
+                        <label htmlFor="password" className={cName('label')}>
                             {Labels.PASSWORD}
                         </label>
 
-                        <input className="login-form-password login-input" type="password" placeholder={Placeholders.PASSWORD} value={password} onChange={changePassword}/>
+                        <input className="login-form-password login-input" type="password" name="password" placeholder={Placeholders.PASSWORD} value={password} onChange={changePassword}/>
                     </div>
 
                     <Button
