@@ -13,6 +13,7 @@ import { getAllProfiles, getProfiles } from '../../api/passport';
 import './Experts.css';
 import { useParams } from 'react-router';
 import Spinner from '../../components/Spinner';
+import { LIMITS } from '../../utils/consts';
 
 const cName = cn('experts');
 const queryClient = new QueryClient();
@@ -22,7 +23,7 @@ function Experts() {
     const [allExperts, setAllExperts] = useState<UserData[]>([]);
     const params = useParams();
 
-    const {isLoading, error, data} = useQuery('allExperts', () => getAllProfiles('*'));
+    const {isLoading, error, data} = useQuery('allExperts', () => getAllProfiles('*', {limit: LIMITS.PROFILES}));
 
     useEffect(() => {
         setAllExperts(data?.items?.map(el => ({...el, hidden: false})) || []);

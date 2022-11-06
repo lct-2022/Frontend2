@@ -12,6 +12,8 @@ import Text from '../../../../components/Text';
 import { getAllProjects } from '../../../../api/platform';
 
 import './ProjectsList.css';
+import Button from '../../../../components/Button';
+import { LIMITS } from '../../../../utils/consts';
 
 const cName = cn('projects-list')
 
@@ -19,26 +21,26 @@ const ProjectsList: Props = ({projects, setProjects}) => {
     const location = useLocation();
 
     const [criteria, setCriteria] = useState('');
-    const [projectss, setProjectss] = useState(projects);
     const [pageKey, setPageKey] = useState<string | undefined>();
 
-
     const isFromProfile = location.pathname === ROUTES.USER;
+    const allHidden = projects.filter(project => !project.hidden).length === 0;
+    const allMiss = !projects.length;
 
     const changeCriteria = (event: ChangeEvent<HTMLInputElement>) => {
         setCriteria(event.target.value);
     }
 
     const projectsList = useMemo(() => {
-        if (!projects.length) {
+        if ((allMiss || allHidden) && !isFromProfile) {
             return (
-                <h3>{isFromProfile ? 'У Вас пока нет проектов' : 'На текущий момент проектов нет'}</h3>
+                <h3>Проектов, удовлетворяющих заданным условиям, нет</h3>
             )
         }
 
-        if (projects.filter(project => !project.hidden).length === 0) {
+        if (allMiss && isFromProfile) {
             return (
-                <h3>Проектов, удовлетворяющих заданным условиям, нет</h3>
+                <h3>У Вас пока нет проектов</h3>
             )
         }
         
@@ -63,7 +65,7 @@ const ProjectsList: Props = ({projects, setProjects}) => {
     }, [projects]);
     
     const search = useCallback(() => {
-        getAllProjects(criteria || '*')
+        getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS})
             .then(data => {
                 setProjects(data?.items || []);
                 setPageKey(data?.next_page_key);
@@ -71,10 +73,16 @@ const ProjectsList: Props = ({projects, setProjects}) => {
         setCriteria('');
     }, [criteria]);
 
+    const showMore = useCallback(() => {
+        getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
+            .then(data => {
+                setProjects(data?.items || []);
+                setPageKey(data?.next_page_key);
+            })
+    }, [criteria, pageKey]);
+
     return (
         <div>
-            {/* <h1>{isFromProfile ? 'Ваши проекты:' : 'Проекты'}</h1> */}
-            {/* <Card as="input"></Card> */}
             <div className={cName('search')}>
                 <input type="text" value={criteria} placeholder="Найти проект" onChange={changeCriteria} className={cName('search-input')}/>
 
@@ -83,10 +91,13 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 </button>
             </div>
 
-            {/* <Card className={cName('search')}> */}
-            {/* </Card> */}
-
             {projectsList}
+
+            {!allHidden && !allMiss &&
+                <Button className={cName('show-more-btn')} onClick={showMore}>
+                    Показать еще 
+                </Button>  
+            }      
         </div>
     )
 }

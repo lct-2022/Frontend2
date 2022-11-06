@@ -12,6 +12,7 @@ import JobCard from '../../components/CommonBlocks/JobItem';
 import './Jobs.css';
 import { popularJobsAction } from '../../store/actions/jobs';
 import Spinner from '../../components/Spinner';
+import { LIMITS } from '../../utils/consts';
 
 const cName = cn('jobs-page');
 
@@ -20,7 +21,7 @@ const queryClient = new QueryClient();
 function Jobs() {
     const [allJobs, setAllJobs] = useState<Job[]>([]);
 
-    const {isLoading, error, data} = useQuery('allJobs', () => getAllJobs('*'));
+    const {isLoading, error, data} = useQuery('allJobs', () => getAllJobs('*', {limit: LIMITS.JOBS}));
 
     useEffect(() => {
         setAllJobs(data?.items?.filter(el => el.open) || []);

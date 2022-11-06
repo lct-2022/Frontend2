@@ -22,3 +22,7 @@
 .projects-list-search-input {
     width: 100%;
 }
+
+.projects-list-show-more-btn {
+    margin-top: 16px;
+}

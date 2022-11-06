@@ -15,6 +15,7 @@ import './Projects.css';
 import { useSelector } from 'react-redux';
 import { authUserSelector } from '../../store/selectors/users';
 import Spinner from '../../components/Spinner';
+import { LIMITS } from '../../utils/consts';
 
 const cName = cn('projects-page');
 
@@ -27,7 +28,7 @@ interface Props {
 const Projects: FC<Props> = () => {
     const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
 
-    const allProjectsResponce = useQuery('allProjects', () => getAllProjects('*'));
+    const allProjectsResponce = useQuery('allProjects', () => getAllProjects('*', {limit: LIMITS.PROJECTS}));
     const innovationTypesResponce = useQuery('getInnovationtypes', () => getInnovationTypes());
     const industriesTypesResponce = useQuery('getInnovationtypes', () => getIndustries());
 
