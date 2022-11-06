@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useMemo, useState } from 'react';
+import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { Props } from '../../types';
 import { cn } from '@bem-react/classname';
@@ -9,15 +9,19 @@ import { ROUTES } from '../../../../utils/routes';
 
 import Card from '../../../../components/Card';
 import Text from '../../../../components/Text';
+import { getAllProjects } from '../../../../api/platform';
 
 import './ProjectsList.css';
 
 const cName = cn('projects-list')
 
-const ProjectsList: Props = ({projects}) => {
+const ProjectsList: Props = ({projects, setProjects}) => {
     const location = useLocation();
 
     const [criteria, setCriteria] = useState('');
+    const [projectss, setProjectss] = useState(projects);
+    const [pageKey, setPageKey] = useState<string | undefined>();
+
 
     const isFromProfile = location.pathname === ROUTES.USER;
 
@@ -57,6 +61,15 @@ const ProjectsList: Props = ({projects}) => {
             </div>
         )
     }, [projects]);
+    
+    const search = useCallback(() => {
+        getAllProjects(criteria || '*')
+            .then(data => {
+                setProjects(data?.items || []);
+                setPageKey(data?.next_page_key);
+            })
+        setCriteria('');
+    }, [criteria]);
 
     return (
         <div>
@@ -65,7 +78,7 @@ const ProjectsList: Props = ({projects}) => {
             <div className={cName('search')}>
                 <input type="text" value={criteria} placeholder="Найти проект" onChange={changeCriteria} className={cName('search-input')}/>
 
-                <button onClick={() => {}}>
+                <button onClick={search}>
                     Найти
                 </button>
             </div>

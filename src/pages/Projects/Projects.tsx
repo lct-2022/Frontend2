@@ -41,15 +41,14 @@ const Projects: FC<Props> = () => {
 
     if (allProjectsResponce.error || innovationTypesResponce.error || industriesTypesResponce.error) {
         throw new Error();
-    } 
+    }
 
     return (
         <QueryClientProvider client={queryClient}>
-
             <div className={cName()}>
                 <div className={cName('options')}>
                     <div className={cName('list')}>
-                        <ProjectsList projects={allProjects}/>
+                        <ProjectsList projects={allProjects} setProjects={setAllProjects}/>
                     </div>
     
                     {<div className={cName('filtration')}>

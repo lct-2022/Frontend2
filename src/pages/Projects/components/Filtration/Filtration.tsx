@@ -11,13 +11,14 @@ import './Filtration.css';
 const cName = cn('project-filters');
 
 const ProjectFilters: Props = ({projects, setProjects, industries, innovationTypes}) => {
+    console.log(projects.map(el => el.hidden))
     const filterIndustries = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
 
         setProjects(prev => {
             return prev.map(project => checked && project.industry !== value
                 ? {...project, hidden: true} 
-                : project   
+                : {...project, hidden: false}   
             );
         });
     }, [setProjects]);
@@ -41,7 +42,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
         setProjects(prev => {
             return prev.map(project => checked && project.innovation_type !== value
                 ? {...project, hidden: true} 
-                : project   
+                : {...project, hidden: false}  
             );
         });
     }, [setProjects]);
@@ -72,7 +73,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
                         || project.title.includes(value)
                         || project.industry.includes(value))
                     ) {
-                        return project;
+                        return {...project, hidden: false};
                     } else {
                         return {...project, hidden: true};
                     }
@@ -96,13 +97,13 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
 
     const filterIsActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setProjects(prev => {
-            return prev.map(project => !project.jobs?.length ? {...project, hidden: true} : project);   
+            return prev.map(project => !project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
         });
     }, [setProjects]);
 
     const filterIsNotActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setProjects(prev => {
-            return prev.map(project => project.jobs?.length ? {...project, hidden: true} : project);   
+            return prev.map(project => project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
         });
     }, [setProjects]);
 
@@ -127,7 +128,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
             
             return prev.map(project => checked && ((project.team_size || 0) <= min || (project.team_size || 0) >= max)
                 ? {...project, hidden: true} 
-                : project   
+                : {...project, hidden: false}   
             );
         });
     }, [setProjects]);

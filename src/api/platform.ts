@@ -1,7 +1,13 @@
 import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
-export const getAllProjects = async (query: string): Promise<Undefinedable<ProjectsList>> => {
+interface ISearchParams {
+    pageKey?: string;
+    limit?: number;
+}
+
+export const getAllProjects = async (query: string, options?: ISearchParams): Promise<Undefinedable<ProjectsList>> => {
+    const {pageKey, limit} = options || {};
     return await request<ProjectsList>({
         method: 'search_projects',
         host: RPCHosts.Platform,
@@ -11,11 +17,19 @@ export const getAllProjects = async (query: string): Promise<Undefinedable<Proje
                 'jobs',
                 'team-size',
             ],
+            ...(limit !== undefined && {
+                limit,
+            }),
+            ...(pageKey && {
+                page_key: pageKey
+            }),
         }
     });
 };
 
-export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>> => {
+export const getAllJobs = async (query: string, options?: ISearchParams): Promise<Undefinedable<JobsList>> => {
+    const {pageKey, limit} = options || {};
+
     return await request<JobsList>({
         method: 'search_jobs',
         host: RPCHosts.Platform,
@@ -24,6 +38,12 @@ export const getAllJobs = async (query: string): Promise<Undefinedable<JobsList>
             additional_fields: [
                 'job-application',
             ],
+            ...(limit !== undefined && {
+                limit,
+            }),
+            ...(pageKey && {
+                page_key: pageKey
+            }),
         }
     });
 };

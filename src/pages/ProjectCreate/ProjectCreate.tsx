@@ -3,7 +3,7 @@ import { createProject, getPopularProjects } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
 import { useDispatch } from 'react-redux';
-import { ActiveProjectActions } from '../../store/types/activeProject';
+import { CurrentProjectActions } from '../../store/types/activeProject';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../utils/routes';
 import { getAuthorizedUser } from '../../api/passport';
@@ -40,7 +40,7 @@ function ProjectCreate() {
       }, getTokenFromCookies())
         .then(project => {
             dispatch({
-              type: ActiveProjectActions.SET_PROJECT,
+              type: CurrentProjectActions.SET_PROJECT,
               payload: project,
             });
             return new Promise((res) => {

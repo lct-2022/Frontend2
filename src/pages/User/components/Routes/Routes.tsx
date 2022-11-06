@@ -10,7 +10,7 @@ import Teams from '../Teams/Teams';
 import UserOptions from '../../components/Options';
 import { ROUTES } from '../../../../utils/routes';
 import './Routes.css';
-// import Projects from '../ProjectsListProfile/ProjectsListProfile';
+import Projects from '../ProjectsListProfile/ProjectsListProfile';
 import { useSelector } from 'react-redux';
 import ProjectsList from '../../../Projects/components/ProjectsList';
 
@@ -39,7 +39,8 @@ const UserRoutes: Props = ({user}) => {
             }
 
             {shownData === 'ideas' &&
-                <ProjectsList projects={user?.projects || []}/>
+                // <Projects projects={user?.projects || []}/>
+                <Projects />
             }
 
             {shownData === 'teams' &&
