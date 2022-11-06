@@ -28,13 +28,7 @@ export const getAuthorizedUserAction = (token?: string) => {
 export const getUserProfileAction = (userId: number) => {
     return async (dispatch: Dispatch<CurrentUserAction>) => {
         const currentProfileResponse = await getUserProfile(userId);
-
-        currentProfileResponse
-            ? dispatch({
-                type: CurrentUserActions.SET_USER_SHOWN,
-                payload: currentProfileResponse,
-            })
-            : dispatch({
+            dispatch({
                 type: CurrentUserActions.SET_USER_SHOWN,
                 payload: currentProfileResponse,
             })
@@ -46,7 +40,7 @@ export const getUserRatingAction = (userId: number) => {
         const ratingResponse = await getRating('user', userId);
         dispatch({
             type: RatingUserActions.SET_USER_RATING,
-            payload: ratingResponse || null,
+            payload: ratingResponse,
         })
     }
 }
