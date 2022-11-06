@@ -3,7 +3,6 @@ import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { currentProjectSelector, currentProjectStagesSelector } from '../../store/selectors/projects';
 
-import './ProjectPage.css';
 import { authUserSelector } from '../../store/selectors/users';
 import { availableTeamsAction } from '../../store/actions/teams';
 import { getTokenFromCookies } from '../../utils/cookie';
@@ -15,8 +14,11 @@ import Button from '../../components/Button'
 import Text from '../../components/Text';
 import { ProjectData, ProjectStage } from '../../types';
 import { getCompleteStages } from '../../utils/getStages';
+import { prepareDate } from '../../utils/grammar';
 
-const cName = cn('project-page')
+import './ProjectPage.css';
+
+const cName = cn('project-page');
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);    
@@ -143,7 +145,7 @@ function ProjectPage() {
 
                     <p className={cName('contests')}>{contests}</p>
 
-                    <p className={cName('created')}>{created_at}</p>
+                    <p className={cName('created')}>Создан {prepareDate(created_at)}</p>
 
                     {stagesMemo}
                 </div>

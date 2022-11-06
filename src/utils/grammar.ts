@@ -11,3 +11,32 @@ export function validateNumberPeople(num: number): string {
 
     return `${num} человек`;
 }
+
+const MONTHS: {[x in string]: string} = {
+    '01': 'января',
+    '02': 'февраля',
+    '03': 'марта',
+    '04': 'апреля',
+    '05': 'мая',
+    '06': 'июня',
+    '07': 'июля',
+    '08': 'августа',
+    '09': 'сентября',
+    '10': 'октября',
+    '11': 'ноября',
+    '12': 'декабря',
+}
+
+export function prepareDate(dateRaw: string | null | undefined): string {
+    if (!dateRaw) return '';
+
+    const splitted = dateRaw.split('-');
+    const year = splitted[0];
+    const month = MONTHS[splitted[1]];
+    let day = splitted[2].slice(0, 2);
+    if (day.startsWith('0')) {
+        day = day.slice(1);
+    }
+    
+    return `${day} ${month} ${year} года`;
+}
