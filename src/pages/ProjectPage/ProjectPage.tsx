@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { currentProjectSelector } from '../../store/selectors/projects';
@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import Button from '../../components/Button'
+import Text from '../../components/Text';
 
 const cName = cn('project-page')
 
@@ -37,6 +38,20 @@ function ProjectPage() {
     const goBackToMyIdeas = () => {
         navigate(ROUTES.USER);
     }
+
+    const jobsOnProject = useMemo(() => {
+        if (!jobs || !jobs.length) {
+            return <Text>Открытых вакансий нет</Text>
+        }
+
+        return (
+            <ul className={cName('vacancies')}>
+                {jobs.map(({title, id}) => (
+                    <li key={id}>{title}</li>
+                ))}
+            </ul>
+        )
+    }, [jobs])
     
     if (!currentProject) {
         return null;
@@ -76,14 +91,7 @@ function ProjectPage() {
                 <div className={cName('vacancies')}>
                     <p>Вакансии</p>
 
-                    <div>
-                        <ul>
-                            <li>Front</li>
-                            <li>Back</li>
-                            <li>PM</li>
-                            <li>Designer</li>
-                        </ul>
-                    </div>
+                    {jobsOnProject}
                 </div>
             </div>
 
