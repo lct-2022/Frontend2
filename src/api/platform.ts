@@ -310,3 +310,21 @@ export const getUsersProjects = async (userId: number, token?: string): Promise<
 };
 
 // create_job
+
+// project_chats
+
+export const getProjectChatIds = async (projectId: number, token?: string): Promise<Undefinedable<string[]>> => {
+    return await request({
+        method: 'project_chats',
+        host: RPCHosts.Platform,
+        params: {
+            project_id: projectId,
+        },
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
+    });
+};
+
