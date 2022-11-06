@@ -155,6 +155,14 @@ function ProjectPage() {
 
                     {jobsOnProject}
                 </div>
+
+                <div className={cName('chats')}>
+                    <p>Чаты</p>
+
+                    <ul className={cName('chats-list')}>
+                      <li><a href="https://ideahunt.ru/chat/c553e30f-e58c-42a3-92ac-01bb4c3bbe33">Публичный</a></li>
+                    </ul>
+                </div>
             </div>
 
             {canSearchTeam &&
