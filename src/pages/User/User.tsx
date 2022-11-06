@@ -17,27 +17,25 @@ const TITLE = 'Профиль';
 
 const cName = cn('profile');
 
-interface Props {
-    user?: UserData;
-}
-
-export const Profile: FC<Props> = () => {
+export const Profile = () => {
     const currentUser = useSelector(currentUserSelector);
     const authUser = useSelector(authUserSelector);
     const rating = useSelector(userRatingSelector);
+    console.log(currentUser);
+    console.log(authUser);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const params = useParams()
 
     const [shownUser, setShownUser] = useState(authUser);
+    console.log('shownUser =>', shownUser);
     
     useEffect(() => {
         setShownUser(params.search ? currentUser : authUser);
-    }, [params.search, currentUser, authUser]);
+    }, [params.search]);
 
     if (!shownUser) {
-        navigate(ROUTES.LOGIN)
         return null;
     }
     

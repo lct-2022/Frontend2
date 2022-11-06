@@ -3,7 +3,7 @@ import {cn} from '@bem-react/classname';
 import { Props } from './types';
 
 import './Bio.css';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
 import Button from '../../../../components/Button';
 import Card from '../../../../components/Card';
@@ -15,6 +15,7 @@ const cName = cn('bio')
 
 const Bio: Props = ({user, rating}) => {
     const navigate = useNavigate();
+    const params = useParams()
 
     const passEditProfile = () => {
         navigate(ROUTES.USER_EDIT)
@@ -50,9 +51,11 @@ const Bio: Props = ({user, rating}) => {
 
             </div>
 
-            <Button className={cName('settings')} onClick={passEditProfile}>
-                Редактировать профиль
-            </Button>
+            {!params.search && 
+                <Button className={cName('settings')} onClick={passEditProfile}>
+                    Редактировать профиль
+                </Button>
+            }
         </Card>
     )
 }

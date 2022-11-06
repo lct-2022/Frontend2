@@ -57,7 +57,7 @@ const Resume: Props = ({user}) => {
                     {user.skill_ids.map(el => {
                         return (
                             <li key={el}>
-                                el
+                                {el}
                             </li>
                         )
                     })}

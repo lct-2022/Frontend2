@@ -2,7 +2,7 @@ import { CurrentUserAction, CurrentUserActions } from "../types/currentUser";
 import { StagesAction, StagesActions } from "../types/stages";
 import { IBaseStore } from "../types/store";
 
-type StagesState = IBaseStore['currentProjectStages'];
+type StagesState = IBaseStore['currentStages'];
 
 const initialState: StagesState = null;
 

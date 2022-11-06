@@ -13,7 +13,7 @@ export const currentProjectReducer = (store: ProjectState = initialState, action
 
     switch (type) {
         case CurrentProjectActions.SET_PROJECT:
-            return {...store, project: payload};
+            return payload;
 
         default:
             return store;

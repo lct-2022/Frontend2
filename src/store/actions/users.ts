@@ -1,8 +1,7 @@
 import { Dispatch } from "react";
 import { getAuthorizedUser, getProfiles, getUserProfile } from "../../api/passport";
 import { getRating } from "../../api/rating";
-import { CommonAction, UserData } from "../../types";
-import { lsSaveAuthorizedUser } from "../../utils/storage";
+import { lsSaveAuthorizedUser, lsSaveCurrentUser } from "../../utils/storage";
 import { AuthUserAction, AuthUserActions } from "../types/authUser";
 import { CurrentUserAction, CurrentUserActions, RatingUserAction, RatingUserActions } from "../types/currentUser";
 
@@ -28,10 +27,13 @@ export const getAuthorizedUserAction = (token?: string) => {
 export const getUserProfileAction = (userId: number) => {
     return async (dispatch: Dispatch<CurrentUserAction>) => {
         const currentProfileResponse = await getUserProfile(userId);
-            dispatch({
-                type: CurrentUserActions.SET_USER_SHOWN,
-                payload: currentProfileResponse,
-            })
+        if (currentProfileResponse) {
+            lsSaveCurrentUser(currentProfileResponse);
+        }
+        dispatch({
+            type: CurrentUserActions.SET_USER_SHOWN,
+            payload: currentProfileResponse,
+        })
     }
 }
 

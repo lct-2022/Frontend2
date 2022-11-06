@@ -9,7 +9,7 @@ export interface IBaseStore {
     currentUserRating: Nullable<number>;
     currentIndustries: Nullable<string[]>;
     currentInnovations: Nullable<string[]>;
-    currentProjectStages: Nullable<ProjectStage[]>;
+    currentStages: Nullable<ProjectStage[]>;
     // events?: NumerableItems<IEvents>;
     teams: Team[];
 }
