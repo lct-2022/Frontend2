@@ -1,7 +1,7 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
-import { currentProjectSelector } from '../../store/selectors/projects';
+import { currentProjectSelector, currentProjectStagesSelector } from '../../store/selectors/projects';
 
 import './ProjectPage.css';
 import { authUserSelector } from '../../store/selectors/users';
@@ -13,12 +13,17 @@ import { ROUTES } from '../../utils/routes';
 
 import Button from '../../components/Button'
 import Text from '../../components/Text';
+import { ProjectStage } from '../../types';
+import { getCompleteStages } from '../../utils/getStages';
 
 const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
     const authUser = useSelector(authUserSelector);
+    const currentProjectStages = useSelector(currentProjectStagesSelector);
+
+    const [stages, setStages] = useState<ProjectStage[]>([]);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,7 +34,7 @@ function ProjectPage() {
     const {team_size, jobs, title, description, url, contests, created_at} = currentProject ?? {};
 
     const getTeamsForProject = useCallback(() => {
-        dispatch<any>(availableTeamsAction(currentProject?.id ?? 0, getTokenFromCookies()))
+        new Promise(res => res(dispatch<any>(availableTeamsAction(currentProject?.id ?? 0, getTokenFromCookies()))))
             .then(() => {
                 navigate(ROUTES.TEAMS)
             });
@@ -37,7 +42,12 @@ function ProjectPage() {
 
     const goBackToMyIdeas = () => {
         navigate(ROUTES.USER);
-    }
+    };
+
+    useEffect(() => {
+        currentProjectStages && currentProject?.stage_id && 
+            setStages(getCompleteStages(currentProjectStages, currentProject?.stage_id));
+    }, [currentProjectStages, currentProject?.stage_id]);
 
     const jobsOnProject = useMemo(() => {
         if (!jobs || !jobs.length) {

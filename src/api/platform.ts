@@ -1,4 +1,4 @@
-import { Application, ISearchParams, IStats, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
+import { Application, ISearchParams, IStats, Job, JobsList, Project, ProjectData, ProjectsList, ProjectStage, ProjectTeamMember, Team, Undefinedable } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
 export const getAllProjects = async (query: string, options?: ISearchParams): Promise<Undefinedable<ProjectsList>> => {
@@ -110,8 +110,8 @@ export const getStats = async (): Promise<Undefinedable<IStats>> => {
     })
 };
 
-export const getStages = async (): Promise<Undefinedable<string[]>> => {
-    return await request<string[]>({
+export const getStages = async (): Promise<Undefinedable<ProjectStage[]>> => {
+    return await request<ProjectStage[]>({
         method: 'get_stages',
         host: RPCHosts.Platform,
     })
