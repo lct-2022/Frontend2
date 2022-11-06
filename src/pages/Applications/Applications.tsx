@@ -15,7 +15,8 @@ const cName = cn('applications');
 
 function Applications() {
     const applications = useSelector(applicationsSelector);
-
+    console.log('Applications');
+    
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -25,6 +26,7 @@ function Applications() {
     return (
         <div className={cName()}>
             {applications.map(application => <Application key={application.user_id} application={application}/>)}
+            {applications.length === 0 && <h3>Откликов нет</h3>}
               
             <Button onClick={goBack}>Назад к профилю</Button>
         </div>

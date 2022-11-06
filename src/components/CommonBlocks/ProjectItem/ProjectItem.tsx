@@ -56,8 +56,11 @@ const ProjectCard: Props = ({
     }
 
     const passToAppllications = useCallback(() => {
+        console.log('AU ???????????????????????????/');
+        
         getApplications(id)
             .then(data => {
+                console.log(data,  '< ==================')
                 dispatch<any>(getJobApplicationsAction(data || []));
                 navigate(ROUTES.APPLICATIONS);
             })
@@ -126,10 +129,6 @@ const ProjectCard: Props = ({
                 }
 
                 <div className={cName('btns')}>
-                    {canSeeApplications &&
-                        <Button>Создать вакансию</Button>
-                    }           
-
                     {canSeeApplications &&
                         <Button onClick={passToAppllications}>Отклики</Button>
                     }       
