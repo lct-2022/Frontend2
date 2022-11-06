@@ -11,7 +11,6 @@ import './Filtration.css';
 const cName = cn('project-filters');
 
 const ProjectFilters: Props = ({projects, setProjects, industries, innovationTypes}) => {
-    console.log(projects.map(el => el.hidden))
     const filterIndustries = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {value, checked} = event.target;
 

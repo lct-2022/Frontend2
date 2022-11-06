@@ -3,18 +3,27 @@
     top: 92px;
     right: 32px;
 
-    padding: 19px 28px;
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px 18px;
+    width: 226px;
+    height: auto;
 
     border-radius: 8px;
     background-color: #fff;
+    box-shadow: 0 8px 20px 0 rgba(117, 115, 111, .3);
 }
 
 .drop-point {
     cursor: pointer;
+
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .drop-divider {
-    border: solid 1px #000;
+    border: solid .5px grey;
     margin: 6px 0;
 }
 

@@ -2,24 +2,12 @@ import { Dispatch } from "react";
 import { getAuthorizedUser, getProfiles } from "../../api/passport";
 import { CommonAction, UserData } from "../../types";
 import { lsSaveAuthorizedUser } from "../../utils/storage";
-import { AuthUserAction, AuthUserActions } from "../types/activeUser";
-import { CurrentUserAction, CurrentUserActions } from "../types/shownUser";
+import { AuthUserAction, AuthUserActions } from "../types/authUser";
+import { CurrentUserAction, CurrentUserActions } from "../types/currentUser";
 import { UsersAction, UsersActions } from '../types/users';
 
 export const getAuthorizedUserAction = (token?: string) => {
     return async (dispatch: Dispatch<AuthUserAction | CurrentUserAction>) => {
-
-        function dispatchUser(data: UserData) {
-            dispatch({
-                type: AuthUserActions.SET_USER,
-                payload: data,
-            })
-            dispatch({
-                type: CurrentUserActions.SET_USER_SHOWN,
-                payload: data,
-            })
-        }
-
         const authorizeResponse = await getAuthorizedUser(token);
 
         if (authorizeResponse) {

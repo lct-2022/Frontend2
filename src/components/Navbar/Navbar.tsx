@@ -11,28 +11,24 @@ import { DEFAULT_LOGO, TOKEN_KEY } from '../../utils/consts';
 import { NavLink } from 'react-router-dom';
 import { getTokenFromCookies, removeAuthToken } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
-import { AuthUserActions } from '../../store/types/activeUser';
+import { AuthUserActions } from '../../store/types/authUser';
 import Drop from './components/Drop';
 import { lsRemoveAuthorizedUser } from '../../utils/storage';
+import {Props} from './types';
+
 import Button from '../Button';
 const userIcon = require('../../assets/user-icon.svg').default;
 
 const cName = cn('navbar');
 
-function Navbar() {
+const Navbar: Props = ({changeDrop, isDropped}) => {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
-    const [isDropped, setIsDropped] = useState(false);
-
-    const isAuthorized = !!activeUser;
-
-    const drop = () => {
-        setIsDropped(prev => !prev);
-    }
+    const isAuthorized = !!authUser;
 
     const passToHome = () => {
         navigate(ROUTES.INDEX);    
@@ -98,21 +94,22 @@ function Navbar() {
             <div className={cName('right-block')}>
                 {menuPoints}
 
-                {activeUser && 
+                {authUser && 
                     <>
-                        <img 
-                            src={userIcon} 
-                            alt="В мой профиль"
-                            onClick={drop}
-                            className={cName('user-icon')}
-                        />
+                        <div onClick={changeDrop}>
+                            <img 
+                                src={userIcon} 
+                                alt="В мой профиль"
+                                className={cName('user-icon')}
+                            />
+                        </div>
 
                         {isDropped && <Drop passToMyProfile={passToMyProfile} logout={logout}/>}
                     </>
                 }
             </div>
         </div>
-  )
+    )
 }
 
 export default memo(Navbar);

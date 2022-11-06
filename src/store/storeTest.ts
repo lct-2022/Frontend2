@@ -2,7 +2,7 @@
 // import { applyMiddleware } from "redux";
 // import thunk from "redux-thunk";
 // import { BaseState, rootReducer } from './reducers';
-// import { activeUserReducer } from "./reducers/activeUser";
+// import { authUserReducer } from "./reducers/authUser";
 // import { projectsReducer } from "./reducers/projects";
 // import type { Reducer } from '@reduxjs/toolkit';
 // import { CommonAction } from "../types";
@@ -10,12 +10,12 @@
 // declare const reducer: Reducer<{}>
 
 // const preloadedState: BaseState = {
-//     activeUser: null,
+//     authUser: null,
 //     projects: [],
 // }
 
 // const reducer: Reducer<BaseState, CommonAction<any>> = {
-//     activeUser: activeUserReducer,
+//     authUser: authUserReducer,
 //     posts: projectsReducer,
 // }
 

@@ -1,4 +1,6 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+
 import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { Props } from '../../types';
 import { cn } from '@bem-react/classname';
@@ -15,13 +17,17 @@ import './ProjectsList.css';
 import Button from '../../../../components/Button';
 import { LIMITS } from '../../../../utils/consts';
 
-const cName = cn('projects-list')
+const cName = cn('projects-list');
+
+const queryClient = new QueryClient();
 
 const ProjectsList: Props = ({projects, setProjects}) => {
     const location = useLocation();
 
     const [criteria, setCriteria] = useState('');
     const [pageKey, setPageKey] = useState<string | undefined>();
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const isFromProfile = location.pathname === ROUTES.USER;
     const allHidden = projects.filter(project => !project.hidden).length === 0;
@@ -65,30 +71,32 @@ const ProjectsList: Props = ({projects, setProjects}) => {
     }, [projects]);
     
     const search = useCallback(() => {
-        getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS})
+        setIsLoading(true);
+        getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
             .then(data => {
                 setProjects(data?.items || []);
                 setPageKey(data?.next_page_key);
+                setCriteria('');
+
             })
-        setCriteria('');
     }, [criteria]);
 
     const showMore = useCallback(() => {
         getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
             .then(data => {
-                setProjects(data?.items || []);
+                setProjects(data?.items.map(project => ({...project, hidden: false})) || []);
                 setPageKey(data?.next_page_key);
             })
     }, [criteria, pageKey]);
 
     return (
-        <div>
+        <div className={cName()}>
             <div className={cName('search')}>
                 <input type="text" value={criteria} placeholder="Найти проект" onChange={changeCriteria} className={cName('search-input')}/>
 
-                <button onClick={search}>
-                    Найти
-                </button>
+                <Button onClick={search}>
+                    {allHidden || allMiss ? 'Показать все' : 'Найти'}
+                </Button>
             </div>
 
             {projectsList}
@@ -97,7 +105,7 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 <Button className={cName('show-more-btn')} onClick={showMore}>
                     Показать еще 
                 </Button>  
-            }      
+            }   
         </div>
     )
 }

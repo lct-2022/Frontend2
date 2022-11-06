@@ -34,12 +34,12 @@ const ProjectCard: Props = ({
     const navigate = useNavigate();
     const location = useLocation();
     
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
     const [isLoading, setIsLoading] = useState(false);
 
     // const canSearchPeople = location.pathname === ROUTES.USER;
-    const canSeeApplications = location.pathname === ROUTES.USER || (activeUser?.admin && location.pathname !== ROUTES.INDEX);
+    const canSeeApplications = location.pathname === ROUTES.USER || (authUser?.admin && location.pathname !== ROUTES.INDEX);
 
     const passToProject = useCallback(() => {
         setIsLoading(true);
@@ -64,7 +64,7 @@ const ProjectCard: Props = ({
     }, [id]);
 
     const makeVote = useCallback(() => {
-        if (!activeUser) {
+        if (!authUser) {
             alert('')
             return;
         }
@@ -78,7 +78,7 @@ const ProjectCard: Props = ({
                 getCurrentProject(id);
                 //
             })
-    }, [id, activeUser]);
+    }, [id, authUser]);
 
     if (isLoading) {
         return <Spinner/>

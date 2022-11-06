@@ -67,7 +67,7 @@ const TEAMS: {title: string; id: number}[] = [
 
 function Teams() {
     const [teams, setTeams] = useState<{title: string; id: number}[]>(TEAMS);
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
     
     const [isTeamCreate, setIsTeamCreate] = useState(false);
 
@@ -93,7 +93,7 @@ function Teams() {
                 <div key={id} style={{display: 'flex', justifyContent: 'space-between', gap: '8px'}}>
                     {title}
                     
-                    {activeUser?.admin &&
+                    {authUser?.admin &&
                         <div style={{display: 'flex', gap: '4px'}}>
                             <button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</button>
                             <button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</button>
@@ -102,9 +102,9 @@ function Teams() {
                 </div>
             ))}
              
-            {activeUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
+            {authUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
 
-            {isTeamCreate && activeUser?.admin && <TeamCreate setTeams={setTeams}/>}  
+            {isTeamCreate && authUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>
     )
 }

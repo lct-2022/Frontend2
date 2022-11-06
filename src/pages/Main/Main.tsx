@@ -1,6 +1,5 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, MouseEvent, useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
-import {QueryClientProvider, QueryClient, useQuery} from 'react-query';
 
 import LoginForm from '../Login';
 import Profile from '../User';
@@ -14,32 +13,40 @@ import Experts from '../Experts';
 import Teams from '../Teams/Teams';
 import { ROUTES } from '../../utils/routes';
 import Navbar from '../../components/Navbar';
-import ErrorBoundary from '../../components/Error-Boundary';
-import { getAllProfiles, getAuthorizedUser } from '../../api/passport';
 import { useDispatch } from 'react-redux';
 import { getAuthorizedUserAction } from '../../store/actions/users';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
 import Applications from '../Applications/Applications';
-import { authUserSelector, currentUserSelector } from '../../store/selectors/users';
+import { authUserSelector } from '../../store/selectors/users';
 import { IBaseStore } from '../../store/types/store';
 import { lsGetAuthorizedUser } from '../../utils/storage';
 import EditForm from '../User/components/EditForm/EditForm';
-import { getAllJobs, getAllProjects } from '../../api/platform';
 
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
   console.log('STORE =>', store);
-  const activeUser = useSelector(authUserSelector);
-
-  const queryClient = new QueryClient();
+  const authUser = useSelector(authUserSelector);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [isDropped, setIsDropped] = useState(false);
+  console.log(isDropped);
+  
+  const cancelDrop = () => {
+    setIsDropped(false);
+  }
+  const changeDrop = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+
+    console.log('HERE');
+    setIsDropped(prev => !prev);
+  }
+
   useEffect(() => {
-      const isUserAuthorizedInit = activeUser || getTokenFromCookies() || lsGetAuthorizedUser();
+      const isUserAuthorizedInit = authUser || getTokenFromCookies() || lsGetAuthorizedUser();
       if (!isUserAuthorizedInit && location.pathname !== ROUTES.INDEX) {
         navigate(ROUTES.INDEX);
       }
@@ -47,8 +54,8 @@ function Main() {
   }, []);
 
   return (  
-      <QueryClientProvider client={queryClient}>
-          <Navbar/>
+        <div onClick={cancelDrop}>
+          <Navbar changeDrop={changeDrop} isDropped={isDropped}/>
             <Routes>
               <Route path={ROUTES.INDEX} element={<Home/>}/>
 
@@ -75,7 +82,7 @@ function Main() {
               <Route path={ROUTES.SERVICES} element={<h1>Сервисы</h1>}/>
             </Routes>
             {/* <Footer/> */}
-        </QueryClientProvider>
+        </div>
   );
 }
 

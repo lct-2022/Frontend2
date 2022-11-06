@@ -3,7 +3,7 @@ import { createProject, getPopularProjects } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
 import { useDispatch } from 'react-redux';
-import { CurrentProjectActions } from '../../store/types/activeProject';
+import { CurrentProjectActions } from '../../store/types/currentProject';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../utils/routes';
 import { getAuthorizedUser } from '../../api/passport';

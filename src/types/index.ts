@@ -114,6 +114,11 @@ export type Job = ICommonData & {
 
 export type Event = ICommonData & {};
 
+export type ProjectStage = ICommonData & {
+    title: string;
+    description: string;
+};
+
 export type Vote = ICommonData & {
     user_id: number;
     subject_type: 'project' | 'user';

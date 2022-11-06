@@ -9,7 +9,7 @@ import { authUserSelector } from '../../../../store/selectors/users';
 const cName = cn('user-options');
 
 export const UserOptions: Props = ({currentOption, setOptions}) => {
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
     return (
         <div className={cName()}>

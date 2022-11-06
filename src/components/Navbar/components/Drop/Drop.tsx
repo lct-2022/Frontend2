@@ -2,12 +2,7 @@ import React, { FC, memo } from 'react';
 import {cn} from '@bem-react/classname';
 
 import './Drop.css';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../../utils/routes';
-import { removeAuthToken } from '../../../../utils/cookie';
-import { TOKEN_KEY } from '../../../../utils/consts';
-import { useDispatch } from 'react-redux';
-import { AuthUserActions } from '../../../../store/types/activeUser';
+import Text from '../../../Text';
 
 const cName = cn('drop');
 
@@ -24,11 +19,11 @@ interface IProps {
 const Drop: FC<IProps> = ({passToMyProfile, logout}) => {
     return (
         <div className={cName()}>
-            <div onClick={passToMyProfile} className={cName('point')}>{DropPoints.Profile}</div>
+            <Text type='light' onClick={passToMyProfile} className={cName('point')}>{DropPoints.Profile}</Text>
 
             <div className={cName('divider')}/>
 
-            <div onClick={logout} className={cName('point')}>{DropPoints.Logout}</div>
+            <Text type='light' onClick={logout} className={cName('point')}>{DropPoints.Logout}</Text>
         </div>
     )
 }

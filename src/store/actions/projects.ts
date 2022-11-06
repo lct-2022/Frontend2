@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { getCurrentProject, getPopularProjects } from '../../api/platform';
-import { CurrentProjectAction, CurrentProjectActions } from "../types/activeProject";
+import { CurrentProjectAction, CurrentProjectActions } from "../types/currentProject";
 import { ProjectsActions, SetProjects } from '../types/projects';
 
 export const popularProjectsAction = (limit?: number) => {

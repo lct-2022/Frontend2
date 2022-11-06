@@ -20,7 +20,7 @@ const APPLY = 'Откликнуться';
 const CANCEL = 'Отозвать';
 
 const JobCard: Props = ({title, description, application, id}) => {
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
     const [isApplication, setIsApplication] = useState(false);
 
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const JobCard: Props = ({title, description, application, id}) => {
     }, [application]);
     
     const applicationAction = useCallback(() => {       
-        if (!activeUser) {
+        if (!authUser) {
             alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
@@ -54,7 +54,7 @@ const JobCard: Props = ({title, description, application, id}) => {
             .catch(() => {
                 throw new Error()
             });
-    }, [id, activeUser, isApplication]);
+    }, [id, authUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
         dispatch<any>(getCurrentVacancyAction(id))

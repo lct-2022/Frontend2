@@ -12,12 +12,12 @@ import { authUserSelector } from '../../../../store/selectors/users';
 const cName = cn('projects-list-profile');
 
 const ProjectsListProfile = () => {
-    const activeUser = useSelector(authUserSelector)
+    const authUser = useSelector(authUserSelector)
     const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
 
     useEffect(() => {
-        setAllProjects(activeUser?.projects || [])
-    }, [activeUser?.projects])
+        setAllProjects(authUser?.projects || [])
+    }, [authUser?.projects])
 
     const projectsList = useMemo(() => {
         if (!allProjects.length) {

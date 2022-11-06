@@ -14,15 +14,15 @@ import './EditProfile.css';
 const cName = cn('edit-profile');
 
 function EditProfile() {
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
-    const [nameValue, setNameValue] = useState(activeUser?.fio.split(' ')[0] || '');
-    const [lastnameValue, setLastnameValue] = useState(activeUser?.fio.split(' ')[1] || '');
-    const [phoneValue, setPhoneValue] = useState(activeUser?.phone || '');
-    const [cityValue, setCityValue] = useState(activeUser?.city || '');
-    const [countryValue, setCountryValue] = useState(activeUser?.country || '');
-    const [aboutValue, setAboutalue] = useState(activeUser?.about || '');
-    const [educationValue, setEducationValue] = useState(activeUser?.education || '');
+    const [nameValue, setNameValue] = useState(authUser?.fio.split(' ')[0] || '');
+    const [lastnameValue, setLastnameValue] = useState(authUser?.fio.split(' ')[1] || '');
+    const [phoneValue, setPhoneValue] = useState(authUser?.phone || '');
+    const [cityValue, setCityValue] = useState(authUser?.city || '');
+    const [countryValue, setCountryValue] = useState(authUser?.country || '');
+    const [aboutValue, setAboutalue] = useState(authUser?.about || '');
+    const [educationValue, setEducationValue] = useState(authUser?.education || '');
     const [avatarValue, setAvatarValue] = useState('');
 
     const changeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ function EditProfile() {
             return;
         }
         updateUserProfile({
-            ...activeUser,
+            ...authUser,
             fio: `${nameValue} ${lastnameValue}`,
             phone: phoneValue,
             country: countryValue,
@@ -81,7 +81,7 @@ function EditProfile() {
             })
     }, [nameValue, lastnameValue, phoneValue, countryValue, cityValue, educationValue, aboutValue])
 
-    if (!activeUser) return null;
+    if (!authUser) return null;
 
     return (
         <div className={cName()}>

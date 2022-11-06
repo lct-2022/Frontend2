@@ -1,4 +1,4 @@
-import { CurrentUserAction, CurrentUserActions } from "../types/shownUser";
+import { CurrentUserAction, CurrentUserActions } from "../types/currentUser";
 import { IBaseStore } from "../types/store";
 
 type CurrentUserState = IBaseStore['currentUser'];

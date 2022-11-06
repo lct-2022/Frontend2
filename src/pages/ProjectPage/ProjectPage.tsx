@@ -17,13 +17,13 @@ const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
 
-    const canSearchTeam = currentProject?.['author_id'] === activeUser?.id;
+    const canSearchTeam = currentProject?.['author_id'] === authUser?.id;
     
     const {team_size, jobs, title, description, url, contests, created_at} = currentProject ?? {};
 

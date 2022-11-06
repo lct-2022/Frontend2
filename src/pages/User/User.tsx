@@ -34,17 +34,17 @@ export const Profile: FC<Props> = () => {
     const dispatch = useDispatch();
     const params = useParams()
 
-    const [activeUser, setactiveUser] = useState(authUser);
+    const [shownUser, setShownUser] = useState(authUser);
     
     useEffect(() => {
-        setactiveUser(params.search ? currentUser : authUser);
+        setShownUser(params.search ? currentUser : authUser);
     }, [params.search, currentUser, authUser]);
 
     useEffect(() => {
         dispatch<any>(popularJobsAction())
     }, []);
 
-    if (!activeUser) {
+    if (!shownUser) {
         navigate(ROUTES.LOGIN)
         return null;
     }
@@ -54,13 +54,13 @@ export const Profile: FC<Props> = () => {
             <h1>{TITLE}</h1>
 
             <Bio 
-                user={activeUser}
+                user={shownUser}
                 rating={1}
             />
 
             <div className={cName('down')}>
-                <UserRoutes user={activeUser}/>
-                <Contacts user={activeUser}/>
+                <UserRoutes user={shownUser}/>
+                <Contacts user={shownUser}/>
             </div>
 
             {params.search &&

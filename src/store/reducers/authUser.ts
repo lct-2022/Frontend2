@@ -1,7 +1,7 @@
 import { User, Nullable } from "../../types";
 import { lsGetAuthorizedUser } from "../../utils/storage";
 
-import { AuthUserAction, AuthUserActions } from "../types/activeUser";
+import { AuthUserAction, AuthUserActions } from "../types/authUser";
 import { IBaseStore } from "../types/store";
 
 type UserState = IBaseStore['authUser'];

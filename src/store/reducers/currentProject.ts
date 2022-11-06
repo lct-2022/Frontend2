@@ -1,7 +1,7 @@
 import { User, Nullable } from "../../types";
-import { CurrentProjectActions, CurrentProjectAction } from "../types/activeProject";
+import { CurrentProjectActions, CurrentProjectAction } from "../types/currentProject";
 
-import { AuthUserAction, AuthUserActions } from "../types/activeUser";
+import { AuthUserAction, AuthUserActions } from "../types/authUser";
 import { IBaseStore } from "../types/store";
 
 type ProjectState = IBaseStore['currentProject'];

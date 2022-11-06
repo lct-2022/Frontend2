@@ -18,7 +18,7 @@ const CANCEL = 'Отозвать';
 
 function JobPage() {
     const currentJob = useSelector(currentJobSelector);
-    const activeUser = useSelector(authUserSelector);
+    const authUser = useSelector(authUserSelector);
 
     const [isApplication, setIsApplication] = useState(false);
 
@@ -42,7 +42,7 @@ function JobPage() {
             .catch(() => {
                 throw new Error()
             });
-    }, [currentJob?.id, activeUser, isApplication]);
+    }, [currentJob?.id, authUser, isApplication]);
 
     const obligations = useMemo(() => {
         return (
