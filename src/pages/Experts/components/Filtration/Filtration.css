@@ -1,0 +1,39 @@
+.filter-experts {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filter-experts-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-experts-field-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;    
+}
+
+.filter-experts-field {
+    display: flex;
+    align-items: center;
+
+    margin: 4px 0;
+}
+
+.filter-experts-boxes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.filter-experts-box {
+    margin-right: 8px;
+    height: 13px;
+    width: 13px;
+}
+
+.filter-experts-chbx {
+    height: 13px;
+}

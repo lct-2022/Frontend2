@@ -18,6 +18,7 @@ import {Props} from './types';
 
 import Button from '../Button';
 const userIcon = require('../../assets/user-icon.svg').default;
+const ideaLogo = require('../../assets/logo.svg').default;
 
 const cName = cn('navbar');
 
@@ -86,7 +87,7 @@ const Navbar: Props = ({changeDrop, isDropped}) => {
     return (
         <div className={cName()}>
             <img 
-                src={DEFAULT_LOGO} 
+                src={ideaLogo} 
                 alt="Лого" 
                 className={cName('main-logo')}
                 onClick={passToHome}

@@ -16,10 +16,9 @@ import { getAllProjects } from '../../../../api/platform';
 import './ProjectsList.css';
 import Button from '../../../../components/Button';
 import { LIMITS } from '../../../../utils/consts';
+import Spinner from '../../../../components/Spinner';
 
 const cName = cn('projects-list');
-
-const queryClient = new QueryClient();
 
 const ProjectsList: Props = ({projects, setProjects}) => {
     const location = useLocation();
@@ -27,7 +26,6 @@ const ProjectsList: Props = ({projects, setProjects}) => {
     const [criteria, setCriteria] = useState('');
     const [pageKey, setPageKey] = useState<string | undefined>();
     const [isLoading, setIsLoading] = useState(false);
-
 
     const isFromProfile = location.pathname === ROUTES.USER;
     const allHidden = projects.filter(project => !project.hidden).length === 0;
@@ -77,6 +75,7 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 setProjects(data?.items || []);
                 setPageKey(data?.next_page_key);
                 setCriteria('');
+                setIsLoading(false);
 
             })
     }, [criteria]);
@@ -88,6 +87,10 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 setPageKey(data?.next_page_key);
             })
     }, [criteria, pageKey]);
+
+    if (isLoading) {
+        return <Spinner/>
+    }
 
     return (
         <div className={cName()}>

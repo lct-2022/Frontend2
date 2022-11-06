@@ -23,9 +23,10 @@ export type UserData = ICommonData & {
     about: Nullable<string>,
     admin: Nullable<boolean>,
     projects?: ProjectData[],
+    profession: string;
     profession_id: number;
-    skill_ids: number[];
     skills: string[];
+    skill_ids: number[];
     looking_for_job: boolean;
     looking_for_hackathon: boolean;
     // для фильтрации
@@ -124,6 +125,15 @@ export type Vote = ICommonData & {
     subject_type: 'project' | 'user';
     subject_id: number;
 };
+
+export type Profession = ICommonData & {
+    title: string;
+}
+
+export type Skill = ICommonData & {
+    title: string;
+    hard: boolean;
+}
 
 export interface IStats {
     num_projects: number,
