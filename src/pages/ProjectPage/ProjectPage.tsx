@@ -6,6 +6,7 @@ import { currentProjectSelector, currentProjectStagesSelector } from '../../stor
 import './ProjectPage.css';
 import { authUserSelector } from '../../store/selectors/users';
 import { availableTeamsAction } from '../../store/actions/teams';
+import { getProjectChatIds} from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -40,6 +41,22 @@ function ProjectPage() {
             });
     }, [currentProject?.id]);
 
+    const chatIds = await getProjectChatIds(currentProject?.id ?? 0, getTokenFromCookies());
+    
+    const chatsOnProject = useMemo(() => {
+        if (!chatIds || !chatIds.length) {
+            return <Text>Чатов нет</Text>
+        }
+
+        return (
+            <ul className={cName('chats')}>
+                {chatIds.map((chatId) => (
+                    <li key={chatId}>Тут будет ссылка на чат: {chatId}</li>
+                ))}
+            </ul>
+        )
+    }, [chatIds])
+    
     const goBackToMyIdeas = () => {
         navigate(ROUTES.USER);
     };
@@ -96,6 +113,11 @@ function ProjectPage() {
                     <p className={cName('contests')}>{contests}</p>
 
                     <p className={cName('created')}>{created_at}</p>
+                </div>
+
+                <div className={cName('chats')}>
+                    <p>Чаты</p>
+                    {jobsOnProject}
                 </div>
 
                 <div className={cName('vacancies')}>

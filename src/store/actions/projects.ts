@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { getCurrentProject, getIndustries, getInnovationTypes, getStages } from '../../api/platform';
-import { CurrentProjectAction, CurrentProjectActions } from "../types/currentProject";
+import { getCurrentProject, getIndustries, getInnovationTypes, getStages, getProjectChatIds} from '../../api/platform';
+import { CurrentProjectAction, CurrentProjectActions, CurrentProjectChatIdsAction} from "../types/currentProject";
 import { IndustriesAction, IndustriesActions } from "../types/industries";
 import { InnovationsAction, InnovationsActions } from "../types/innovations";
 import { StagesAction, StagesActions } from "../types/stages";
@@ -42,5 +42,29 @@ export const allStagessAction = () => {
             type: StagesActions.SET_STAGES,
             payload: stagesResponse || null,
         })
+    }
+}
+
+// export const projectChatIdsAction = (projectId: number, token?: string) => {
+//     return async (dispatch: Dispatch<CurrentProjectChatIdsAction>) => {
+
+//         const chatIdsResponse = await getProjectChatIds(projectId, token);
+
+//         dispatch({
+//             type: CurrentProjectActions.SET_CHAT_IDS,
+//             payload: chatIdsResponse || [],
+//         });
+//     }
+// }
+
+export const projectChatIdsAction = (projectId: number, token?: string) => {
+    return async (dispatch: Dispatch<CurrentProjectChatIdsAction>) => {
+
+        const chatIdsResponse = await getProjectChatIds(projectId, token);
+
+        dispatch({
+            type: CurrentProjectActions.SET_CHAT_IDS,
+            payload: chatIdsResponse || [],
+        });
     }
 }
