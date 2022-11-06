@@ -70,12 +70,12 @@ const Filtration: FC<Props> = ({setExperts, professions, skills}) => {
     return (
         <Card className={cName()}>
             <div className={cName('block')}>
-                <Text className={cName('field-title')}>Статус</Text>
+                <Text className={cName('field-title')}>Профессии:</Text>
                 {professionsCriterias}
             </div>   
 
             <div className={cName('block')}>
-                <Text className={cName('field-title')}>Категория инноваций</Text>
+                <Text className={cName('field-title')}>Навыки:</Text>
                 {skillsCriterias}
             </div>
         </Card>

@@ -34,7 +34,7 @@ const Bio: Props = ({user, rating}) => {
                     <div className={cName('upper-first')}>
                         <Text type='large' className={cName('fio')}>{user.fio}</Text>
 
-                        <Text className={cName('job')}>{user.profession}</Text>
+                        <Text type='violet' className={cName('job')}>{user.profession}</Text>
                     </div>
 
                     <div className={cName('upper-first')}>

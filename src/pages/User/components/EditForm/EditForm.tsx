@@ -25,6 +25,9 @@ function EditProfile() {
     const [aboutValue, setAboutalue] = useState(authUser?.about || '');
     const [educationValue, setEducationValue] = useState(authUser?.education || '');
     const [avatarValue, setAvatarValue] = useState('');
+    const [isJob, setIsJob] = useState(false);
+    const [isHakaton, setIsHakaton] = useState(false);
+
 
     const changeName = (event: ChangeEvent<HTMLInputElement>) => {
         setNameValue(event.target.value)
@@ -124,6 +127,16 @@ function EditProfile() {
             <div className={cName('input-block')}>
                 <label htmlFor="avatar">Аватар (ссылка)</label>
                 <input type="text" name="avatar" value={avatarValue} placeholder="url" onChange={changeAvatar}/>
+            </div>
+
+            <div className={cName('input-block-chbx')}>
+                <label htmlFor="job">Хочу в команду</label>
+                <input type="checkbox" className={cName('chbx')} name="job" value={avatarValue} onChange={changeAvatar}/>
+            </div>
+
+            <div className={cName('input-block-chbx')}>
+                <label htmlFor="hakaton" >Хочу на хакатон</label>
+                <input type="checkbox" className={cName('chbx')} name="hakaton" value={avatarValue} onChange={changeAvatar}/>
             </div>
             
             <div className={cName('btns')}>

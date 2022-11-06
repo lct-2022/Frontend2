@@ -33,3 +33,7 @@
 .experts-filtration {
     width: 25%;
 }
+
+.experts-expert_hidden {
+    display: none;
+}

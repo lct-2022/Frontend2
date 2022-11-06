@@ -17,3 +17,12 @@
     
     width: 50%;
 }
+
+.edit-profile-input-block-chbx {
+    display: flex;
+}
+
+.edit-profile-chbx {
+    width: 18px;
+    height: 18px;
+}

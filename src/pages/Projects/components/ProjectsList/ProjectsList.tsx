@@ -81,10 +81,12 @@ const ProjectsList: Props = ({projects, setProjects}) => {
     }, [criteria]);
 
     const showMore = useCallback(() => {
+        setIsLoading(true);
         getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
             .then(data => {
                 setProjects(data?.items.map(project => ({...project, hidden: false})) || []);
                 setPageKey(data?.next_page_key);
+                setIsLoading(false);
             })
     }, [criteria, pageKey]);
 
