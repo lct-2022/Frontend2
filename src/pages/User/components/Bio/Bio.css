@@ -22,16 +22,33 @@
 
 .bio-data {
     display: flex;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 24px;
+    gap: 16px;
 
 }
 
 .bio-personal-info {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
+}
 
+.bio-upper-first {
+    display: flex;
+    gap: 8px;
+}
+
+.bio-fio {
+    font-size: 30px !important;
+    line-height: 38px;
+    font-weight: 600;
+}
+
+.bio-job {
+    font-size: 30px;
+    line-height: 38px;
+    font-weight: 600;
 }
 
 .bio-location {

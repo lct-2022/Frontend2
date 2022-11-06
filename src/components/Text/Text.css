@@ -1,4 +1,4 @@
-.text {
+.text_ordinary {
     font-family: 'Inter';
     font-style: normal;
 
@@ -25,4 +25,10 @@
 
 .text_type_wrapped {
     color: #475467;
+}
+
+.text_type_large {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 38px;
 }

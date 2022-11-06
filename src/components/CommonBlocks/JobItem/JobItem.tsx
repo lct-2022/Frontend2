@@ -65,9 +65,9 @@ const JobCard: Props = ({title, description, application, id}) => {
 
     const btn = useMemo(() => {
         return (
-            <button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
+            <Button className={cName('apply-btn', {applied: isApplication})} onClick={applicationAction}>
                 {isApplication ? CANCEL : APPLY}
-            </button>
+            </Button>
         )
     }, [isApplication, applicationAction])
 

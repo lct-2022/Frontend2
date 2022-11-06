@@ -10,6 +10,7 @@ import { getOwnJobs } from '../../utils/jobsAuthor';
 import { authUserSelector } from '../../store/selectors/users';
 import { ApplicationStatus, Job } from '../../types';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
 const cName = cn('applications');
 
 const APPLICATIONS = [
@@ -48,7 +49,7 @@ function Applications() {
             {applications.map(application => <Application key={application.user_id} application={application}/>)}
             
             
-            <button onClick={goBack}>Назад к профилю</button>
+            <Button onClick={goBack}>Назад к профилю</Button>
         </div>
     )
 }

@@ -10,6 +10,7 @@ import { getTokenFromCookies } from '../../utils/cookie';
 import { authUserSelector } from '../../store/selectors/users';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
+import Button from '../../components/Button';
 
 const cName = cn('vacancy-page')
 
@@ -78,9 +79,9 @@ function JobPage() {
                 </div>
 
                 <div className={cName('btn-container')}>
-                    <button onClick={applicationAction} className={cName('apply-btn', {applied: isApplication})}>
+                    <Button onClick={applicationAction} className={cName('apply-btn', {applied: isApplication})}>
                         {isApplication ? CANCEL : APPLY}
-                    </button>
+                    </Button>
                 </div>
             </div>
 

@@ -17,14 +17,15 @@ import Card from '../../Card';
 import Text from '../../Text';
 import { validateNumberPeople } from '../../../utils/grammar';
 import Spinner from '../../Spinner';
+import Button from '../../Button';
 
 const cName = cn('project-card');
 
 const ProjectCard: Props = ({
     title, 
     description,
-    industry = 'Artificial intellegence',
-    teamSize = 3,
+    industry,
+    teamSize,
     jobs,
     rating,
     additonalInfo = 'В проработке',
@@ -43,7 +44,10 @@ const ProjectCard: Props = ({
 
     const passToProject = useCallback(() => {
         setIsLoading(true);
-        new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id))))
+        Promise.all([
+            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
+            new Promise((res) => res(dispatch<any>(getCurrentProjectAction(id)))),
+        ])
             .then(() => {
                 navigate(ROUTES.PROJECT);
                 setIsLoading(false);
@@ -55,7 +59,6 @@ const ProjectCard: Props = ({
     }
 
     const passToAppllications = useCallback(() => {
-        // THUNK
         getApplications(id)
             .then(data => {
                 dispatch<any>(getJobApplicationsAction(data || []));
@@ -126,11 +129,11 @@ const ProjectCard: Props = ({
                 }
 
                 {canSeeApplications &&
-                    <button>Создать вакансию</button>
+                    <Button>Создать вакансию</Button>
                 }           
 
                 {canSeeApplications &&
-                    <button onClick={passToAppllications}>Отклики</button>
+                    <Button onClick={passToAppllications}>Отклики</Button>
                 }       
         </Card>
     )

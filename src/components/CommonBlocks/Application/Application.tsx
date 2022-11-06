@@ -13,6 +13,7 @@ import { getUserProfile } from '../../../api/passport';
 import { Application, Nullable, User, UserData } from '../../../types';
 import { getUserProfileAction } from '../../../store/actions/users';
 import './Application.css';
+import Button from '../../Button';
 
 const cName = cn('application');
 
@@ -68,11 +69,11 @@ const ApplicationComp: FC<Props> = ({application}) => {
             </div>
 
             <div className={cName('btns')}>
-                <button>Принять</button>
+                <Button>Принять</Button>
 
-                <button>Отклонить</button>
+                <Button>Отклонить</Button>
                 
-                <button>На рассмотрении</button>
+                <Button>На рассмотрении</Button>
             </div>
         </div>
     )

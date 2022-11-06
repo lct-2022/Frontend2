@@ -131,12 +131,12 @@ export const LoginForm: Props = ({type = 'login'}) => {
                         <input className="login-form-password login-input" type="password" placeholder={Placeholders.PASSWORD} value={password} onChange={changePassword}/>
                     </div>
 
-                    <button
+                    <Button
                         className={cName('btn')}
                         onClick={submit}
                     >
                         {btnName}
-                    </button>
+                    </Button>
 
                     <div id="divider"/>
 

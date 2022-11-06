@@ -96,13 +96,12 @@ const Navbar: Props = ({changeDrop, isDropped}) => {
 
                 {authUser && 
                     <>
-                        <div onClick={changeDrop}>
-                            <img 
-                                src={userIcon} 
-                                alt="В мой профиль"
-                                className={cName('user-icon')}
-                            />
-                        </div>
+                        <img 
+                            src={isAuthorized ? authUser.avatar_url : userIcon} 
+                            alt="В мой профиль"
+                            onClick={changeDrop}
+                            className={cName('user-icon')}
+                        />
 
                         {isDropped && <Drop passToMyProfile={passToMyProfile} logout={logout}/>}
                     </>

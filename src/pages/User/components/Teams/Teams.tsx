@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { createTeam } from '../../../../api/platform';
+import Button from '../../../../components/Button';
 import { setActiveTeamAction } from '../../../../store/actions/teams';
 import { authUserSelector } from '../../../../store/selectors/users';
 import { ROUTES } from '../../../../utils/routes';
@@ -31,7 +32,7 @@ export const TeamCreate: FC<Props> = ({setTeams}) => {
         <div>
             <input type="text" value={teamTitle} onChange={changeTeamTitle}/>
 
-            <button onClick={addTeam}>Добавить</button>
+            <Button onClick={addTeam}>Добавить</Button>
         </div>
     )
 }
@@ -57,16 +58,8 @@ const TeamChange: FC<Props> = ({setTeams, team}) => {
     )
 }
 
-const TEAMS: {title: string; id: number}[] = [
-    {title: 'Team1', id:1},
-    {title: 'Team2', id:2},
-    {title: 'Team3', id:3},
-    {title: 'Team4', id:4},
-    {title: 'Team5', id:5},
-];
-
 function Teams() {
-    const [teams, setTeams] = useState<{title: string; id: number}[]>(TEAMS);
+    const [teams, setTeams] = useState<{title: string; id: number}[]>([]);
     const authUser = useSelector(authUserSelector);
     
     const [isTeamCreate, setIsTeamCreate] = useState(false);
@@ -95,14 +88,14 @@ function Teams() {
                     
                     {authUser?.admin &&
                         <div style={{display: 'flex', gap: '4px'}}>
-                            <button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</button>
-                            <button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</button>
+                            <Button onClick={() => addUserToTeam(id, title)} style={{cursor: 'pointer'}}>Добавить участника в команду</Button>
+                            <Button onClick={() => removeTeam(id)} style={{cursor: 'pointer'}}>Удалить команду</Button>
                         </div>
                     }
                 </div>
             ))}
              
-            {authUser?.admin && <button onClick={createNewTeam}>Создать команду +</button>}
+            {authUser?.admin && <Button onClick={createNewTeam}>Создать команду +</Button>}
 
             {isTeamCreate && authUser?.admin && <TeamCreate setTeams={setTeams}/>}  
         </div>

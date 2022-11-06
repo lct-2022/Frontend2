@@ -5,6 +5,9 @@ import { Props } from './types';
 import './Bio.css';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
+import Button from '../../../../components/Button';
+import Card from '../../../../components/Card';
+import Text from '../../../../components/Text';
 
 const avatarIcon = require('../../../../assets/avatar.svg').default;
 
@@ -24,39 +27,42 @@ const Bio: Props = ({user, rating}) => {
     }
     
     return (
-        <div className={cName()}>
-            <div className={cName('data')}>
-               
+        <Card className={cName()}>
+            <div className={cName('data')}>              
                 <img 
                     src={user.avatar_url || avatarIcon}
                     alt="Аватар" 
                     className={cName('avatar')}
                 />
 
-                <div className={cName('personal_info')}>
-                    <p>{user.fio}</p>
-                    
-                    <div className={cName('location')}>
-                        <p>{user.city}</p>
-                        <p>{user.country}</p>
+                <div className={cName('personal-info')}>
+                    <div className={cName('upper-first')}>
+                        <Text type='large' className={cName('fio')}>{user.fio}</Text>
+
+                        <div className={cName('job')}>{user.job}</div>
+
+                        <div className={cName('looking-hackathon')}>{user.looking_for_hackathon}</div>
                     </div>
 
-                    <div className={cName('rating')}>{rating}</div>
+                    <div className={cName('upper-first')}>
+                        <Text className={cName('location')}>{user.city}</Text>
+                    </div>
+
+                    <Text className={cName('rating')}>{rating}</Text>
+
+                    <Text className={cName('status')}>{user.looking_for_job}</Text>
+
+                    <Text className={cName('hakatons_experience')}>
+                        Опыт в хакатонах
+                    </Text>
                 </div>
 
-                <div className={cName('status')}>
-                    {user.admin ? 'Эксперт' : 'Неэксперт'}
-                </div>
-
-                <div className={cName('hakatons_experience')}>
-                    Опыт в хакатонах
-                </div>
             </div>
 
-            <button className={cName('settings')} onClick={passEditProfile}>
+            <Button className={cName('settings')} onClick={passEditProfile}>
                 Редактировать профиль
-            </button>
-        </div>
+            </Button>
+        </Card>
     )
 }
 export default Bio;

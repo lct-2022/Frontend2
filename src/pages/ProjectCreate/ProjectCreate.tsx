@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { createProject, getPopularProjects } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import {cn} from '@bem-react/classname';
@@ -9,15 +9,21 @@ import { ROUTES } from '../../utils/routes';
 import { getAuthorizedUser } from '../../api/passport';
 import { getAuthorizedUserAction } from '../../store/actions/users';
 
+import './ProjectCreate.css';
+import Button from '../../components/Button';
+
 const cName = cn('project-create');
 
 const CREATE_TITLE = 'Создать проект';
 
 function ProjectCreate() {
-      //TODO Formik!!!
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    
+  }, []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -54,39 +60,36 @@ function ProjectCreate() {
     
   return (
     <div className={cName()}>
-      <h1>Форма проекта</h1>
-      <br/>
-
-      <div>
+      <div className={cName('blocks')}>
         <div className={cName('title')}>
-          <label htmlFor={cName('title')} className={cName('title-label')}>
+          <label htmlFor="title" className={cName('title-label')}>
             Название проекта
           </label>
 
-          <input className={cName('title-input')} type="text" value={title} onChange={changeTitle}/>
+          <input className={cName('input')} name="title" type="text" value={title} placeholder="Название проекта" onChange={changeTitle}/>
         </div>
 
-        <div className={cName('description')}>
-          <label htmlFor={cName('description')} className={cName('description-label')}>
+        <div className={cName('title')}>
+          <label htmlFor="description" className={cName('description-label')}>
             Описание проекта
           </label>
 
-          <input className={cName('description-input')} type="text" value={description} onChange={changeDescription}/>
+          <input className={cName('input')} name="description" type="text" value={description} placeholder="Описание проекта" onChange={changeDescription}/>
         </div>
 
-        <div className={cName('url')}>
-          <label htmlFor={cName('url')} className={cName('url-label')}>
+        <div className={cName('title')}>
+          <label htmlFor="url" className={cName('url-label')}>
             Ссылка на проект
           </label>
 
-          <input className={cName('url-input')} type="text" value={url} onChange={changeUrl}/>
+          <input className={cName('input')} name="url" type="text" value={url} placeholder="Ссылка на проект" onChange={changeUrl}/>
         </div>
 
       </div>
 
-      <button onClick={createProjectBtn}>
+      <Button onClick={createProjectBtn}>
         {CREATE_TITLE}
-      </button>
+      </Button>
     </div>
 
   )

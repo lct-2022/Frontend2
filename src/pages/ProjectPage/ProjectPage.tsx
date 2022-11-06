@@ -89,12 +89,12 @@ function ProjectPage() {
 
             {canSearchTeam &&
                 <div>
-                    <button onClick={getTeamsForProject}>Найти чеоовека в команду</button>
+                    <Button onClick={getTeamsForProject}>Найти чеоовека в команду</Button>
                 </div>
             }
 
             {params.created && 
-                <button onClick={goBackToMyIdeas}>К списку идей</button>
+                <Button onClick={goBackToMyIdeas}>К списку идей</Button>
             }
         </div>
     )

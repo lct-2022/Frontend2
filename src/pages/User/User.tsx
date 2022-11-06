@@ -18,6 +18,7 @@ import { popularJobsAction } from '../../store/actions/jobs';
 import { UserData } from '../../types';
 import { getAuthorizedUserAction } from '../../store/actions/users';
 import { getAuthorizedUser } from '../../api/passport';
+import Button from '../../components/Button';
 const TITLE = 'Профиль';
 
 const cName = cn('profile');
@@ -64,7 +65,7 @@ export const Profile: FC<Props> = () => {
             </div>
 
             {params.search &&
-                <button>Пригласить в команду</button>
+                <Button>Пригласить в команду</Button>
             }
         </div>
     );

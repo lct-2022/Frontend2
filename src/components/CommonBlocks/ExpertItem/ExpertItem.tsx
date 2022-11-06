@@ -13,6 +13,7 @@ import { DEFAULT_AVATAR } from '../../../utils/consts';
 import { getUserProfileAction } from '../../../store/actions/users';
 import { getUserProfile } from '../../../api/passport';
 import './ExpertItem.css';
+import Button from '../../Button';
 
 const cName = cn('expert-card');
 
@@ -44,8 +45,8 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
             {/* Уведомления потом */}
             {canBeInvited && 
                 <div>
-                    <button>Пригласить в команду</button>
-                    <button onClick={passToProfile}>Посмотреть профиль</button>
+                    <Button>Пригласить в команду</Button>
+                    <Button onClick={passToProfile}>Посмотреть профиль</Button>
                 </div>
             }
         </div>

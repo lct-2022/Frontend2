@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { teamsSelector } from '../../store/selectors/teams';
 
 import './Teams.css';
+import Button from '../../components/Button';
 
 const cName = cn('teams');
 
@@ -32,7 +33,7 @@ function Main() {
                         <h4>{title}</h4>
 
                         <div className={cName('btns')}>
-                            <button onClick={addTeamToProject}>Кинуть приглашение</button>
+                            <Button onClick={addTeamToProject}>Кинуть приглашение</Button>
                         </div>
                     </div>
                 ))}

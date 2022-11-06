@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../utils/routes";
 
 import './EditProfile.css';
+import Button from "../../../../components/Button";
 
 const cName = cn('edit-profile');
 
@@ -126,8 +127,8 @@ function EditProfile() {
             </div>
             
             <div className={cName('btns')}>
-                <button onClick={updateProfile}>Редактировать</button>
-                <button onClick={() => navigate(-1)}>Назад в профиль</button>
+                <Button onClick={updateProfile}>Редактировать</Button>
+                <Button onClick={() => navigate(-1)}>Назад в профиль</Button>
             </div>
         </div>
     );
