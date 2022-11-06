@@ -13,28 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 const cName = cn('applications');
 
-const APPLICATIONS = [
-    {
-        user_id: 7,
-        message: 'Отклик',
-        status: ApplicationStatus.ACCEPTED,
-        job: {
-            title: 'Fresh',
-        }
-    },
-    {
-        user_id: 6,
-        message: 'Отклик',
-        status: ApplicationStatus.ACCEPTED,
-        job: {
-            title: 'Argument',
-        }
-    }
-]
-
 function Applications() {
-    const applications = APPLICATIONS
-    // useSelector(applicationsSelector);
+    const applications = useSelector(applicationsSelector);
 
     const navigate = useNavigate();
 
@@ -44,11 +24,8 @@ function Applications() {
     
     return (
         <div className={cName()}>
-            {/* <h3></h3> */}
-
             {applications.map(application => <Application key={application.user_id} application={application}/>)}
-            
-            
+              
             <Button onClick={goBack}>Назад к профилю</Button>
         </div>
     )

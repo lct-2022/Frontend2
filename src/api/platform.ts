@@ -169,7 +169,6 @@ export const applyToJob = async (jobId: number, token?: string): Promise<Undefin
     });
 };
 
-//accept_application
 export const replyApplication = async (type: 'accept' | 'decline', applicationId: number): Promise<Undefinedable<Application>> => {
     return await request({
         method: type === 'accept' ? 'accept_application' : 'decline_application',
