@@ -110,6 +110,13 @@ export const getStats = async (): Promise<Undefinedable<IStats>> => {
     })
 };
 
+export const getStages = async (): Promise<Undefinedable<string[]>> => {
+    return await request<string[]>({
+        method: 'get_stages',
+        host: RPCHosts.Platform,
+    })
+};
+
 export const getCurrentProject = async (id: number): Promise<Undefinedable<ProjectData>> => {
     return await request<ProjectData>({
         method: 'get_project',

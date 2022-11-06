@@ -15,8 +15,6 @@ import './Home.css';
 const queryClient = new QueryClient();
 
 function Home() {
-    const dispatch = useDispatch();
-
     const queryResultProjects = useQuery('popularProjects', () => getPopularProjects((LIMITS.PROJECTS)));
     const queryResultJobs = useQuery('popularJobs', () => getPopularJobs((LIMITS.JOBS)));
     const queryResultStats = useQuery('stats', () => getStats());

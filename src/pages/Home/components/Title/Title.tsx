@@ -6,6 +6,7 @@ import {cn} from '@bem-react/classname';
 import './Title.css';
 import { IStats } from '../../../../types';
 import Card from '../../../../components/Card';
+import Text from '../../../../components/Text';
 
 const cName = cn('title-home-page');
 
@@ -34,7 +35,7 @@ const TitleHomePage: FC<IProps> = ({stats}) => {
 
     return (
         <div className={cName()}>
-            <h3 className={cName('title')}>{TITLE}</h3>
+            <Text type="large" className={cName('title')}>{TITLE}</Text>
 
             {cards}
         </div>

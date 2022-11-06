@@ -6,13 +6,14 @@ import { cn } from '@bem-react/classname'
 import './JobItem.css';
 
 import {Props} from './types';
-import { applyToJob, getJobApplication, getApplications, getVacancy, cancelApplication } from '../../../api/platform';
+import { applyToJob, getJobApplication, cancelApplication } from '../../../api/platform';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
 import { useSelector } from 'react-redux';
 import { authUserSelector } from '../../../store/selectors/users';
 import Button from '../../Button';
+import Spinner from '../../Spinner';
 
 const cName = cn('vacancy-card');
 
@@ -22,6 +23,7 @@ const CANCEL = 'Отозвать';
 const JobCard: Props = ({title, description, application, id}) => {
     const authUser = useSelector(authUserSelector);
     const [isApplication, setIsApplication] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -57,9 +59,11 @@ const JobCard: Props = ({title, description, application, id}) => {
     }, [id, authUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
+        setIsLoading(true);
         new Promise(res => res(dispatch<any>(getCurrentVacancyAction(id)))) 
             .then(() => {
                 navigate(ROUTES.JOB);
+                setIsLoading(false)
             })
     }, [id]);    
 
@@ -69,7 +73,11 @@ const JobCard: Props = ({title, description, application, id}) => {
                 {isApplication ? CANCEL : APPLY}
             </Button>
         )
-    }, [isApplication, applicationAction])
+    }, [isApplication, applicationAction]);
+
+    if (isLoading) {
+        return <Spinner/>
+    }
 
     return (
         <div className={cName()}>

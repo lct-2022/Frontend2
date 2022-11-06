@@ -22,6 +22,9 @@ import { authUserSelector } from '../../store/selectors/users';
 import { IBaseStore } from '../../store/types/store';
 import { lsGetAuthorizedUser } from '../../utils/storage';
 import EditForm from '../User/components/EditForm/EditForm';
+import Spinner from '../../components/Spinner';
+
+import './Main.css';
 
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
@@ -50,8 +53,10 @@ function Main() {
       dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())); // token из кук
   }, []);
 
+  // return <Spinner/>
+
   return (  
-        <div onClick={cancelDrop}>
+        <div className="main" onClick={cancelDrop}>
           <Navbar changeDrop={changeDrop} isDropped={isDropped}/>
             <Routes>
               <Route path={ROUTES.INDEX} element={<Home/>}/>

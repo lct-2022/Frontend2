@@ -1,6 +1,4 @@
 body {
-  margin: 16px 32px;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -9,10 +7,10 @@ body {
   user-select: none;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 
 button {
   cursor: pointer;
