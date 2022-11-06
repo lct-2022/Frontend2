@@ -301,6 +301,8 @@ export const getTeamJobs = async (projectId: number, token?: string): Promise<Un
 
 // cancel-application
 export const cancelApplication = async (applId: number, token?: string): Promise<Undefinedable<Application>> => {
+    console.log('APPL ID ===>', applId);
+    
     return await request({
         method: 'cancel_application',
         host: RPCHosts.Platform,
