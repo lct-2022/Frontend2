@@ -61,6 +61,7 @@
     
     border-radius: 8px;
     background-color: #E4CCFF;
+    overflow: hidden;
 }
 
 .project-card-title-in-logo {
