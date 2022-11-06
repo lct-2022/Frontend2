@@ -1,4 +1,4 @@
-import { UserData } from "../types";
+import { Job, ProjectData, ProjectStage, UserData } from "../types";
 
 export function lsSaveAuthorizedUser(user: UserData) {
     try {
@@ -55,6 +55,50 @@ export function lsGetCurrentUser(): UserData | undefined {
 export function lsRemoveCurrentUser() {
     try {
         localStorage.removeItem('current_user_ideahunt');
+    } catch(err) {
+        // pass
+    }
+}
+
+export function lsSaveCurrentProject(project: ProjectData) {
+    try {
+        localStorage.setItem('current_project_ideahunt', JSON.stringify(project));
+    } catch(err) {
+        // pass
+    }
+}
+
+export function lsGetCurrentProject(): ProjectData | undefined {
+    try {
+        const project = localStorage.getItem('current_project_ideahunt');
+        
+        if (project) {
+            return JSON.parse(project);
+        }
+
+        return;
+    } catch(err) {
+        // pass
+    }
+}
+
+export function lsSaveCurrentJob(job: Job) {
+    try {
+        localStorage.setItem('current_job_ideahunt', JSON.stringify(job));
+    } catch(err) {
+        // pass
+    }
+}
+
+export function lsGetCurrentJob(): Job | undefined {
+    try {
+        const job = localStorage.getItem('current_job_ideahunt');
+        
+        if (job) {
+            return JSON.parse(job);
+        }
+
+        return;
     } catch(err) {
         // pass
     }

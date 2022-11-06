@@ -3,10 +3,11 @@ import { currentJobAction, currentJobActions } from "../types/currentJob";
 
 import { AuthUserAction, AuthUserActions } from "../types/authUser";
 import { IBaseStore } from "../types/store";
+import { lsGetCurrentJob } from "../../utils/storage";
 
 type CurrentJobState = IBaseStore['currentJob'];
 
-const initialState: CurrentJobState = null;
+const initialState: CurrentJobState = lsGetCurrentJob() || null;
 
 export const currentJobReducer = (store: CurrentJobState = initialState, action: currentJobAction) => {
     const {type, payload} = action;
