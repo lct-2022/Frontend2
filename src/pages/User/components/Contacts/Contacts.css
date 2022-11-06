@@ -5,7 +5,8 @@
     
     padding: 24px;
     height: 180px;
-    min-width: 160px
+    min-width: 160px;
+    width: 25%;
 }
 
 .contacts-title {

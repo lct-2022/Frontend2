@@ -1,13 +1,9 @@
-import { Application, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
+import { Application, ISearchParams, Job, JobsList, Project, ProjectData, ProjectsList, ProjectTeamMember, Team, Undefinedable } from "../types";
 import { request, RPCHosts } from "../utils/api";
-
-interface ISearchParams {
-    pageKey?: string;
-    limit?: number;
-}
 
 export const getAllProjects = async (query: string, options?: ISearchParams): Promise<Undefinedable<ProjectsList>> => {
     const {pageKey, limit} = options || {};
+    
     return await request<ProjectsList>({
         method: 'search_projects',
         host: RPCHosts.Platform,

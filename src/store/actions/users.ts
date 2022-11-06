@@ -18,7 +18,7 @@ export const getAuthorizedUserAction = (token?: string) => {
                 type: CurrentUserActions.SET_USER_SHOWN,
                 payload: data,
             })
-        } 
+        }
 
         const authorizeResponse = await getAuthorizedUser(token);
 
@@ -28,7 +28,10 @@ export const getAuthorizedUserAction = (token?: string) => {
         
         return authorizeResponse
             ? 
-                dispatchUser(authorizeResponse)
+                dispatch({
+                    type: AuthUserActions.SET_USER,
+                    payload: authorizeResponse,
+                })
             : 
                 dispatch({
                     type: AuthUserActions.UNSET_USER,

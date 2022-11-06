@@ -6,9 +6,10 @@ import { jobsReducer } from "./jobs";
 import { currentProjectReducer } from "./currentProject";
 import { currentJobReducer } from "./currentJob";
 import { currentApplicationsReducer } from "./applications";
+import { authUserReducer } from "./authUser";
 
 export const rootReducer = combineReducers({
-    authUser: currentUserReducer,
+    authUser: authUserReducer,
     currentProject: currentProjectReducer,
     currentJob: currentJobReducer,
     projects: projectsReducer,

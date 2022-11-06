@@ -1,4 +1,4 @@
-import { Undefinedable, User, UserData, UsersList } from "../types";
+import { ISearchParams, Undefinedable, User, UserData, UsersList } from "../types";
 import { request, RPCHosts } from "../utils/api";
 
 export const getAuthorizedUser = async (token?: string): Promise<Undefinedable<UserData>> => {
@@ -42,7 +42,9 @@ export const login = async (email: string, password: string): Promise<Undefineda
 };
 
 // search-users
-export const getAllProfiles = async (query: string): Promise<Undefinedable<UsersList>> => {
+export const getAllProfiles = async (query: string, options?: ISearchParams): Promise<Undefinedable<UsersList>> => {
+    const {pageKey, limit} = options || {};
+    
     return await request<UsersList>({
         method: 'search_users',
         host: RPCHosts.Passport,
@@ -51,6 +53,12 @@ export const getAllProfiles = async (query: string): Promise<Undefinedable<Users
             additional_fields: [
                 'projects',
             ],
+            ...(limit !== undefined && {
+                limit,
+            }),
+            ...(pageKey && {
+                page_key: pageKey
+            }),
         }
     });
 };

@@ -123,4 +123,9 @@ export type Vote = ICommonData & {
 export type CommonAction<T, P = never> = {
     type: T,
     payload?: P,
+};
+
+export interface ISearchParams {
+    pageKey?: string;
+    limit?: number;
 }

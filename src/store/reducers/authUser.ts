@@ -5,10 +5,11 @@ import { AuthUserAction, AuthUserActions } from "../types/activeUser";
 import { IBaseStore } from "../types/store";
 
 type UserState = IBaseStore['authUser'];
+console.log(lsGetAuthorizedUser());
 
 const initialState: UserState = lsGetAuthorizedUser() || null;
 
-export const activeUserReducer = (store: UserState = initialState, action: AuthUserAction) => {
+export const authUserReducer = (store: UserState = initialState, action: AuthUserAction) => {
     const {type, payload} = action;
 
     switch (type) {
