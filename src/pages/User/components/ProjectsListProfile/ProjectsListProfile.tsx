@@ -3,26 +3,29 @@ import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { cn } from '@bem-react/classname';
 
 import './ProjectsList.css';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
 import { ProjectData } from '../../../../types';
 import { useSelector } from 'react-redux';
-import { authUserSelector } from '../../../../store/selectors/users';
+import { authUserSelector, currentUserSelector } from '../../../../store/selectors/users';
 
 const cName = cn('projects-list-profile');
 
 const ProjectsListProfile = () => {
-    const authUser = useSelector(authUserSelector)
-    const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
+    const params = useParams();
 
+    const currentUser = useSelector(currentUserSelector)
+    const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
+    console.log(currentUser);
+    
     useEffect(() => {
-        setAllProjects(authUser?.projects || [])
-    }, [authUser?.projects])
+        setAllProjects(currentUser?.projects || [])
+    }, [currentUser?.projects])
 
     const projectsList = useMemo(() => {
         if (!allProjects.length) {
             return (
-                <h3>У Вас пока нет проектов</h3>
+                <h3>{params.search ? 'У эксперта нет проектов' : 'У Вас пока нет проектов'}</h3>
             )
         }
         
@@ -32,7 +35,7 @@ const ProjectsListProfile = () => {
 
         return (
             <div className={cName('container')}>
-                {allProjects.map(({title, description, industry, team_size, jobs, id, author_id}, index) => (
+                {allProjects.map(({title, description, industry, team_size, jobs, id}, index) => (
                     <div key={index} className={cName('project')}>
                         <ProjectCard
                             title={title}
@@ -50,7 +53,7 @@ const ProjectsListProfile = () => {
 
     return (
         <div>
-            <h1>Ваши проекты:</h1>
+            {!params.search && <h1>Ваши проекты:</h1>}
 
             {projectsList}
         </div>

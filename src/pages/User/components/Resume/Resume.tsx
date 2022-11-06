@@ -3,18 +3,15 @@ import {cn} from '@bem-react/classname';
 import { Props } from './types';
 import { Nullable } from '../../../../types';
 import Text from '../../../../components/Text';
+import { prepareDate } from '../../../../utils/grammar';
 
 const cName = cn('resume');
-
-const prepareDate = (birthday: string) => {
-    return birthday;
-}
 
 const prepareText = (gender: Nullable<string>, birthday: Nullable<string>): string => {
     if (!gender || !birthday) {
         return 'Родился';
     }
-    return `${gender === 'm' || gender === 'M' ? 'Родился' : 'Родилась'} ${birthday}`
+    return `${gender === 'm' || gender === 'M' ? 'Родился' : 'Родилась'} ${prepareDate(birthday)}`
 }
 
 const prepareLocationText = (city: Nullable<string>, country: Nullable<string>): string => {
@@ -57,7 +54,7 @@ const Resume: Props = ({user}) => {
                     {user.skill_ids.map(el => {
                         return (
                             <li key={el}>
-                                el
+                                {el}
                             </li>
                         )
                     })}

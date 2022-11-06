@@ -7,7 +7,7 @@ export const currentProjectSelector = createSelector(
 );
 
 export const currentProjectStagesSelector = createSelector(
-    (store: IBaseStore) => store.currentProjectStages,
+    (store: IBaseStore) => store.currentStages,
     stages => stages,
 );
 

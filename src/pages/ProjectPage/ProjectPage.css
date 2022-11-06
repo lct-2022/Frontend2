@@ -17,6 +17,7 @@
 .project-page-title {
     font-size: 30px;
     font-weight: 600;
+    margin-bottom: 16px;
 }
 
 .project-page-team-info {
@@ -30,4 +31,9 @@
 .project-page-details {
     display: flex;
     justify-content: space-between;
+}
+
+.project-page-contest, .project-page-created, .project-page-description {
+    margin-bottom: 16px;
+    margin-top: 8px;
 }

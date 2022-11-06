@@ -48,7 +48,7 @@ function Main() {
 
   useEffect(() => {
       dispatch<any>(allIndustriesAction());
-      dispatch<any>(allInnovationsAction())
+      dispatch<any>(allInnovationsAction());
       dispatch<any>(allStagessAction());
 
       const isUserAuthorizedInit = authUser || getTokenFromCookies() || lsGetAuthorizedUser();
