@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
-import { prepareProfileItems } from '../../utils';
-import { CHANGE_TITLE, ITEMS_MAP } from '../../consts';
 import { Props } from './types';
 import { Nullable } from '../../../../types';
+import Text from '../../../../components/Text';
 
 const cName = cn('resume');
 
@@ -15,7 +14,7 @@ const prepareText = (gender: Nullable<string>, birthday: Nullable<string>): stri
     if (!gender || !birthday) {
         return 'Родился';
     }
-    return `${gender === 'm' ? 'Родился' : 'Родилась'} ${birthday}`
+    return `${gender === 'm' || gender === 'M' ? 'Родился' : 'Родилась'} ${birthday}`
 }
 
 const prepareLocationText = (city: Nullable<string>, country: Nullable<string>): string => {
@@ -47,9 +46,24 @@ const Resume: Props = ({user}) => {
 
             {birhtText}
             {locationText}
-
-            <p>Resume...</p>
-            <p>Resume...</p>
+            {user.about}
+            
+            <div className={cName('data')}>
+                <h5>Образование:</h5>
+                <Text>{user.education}</Text>
+                
+                <h5>Навыки:</h5>
+                <ul>
+                    {user.skill_ids.map(el => {
+                        return (
+                            <li key={el}>
+                                el
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <Text>Resume...</Text>
         </div>
     )
 }

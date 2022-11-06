@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback, useEffect, useMemo, useState} from 'react
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
-import { applyToJob, getJobApplication, getApplications, getVacancy } from '../../../api/platform';
+import { applyToJob, getJobApplication, getApplications, getVacancy, replyApplication } from '../../../api/platform';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { useDispatch } from 'react-redux';
 import { getCurrentVacancyAction } from '../../../store/actions/jobs';
@@ -19,7 +19,7 @@ import { CurrentUserActions } from '../../../store/types/currentUser';
 const cName = cn('application');
 
 type Props = {
-    application: Application | any;
+    application: Application;
     user?: User;
 }
 
@@ -50,6 +50,14 @@ const ApplicationComp: FC<Props> = ({application}) => {
         navigate(`${ROUTES.USER}/search`);
     }, [appliedUser]);
 
+    const acceptApplication = useCallback(() => {
+        replyApplication('accept', application?.id)
+    }, [application?.id]);
+
+    const declineApplication = useCallback(() => {
+        replyApplication('decline', application?.id)
+    }, [application?.id])
+
     if (!appliedUser) {
         return null;
     }
@@ -73,9 +81,9 @@ const ApplicationComp: FC<Props> = ({application}) => {
             </div>
 
             <div className={cName('btns')}>
-                <Button>Принять</Button>
+                <Button onClick={acceptApplication}>Принять</Button>
 
-                <Button>Отклонить</Button>
+                <Button onClick={declineApplication}>Отклонить</Button>
                 
                 <Button>На рассмотрении</Button>
             </div>

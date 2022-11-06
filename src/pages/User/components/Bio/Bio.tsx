@@ -39,16 +39,13 @@ const Bio: Props = ({user, rating}) => {
                     </div>
 
                     <div className={cName('upper-first')}>
-                        <Text className={cName('location')}>{user.city}</Text>
+                        <Text className={cName('location')}>Живет в городе {user.city}</Text>
                     </div>
 
-                    <Text className={cName('rating')}>{rating || 0}</Text>
+                    <Text className={cName('rating')} type="violet">место в рейтинге - {rating || 0}</Text>
 
-                    <Text className={cName('status')}>{user.looking_for_job}</Text>
-
-                    <Text className={cName('hakatons_experience')}>
-                        Опыт в хакатонах
-                    </Text>
+                    {user.looking_for_job && <Text className={cName('status')}>Ищет команду</Text>}
+                    {user.looking_for_hackathon && <div className={cName('looking-hackathon')}>Хочет в хакатон</div>}
                 </div>
 
             </div>

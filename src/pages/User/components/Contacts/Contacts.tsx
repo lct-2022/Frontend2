@@ -3,6 +3,7 @@ import {cn} from '@bem-react/classname';
 import { Props } from '../../components/About/types';
 
 import './Contacts.css'
+import Text from '../../../../components/Text';
 
 const cName = cn('contacts');
 
@@ -15,13 +16,13 @@ const Contacts: Props = ({user}) => {
             <h3 className={cName('title')}>{TITLE}</h3>
 
             <div className={cName('phone')}>
-                <p>Телефон</p>
-                <p>{user.phone || '8 (999) 999-99-99'}</p>    
+                <Text>Телефон:</Text>
+                <Text type="light">{user.phone}</Text>    
             </div>
 
             <div className={cName('email')}>
-                <p>Почта</p>
-                <p>{user.email || 'email@email.ru'}</p>
+                <Text>Почта:</Text>
+                <Text type='light'>{user.email}</Text>
             </div>
         </div>
     )

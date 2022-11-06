@@ -25,3 +25,8 @@
 .expert-card-fio:hover {
     cursor: pointer;
 }
+
+.expert-card-horizontal {
+    display: flex;
+    gap: 8px;
+}

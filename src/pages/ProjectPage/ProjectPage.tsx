@@ -20,6 +20,8 @@ const cName = cn('project-page')
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);
+    console.log(currentProject);
+    
     const authUser = useSelector(authUserSelector);
     const currentProjectStages = useSelector(currentProjectStagesSelector);
 

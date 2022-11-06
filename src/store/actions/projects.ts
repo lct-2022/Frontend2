@@ -10,7 +10,7 @@ export const getCurrentProjectAction = (id: number) => {
         const currentProjectResponse = await getCurrentProject(id);
         dispatch({
             type: CurrentProjectActions.SET_PROJECT,
-            payload: currentProjectResponse || null,
+            payload: currentProjectResponse,
         })
     }
 }
@@ -20,7 +20,7 @@ export const allIndustriesAction = () => {
         const industriesResponse = await getIndustries();
         dispatch({
             type: IndustriesActions.SET_INDUSTRIES,
-            payload: industriesResponse || null,
+            payload: industriesResponse,
         })
     }
 }
@@ -30,7 +30,7 @@ export const allInnovationsAction = () => {
         const innovationsResponse = await getInnovationTypes();
         dispatch({
             type: InnovationsActions.SET_INNIVATIONS,
-            payload: innovationsResponse || null,
+            payload: innovationsResponse,
         })
     }
 }
@@ -40,7 +40,7 @@ export const allStagessAction = () => {
         const stagesResponse = await getStages();
         dispatch({
             type: StagesActions.SET_STAGES,
-            payload: stagesResponse || null,
+            payload: stagesResponse,
         })
     }
 }

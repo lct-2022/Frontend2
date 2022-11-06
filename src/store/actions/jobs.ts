@@ -17,12 +17,12 @@ export const getCurrentVacancyAction = (jobId: number) => {
     }
 }
 
-export const getJobApplicationsAction = (applications: Application[] | null) => {
+export const getJobApplicationsAction = (applications: Application[]) => {
     return async (dispatch: Dispatch<SetApplications>) => {
 
         dispatch({
             type: ApplicationsActions.SET_APPLICATIONS,
-            payload: applications || [],
+            payload: applications,
         });
     }
 }
