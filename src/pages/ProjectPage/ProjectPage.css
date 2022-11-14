@@ -1,23 +1,31 @@
 .project-page-title-card {
     display: flex;
+    justify-content: flex-start;
     align-items: flex-start;
 
     margin-bottom: 24px;
 }
 
 .project-page-logo {
-    width: 96px;
-    height: 96px;
+    width: 179px;
+    height: 179px;
     margin-right: 32px;
     
     border-radius: 8px;
     background-color: grey;
 }
 
+.project-page-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .project-page-title {
     font-size: 30px;
     font-weight: 600;
-    margin-bottom: 16px;
+    line-height: 38px;
+
+    margin-bottom: 39px;
 }
 
 .project-page-team-info {
@@ -36,4 +44,16 @@
 .project-page-contest, .project-page-created, .project-page-description {
     margin-bottom: 16px;
     margin-top: 8px;
+}
+
+.project-page-author-info-name {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.project-page-author-ava {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }

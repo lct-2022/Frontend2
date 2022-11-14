@@ -32,7 +32,7 @@
 .project-card-title {
     font-size: 18px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 20px;
 }
 
 .project-card-title:hover {
@@ -106,5 +106,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+}
+
+.project-card-is-appliable {
+    line-height: 24px;
 }
 

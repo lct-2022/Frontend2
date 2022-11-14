@@ -112,7 +112,7 @@ const ProjectCard: Props = ({
                     <div className={cName('data-down')}>
                         {teamSize !== undefined && teamSize !== null &&  <Text>{validateNumberPeople(teamSize)}</Text>}
 
-                        {jobs && <Text type="light">{jobs?.length ? 'Идет найм' : 'Найма нет'}</Text>}
+                        {jobs && <Text type="light" className={cName('is-appliable')}>{jobs?.length ? 'Идет найм' : 'Найма нет'}</Text>}
 
                         {additonalInfo && <Text>{additonalInfo}</Text>}
                     </div>

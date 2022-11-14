@@ -1,21 +1,15 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
-import { UserOption } from '../../consts';
-import { Props } from '../About/types';
-import About from '../About';
-import Resume from '../Resume';
-import Teams from '../Teams/Teams';
-import UserOptions from '../../components/Options';
-import Projects from '../ProjectsListProfile/ProjectsListProfile';
 
 import './Routes.css';
+import { ProjectOption } from '../../consts';
 
 const cName = cn('user-routes');
 
-const UserRoutes: Props = ({user}) => {
-    const [shownData, setShowData] = useState<UserOption>('ideas');
+const ProjectRoutes: Props = ({user}) => {
+    const [shownData, setShowData] = useState<ProjectOption>('stages');
 
-    const setOptions = useCallback((point: UserOption) => {
+    const setOptions = useCallback((point: ProjectOption) => {
         setShowData(point)
     }, [])    
 
@@ -44,4 +38,4 @@ const UserRoutes: Props = ({user}) => {
         </div>
     )
 }
-export default UserRoutes;
+export default ProjectRoutes;

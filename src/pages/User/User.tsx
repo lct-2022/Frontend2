@@ -21,19 +21,10 @@ export const Profile = () => {
     const currentUser = useSelector(currentUserSelector);
     const authUser = useSelector(authUserSelector);
     const rating = useSelector(userRatingSelector);
-    console.log(currentUser);
-    console.log(authUser);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const params = useParams()
 
-    const [shownUser, setShownUser] = useState(authUser);
-    console.log('shownUser =>', shownUser);
-    
-    useEffect(() => {
-        setShownUser(params.search ? currentUser : authUser);
-    }, [params.search]);
+    const [shownUser] = useState(params.search ? currentUser : authUser);
 
     if (!shownUser) {
         return null;

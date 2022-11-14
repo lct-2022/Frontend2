@@ -2,14 +2,12 @@ import React, { useState, ChangeEvent, useCallback, useEffect, memo } from 'reac
 import { OPTIONS, UserOption} from '../../consts';
 import {cn} from '@bem-react/classname';
 import {Props} from './types';
+
 import './Options.css';
-import { useSelector } from 'react-redux';
-import { authUserSelector } from '../../../../store/selectors/users';
 
 const cName = cn('user-options');
 
 export const UserOptions: Props = ({currentOption, setOptions}) => {
-    const authUser = useSelector(authUserSelector);
 
     return (
         <div className={cName()}>

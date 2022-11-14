@@ -7,11 +7,6 @@ body {
   user-select: none;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
-
 button {
   cursor: pointer;
   font-weight: 800;
@@ -60,7 +55,11 @@ input {
 
 p {
   margin: 0;
-  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Inter';
+  font-style: normal;
 }
 
 #divider {

@@ -19,7 +19,6 @@ import Filtration from './components/Filtration/Filtration';
 const cName = cn('experts');
 const queryClient = new QueryClient();
 
-
 function Experts() {
     const [allExperts, setAllExperts] = useState<UserData[]>([]);
     const params = useParams();

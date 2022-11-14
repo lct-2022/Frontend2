@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { currentProjectSelector, currentProjectStagesSelector } from '../../store/selectors/projects';
@@ -16,9 +17,23 @@ import { ProjectData, ProjectStage } from '../../types';
 import { getCompleteStages } from '../../utils/getStages';
 import { prepareDate } from '../../utils/grammar';
 
+import { getUserProfile } from '../../api/passport';
+import Spinner from '../../components/Spinner';
+import Card from '../../components/Card';
+
 import './ProjectPage.css';
 
 const cName = cn('project-page');
+
+const queryClient = new QueryClient();
+
+const MENU = [
+    'Этапы развития',
+    'Материалы',
+    'Команда',
+    'Вакансии',
+    'Сервисы'
+];
 
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);    
@@ -33,18 +48,13 @@ function ProjectPage() {
     const params = useParams();
 
     useEffect(() => {
-        const item = sessionStorage.getItem('project');
-
-        
+        const item = sessionStorage.getItem('project');        
         if (item) {
-            console.log('ITEM !!!!!!!!!!!!!!!!!!');
             setProject(JSON.parse(item))
         }
         
         if (currentProject) {
             setProject(currentProject);
-            console.log('HERE');
-            
             sessionStorage.setItem('project', JSON.stringify(currentProject))
         }
 
@@ -52,7 +62,9 @@ function ProjectPage() {
 
     const canSearchTeam = currentProject?.['author_id'] === authUser?.id;
     
-    const {team_size, jobs, title, description, url, contests, created_at} = project ?? {};
+    const {team_size, jobs, title, description, url, contests, created_at, author_id = 0} = project ?? {};
+
+    const {data, error, isLoading} = useQuery('getProfile', () => getUserProfile(author_id))
 
     const getTeamsForProject = useCallback(() => {
         new Promise(res => res(dispatch<any>(availableTeamsAction(project?.id ?? 0, getTokenFromCookies()))))
@@ -64,17 +76,12 @@ function ProjectPage() {
     const goBackToMyIdeas = () => {
         navigate(ROUTES.USER);
     };
-    console.log('====>', currentProjectStages);
     
     useEffect(() => {
         if (currentProjectStages && project?.stage_id) {
-            setStages(getCompleteStages(currentProjectStages, project?.stage_id));
-            console.log('===>', getCompleteStages(currentProjectStages, project?.stage_id));
-            
+            setStages(getCompleteStages(currentProjectStages, project?.stage_id)); 
         }
     }, [currentProjectStages, project?.stage_id]);
-
-    console.log(project?.stage_title);
 
     const jobsOnProject = useMemo(() => {
         if (!jobs || !jobs.length) {
@@ -117,64 +124,86 @@ function ProjectPage() {
         return null;
     }
 
+    if (isLoading) {
+        return <Spinner/>
+    }
+
+    if (error) {
+        throw new Error();
+    }
+
     return (
-        <div className={cName()}>
-            {params.created && <h3>Проект создан!</h3>}
-            <div className={cName('title-card')}>
-                <div className={cName('logo')}/>
-                <p className={cName('title')}>{title}</p>
-            </div>
+        <QueryClientProvider client={queryClient}>
+            <div className={cName()}>
+                {params.created && <h3>Проект создан!</h3>}
+                <Card className={cName('title-card')}>
+                    <div className={cName('logo')}/>
+    
+                    <div className={cName('info')}>
+                        <p className={cName('title')}>{title}</p>
+    
+                        <div className={cName('author-info')}>
+                            <b>Создатель:</b>
 
-            <div className={cName('details')}>
-                <div className={cName('description_card')}>
-                    <div className={cName('team-info')}>
-                        <p className={cName('team-amount')}>{team_size} человек в команде</p>
-                        
-                        <p>{jobs?.length ? `${jobs?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
+                            <div className={cName('author-info-name')}>
+                                <img src={data?.avatar_url} alt="" className={cName('author-ava')}/>
+                                <p>{data?.fio}</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <p className={cName('description')}>{description}</p>
-
-                    <a 
-                        href={url || 'https://ya.ru/'}
-                        target="_blank"
-                        rel="noopener norefere"
-                    >
-                        {url || ''}  
-                    </a>
-
-                    <p className={cName('contests')}>{contests}</p>
-
-                    <p className={cName('created')}>Создан {prepareDate(created_at)}</p>
-
-                    {stagesMemo}
-                </div>
-
-                <div className={cName('vacancies')}>
-                    <p>Вакансии</p>
-
-                    {jobsOnProject}
-                </div>
-
-                <div className={cName('chats')}>
-                    <p>Чаты</p>
-
-                    <ul className={cName('chats-list')}>
-                      <li><a href="https://ideahunt.ru/chat/c553e30f-e58c-42a3-92ac-01bb4c3bbe33">Публичный</a></li>
-                    </ul>
-                </div>
+                </Card>
+    
+                <Card className={cName('details')}>
+                    <div className={cName('description_card')}>
+                        <div className={cName('team-info')}>
+                            <p className={cName('team-amount')}>{team_size} человек в команде</p>
+                            
+                            <p>{jobs?.length ? `${jobs?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
+                        </div>
+    
+                        <p className={cName('description')}>{description}</p>
+    
+                        <a 
+                            href={url || 'https://ya.ru/'}
+                            target="_blank"
+                            rel="noopener norefere"
+                        >
+                            {url || ''}  
+                        </a>
+    
+                        <p className={cName('contests')}>{contests}</p>
+    
+                        <p className={cName('created')}>Создан {prepareDate(created_at)}</p>
+    
+                        {stagesMemo}
+                    </div>
+    
+                    <div className={cName('vacancies')}>
+                        <p>Вакансии</p>
+    
+                        {jobsOnProject}
+                    </div>
+    
+                    <div className={cName('chats')}>
+                        <p>Чаты</p>
+    
+                        <ul className={cName('chats-list')}>
+                          <li><a href="https://ideahunt.ru/chat/c553e30f-e58c-42a3-92ac-01bb4c3bbe33">Публичный</a></li>
+                        </ul>
+                    </div>
+                </Card>
+    
+                {canSearchTeam &&
+                    <div>
+                        <Button onClick={getTeamsForProject}>Найти человека в команду</Button>
+                    </div>
+                }
+    
+                {params.created && 
+                    <Button onClick={goBackToMyIdeas}>К списку идей</Button>
+                }
             </div>
-
-            {canSearchTeam &&
-                <div>
-                    <Button onClick={getTeamsForProject}>Найти человека в команду</Button>
-                </div>
-            }
-
-            {params.created && 
-                <Button onClick={goBackToMyIdeas}>К списку идей</Button>
-            }
-        </div>
+        </QueryClientProvider>
     )
 }
 export default ProjectPage;
