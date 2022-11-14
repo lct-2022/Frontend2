@@ -94,7 +94,7 @@ function ProjectCreate() {
               Описание проекта
             </label>
 
-            <input className={cName('input')} name="description" type="text" value={description} placeholder="Описание проекта" onChange={changeDescription}/>
+            <input className={cName('input', {high: true})} name="description" type="text" value={description} placeholder="Описание проекта" onChange={changeDescription}/>
           </div>
 
           <div className={cName('title')}>

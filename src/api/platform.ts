@@ -104,8 +104,8 @@ export const getInnovationTypes = async (): Promise<Undefinedable<string[]>> => 
     })
 };
 
-export const getProjectStages = async (): Promise<Undefinedable<string[]>> => {
-    return await request<string[]>({
+export const getProjectStages = async (): Promise<Undefinedable<ProjectStage[]>> => {
+    return await request<ProjectStage[]>({
         method: 'get_stages',
         host: RPCHosts.Platform,
     })

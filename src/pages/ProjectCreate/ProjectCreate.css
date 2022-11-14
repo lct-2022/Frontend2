@@ -8,6 +8,10 @@
     height: 24px;
 }
 
+.project-create-input_high {
+    height: 72px;
+}
+
 .project-create-blocks {
     display: flex;
     flex-direction: column;

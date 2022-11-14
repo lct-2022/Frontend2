@@ -22,6 +22,8 @@ import Spinner from '../../components/Spinner';
 import Card from '../../components/Card';
 
 import './ProjectPage.css';
+import { getProjectStages } from '../../api/platform';
+import ProjectRoutes from './components/ProjectRoutes/ProjectRoutes';
 
 const cName = cn('project-page');
 
@@ -64,7 +66,8 @@ function ProjectPage() {
     
     const {team_size, jobs, title, description, url, contests, created_at, author_id = 0} = project ?? {};
 
-    const {data, error, isLoading} = useQuery('getProfile', () => getUserProfile(author_id))
+    const profileQuery = useQuery('getProfile', () => getUserProfile(author_id));
+    const stagesQuery = useQuery('getStages', () => getProjectStages());
 
     const getTeamsForProject = useCallback(() => {
         new Promise(res => res(dispatch<any>(availableTeamsAction(project?.id ?? 0, getTokenFromCookies()))))
@@ -124,11 +127,11 @@ function ProjectPage() {
         return null;
     }
 
-    if (isLoading) {
+    if (profileQuery.isLoading || stagesQuery.isLoading) {
         return <Spinner/>
     }
 
-    if (error) {
+    if (profileQuery.error || stagesQuery.error) {
         throw new Error();
     }
 
@@ -146,12 +149,14 @@ function ProjectPage() {
                             <b>Создатель:</b>
 
                             <div className={cName('author-info-name')}>
-                                <img src={data?.avatar_url} alt="" className={cName('author-ava')}/>
-                                <p>{data?.fio}</p>
+                                <img src={profileQuery.data?.avatar_url} alt="" className={cName('author-ava')}/>
+                                <p>{profileQuery.data?.fio}</p>
                             </div>
                         </div>
                     </div>
                 </Card>
+
+                <ProjectRoutes stages={stagesQuery.data || []}/>
     
                 <Card className={cName('details')}>
                     <div className={cName('description_card')}>

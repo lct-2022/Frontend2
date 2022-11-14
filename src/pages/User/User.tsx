@@ -10,7 +10,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import {cn} from '@bem-react/classname';
-import { UserData } from '../../types';
 import Button from '../../components/Button';
 
 const TITLE = 'Профиль';

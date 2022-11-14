@@ -5,7 +5,7 @@ import './ProjectItem.css';
 
 import {Props} from './types';
 import { ROUTES } from '../../../utils/routes';
-import { getApplications, getCurrentProject } from '../../../api/platform';
+import { getApplications, getCurrentProject, getPopularProjects } from '../../../api/platform';
 import { getCurrentProjectAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ import Text from '../../Text';
 import { validateNumberPeople } from '../../../utils/grammar';
 import Spinner from '../../Spinner';
 import Button from '../../Button';
+import { LIMITS } from '../../../utils/consts';
 
 const cName = cn('project-card');
 
@@ -78,8 +79,7 @@ const ProjectCard: Props = ({
             token: getTokenFromCookies()
         })
             .then(() => {
-                getCurrentProject(id);
-                //
+                getPopularProjects(LIMITS.PROJECTS);
             })
     }, [id, authUser]);
 
@@ -119,20 +119,20 @@ const ProjectCard: Props = ({
                 </div>
             </div>
 
-                {rating !== undefined && 
-                    <div className={cName('rating')}>
-                        <>
-                            <div className={cName('triangle')} onClick={makeVote}/>
-                            <div className={cName('num-votes')}>{rating}</div>
-                        </>
-                    </div>
-                }
-
-                <div className={cName('btns')}>
-                    {canSeeApplications &&
-                        <Button onClick={passToAppllications}>Отклики</Button>
-                    }       
+            {rating !== undefined && 
+                <div className={cName('rating')}>
+                    <>
+                        <div className={cName('triangle')} onClick={makeVote}/>
+                        <div className={cName('num-votes')}>{rating}</div>
+                    </>
                 </div>
+            }
+
+            <div className={cName('btns')}>
+                {canSeeApplications &&
+                    <Button onClick={passToAppllications}>Отклики</Button>
+                }       
+            </div>
         </Card>
     )
 }
