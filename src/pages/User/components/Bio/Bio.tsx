@@ -17,13 +17,13 @@ const inIcon = require('../../../../assets/in.svg').default;
 const cName = cn('bio');
 
 const Bio: Props = ({user, rating}) => {
-    const navigate = useNavigate();
+        const navigate = useNavigate();
     const params = useParams();
 
     const passEditProfile = () => {
         navigate(ROUTES.USER_EDIT)
     }
-    
+
     return (
         <Card className={cName()}>
             <div className={cName('data')}>              
@@ -57,9 +57,12 @@ const Bio: Props = ({user, rating}) => {
                         <img src={inIcon} alt="" className={cName('in-icon')}/>
                     </div>
 
-                    <Text className={cName('rating')} type="violet">место в рейтинге - {rating || 0}</Text>
+                    <div className={cName('rating')}>
+                        <Text className={cName('rating-place')} type="violet">{rating || 0}</Text>
+                        <Text className={cName('rating-text')}>место в рейтинге</Text>
+                    </div>
 
-                    {user.looking_for_job && <Text className={cName('status')}>Ищет команду</Text>}
+                    {user.looking_for_job && <Text type="light" className={cName('looking-job')}>Разрешить приглашать в команду</Text>}
                 </div>
             </div>
 

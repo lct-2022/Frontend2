@@ -35,12 +35,12 @@ function EditProfile() {
     const [isJob, setIsJob] = useState(false);
     const [isHakaton, setIsHakaton] = useState(false);
 
-    const [skillState, setSkillState] = useState<{name: string, selected: boolean}[]>([]);
+    const [skillState, setSkillState] = useState<{name: string, selected: boolean, id: number}[]>([]);
 
-    const {data, isLoading} = useQuery('skillss', () => getSkills());
+    const {data, isLoading} = useQuery('skills', () => getSkills());
 
     useEffect(() => {
-        data && setSkillState(data.map(el => ({name: el.title, selected: false})));
+        data && setSkillState(data.map(el => ({name: el.title, selected: false, id: el.id})));
     }, [data]);
 
     const changeName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -157,10 +157,10 @@ function EditProfile() {
                     <input type="text" name="avatar" value={avatarValue} placeholder="url" onChange={changeAvatar}/>
                 </div>
 
-                {data?.map(({id, title}) => (
+                {skillState?.map(({id, name}) => (
                   <div key={id}>
-                        <label htmlFor={title}>{title}</label>
-                        <input name={title} value={title} className={cName('chbx')} type="checkbox" onChange={() => {changeSkills(title)}}/>
+                        <label htmlFor={name}>{name}</label>
+                        <input name={name} value={name} className={cName('chbx')} type="checkbox" onChange={() => {changeSkills(name)}}/>
                     </div>
                 ))}
 

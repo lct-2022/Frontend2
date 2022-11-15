@@ -4,7 +4,7 @@ import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
 import {Props} from './types';
 import { useDispatch } from 'react-redux';
-import { getUserProfileAction, getUserRatingAction } from '../../../store/actions/users';
+import { getUserProfileAction } from '../../../store/actions/users';
 import Button from '../../Button';
 import Spinner from '../../Spinner';
 import Text from '../../Text';
@@ -25,7 +25,6 @@ const ExpertCard: Props = ({user, rating, canBeInvited}) => {
         setLoading(true);
         Promise.all([
             new Promise(res => res(dispatch<any>(getUserProfileAction(id)))),
-            new Promise(res => res(dispatch<any>(getUserRatingAction(id))))
         ])
             .then(() => {
                 navigate(`${ROUTES.USER}/search`);

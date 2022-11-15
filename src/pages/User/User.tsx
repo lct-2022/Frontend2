@@ -1,4 +1,4 @@
-import React, { useState, memo, FC } from 'react';
+import React, { useState, memo, FC, useEffect } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import Bio from './components/Bio';
@@ -14,6 +14,7 @@ import Button from '../../components/Button';
 
 import './User.css';
 import { getRating } from '../../api/rating';
+import Spinner from '../../components/Spinner';
 
 const TITLE = 'Профиль';
 
@@ -24,17 +25,23 @@ const clientQury = new QueryClient();
 export const Profile = () => {
     const currentUser = useSelector(currentUserSelector);
     const authUser = useSelector(authUserSelector);
-    const rating = useSelector(userRatingSelector);
 
     const params = useParams();
 
-    const [shownUser] = useState(params.search ? currentUser : authUser);
+    const [shownUser, setUser] = useState(authUser);
 
-    // const {data, isLoading} = useQuery('getRating', () => getRating('user', shownUser?.id || 0));
-    // console.log(data);
+    useEffect(() => {
+        setUser(params.search ? currentUser : authUser)
+    }, [params.search])
+
+    const {data, isLoading} = useQuery('getRating', () => getRating('user', shownUser?.id || 0));
     
     if (!shownUser) {
         return null;
+    }
+
+    if (isLoading) {
+        return <Spinner/>;
     }
     
     return (
@@ -44,7 +51,7 @@ export const Profile = () => {
 
                 <Bio 
                     user={shownUser}
-                    {...params.search && {rating}}
+                    {...params.search && {rating: data}}
                 />
 
                 <div className={cName('down')}>

@@ -13,7 +13,7 @@ export const vote = async (voteArgs: IVoteArgs): Promise<Undefinedable<Vote>> =>
     const {method, subjectId, subjectType, token} = voteArgs;
     return await request({
         method,
-        host: RPCHosts.Ratings,
+        host: RPCHosts.Rating,
         params: {
             subject_type: subjectType,
             subject_id: subjectId,
@@ -27,7 +27,7 @@ export const vote = async (voteArgs: IVoteArgs): Promise<Undefinedable<Vote>> =>
 export const getRating = async (subjectType: 'project' | 'user', subjectId: number): Promise<Undefinedable<number>> => {
     return await request({
         method: 'get_rating',
-        host: RPCHosts.Ratings,
+        host: RPCHosts.Rating,
         params: {
             subject_type: subjectType,
             subject_id: subjectId,

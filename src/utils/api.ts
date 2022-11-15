@@ -12,7 +12,7 @@ interface IDataRPC<D> {
 
 interface IRPCRequestArguments {
     method: string, 
-    host: string, 
+    host: RPCHosts, 
     params?: Object, 
     settings?: {
         authToken: string | undefined,
@@ -52,7 +52,7 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D | undefi
     const response = await fetch(url, options);    
     const result: IDataRPC<D> = await response.json();
     
-    if (!result.result) {   
+    if (result.result === undefined || result.error) {   
         return undefined;
     }
     
@@ -62,7 +62,7 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D | undefi
 export enum RPCHosts {
     Passport = 'passport',
     Platform = 'platform',
-    Ratings = 'rating',
+    Rating = 'rating',
     Chat = 'chat',
     Events = 'events',
 }
@@ -79,10 +79,4 @@ export const RPC_METHODS = {
         POPULAR_PROJECTS: 'popular_projects',
         POPULAR_JOBS: 'popular_jobs',
     },
-    RATING: {
-
-    },
-    CHAT: {
-
-    }
 }

@@ -31,7 +31,7 @@
 .bio-personal-info {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    justify-content: space-between;
 }
 
 .bio-upper-first {
@@ -92,4 +92,26 @@
 
 .bio-location-icon {
     margin-right: 11px;
+}
+
+.bio-rating {
+    border-radius: 8px;
+
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+
+    width: auto;
+    border-radius: 8px;
+    padding: 4px 8px;
+
+    background-color: #F9F5FF;
+}
+
+.bio-rating-place {
+    margin-right: 7px;
+}
+
+.bio-rating-text {
+    color: #344054;
 }

@@ -40,6 +40,8 @@ export const getUserProfileAction = (userId: number) => {
 export const getUserRatingAction = (userId: number) => {
     return async (dispatch: Dispatch<RatingUserAction>) => {
         const ratingResponse = await getRating('user', userId);
+        console.log('ratingResponse', ratingResponse);
+        
         dispatch({
             type: RatingUserActions.SET_USER_RATING,
             payload: ratingResponse,
