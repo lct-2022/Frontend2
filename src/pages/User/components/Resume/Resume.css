@@ -1,0 +1,28 @@
+.resume {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.resume-personal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resume-personal-info-header, .resume-education-header {
+    display: flex;
+    gap: 10px;
+}
+
+.resume-header {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.resume-edit {
+    position: relative;
+    top: 5px;
+
+    cursor: pointer;
+}

@@ -1,15 +1,15 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { cn } from '@bem-react/classname';
 
-import { ProjectStage } from '../../../../types';
+import { ProjectStage, Undefinedable } from '../../../../types';
 
 import { getCurrentProject } from '../../../../api/platform';
 import { getCompleteStages } from '../../../../utils/getStages';
+import Text from '../../../../components/Text';
 
 import './ProfileProject.css';
-import Text from '../../../../components/Text';
 
 const cName = cn('profile-project');
 
@@ -25,9 +25,12 @@ interface IProps {
 
 const ProfileProject: FC<IProps> = ({id, title, description, teamSize, allStages}) => {
     const {data, error} = useQuery('getProject', () => getCurrentProject(id));
-    const stagesIds = getCompleteStages(allStages, data?.stage_id || 0).map(elem => elem.id)
-
+    const stagesIds = getCompleteStages(allStages, data?.stage_id || 0).map(elem => elem.id);
+    
     const projectStages = useMemo(() => {
+        if (!data || !allStages || !stagesIds) {
+            return null;
+        }
         return (
             <div className={cName('stages')}>
                 {allStages.map(({title, id}) => (
@@ -37,7 +40,7 @@ const ProfileProject: FC<IProps> = ({id, title, description, teamSize, allStages
                 ))}
             </div>
         )
-    }, [allStages, stagesIds]);
+    }, [allStages, data, stagesIds]);
 
     if (error || !data) {
         return null;
@@ -59,4 +62,4 @@ const ProfileProject: FC<IProps> = ({id, title, description, teamSize, allStages
         </QueryClientProvider>
     )
 }
-export default ProfileProject;
+export default memo(ProfileProject);

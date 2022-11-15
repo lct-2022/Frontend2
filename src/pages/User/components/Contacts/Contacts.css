@@ -7,9 +7,25 @@
     height: 180px;
     min-width: 160px;
     width: 25%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.contacts-title {
-    margin-top: 0;
-    margin-bottom: 16px;
+.contacts-email {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.contacts-email-header, .contacts-phone-header {
+    display: flex;
+    gap: 10px;
+}
+
+.contacts-edit {
+    position: relative;
+    top: 5px;
+
+    cursor: pointer;
 }

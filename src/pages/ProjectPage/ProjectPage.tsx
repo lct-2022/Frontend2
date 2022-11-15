@@ -178,7 +178,7 @@ function ProjectPage() {
     
                         <p className={cName('contests')}>{contests}</p>
     
-                        <p className={cName('created')}>Создан {prepareDate(created_at)}</p>
+                        <p className={cName('created')}>Создан {prepareDate(created_at, {project: true})}</p>
     
                         {stagesMemo}
                     </div>

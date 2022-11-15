@@ -3,3 +3,15 @@
     flex-direction: column;
     gap: 16px;
 }
+
+.about-education, .about-info {
+    display: flex;
+    gap: 10px;
+}
+
+.about-edit {
+    position: relative;
+    top: 5px;
+
+    cursor: pointer;
+}

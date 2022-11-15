@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, memo, useEffect, useMemo, useState } from 'react';
 import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { cn } from '@bem-react/classname';
 
@@ -48,7 +48,7 @@ const ProjectsListProfile: FC<IProps> = ({projects}) => {
                 ))}
             </div>
         )
-    }, [projects, params.search]);
+    }, [projects, currentProjectStages, params.search]);
 
     return (
         <div>
@@ -58,4 +58,4 @@ const ProjectsListProfile: FC<IProps> = ({projects}) => {
         </div>
     )
 }
-export default ProjectsListProfile;
+export default memo(ProjectsListProfile);

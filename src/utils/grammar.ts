@@ -27,12 +27,10 @@ const MONTHS: {[x in string]: string} = {
     '12': 'декабря',
 }
 
-export function prepareDate(dateRaw: string | null | undefined): string {
+export function prepareDate(dateRaw: string | null | undefined, options?: {project: boolean}): string {
     if (!dateRaw) return '';
 
-    console.log(dateRaw);
-    
-    const splitted = dateRaw.split('.');
+    const splitted = dateRaw.split(options?.project ? '-' : '.');
     const year = splitted[0];
     const month = MONTHS[splitted[1]];
     let day = splitted[2].slice(0, 2);
