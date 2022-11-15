@@ -17,6 +17,7 @@ import { lsRemoveAuthorizedUser } from '../../utils/storage';
 import {Props} from './types';
 
 import Button from '../Button';
+
 const userIcon = require('../../assets/user-icon.svg').default;
 const ideaLogo = require('../../assets/logo.svg').default;
 

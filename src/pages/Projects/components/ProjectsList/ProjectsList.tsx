@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { Props } from '../../types';

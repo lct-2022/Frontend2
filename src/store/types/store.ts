@@ -1,4 +1,4 @@
-import { Job, Project, User, Nullable, Application, UserData, Team, ProjectData, ProjectStage } from "../../types";
+import { Job, Nullable, Application, UserData, Team, ProjectData, ProjectStage } from "../../types";
 
 export interface IBaseStore {
     authUser:  Nullable<UserData>;
@@ -10,6 +10,5 @@ export interface IBaseStore {
     currentIndustries: Nullable<string[]>;
     currentInnovations: Nullable<string[]>;
     currentStages: Nullable<ProjectStage[]>;
-    // events?: NumerableItems<IEvents>;
     teams: Team[];
 }

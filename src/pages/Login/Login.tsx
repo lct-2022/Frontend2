@@ -8,7 +8,7 @@ import RedirectLoginBlock from './components/Redirect-Block';
 import Button from '../../components/Button';
 import { useDispatch } from 'react-redux';
 import { AuthUserActions } from '../../store/types/authUser';
-import { getAuthorizedUserAction } from '../../store/actions/users';
+import { getAuthorizedUserAction, getUserRatingAction } from '../../store/actions/users';
 import { ROUTES } from '../../utils/routes';
 import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
 import { CurrentUserActions } from '../../store/types/currentUser';
@@ -63,14 +63,14 @@ export const LoginForm: Props = ({type = 'login'}) => {
         : 'Регистрация'
 
     const submit = useCallback(() => {
-        // if (!email.match(EMAIL_REGEXP)) {
-        //     alert('Невалидный адрес электронный почты')
-        //     return;
-        // }
-        // if (!email || !password || (type === 'signup' && (!name || !lastname))) {
-        //     alert('Пожалуйста, заполните все поля!')
-        //     return;
-        // }
+        if (!email.match(EMAIL_REGEXP)) {
+            alert('Невалидный адрес электронный почты')
+            return;
+        }
+        if (!email || !password || (type === 'signup' && (!name || !lastname))) {
+            alert('Пожалуйста, заполните все поля!')
+            return;
+        }
         const requestor = type === 'login'
             ? login(email, password)
             : signup(email, password, `${name} ${lastname}`)
@@ -89,6 +89,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
                     type: CurrentUserActions.SET_USER_SHOWN,
                     payload: data || null,
                 })
+                dispatch<any>(getUserRatingAction(data?.id || 0))
             })
             .then(() => {
                 setEmail('');

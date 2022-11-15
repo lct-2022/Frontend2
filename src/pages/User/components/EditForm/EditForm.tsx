@@ -11,10 +11,11 @@ import { PHONE_REGEXP } from "../../../../utils/consts";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../utils/routes";
 
-import './EditProfile.css';
 import Button from "../../../../components/Button";
 import { getSkills } from "../../../../api/platform";
 import Spinner from "../../../../components/Spinner";
+
+import './EditProfile.css';
 
 const cName = cn('edit-profile');
 
@@ -34,8 +35,9 @@ function EditProfile() {
     const [isJob, setIsJob] = useState(false);
     const [isHakaton, setIsHakaton] = useState(false);
 
-    const {data, isLoading} = useQuery('skillss', () => getSkills());
     const [skillState, setSkillState] = useState<{name: string, selected: boolean}[]>([]);
+
+    const {data, isLoading} = useQuery('skillss', () => getSkills());
 
     useEffect(() => {
         data && setSkillState(data.map(el => ({name: el.title, selected: false})));

@@ -1,7 +1,7 @@
 .bio {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-start !important;
 
     padding: 24px;
     height: auto;
@@ -45,12 +45,51 @@
 }
 
 .bio-job {
-    font-size: 30px;
-    line-height: 38px;
-    font-weight: 600;
+    background-color: #EAECF0;
+    color: #101828;
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.bio-looking-hackathon {
+    border: solid 2px #EAECF0;
+    background-color: #fff;
+
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.bio-looking-hackathon-ok {
+    margin-right: 4px;
+}
+
+.bio-upper-second {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .bio-location {
-    display: flex;
-    justify-content: space-between;
+    margin-right: 26px;
+}
+
+.bio-location-icon {
+    margin-right: 11px;
 }

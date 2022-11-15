@@ -4,13 +4,12 @@ import { ROUTES } from '../../../utils/routes';
 import { cn } from '@bem-react/classname'
 import {Props} from './types';
 import { useDispatch } from 'react-redux';
-import { DEFAULT_AVATAR } from '../../../utils/consts';
 import { getUserProfileAction, getUserRatingAction } from '../../../store/actions/users';
-import { getUserProfile } from '../../../api/passport';
-import './ExpertItem.css';
 import Button from '../../Button';
 import Spinner from '../../Spinner';
 import Text from '../../Text';
+
+import './ExpertItem.css';
 
 const cName = cn('expert-card');
 

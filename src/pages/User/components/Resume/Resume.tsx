@@ -11,7 +11,7 @@ const prepareText = (gender: Nullable<string>, birthday: Nullable<string>): stri
     if (!gender || !birthday) {
         return 'Родился';
     }
-    return `${gender === 'm' || gender === 'M' ? 'Родился' : 'Родилась'} ${prepareDate(birthday)}`
+    return `${gender === 'М' ? 'Родился' : 'Родилась'} ${prepareDate(birthday)}`
 }
 
 const prepareLocationText = (city: Nullable<string>, country: Nullable<string>): string => {
@@ -20,7 +20,6 @@ const prepareLocationText = (city: Nullable<string>, country: Nullable<string>):
     }
     return `Живет в ${country}, городе ${city}`
 }
-
 
 const Resume: Props = ({user}) => {
 

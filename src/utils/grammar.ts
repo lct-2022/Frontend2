@@ -30,7 +30,9 @@ const MONTHS: {[x in string]: string} = {
 export function prepareDate(dateRaw: string | null | undefined): string {
     if (!dateRaw) return '';
 
-    const splitted = dateRaw.split('-');
+    console.log(dateRaw);
+    
+    const splitted = dateRaw.split('.');
     const year = splitted[0];
     const month = MONTHS[splitted[1]];
     let day = splitted[2].slice(0, 2);
