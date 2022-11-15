@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { Application } from "../../../../types";
+import { Application, Job } from "../../../../types";
 
 interface IProps {
-    vacancies: Application[]
+    vacancies: Job[]
 }
 
 export type Props = FC<IProps>;

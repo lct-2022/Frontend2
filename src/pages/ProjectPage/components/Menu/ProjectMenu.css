@@ -2,3 +2,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.project-menu-point {
+    cursor: pointer;
+}
+
+.project-menu-line {
+    margin-top: 13px;
+
+    border: 2px solid #000;
+}

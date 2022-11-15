@@ -1,35 +1,35 @@
 import React, {FC, memo} from 'react';
 import {cn} from '@bem-react/classname';
 
-import { ProjectOption } from '../../consts';
+import { OPTIONS, ProjectOption } from '../../consts';
+import Text from '../../../../components/Text';
 
 import './ProjectMenu.css';
 
 const cName = cn('project-menu');
-
-const MENU = [
-    'Этапы развития',
-    'Материалы',
-    'Команда',
-    'Вакансии',
-    'Сервисы'
-];
 
 interface IProps {
     currentOption: ProjectOption,
     setOptions: (point: ProjectOption) => void;
 }
 
-const ProjectMenu: FC<IProps> = ({}) => {
+const ProjectMenu: FC<IProps> = ({currentOption, setOptions}) => {
     return (
         <div className={cName()}>
-            {MENU.map(point => (
+            {Object.entries(OPTIONS).map(([key, point], index) => (
                 <div 
-                    key={point}
+                    key={index}
+                    onClick={() => setOptions(key as ProjectOption)}
                     className={cName('point')}
                 >
-                    {point}
+                    <Text
+                        type="bold"
+                    >
+                        {point}
+                    </Text>
+                    {key === currentOption && <div className={cName('line')}/>}
                 </div>
+
             ))}
         </div>
     )

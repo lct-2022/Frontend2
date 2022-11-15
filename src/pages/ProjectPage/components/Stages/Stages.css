@@ -1,0 +1,63 @@
+.project-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project-stages-stage-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 16px;
+    gap: 10px;
+
+    width: 250px;
+    margin-bottom: 8px;
+
+    background: #F2F4F7;
+    border-radius: 8px;
+}
+
+.project-stages-text-done {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    
+    border: 1px solid #667085;
+    border-radius: 8px;
+}
+
+.project-stages-text-undone {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 10px;
+    
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+}
+
+.project-stages-block {
+    display: flex;
+
+    margin-bottom: 8px;
+}
+
+.project-stages-icon-done {
+    width: 49px;
+    height: 49px;
+    margin-right: 38px;
+}
+
+.project-stages-icon-undone {
+    width: 32px;
+    height: 32px;
+    margin-right: 48px;
+}

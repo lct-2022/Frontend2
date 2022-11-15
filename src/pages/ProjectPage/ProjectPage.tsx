@@ -29,14 +29,6 @@ const cName = cn('project-page');
 
 const queryClient = new QueryClient();
 
-const MENU = [
-    'Этапы развития',
-    'Материалы',
-    'Команда',
-    'Вакансии',
-    'Сервисы'
-];
-
 function ProjectPage() {
     const currentProject = useSelector(currentProjectSelector);    
     const authUser = useSelector(authUserSelector);
@@ -85,43 +77,6 @@ function ProjectPage() {
             setStages(getCompleteStages(currentProjectStages, project?.stage_id)); 
         }
     }, [currentProjectStages, project?.stage_id]);
-
-    const jobsOnProject = useMemo(() => {
-        if (!jobs || !jobs.length) {
-            return <Text>Открытых вакансий нет</Text>
-        }
-
-        return (
-            <ul className={cName('vacancies')}>
-                {jobs.map(({title, id}) => (
-                    <li key={id}>{title}</li>
-                ))}
-            </ul>
-        )
-    }, [jobs]);
-    
-    const stagesMemo = useMemo(() => {
-        if (!stages || !stages.length) {
-            return null
-        }
-
-        return (
-            <ul className={cName('stages')}>
-                <h3>Этапы проекта</h3>
-                {stages.map(({title, description, id}) => (
-                    <div key={id}>
-                        <div>
-                            <Text>{title}</Text>
-                        </div>
-                        <div>
-                            <Text>{description}</Text>
-                        </div>
-                    </div>
-
-                ))}
-            </ul>
-        )
-    }, [stages]);
     
     if (!currentProject) {
         return null;
@@ -139,6 +94,7 @@ function ProjectPage() {
         <QueryClientProvider client={queryClient}>
             <div className={cName()}>
                 {params.created && <h3>Проект создан!</h3>}
+
                 <Card className={cName('title-card')}>
                     <div className={cName('logo')}/>
     
@@ -156,9 +112,13 @@ function ProjectPage() {
                     </div>
                 </Card>
 
-                <ProjectRoutes stages={stagesQuery.data || []}/>
+                <ProjectRoutes
+                    stages={stages || []}
+                    vacancies={jobs || []}
+                    description={description || ''}
+                />
     
-                <Card className={cName('details')}>
+                {/* <Card className={cName('details')}>
                     <div className={cName('description_card')}>
                         <div className={cName('team-info')}>
                             <p className={cName('team-amount')}>{team_size} человек в команде</p>
@@ -197,7 +157,7 @@ function ProjectPage() {
                         </ul>
                     </div>
                 </Card>
-    
+     */}
                 {canSearchTeam &&
                     <div>
                         <Button onClick={getTeamsForProject}>Найти человека в команду</Button>

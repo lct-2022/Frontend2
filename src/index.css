@@ -55,6 +55,8 @@ input {
 
 input::placeholder {
   text-align: left;
+  position: relative;
+  top: 4px;
 }
 
 p {

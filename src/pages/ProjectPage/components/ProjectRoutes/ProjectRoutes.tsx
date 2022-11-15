@@ -5,17 +5,20 @@ import { ProjectOption } from '../../consts';
 import ProjectMenu from '../Menu/ProjectMenu';
 import Stages from '../Stages/Stages';
 import Vacancies from '../Vacancies/Vacancies';
-import { ProjectStage } from '../../../../types';
+import { Job, ProjectStage } from '../../../../types';
 
 import './ProjectRoutes.css';
+import Card from '../../../../components/Card';
 
-const cName = cn('user-routes');
+const cName = cn('project-routes');
 
 interface IProps {
     stages: ProjectStage[];
+    vacancies: Job[];
+    description: string;
 }
 
-const ProjectRoutes: FC<IProps> = ({stages}) => {
+const ProjectRoutes: FC<IProps> = ({stages, vacancies, description}) => {
     const [shownData, setShowData] = useState<ProjectOption>('stages');
 
     const setOptions = useCallback((point: ProjectOption) => {
@@ -30,11 +33,20 @@ const ProjectRoutes: FC<IProps> = ({stages}) => {
             />
 
             {shownData === 'stages' &&
-                <Stages stages={stages}/>
+                <Stages 
+                    stagesIds={stages.map(el => el.id)}
+                    description={description}
+                />
             }
 
             {shownData === 'vacancies' &&
-                <Vacancies vacancies={[]}/>
+                <Vacancies vacancies={vacancies}/>
+            }
+
+            {shownData === 'materials' &&
+                <p>
+                    {description}
+                </p>
             }
         </div>
     )
