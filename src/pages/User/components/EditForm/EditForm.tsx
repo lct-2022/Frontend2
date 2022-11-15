@@ -157,12 +157,15 @@ function EditProfile() {
                     <input type="text" name="avatar" value={avatarValue} placeholder="url" onChange={changeAvatar}/>
                 </div>
 
-                {skillState?.map(({id, name}) => (
-                  <div key={id}>
-                        <label htmlFor={name}>{name}</label>
-                        <input name={name} value={name} className={cName('chbx')} type="checkbox" onChange={() => {changeSkills(name)}}/>
-                    </div>
-                ))}
+                <p>Ваши навыки</p>
+                <div className={cName('skills')}>
+                    {skillState?.map(({id, name}) => (
+                        <div key={id} className={cName('skills-block')}>
+                            <label htmlFor={name}>{name}</label>
+                            <input name={name} value={name} className={cName('chbx')} type="checkbox" onChange={() => {changeSkills(name)}}/>
+                        </div>    
+                    ))}
+                </div>
 
                 <div className={cName('input-block-chbx')}>
                     <label htmlFor="job">Хочу в команду</label>
