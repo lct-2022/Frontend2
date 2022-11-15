@@ -53,6 +53,10 @@ input {
   padding: 8px;
 }
 
+input::placeholder {
+  text-align: left;
+}
+
 p {
   margin: 0;
   font-size: 16px;

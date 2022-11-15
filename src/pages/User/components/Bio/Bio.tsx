@@ -46,7 +46,6 @@ const Bio: Props = ({user, rating}) => {
                     {user.looking_for_job && <Text className={cName('status')}>Ищет команду</Text>}
                     {user.looking_for_hackathon && <div className={cName('looking-hackathon')}>Хочет в хакатон</div>}
                 </div>
-
             </div>
 
             {!params.search && 

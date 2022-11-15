@@ -14,8 +14,8 @@
 }
 
 .bio-avatar {
-    width: 100px;
-    height: 100px;
+    width: 179px;
+    height: 179px;
 
     border-radius: 8px;
 }
@@ -40,8 +40,7 @@
 }
 
 .bio-fio {
-    font-size: 30px !important;
-    line-height: 38px;
+    font-size: 30px;
     font-weight: 600;
 }
 

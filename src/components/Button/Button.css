@@ -8,7 +8,8 @@
   
     padding: 0 8px;
     width: 180px;
-    height: 42px;
+    height: auto;
+    min-height: 42px;
     flex-wrap: wrap;
   
     border-radius: 8px;

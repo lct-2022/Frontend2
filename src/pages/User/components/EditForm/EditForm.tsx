@@ -147,7 +147,7 @@ function EditProfile() {
 
                 <div className={cName('input-block', {about: true})}>
                     <label htmlFor="about">О себе</label>
-                    <input type="text" name="about" value={aboutValue} placeholder="О себе" onChange={changeAbout}/>
+                    <input type="text" name="about" value={aboutValue} placeholder="О себе" className={cName('input', {about: true})} onChange={changeAbout}/>
                 </div>
 
                 <div className={cName('input-block')}>

@@ -7,6 +7,7 @@ type Text =
     | 'violet'
     | 'wrapped'
     | 'large'
+    | 'bold'
 
 export type TextProps = {
     type?: Text;

@@ -83,23 +83,23 @@ function ProjectCreate() {
         <div className={cName('blocks')}>
           <div className={cName('title')}>
             <label htmlFor="title" className={cName('title-label')}>
-              Название проекта
+              <Text className={cName('header')}>Название</Text>
             </label>
 
-            <input className={cName('input')} name="title" type="text" value={title} placeholder="Название проекта" onChange={changeTitle}/>
+            <input className={cName('input')} name="title" type="text" value={title} placeholder="Придумайте название" onChange={changeTitle}/>
           </div>
 
           <div className={cName('title')}>
             <label htmlFor="description" className={cName('description-label')}>
-              Описание проекта
+              <Text className={cName('header')}>Описание</Text>
             </label>
 
-            <input className={cName('input', {high: true})} name="description" type="text" value={description} placeholder="Описание проекта" onChange={changeDescription}/>
+            <input className={cName('input', {high: true})} name="description" type="text" value={description} placeholder="О чём Ваша идея?" onChange={changeDescription}/>
           </div>
 
           <div className={cName('title')}>
             <label htmlFor="url" className={cName('url-label')}>
-              Ссылка на проект
+              <Text className={cName('header')}>Ссылка на проект</Text>
             </label>
 
             <input className={cName('input')} name="url" type="text" value={url} placeholder="Ссылка на проект" onChange={changeUrl}/>
@@ -107,7 +107,7 @@ function ProjectCreate() {
 
           <div className={cName('checkboxes')}>
             <div className={cName('innovations')}>
-              <Text>Тип инновации</Text>
+              <Text className={cName('header')}>Тип инновации</Text>
               {innovations?.map(el => (
                   <div key={el}>
                     <label htmlFor={el}>{el}</label>
@@ -116,7 +116,7 @@ function ProjectCreate() {
               ))}
             </div>
             <div className={cName('industries')}>
-              <Text>Индустрия</Text>
+              <Text className={cName('header-mb')}>Индустрия</Text>
                 {industries?.map(el => (
                     <div key={el}>
                         <label htmlFor={el}>{el}</label>

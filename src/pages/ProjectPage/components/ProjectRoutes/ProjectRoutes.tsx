@@ -1,12 +1,13 @@
 import React, { FC, useCallback, useContext, useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
 
-import './Routes.css';
 import { ProjectOption } from '../../consts';
 import ProjectMenu from '../Menu/ProjectMenu';
 import Stages from '../Stages/Stages';
 import Vacancies from '../Vacancies/Vacancies';
 import { ProjectStage } from '../../../../types';
+
+import './ProjectRoutes.css';
 
 const cName = cn('user-routes');
 
