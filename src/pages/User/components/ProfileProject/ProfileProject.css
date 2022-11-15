@@ -1,0 +1,52 @@
+.profile-project {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    padding: 24px;
+    height: auto;
+
+    border-radius: 8px;
+
+    background-color: #EAECF0;
+}
+
+.profile-project-upper {
+    display: flex;
+    gap: 24px;
+}
+
+.profile-project-title {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.profile-project-team {
+    border-radius: 8px;
+    background-color: #344054;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 4px 8px;
+}
+
+.profile-project-stages {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    max-width: 480px;
+}
+
+.profile-project-stage {
+    color: #667085;
+}
+
+.profile-project-stage_active {
+    color: #101828;
+    font-weight: 600;
+}

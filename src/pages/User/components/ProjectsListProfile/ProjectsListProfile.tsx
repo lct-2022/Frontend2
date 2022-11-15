@@ -2,12 +2,14 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
 import { cn } from '@bem-react/classname';
 
-import './ProjectsList.css';
 import { useLocation, useParams } from 'react-router';
-import { ROUTES } from '../../../../utils/routes';
 import { ProjectData } from '../../../../types';
 import { useSelector } from 'react-redux';
 import { authUserSelector, currentUserSelector } from '../../../../store/selectors/users';
+
+import './ProjectsList.css';
+import ProfileProject from '../ProfileProject/ProfileProject';
+import { currentProjectStagesSelector } from '../../../../store/selectors/projects';
 
 const cName = cn('projects-list-profile');
 
@@ -16,20 +18,14 @@ interface IProps {
 }
 
 const ProjectsListProfile: FC<IProps> = ({projects}) => {
-    const params = useParams();
+    const currentProjectStages = useSelector(currentProjectStagesSelector);
 
-    const currentUser = useSelector(currentUserSelector)
-    const [allProjects, setAllProjects] = useState<ProjectData[]>([]);
-    console.log(currentUser);
-    
-    useEffect(() => {
-        setAllProjects(currentUser?.projects || [])
-    }, [currentUser?.projects])
+    const params = useParams();
 
     const projectsList = useMemo(() => {
         if (!projects.length) {
             return (
-                <h3>{params.search ? 'У эксперта нет проектов' : 'У Вас пока нет проектов'}</h3>
+                <h3>{params.search ? 'У эксперта нет идей' : 'У Вас пока нет идей'}</h3>
             )
         }
         
@@ -39,15 +35,14 @@ const ProjectsListProfile: FC<IProps> = ({projects}) => {
 
         return (
             <div className={cName('container')}>
-                {projects.map(({title, description, industry, team_size, jobs, id}, index) => (
+                {projects.map(({title, description, team_size, id}, index) => (
                     <div key={index} className={cName('project')}>
-                        <ProjectCard
+                        <ProfileProject
                             title={title}
                             description={description}
                             id={id}
-                            industry={industry}
-                            teamSize={team_size}
-                            jobs={jobs}
+                            teamSize={team_size || 0}
+                            allStages={currentProjectStages || []}
                         />
                     </div>
                 ))}
@@ -57,7 +52,7 @@ const ProjectsListProfile: FC<IProps> = ({projects}) => {
 
     return (
         <div>
-            {!params.search && <h1>Ваши проекты:</h1>}
+            {!params.search && <h3 className={cName('header-ideas')}>Идеи</h3>}
 
             {projectsList}
         </div>

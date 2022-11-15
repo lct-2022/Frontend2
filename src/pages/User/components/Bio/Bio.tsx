@@ -41,12 +41,12 @@ const Bio: Props = ({user, rating}) => {
                             {user.profession}
                         </div>
 
-                        {/* {user.looking_for_hackathon &&  */}
+                        {user.looking_for_hackathon && 
                             <div className={cName('looking-hackathon')}>
                                 <img src={okIcon} alt="" className={cName('looking-hackathon-ok')}/>
                                 {`Готов${user.gender === 'Ж' ? 'а' : ''} к хакатону`}
                             </div>
-                        {/* } */}
+                        }
                     </div>
 
                     <div className={cName('upper-second')}>
@@ -62,7 +62,9 @@ const Bio: Props = ({user, rating}) => {
                         <Text className={cName('rating-text')}>место в рейтинге</Text>
                     </div>
 
-                    {user.looking_for_job && <Text type="light" className={cName('looking-job')}>Разрешить приглашать в команду</Text>}
+                    {user.looking_for_job && 
+                        <Text type="light" className={cName('looking-job')}>Разрешить приглашать в команду</Text>
+                    }
                 </div>
             </div>
 

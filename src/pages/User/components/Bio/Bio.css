@@ -23,9 +23,7 @@
 .bio-data {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
     gap: 16px;
-
 }
 
 .bio-personal-info {
@@ -98,10 +96,8 @@
     border-radius: 8px;
 
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
 
-    width: auto;
+    width: 150px;
     border-radius: 8px;
     padding: 4px 8px;
 

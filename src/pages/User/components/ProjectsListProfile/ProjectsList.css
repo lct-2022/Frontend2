@@ -1,0 +1,9 @@
+.projects-list-profile-header-ideas {
+    margin: 0 0 15px 0;
+}
+
+.projects-list-profile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
