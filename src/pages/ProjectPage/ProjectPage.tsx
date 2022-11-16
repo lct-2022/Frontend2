@@ -12,18 +12,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 
 import Button from '../../components/Button'
-import Text from '../../components/Text';
 import { ProjectData, ProjectStage } from '../../types';
 import { getCompleteStages } from '../../utils/getStages';
-import { prepareDate } from '../../utils/grammar';
 
 import { getUserProfile } from '../../api/passport';
 import Spinner from '../../components/Spinner';
 import Card from '../../components/Card';
 
-import './ProjectPage.css';
 import { getProjectStages } from '../../api/platform';
 import ProjectRoutes from './components/ProjectRoutes/ProjectRoutes';
+
+import './ProjectPage.css';
 
 const cName = cn('project-page');
 
@@ -56,7 +55,7 @@ function ProjectPage() {
 
     const canSearchTeam = currentProject?.['author_id'] === authUser?.id;
     
-    const {team_size, jobs, title, description, url, contests, created_at, author_id = 0} = project ?? {};
+    const {jobs, title, description, author_id = 0} = project ?? {};
 
     const profileQuery = useQuery('getProfile', () => getUserProfile(author_id));
     const stagesQuery = useQuery('getStages', () => getProjectStages());
@@ -118,46 +117,6 @@ function ProjectPage() {
                     description={description || ''}
                 />
     
-                {/* <Card className={cName('details')}>
-                    <div className={cName('description_card')}>
-                        <div className={cName('team-info')}>
-                            <p className={cName('team-amount')}>{team_size} человек в команде</p>
-                            
-                            <p>{jobs?.length ? `${jobs?.length} открытых вакансий` : 'Открытых вакансий нет'}</p>
-                        </div>
-    
-                        <p className={cName('description')}>{description}</p>
-    
-                        <a 
-                            href={url || 'https://ya.ru/'}
-                            target="_blank"
-                            rel="noopener norefere"
-                        >
-                            {url || ''}  
-                        </a>
-    
-                        <p className={cName('contests')}>{contests}</p>
-    
-                        <p className={cName('created')}>Создан {prepareDate(created_at, {project: true})}</p>
-    
-                        {stagesMemo}
-                    </div>
-    
-                    <div className={cName('vacancies')}>
-                        <p>Вакансии</p>
-    
-                        {jobsOnProject}
-                    </div>
-    
-                    <div className={cName('chats')}>
-                        <p>Чаты</p>
-    
-                        <ul className={cName('chats-list')}>
-                          <li><a href="https://ideahunt.ru/chat/c553e30f-e58c-42a3-92ac-01bb4c3bbe33">Публичный</a></li>
-                        </ul>
-                    </div>
-                </Card>
-     */}
                 {canSearchTeam &&
                     <div>
                         <Button onClick={getTeamsForProject}>Найти человека в команду</Button>

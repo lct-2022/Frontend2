@@ -6,15 +6,15 @@ const RedirectLoginBlock: Props = ({type}) => {
     if (type === 'login') {
         return (
             <>
-                <p>need an account?</p>
-                <NavLink to="/signup">Sign up!</NavLink>            
+                <p>У Вас нет аккаунта?</p>
+                <NavLink to="/signup">Регистрация</NavLink>            
             </>
         )
     } else {
         return (
           <div>
-            <p>Already a user?</p>
-            <NavLink to="/login">Log in!</NavLink> 
+            <p>У Вас есть аккаунт?</p>
+            <NavLink to="/login">Войти</NavLink> 
           </div>
         )
     }

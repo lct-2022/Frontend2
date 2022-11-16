@@ -28,7 +28,7 @@ const ProjectsPreview: Props = ({projects}) => {
     }, [projects]);
 
     return (
-        <div>
+        <div style={{marginTop: '16px'}}>
             <h3>{TITLE}</h3>
 
             {projectsList}

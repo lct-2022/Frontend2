@@ -15,7 +15,7 @@ import { getTokenFromCookies } from '../../../utils/cookie';
 import { authUserSelector } from '../../../store/selectors/users';
 import Card from '../../Card';
 import Text from '../../Text';
-import { validateNumberPeople } from '../../../utils/grammar';
+import { getBrief, validateNumberPeople } from '../../../utils/grammar';
 import Spinner from '../../Spinner';
 import Button from '../../Button';
 import { LIMITS } from '../../../utils/consts';
@@ -88,7 +88,7 @@ const ProjectCard: Props = ({
         <Card className={cName()}>
             <div className={cName('left-block')}>
                 <div className={cName('logo')}>
-                    <Text type="violet" className={cName('title-in-logo')}>{title}</Text>
+                    <Text type="violet" className={cName('title-in-logo')}>{getBrief(title)}</Text>
                 </div>
                 
                 <div className={cName('data')}>
@@ -125,11 +125,11 @@ const ProjectCard: Props = ({
                 </div>
             }
 
-            <div className={cName('btns')}>
-                {canSeeApplications &&
+            {canSeeApplications &&
+                <div className={cName('btns')}>
                     <Button onClick={passToAppllications}>Отклики</Button>
-                }       
-            </div>
+                </div>
+            }       
         </Card>
     )
 }

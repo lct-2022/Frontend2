@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useCallback, useMemo } from 'react';
+import React, { ChangeEvent, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { parseStringForDiapazon } from '../../../../utils/parse';
 import { Props } from './types';
@@ -17,7 +17,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
         setProjects(prev => {
             return prev.map(project => checked && project.industry !== value
                 ? {...project, hidden: true} 
-                : {...project, hidden: false}   
+                : {...project, hidden: false} 
             );
         });
     }, [setProjects]);
@@ -41,7 +41,7 @@ const ProjectFilters: Props = ({projects, setProjects, industries, innovationTyp
         setProjects(prev => {
             return prev.map(project => checked && project.innovation_type !== value
                 ? {...project, hidden: true} 
-                : {...project, hidden: false}  
+                : {...project, hidden: false}
             );
         });
     }, [setProjects]);

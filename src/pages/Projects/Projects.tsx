@@ -6,7 +6,6 @@ import { getAllProjects, getIndustries, getInnovationTypes } from '../../api/pla
 import { Project, ProjectData } from '../../types';
 
 import ProjectsList from './components/ProjectsList';
-import Pagination from './components/Pagination';
 import Filtration from './components/Filtration';
 
 import './Projects.css';
@@ -57,8 +56,6 @@ const Projects: FC<Props> = () => {
                         />
                     </div>}
                 </div>
-    
-                {/* <Pagination projects={allProjects}/> */}
             </div>
         </QueryClientProvider>
     )

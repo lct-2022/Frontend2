@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 
 import { useDispatch } from 'react-redux';
@@ -39,4 +39,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default memo(Home);

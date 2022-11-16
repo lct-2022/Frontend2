@@ -40,3 +40,9 @@ export function prepareDate(dateRaw: string | null | undefined, options?: {proje
     
     return `${day} ${month} ${year} года`;
 }
+
+export function getBrief(str: string): string {
+    if (str.length <= 27) return str;
+
+    return str.slice(0, 27) + '...';
+}
