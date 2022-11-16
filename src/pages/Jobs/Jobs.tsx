@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 
 function Jobs() {
     const [allJobs, setAllJobs] = useState<Job[]>([]);
-
+        
     const {isLoading, error, data} = useQuery('allJobs', () => getAllJobs('*', {limit: LIMITS.JOBS}));
 
     useEffect(() => {

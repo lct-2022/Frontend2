@@ -7,7 +7,6 @@ import './ProjectsPreview.css';
 
 const TITLE = 'Проекты';
 
-
 const ProjectsPreview: Props = ({projects}) => {
     const projectsList = useMemo(() => {
         return (

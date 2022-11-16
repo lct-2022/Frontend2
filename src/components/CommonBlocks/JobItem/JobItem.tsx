@@ -31,10 +31,12 @@ const JobCard: Props = ({title, description, application, id}) => {
     useEffect(() => {
         getJobApplication(id, getTokenFromCookies())
             .then(data => {
+                console.log('->', data);
+                
                 setIsApplication(!!data);
             })
     }, [id]);
-    //-----//
+
     useEffect(() => {
         setIsApplication(!!application);
     }, [application]);
@@ -46,17 +48,17 @@ const JobCard: Props = ({title, description, application, id}) => {
         }
 
         const applicationRequestor = !isApplication
-            ? applyToJob
-            : cancelApplication
+            ? applyToJob(id)
+            : cancelApplication(application?.id || 0)
         
-        applicationRequestor(id, getTokenFromCookies())
+        applicationRequestor
             .then(result => {
                 setIsApplication(!!result)
             })
             .catch(() => {
                 throw new Error()
             });
-    }, [id, authUser, isApplication]);
+    }, [id, application?.id, authUser, isApplication]);
 
     const passToVacancy = useCallback(() => {
         setIsLoading(true);

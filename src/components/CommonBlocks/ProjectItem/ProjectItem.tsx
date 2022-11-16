@@ -10,7 +10,7 @@ import { getCurrentProjectAction } from '../../../store/actions/projects';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getJobApplicationsAction } from '../../../store/actions/jobs';
-import { vote } from '../../../api/rating';
+import { getRating, vote } from '../../../api/rating';
 import { getTokenFromCookies } from '../../../utils/cookie';
 import { authUserSelector } from '../../../store/selectors/users';
 import Card from '../../Card';
@@ -57,11 +57,8 @@ const ProjectCard: Props = ({
     }
 
     const passToAppllications = useCallback(() => {
-        console.log('AU ???????????????????????????/');
-        
         getApplications(id)
             .then(data => {
-                console.log(data,  '< ==================')
                 dispatch<any>(getJobApplicationsAction(data || []));
                 navigate(ROUTES.APPLICATIONS);
             })
@@ -79,6 +76,7 @@ const ProjectCard: Props = ({
             token: getTokenFromCookies()
         })
             .then(() => {
+                getRating('project', id);
                 getPopularProjects(LIMITS.PROJECTS);
             })
     }, [id, authUser]);
