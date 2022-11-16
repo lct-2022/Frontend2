@@ -301,8 +301,6 @@ export const getTeamJobs = async (projectId: number, token?: string): Promise<Un
 
 // cancel-application
 export const cancelApplication = async (applId: number, token?: string): Promise<Undefinedable<Application>> => {
-    console.log('APPL ID ===>', applId);
-    
     return await request({
         method: 'cancel_application',
         host: RPCHosts.Platform,
@@ -334,3 +332,19 @@ export const getUsersProjects = async (userId: number, token?: string): Promise<
 };
 
 // create_job
+export const createJob = async (teamId: number, title: string, description: string, token?: string): Promise<Undefinedable<Job>> => {
+    return await request<Job>({
+        method: 'create_job',
+        host: RPCHosts.Platform,
+        params: {
+            team_id: teamId,
+            title,
+            description,
+        },
+        ...(token && {
+            settings: {
+                authToken: token,
+            }
+        }),
+    });
+};

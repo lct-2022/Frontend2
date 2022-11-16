@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
@@ -54,10 +54,11 @@ function ProjectPage() {
     }, [currentProject]);
 
     const canSearchTeam = currentProject?.['author_id'] === authUser?.id;
-    
-    const {jobs, title, description, author_id = 0} = project ?? {};
+    const canCreateJob = currentProject?.['author_id'] === authUser?.id || authUser?.admin;
 
-    const profileQuery = useQuery('getProfile', () => getUserProfile(author_id));
+    const {jobs, title, description} = project ?? {};
+
+    const profileQuery = useQuery('getProfile', () => getUserProfile(currentProject?.author_id || 0));
     const stagesQuery = useQuery('getStages', () => getProjectStages());
 
     const getTeamsForProject = useCallback(() => {
@@ -81,7 +82,7 @@ function ProjectPage() {
         return null;
     }
 
-    if (profileQuery.isLoading || stagesQuery.isLoading) {
+    if (profileQuery.isLoading || stagesQuery.isLoading || !currentProject || !project) {
         return <Spinner/>
     }
 
@@ -118,10 +119,16 @@ function ProjectPage() {
                 />
     
                 {canSearchTeam &&
-                    <div>
+                    <div style={{marginTop: '16px'}}>
                         <Button onClick={getTeamsForProject}>Найти человека в команду</Button>
                     </div>
                 }
+
+                {canCreateJob &&
+                    <div style={{marginTop: '16px'}}>
+                        <Button onClick={() => navigate(ROUTES.JOB_CREATE)}>Создать вакансию</Button>
+                    </div>
+                }          
     
                 {params.created && 
                     <Button onClick={goBackToMyIdeas}>К списку идей</Button>
@@ -130,4 +137,4 @@ function ProjectPage() {
         </QueryClientProvider>
     )
 }
-export default ProjectPage;
+export default memo(ProjectPage);

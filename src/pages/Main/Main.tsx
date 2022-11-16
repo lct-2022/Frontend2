@@ -26,6 +26,7 @@ import Spinner from '../../components/Spinner';
 
 import './Main.css';
 import { allIndustriesAction, allInnovationsAction, allStagessAction } from '../../store/actions/projects';
+import CreateJob from '../CreateJob/CreateJob';
 
 function Main() {
   const store = useSelector((store: IBaseStore) => store);
@@ -77,6 +78,7 @@ function Main() {
               <Route path={ROUTES.PROJECT_CREATED} element={<ProjectPage/>}/>
               <Route path={ROUTES.JOBS} element={<Jobs/>}/>
               <Route path={ROUTES.JOB} element={<JobPage/>}/>
+              <Route path={ROUTES.JOB_CREATE} element={<CreateJob/>}/>
               <Route path={ROUTES.EXPERTS} element={<Experts/>}/>
               <Route path={ROUTES.EXPERTS_SEARCH} element={<Experts/>}/>
 

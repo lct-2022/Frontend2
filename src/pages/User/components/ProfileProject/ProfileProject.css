@@ -20,6 +20,8 @@
     color: #000;
     font-size: 20px;
     font-weight: 600;
+
+    cursor: pointer;
 }
 
 .profile-project-team {
@@ -49,4 +51,16 @@
 .profile-project-stage_active {
     color: #101828;
     font-weight: 600;
+}
+
+.profile-project-arrow {
+    width: 79px;
+    height: 13px;
+
+    cursor: pointer;
+}
+
+.profile-project-wrapper {
+    display: flex;
+    justify-content: flex-end;
 }

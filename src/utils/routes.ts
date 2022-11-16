@@ -15,6 +15,7 @@ export const ROUTES = {
     USER_EDIT: '/profile/edit',
     JOBS: '/vacancies',
     JOB: '/vacancy',
+    JOB_CREATE: '/vacancy/create',
     EVENTS: '/events',
     CHAT: '/chat',
     APPLICATIONS: '/applications',

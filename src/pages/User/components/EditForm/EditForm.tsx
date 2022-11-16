@@ -76,7 +76,7 @@ function EditProfile() {
     ///
     const changeSkills = useCallback((name: string) => {
         setSkillState(prev => prev.map(el => el.name === name ? {...el, selected: !el.selected} : el));
-      }, []);
+    }, []);
     ///
 
     const dispatch = useDispatch();
