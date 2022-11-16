@@ -40,7 +40,6 @@ const ProjectCard: Props = ({
 
     const [isLoading, setIsLoading] = useState(false);
 
-    // const canSearchPeople = location.pathname === ROUTES.USER;
     const canSeeApplications = location.pathname === ROUTES.USER || (authUser?.admin && location.pathname !== ROUTES.INDEX);
 
     const passToProject = useCallback(() => {
