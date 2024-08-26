@@ -1,7 +1,7 @@
 import React, {FC, memo, useMemo} from 'react';
 import {cn} from '@bem-react/classname';
 
-import Text from '../../../../components/Text';
+import Text from '../../../../ui/Text';
 import { useSelector } from 'react-redux';
 import { currentProjectStagesSelector } from '../../../../store/selectors/projects';
 

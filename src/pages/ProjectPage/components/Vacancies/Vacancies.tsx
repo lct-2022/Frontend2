@@ -8,8 +8,8 @@ import {Props} from './types';
 import { useDispatch } from 'react-redux';
 
 import { ROUTES } from '../../../../utils/routes';
-import Spinner from '../../../../components/Spinner';
-import Text from '../../../../components/Text';
+import Spinner from '../../../../ui/Spinner';
+import Text from '../../../../ui/Text';
 
 import './Vacancies.css';
 

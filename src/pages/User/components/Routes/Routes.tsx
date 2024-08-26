@@ -5,7 +5,7 @@ import { Props } from '../About/types';
 import About from '../About';
 import Resume from '../Resume';
 import Teams from '../Teams/Teams';
-import UserOptions from '../../components/Options';
+import UserOptions from '../Options';
 import Projects from '../ProjectsListProfile/ProjectsListProfile';
 
 import './Routes.css';

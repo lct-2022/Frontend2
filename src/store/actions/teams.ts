@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { getTeamsAvailableForProject } from "../../api/platform";
-import { CommonAction, Team } from "../../types";
+import { CommonAction, Team } from "../../types/common";
 import { TeamsAction, TeamsActions } from "../types/teams";
 
 export const availableTeamsAction = (projectId: number, token?: string) => {

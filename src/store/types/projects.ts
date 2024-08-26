@@ -1,5 +1,5 @@
-import { Project } from "../../types";
-import { CommonAction } from '../../types';
+import { Project } from "../../types/common";
+import { CommonAction } from '../../types/common';
 
 export enum ProjectsActions {
     SET_PROJECTS = 'SET_PROJECTS',

@@ -3,7 +3,7 @@ import { OPTIONS, UserOption} from '../../consts';
 import {cn} from '@bem-react/classname';
 import {Props} from './types';
 
-import Text from '../../../../components/Text';
+import Text from '../../../../ui/Text';
 
 import './Options.css';
 

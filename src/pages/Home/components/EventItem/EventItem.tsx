@@ -24,7 +24,6 @@ const EventItem: Props = ({
                     </div>
 
                 </div>
-
             </div>
         </div>
     )

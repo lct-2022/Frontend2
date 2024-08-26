@@ -1,84 +1,65 @@
-import React, { ChangeEvent, Dispatch, FC, SetStateAction, useCallback, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, memo } from 'react';
 import { cn } from '@bem-react/classname';
+import { useQuery } from 'react-query';
 
-import Card from '../../../../components/Card';
-import Text from '../../../../components/Text';
-import { Profession, Skill, UserData } from '../../../../types';
+import Card from '../../../../ui/Card';
+import Text from '../../../../ui/Text';
+import { getProfessions, getSkills } from '../../../../api/platform';
+import Spinner from '../../../../ui/Spinner';
+import { handleError } from '../../../../utils/handlers';
 
 import './Filtration.css';
 
 const cName = cn('filter-experts');
 
 type Props = {
-    experts: UserData[],
-    setExperts: Dispatch<SetStateAction<UserData[]>>;
-    professions: Profession[];
-    skills: Skill[];
+    filterProfessions: (event: ChangeEvent<HTMLInputElement>) => void;
+    filterSkills: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Filtration: FC<Props> = ({setExperts, professions, skills}) => {
-    console.log('RENDERRRRR');
-    
-    const filterProfessions = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
+const Filtration: FC<Props> = ({filterProfessions, filterSkills}) => {
+    const professions = useQuery('professions', () => getProfessions());
+    const skills = useQuery('skills', () => getSkills());
 
-        setExperts(prev => {
-            return prev.map(el => checked && el.profession_id !== Number(value)
-                ? {...el, hidden: true} 
-                : {...el, hidden: false}   
-            );
-        });
-    }, [setExperts]);
+    if (professions.isLoading || skills.isLoading) {
+        return <Spinner/>
+    }
 
-    const professionsCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {professions.map(({id, title}) => (
-                    <div key={id}>
-                        <label htmlFor={title}>{title}</label>
-                        <input name={title} value={id} className={cName('chbx')} type="checkbox" onChange={filterProfessions}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [professions, filterProfessions, setExperts]);
-
-    const filterSkills = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-
-        setExperts(prev => {
-            return prev.map(el => checked && !el.skill_ids.includes(Number(value))
-                ? {...el, hidden: true} 
-                : {...el, hidden: false}   
-            );
-        });
-    }, [setExperts]);
-
-    const skillsCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {skills.map(({id, title}) => (
-                    <div key={id}>
-                        <label htmlFor={title}>{title}</label>
-                        <input name={title} value={id} className={cName('chbx')} type="checkbox" onChange={filterSkills}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [skills, filterSkills, setExperts]);
+    handleError({
+        professions,
+        skills,
+    });
 
     return (
         <Card className={cName()}>
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Профессии:</Text>
-                {professionsCriterias}
+
+                <div className={cName('boxes')}>
+                    {professions.data?.map(({id, title}) => (
+                        <div key={id}>
+                            <label htmlFor={title}>{title}</label>
+
+                            <input name={title} value={id} className={cName('chbx')} type="checkbox" onChange={filterProfessions}/>
+                        </div>
+                    ))}
+                </div>
             </div>   
 
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Навыки:</Text>
-                {skillsCriterias}
+
+                <div className={cName('boxes')}>
+                    {skills.data?.map(({id, title}) => (
+                        <div key={id}>
+                            <label htmlFor={title}>{title}</label>
+
+                            <input name={title} value={id} className={cName('chbx')} type="checkbox" onChange={filterSkills}/>
+                        </div>
+                    ))}
+                </div>
             </div>
         </Card>
     )
 }
-export default Filtration;
+export default memo(Filtration);

@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { getVacancy } from "../../api/platform";
-import { Application } from "../../types";
+import { Application } from "../../types/common";
 import { currentJobAction, currentJobActions } from "../types/currentJob";
 import { ApplicationsActions, SetApplications } from "../types/applications";
 import { lsSaveCurrentJob } from "../../utils/storage";

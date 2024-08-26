@@ -1,19 +1,20 @@
-import React, { useState, ChangeEvent, useCallback, useEffect } from 'react';
+import React, { useState, ChangeEvent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './Login.css';
 import { Props } from './types';
 import { getAuthorizedUser, login, signup } from '../../api/passport';
 import RedirectLoginBlock from './components/Redirect-Block';
-import Button from '../../components/Button';
+import Button from '../../ui/Button';
 import { useDispatch } from 'react-redux';
 import { AuthUserActions } from '../../store/types/authUser';
 import { ROUTES } from '../../utils/routes';
-import { getTokenFromCookies, setAuthToken } from '../../utils/cookie';
+import { setAuthToken } from '../../utils/cookie';
 import { CurrentUserActions } from '../../store/types/currentUser';
 import { cn } from '@bem-react/classname';
-import { lsSaveAuthorizedUser } from '../../utils/storage';
 import { EMAIL_REGEXP } from '../../utils/consts';
+
+import './Login.css';
+import Text from '../../ui/Text';
 
 enum Labels {
     EMAIL = 'E-mail',
@@ -66,6 +67,7 @@ export const LoginForm: Props = ({type = 'login'}) => {
             alert('Невалидный адрес электронный почты')
             return;
         }
+        
         if (!email || !password || (type === 'signup' && (!name || !lastname))) {
             alert('Пожалуйста, заполните все поля!')
             return;
@@ -98,50 +100,74 @@ export const LoginForm: Props = ({type = 'login'}) => {
 
     return (
         <div className={cName()}>
-                <p className={cName('title')}>{title}</p>
+            <Text className={cName('title')}>{title}</Text>
 
-                    <div className={cName('input', {hidden: type === 'login'})}>
-                        <label htmlFor="name" className="login-label">
-                            {Labels.NAME}
-                        </label>
+                <div className={cName('input', {hidden: type === 'login'})}>
+                    <label htmlFor="name" className="login-label">
+                        {Labels.NAME}
+                    </label>
 
-                        <input className="login-form-mail login-input" name="name" type="text" placeholder={Placeholders.NAME} value={name} onChange={changeName}/>
-                    </div>
+                    <input
+                        className="login-form-mail login-input" 
+                        name="name"
+                        type="text"
+                        placeholder={Placeholders.NAME}
+                        value={name}
+                        onChange={changeName}
+                    />
+                </div>
 
-                    <div className={cName('input', {hidden: type === 'login'})}>
-                        <label htmlFor="lastname" className={cName('label')}>
-                            {Labels.LASTNAME}
-                        </label>
+                <div className={cName('input', {hidden: type === 'login'})}>
+                    <label htmlFor="lastname" className={cName('label')}>
+                        {Labels.LASTNAME}
+                    </label>
 
-                        <input className="login-form-mail login-input" name="lastname" type="text" placeholder={Placeholders.LASTNAME} value={lastname} onChange={changeLastname}/>
-                    </div>
+                    <input
+                        className="login-form-mail login-input"
+                        name="lastname"
+                        type="text"
+                        placeholder={Placeholders.LASTNAME}
+                        value={lastname}
+                        onChange={changeLastname}
+                    />
+                </div>
 
-                    <div className={cName('input')}>
-                        <label htmlFor="email" className={cName('label')}>
-                            {Labels.EMAIL}
-                        </label>
+                <div className={cName('input')}>
+                    <label htmlFor="email" className={cName('label')}>
+                        {Labels.EMAIL}
+                    </label>
 
-                        <input className="login-form-mail login-input" type="email" name="email" placeholder={Placeholders.EMAIL} value={email} onChange={changeMail}/>
-                    </div>
+                    <input
+                        className="login-form-mail login-input"
+                        type="email"
+                        name="email"
+                        placeholder={Placeholders.EMAIL}
+                        value={email}
+                        onChange={changeMail}
+                    />
+                </div>
 
-                    <div className={cName('input')}>
-                        <label htmlFor="password" className={cName('label')}>
-                            {Labels.PASSWORD}
-                        </label>
+                <div className={cName('input')}>
+                    <label htmlFor="password" className={cName('label')}>
+                        {Labels.PASSWORD}
+                    </label>
 
-                        <input className="login-form-password login-input" type="password" name="password" placeholder={Placeholders.PASSWORD} value={password} onChange={changePassword}/>
-                    </div>
+                    <input
+                        className="login-form-password login-input"
+                        type="password"
+                        name="password"
+                        placeholder={Placeholders.PASSWORD}
+                        value={password}
+                        onChange={changePassword}
+                    />
+                </div>
 
-                    <Button
-                        className={cName('btn')}
-                        onClick={submit}
-                    >
-                        {btnName}
-                    </Button>
+                <Button className={cName('btn')} onClick={submit}>
+                    {btnName}
+                </Button>
 
-                    <div id="divider"/>
-
-                <RedirectLoginBlock type={type}/>
+                <div id="divider"/>
+            <RedirectLoginBlock type={type}/>
         </div>
     );
 }

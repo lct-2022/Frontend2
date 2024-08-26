@@ -1,4 +1,5 @@
 import { result } from "lodash";
+import { Empty } from "../types/common";
 
 interface IDataRPC<D> {
     result?: D,
@@ -15,7 +16,7 @@ interface IRPCRequestArguments {
     host: RPCHosts, 
     params?: Object, 
     settings?: {
-        authToken: string | undefined,
+        authToken: string,
     }
 }
 
@@ -23,7 +24,7 @@ export interface RequestOptions {
     projects: boolean;
 }
 
-export async function request<D>(args: IRPCRequestArguments): Promise<D | undefined> {
+export async function request<D>(args: IRPCRequestArguments): Promise<D> {
     const {method, host, params, settings} = args;
     
     const url = `https://${host}.dev.lct.40ants.com`;
@@ -48,15 +49,21 @@ export async function request<D>(args: IRPCRequestArguments): Promise<D | undefi
         headers,
         body: JSON.stringify(body),
     }
-    
-    const response = await fetch(url, options);    
-    const result: IDataRPC<D> = await response.json();
-    
-    if (result.result === undefined || result.error) {   
-        return undefined;
+
+    try {
+        const response = await fetch(url, options);    
+        const result: IDataRPC<D> = await response.json();
+        
+        if (result.result === undefined || result.error) {           
+            throw new Error('Fetch error');
+        }
+
+        return result.result;
+    } catch(err) {        
+        console.info(err);;
+
+        return Promise.reject();
     }
-    
-    return result.result;
 }
 
 export enum RPCHosts {

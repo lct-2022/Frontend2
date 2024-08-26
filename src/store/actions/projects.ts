@@ -13,6 +13,7 @@ export const getCurrentProjectAction = (id: number) => {
         if (currentProjectResponse) {
             lsSaveCurrentProject(currentProjectResponse)
         }
+
         dispatch({
             type: CurrentProjectActions.SET_PROJECT,
             payload: currentProjectResponse,
@@ -23,6 +24,7 @@ export const getCurrentProjectAction = (id: number) => {
 export const allIndustriesAction = () => {
     return async (dispatch: Dispatch<IndustriesAction>) => {
         const industriesResponse = await getIndustries();
+
         dispatch({
             type: IndustriesActions.SET_INDUSTRIES,
             payload: industriesResponse,
@@ -33,6 +35,7 @@ export const allIndustriesAction = () => {
 export const allInnovationsAction = () => {
     return async (dispatch: Dispatch<InnovationsAction>) => {
         const innovationsResponse = await getInnovationTypes();
+
         dispatch({
             type: InnovationsActions.SET_INNIVATIONS,
             payload: innovationsResponse,
@@ -40,9 +43,10 @@ export const allInnovationsAction = () => {
     }
 }
 
-export const allStagessAction = () => {
+export const allStagesAction = () => {
     return async (dispatch: Dispatch<StagesAction>) => {
         const stagesResponse = await getStages();
+
         dispatch({
             type: StagesActions.SET_STAGES,
             payload: stagesResponse,

@@ -2,8 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {cn} from '@bem-react/classname';
 import { Props } from './types';
-import { Nullable } from '../../../../types';
-import Text from '../../../../components/Text';
+import { Nullable } from '../../../../types/common';
+import Text from '../../../../ui/Text';
 import { prepareDate } from '../../../../utils/grammar';
 
 import { ROUTES } from '../../../../utils/routes';

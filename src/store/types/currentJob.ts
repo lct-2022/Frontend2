@@ -1,4 +1,4 @@
-import { Job, CommonAction } from "../../types";
+import { Job, CommonAction } from "../../types/common";
 
 export enum currentJobActions {
     SET_ACTIVE_JOB = 'SET_ACTIVE_JOB',

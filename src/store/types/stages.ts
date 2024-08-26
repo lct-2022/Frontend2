@@ -1,4 +1,4 @@
-import { Job, CommonAction, ProjectStage } from "../../types";
+import { Job, CommonAction, ProjectStage } from "../../types/common";
 
 export enum StagesActions {
     SET_STAGES = 'SET_STAGES',

@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {cn} from '@bem-react/classname';
-import { Props } from '../../components/About/types';
+import { Props } from '../About/types';
 
-import Text from '../../../../components/Text';
+import Text from '../../../../ui/Text';
 import { ROUTES } from '../../../../utils/routes';
 
 import './Contacts.css';

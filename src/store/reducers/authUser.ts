@@ -1,13 +1,9 @@
-import { User, Nullable } from "../../types";
-import { lsGetAuthorizedUser } from "../../utils/storage";
-
 import { AuthUserAction, AuthUserActions } from "../types/authUser";
 import { IBaseStore } from "../types/store";
 
 type UserState = IBaseStore['authUser'];
-console.log(lsGetAuthorizedUser());
 
-const initialState: UserState = lsGetAuthorizedUser() || null;
+const initialState: UserState = null;
 
 export const authUserReducer = (store: UserState = initialState, action: AuthUserAction) => {
     const {type, payload} = action;

@@ -1,0 +1,10 @@
+.edit-skills {
+    width: 800px;
+    flex-wrap: wrap;
+
+    display: flex;
+}
+
+.edit-skills-block {
+    margin-right: 16px;
+}

@@ -1,22 +1,26 @@
 import React from 'react';
-import {QueryClientProvider, QueryClient,} from 'react-query';
-
 import {BrowserRouter} from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+import ErrorBoundary from '../../ui/Error-Boundary';
+import { Provider } from 'react-redux';
 import Main from '../Main';
-import ErrorBoundary from '../../components/Error-Boundary';
+import {store} from '../../store';
 
 const queryClient = new QueryClient();
 
 function App() {
-  return (  
-    <ErrorBoundary>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <Main/>
-          </QueryClientProvider>
-        </BrowserRouter>
-    </ErrorBoundary>
-  );
+    return (  
+        <ErrorBoundary>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <QueryClientProvider client={queryClient}>
+                        <Main/>
+                    </QueryClientProvider>
+                </Provider>
+            </BrowserRouter>
+        </ErrorBoundary>
+    );
 }
 
 export default App;

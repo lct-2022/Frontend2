@@ -5,9 +5,9 @@ import { Props } from './types';
 import './Bio.css';
 import { useNavigate, useParams } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
-import Button from '../../../../components/Button';
-import Card from '../../../../components/Card';
-import Text from '../../../../components/Text';
+import Button from '../../../../ui/Button';
+import Card from '../../../../ui/Card';
+import Text from '../../../../ui/Text';
 
 const avatarIcon = require('../../../../assets/avatar.svg').default;
 const okIcon = require('../../../../assets/ok.svg').default;

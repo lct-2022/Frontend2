@@ -1,12 +1,12 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, memo } from 'react';
 
 import { CARD_TITLES, TITLE } from './consts';
 import {cn} from '@bem-react/classname';
 
 import './Title.css';
-import { IStats } from '../../../../types';
-import Card from '../../../../components/Card';
-import Text from '../../../../components/Text';
+import { IStats } from '../../../../types/common';
+import Card from '../../../../ui/Card';
+import Text from '../../../../ui/Text';
 
 const cName = cn('title-home-page');
 
@@ -15,29 +15,20 @@ interface IProps {
 }
 
 const TitleHomePage: FC<IProps> = ({stats}) => {
-    const cards = useMemo(() => {
-        return (
-            <div className={cName('container')}>
-                {Object.entries(stats).map(([key, value], index) => (
-                    <Card key={index} className={cName('card')}>
-                        <div className={cName('val')}>{value}</div>
-                        
-                        <div className={cName('item')}>{CARD_TITLES[key as keyof IStats]}</div>
-                    </Card>
-                ))}
-            </div>
-        )
-    }, [stats]);
-
-    if (!stats) {
-        return null;
-    }
-
     return (
         <div className={cName()}>
             <Text type="large" className={cName('title')}>{TITLE}</Text>
 
-            {cards}
+            <div className={cName('container')}>
+                {Object.entries(stats)
+                    .map(([key, value]) => (
+                        <Card key={key} className={cName('card')}>
+                            <div className={cName('val')}>{value}</div>
+                            
+                            <div className={cName('item')}>{CARD_TITLES[key as keyof IStats]}</div>
+                        </Card>
+                ))}
+            </div>
         </div>
     )
 }

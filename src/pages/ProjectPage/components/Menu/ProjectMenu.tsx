@@ -2,7 +2,7 @@ import React, {FC, memo} from 'react';
 import {cn} from '@bem-react/classname';
 
 import { OPTIONS, ProjectOption } from '../../consts';
-import Text from '../../../../components/Text';
+import Text from '../../../../ui/Text';
 
 import './ProjectMenu.css';
 

@@ -1,29 +1,25 @@
 import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
-
-import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
-import { Props } from '../../types';
 import { cn } from '@bem-react/classname';
 
-import './ProjectsList.css';
+import ProjectCard from '../../../../ui/CommonBlocks/ProjectItem';
+import { Props } from '../../types';
 import { useLocation } from 'react-router';
 import { ROUTES } from '../../../../utils/routes';
-
-import Card from '../../../../components/Card';
-import Text from '../../../../components/Text';
 import { getAllProjects } from '../../../../api/platform';
+import Button from '../../../../ui/Button';
+import { LIMITS } from '../../../../utils/consts';
+import Spinner from '../../../../ui/Spinner';
+import { Empty } from '../../../../types/common';
 
 import './ProjectsList.css';
-import Button from '../../../../components/Button';
-import { LIMITS } from '../../../../utils/consts';
-import Spinner from '../../../../components/Spinner';
 
 const cName = cn('projects-list');
 
-const ProjectsList: Props = ({projects, setProjects}) => {
+const ProjectsList: Props = ({projects, setNewProjects}) => {
     const location = useLocation();
 
     const [criteria, setCriteria] = useState('');
-    const [pageKey, setPageKey] = useState<string | undefined>();
+    const [pageKey, setPageKey] = useState<Empty<string>>();
     const [isLoading, setIsLoading] = useState(false);
 
     const isFromProfile = location.pathname === ROUTES.USER;
@@ -46,15 +42,11 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 <h3>У Вас пока нет проектов</h3>
             )
         }
-        
-        if (!projects) {
-            return null;
-        }
 
         return (
             <div className={cName('container')}>
-                {projects?.map(({title, description, industry, id, hidden}, index) => (
-                    <div key={index} className={cName('project', {hidden})}>
+                {projects?.map(({title, description, industry, id, hidden}) => (
+                    <div key={id} className={cName('project', {hidden})}>
                         <ProjectCard
                             title={title}
                             description={description}
@@ -65,13 +57,14 @@ const ProjectsList: Props = ({projects, setProjects}) => {
                 ))}
             </div>
         )
-    }, [projects]);
+    }, [projects, isFromProfile, allMiss, allHidden]);
     
     const search = useCallback(() => {
         setIsLoading(true);
+
         getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
             .then(data => {
-                setProjects(data?.items || []);
+                setNewProjects(data?.items || []);
                 setPageKey(data?.next_page_key);
                 setCriteria('');
                 setIsLoading(false);
@@ -81,9 +74,10 @@ const ProjectsList: Props = ({projects, setProjects}) => {
 
     const showMore = useCallback(() => {
         setIsLoading(true);
+
         getAllProjects(criteria || '*', {limit: LIMITS.PROJECTS, pageKey})
             .then(data => {
-                setProjects(data?.items.map(project => ({...project, hidden: false})) || []);
+                setNewProjects(data?.items.map(project => ({...project, hidden: false})) || []);
                 setPageKey(data?.next_page_key);
                 setIsLoading(false);
             })

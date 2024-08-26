@@ -1,173 +1,103 @@
-import React, { ChangeEvent, memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo } from 'react';
 import { cn } from '@bem-react/classname';
-import { parseStringForDiapazon } from '../../../../utils/parse';
 import { Props } from './types';
-import Card from '../../../../components/Card';
-import Text from '../../../../components/Text';
-import { NAIM, STATUSES, TAGS, TEAM_SIZES } from '../../consts';
+import Card from '../../../../ui/Card';
+import Text from '../../../../ui/Text';
+import { HIRING, STATUSES, TAGS, TEAM_SIZES } from '../../consts';
+import { useQuery } from 'react-query';
+import { getIndustries, getInnovationTypes } from '../../../../api/platform';
+import Spinner from '../../../../ui/Spinner';
+import { handleError } from '../../../../utils/handlers';
 
 import './Filtration.css';
 
 const cName = cn('project-filters');
 
-const ProjectFilters: Props = ({projects, setProjects, industries, innovationTypes}) => {
-    const filterIndustries = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
+const ProjectFilters: Props = ({
+    filterByIndustries,
+    filterByInnivationTypes,
+    filterByTags,
+    filterByTeamSize,
+    filterIsActive,
+    filterIsNotActive,
+}) => {
+    const innovationTypes = useQuery('getInnovationtypes', () => getInnovationTypes());
+    const industries = useQuery('getInnovationtypes', () => getIndustries());
 
-        setProjects(prev => {
-            return prev.map(project => checked && project.industry !== value
-                ? {...project, hidden: true} 
-                : {...project, hidden: false} 
-            );
-        });
-    }, [setProjects]);
+    if (innovationTypes.isLoading || industries.isLoading) return <Spinner/>;
 
-    const industriesCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {industries.map(el => (
-                    <div key={el}>
-                        <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterIndustries}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [industries, projects, filterIndustries, setProjects]);
-
-    const filterInnivationTypes = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-
-        setProjects(prev => {
-            return prev.map(project => checked && project.innovation_type !== value
-                ? {...project, hidden: true} 
-                : {...project, hidden: false}
-            );
-        });
-    }, [setProjects]);
-
-    const innovationTypesCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {innovationTypes.map(el => (
-                    <div key={el}>
-                        <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterInnivationTypes}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [innovationTypes, filterInnivationTypes, setProjects]);
-
-    const filterTags = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-
-        setProjects(prev => {
-            return prev.map(project => {
-                if (checked && !(project.innovations.includes(value) 
-                    || project.description.includes(value) 
-                    || project.title.includes(value)
-                    || project.industry.includes(value))
-                ) {
-                    return {...project, hidden: true};
-                } else {
-                    return {...project, hidden: false}
-                }  
-            });
-        });
-    }, [setProjects]);
-
-    const tagsCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {TAGS.map(el => (
-                    <div key={el}>
-                        <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterTags}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [filterTags]);
-
-    const filterIsActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-        setProjects(prev => {
-            return prev.map(project => checked && !project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
-        });
-    }, [setProjects, projects]);
-
-    const filterIsNotActive = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-        setProjects(prev => {
-            return prev.map(project => checked && project.jobs?.length ? {...project, hidden: true} : {...project, hidden: false});   
-        });
-    }, [setProjects, projects]);
-
-    const isActiveCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {STATUSES.map(el => (
-                    <div key={el}>
-                        <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={el === NAIM ? filterIsActive : filterIsNotActive}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [projects, filterIsActive, filterIsActive, setProjects]);
-
-    const filterTeamSize = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        const {value, checked} = event.target;
-
-        setProjects(prev => {
-            const {min, max} = parseStringForDiapazon(value);
-            
-            return prev.map(project => checked && ((project.team_size || 0) <= min || (project.team_size || 0) >= max)
-                ? {...project, hidden: true} 
-                : {...project, hidden: false}   
-            );
-        });
-    }, [setProjects]);
-
-    const teamSizeCriterias = useMemo(() => {
-        return (
-            <div className={cName('boxes')}>
-                {TEAM_SIZES.map(el => (
-                    <div key={el}>
-                        <label htmlFor={el}>{el}</label>
-                        <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterTeamSize}/>
-                    </div>
-                ))}
-            </div>
-        )
-    }, [filterTeamSize, setProjects]);
+    handleError({
+        innovationTypes,
+        industries,
+    });
     
     return (
         <Card className={cName()}>
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Статус</Text>
-                {isActiveCriterias}
+
+                <div className={cName('boxes')}>
+                    {STATUSES.map(el => (
+                        <div key={el}>
+                            <label htmlFor={el}>{el}</label>
+                            <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={el === HIRING ? filterIsActive : filterIsNotActive}/>
+                        </div>
+                    ))}
+                </div>
             </div>   
 
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Категория инноваций</Text>
-                {innovationTypesCriterias}
+
+                <div className={cName('boxes')}>
+                    {innovationTypes.data?.map(el => (
+                        <div key={el}>
+                            <label htmlFor={el}>{el}</label>
+
+                            <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterByInnivationTypes}/>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Индустрия</Text>
-                {industriesCriterias}
+                
+                <div className={cName('boxes')}>
+                    {industries.data?.map(el => (
+                        <div key={el}>
+                            <label htmlFor={el}>{el}</label>
+
+                            <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterByIndustries}/>
+                        </div>
+                    ))}
+                </div>
             </div>     
 
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Размер команды</Text>
-                {teamSizeCriterias}
+
+                <div className={cName('boxes')}>
+                    {TEAM_SIZES.map(el => (
+                        <div key={el}>
+                            <label htmlFor={el}>{el}</label>
+                            <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterByTeamSize}/>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className={cName('block')}>
                 <Text className={cName('field-title')}>Теги</Text>
-                {tagsCriterias}
+
+                <div className={cName('boxes')}>
+                    {TAGS.map(el => (
+                        <div key={el}>
+                            <label htmlFor={el}>{el}</label>
+                            <input name={el} value={el} className={cName('chbx')} type="checkbox" onChange={filterByTags}/>
+                        </div>
+                    ))}
+                </div>
             </div>
         </Card>
     )

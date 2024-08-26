@@ -31,14 +31,3 @@
 .edit-profile-input_about {
     height: 72px;
 }
-
-.edit-profile-skills {
-    width: 800px;
-    flex-wrap: wrap;
-
-    display: flex;
-}
-
-.edit-profile-skills-block {
-    margin-right: 16px;
-}

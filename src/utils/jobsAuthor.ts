@@ -1,4 +1,4 @@
-import { Application, Job, User } from "../types";
+import { Application, Job, User } from "../types/common";
 
 export const getOwnJobs = (jobs: Job[], authUserId: number | undefined) => {
     if (authUserId === undefined) {

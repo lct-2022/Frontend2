@@ -1,27 +1,24 @@
 
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 
-import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
+import {cn} from '@bem-react/classname';
+
 import { applicationsSelector } from '../../store/selectors/applications';
-import Application from '../../components/CommonBlocks/Application/Application';
-import { getPopularJobs } from '../../api/platform';
-import { getOwnJobs } from '../../utils/jobsAuthor';
-import { authUserSelector } from '../../store/selectors/users';
-import { ApplicationStatus, Job } from '../../types';
+import Application from '../../ui/CommonBlocks/Application/Application';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button';
+import Button from '../../ui/Button';
+
 const cName = cn('applications');
 
 function Applications() {
     const applications = useSelector(applicationsSelector);
-    console.log('Applications');
     
     const navigate = useNavigate();
 
-    const goBack = () => {
+    const goBack = useCallback(() => {
         navigate(-1);
-    }
+    }, [])
     
     return (
         <div className={cName()}>

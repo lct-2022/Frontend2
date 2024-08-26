@@ -1,9 +1,9 @@
 import React, { FC, memo, useEffect, useMemo, useState } from 'react';
-import ProjectCard from '../../../../components/CommonBlocks/ProjectItem';
+import ProjectCard from '../../../../ui/CommonBlocks/ProjectItem';
 import { cn } from '@bem-react/classname';
 
 import { useLocation, useParams } from 'react-router';
-import { ProjectData } from '../../../../types';
+import { ProjectData } from '../../../../types/common';
 import { useSelector } from 'react-redux';
 import { authUserSelector, currentUserSelector } from '../../../../store/selectors/users';
 

@@ -1,4 +1,4 @@
-import { User, Nullable } from "../../types";
+import { User, Nullable } from "../../types/common";
 import { CurrentProjectActions, CurrentProjectAction } from "../types/currentProject";
 
 import { AuthUserAction, AuthUserActions } from "../types/authUser";

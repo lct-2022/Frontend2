@@ -1,21 +1,20 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
-import { currentProjectSelector } from '../../store/selectors/projects';
 
-import './JobPage.css';
 import { currentJobSelector } from '../../store/selectors/jobs';
 import { applyToJob, cancelApplication } from '../../api/platform';
 import { getTokenFromCookies } from '../../utils/cookie';
 import { authUserSelector } from '../../store/selectors/users';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../utils/routes';
-import Button from '../../components/Button';
+import Button from '../../ui/Button';
+
+import './JobPage.css';
 
 const cName = cn('vacancy-page')
 
 const APPLY = 'Откликнуться';
 const CANCEL = 'Отозвать';
+const APPLICATION_ERROR = 'Не получилось откликнуться на вакансию. Пожалуйста, попробуйте позже';
 
 function JobPage() {
     const currentJob = useSelector(currentJobSelector);
@@ -23,11 +22,8 @@ function JobPage() {
 
     const [isApplication, setIsApplication] = useState(false);
 
-    const navigate = useNavigate();
-
-    // TODO: remove possibilities of NULL in currentJob
     const applicationAction = useCallback(() => {       
-        if (!authUserSelector || !currentJob) {
+        if (!authUserSelector) {
             alert('Чтобы откликнуться на вакансию, войдите или зарегистируйтесь')
             return;
         }
@@ -41,34 +37,13 @@ function JobPage() {
                 setIsApplication(!!result)
             })
             .catch(() => {
-                throw new Error()
+                throw new Error(APPLICATION_ERROR);
             });
     }, [currentJob?.id, authUser, isApplication]);
 
-    const obligations = useMemo(() => {
-        return (
-            <ul className={cName('requirements')}>
-                {new Array(5).fill('Обязанность').map((el, index) => (
-                    <li key={index}>{el}&nbsp;{index + 1}</li>
-                ))}
-            </ul>
-        )
-    }, []);
-
-    const requirements = useMemo(() => {
-        return (
-            <ul className={cName('requirements')}>
-                {new Array(10).fill('Требование').map((el, index) => (
-                    <li key={index}>{el}&nbsp;{index + 1}</li>
-                ))}
-            </ul>
-        )
-    }, []);
-
     if (!currentJob) return null;
 
-    const {title, description, team, team_id, id} = currentJob;    
-    // const currentJobProject = team.project
+    const {title, description, id, obligations, requirements, team} = currentJob;    
 
     return (
         <div className={cName()}>
@@ -86,21 +61,31 @@ function JobPage() {
             </div>
 
             <div className={cName('project')}>
-                
+                {team.project.title}
             </div>
 
             <div className={cName('requirements-block')}>
                 <div>Обязанности:</div>
-                {obligations}
+
+                <ul className={cName('obligations')}>
+                    {obligations.map((obligation, index) => (
+                        <li key={obligation}>{obligation}&nbsp;{index + 1}</li>
+                    ))}
+                </ul>
             </div>
 
             <div className={cName('requirements-block')}>
                 <div>Требования:</div>
-                {requirements}
+
+                <ul className={cName('requirements')}>
+                    {requirements.map((requirement, index) => (
+                        <li key={requirement}>{requirement}&nbsp;{index + 1}</li>
+                    ))}
+                </ul>
             </div>
             
             <div className={cName('team')}>
-
+                {team.title}
             </div>
         </div>
     )

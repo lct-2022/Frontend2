@@ -5,10 +5,10 @@ import { ProjectOption } from '../../consts';
 import ProjectMenu from '../Menu/ProjectMenu';
 import Stages from '../Stages/Stages';
 import Vacancies from '../Vacancies/Vacancies';
-import { Job, ProjectStage } from '../../../../types';
+import { Job, ProjectStage } from '../../../../types/common';
 
 import './ProjectRoutes.css';
-import Card from '../../../../components/Card';
+import Card from '../../../../ui/Card';
 
 const cName = cn('project-routes');
 

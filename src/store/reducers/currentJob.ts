@@ -1,4 +1,4 @@
-import { User, Nullable } from "../../types";
+import { User, Nullable } from "../../types/common";
 import { currentJobAction, currentJobActions } from "../types/currentJob";
 
 import { AuthUserAction, AuthUserActions } from "../types/authUser";

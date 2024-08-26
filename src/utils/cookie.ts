@@ -6,7 +6,7 @@ function parseCookie() {
     try {
         return qs.parse(cookie, {delimiter: ';'});
     } catch(err) {
-        // pass
+        console.info(err);
     }
 }
 

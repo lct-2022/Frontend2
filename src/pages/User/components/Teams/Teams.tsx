@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { createTeam } from '../../../../api/platform';
-import Button from '../../../../components/Button';
+import Button from '../../../../ui/Button';
 import { setActiveTeamAction } from '../../../../store/actions/teams';
 import { authUserSelector } from '../../../../store/selectors/users';
 import { ROUTES } from '../../../../utils/routes';

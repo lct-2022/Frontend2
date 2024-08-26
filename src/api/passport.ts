@@ -1,7 +1,7 @@
-import { ISearchParams, Undefinedable, User, UserData, UsersList } from "../types";
+import { ISearchParams, Empty, User, UserData, UsersList } from "../types/common";
 import { request, RPCHosts } from "../utils/api";
 
-export const getAuthorizedUser = async (token?: string): Promise<Undefinedable<UserData>> => {
+export const getAuthorizedUser = async (token?: string): Promise<Empty<UserData>> => {
     return await request<UserData>({
         method: 'my_profile',
         host: RPCHosts.Passport,
@@ -18,7 +18,7 @@ export const getAuthorizedUser = async (token?: string): Promise<Undefinedable<U
     });
 }
 
-export const signup = async (email: string, password: string, fio: string): Promise<Undefinedable<string>> => {
+export const signup = async (email: string, password: string, fio: string): Promise<Empty<string>> => {
     return await request<string>({
         method: 'signup',
         host: RPCHosts.Passport,
@@ -30,7 +30,7 @@ export const signup = async (email: string, password: string, fio: string): Prom
     })
 };
 
-export const login = async (email: string, password: string): Promise<Undefinedable<string>> => {
+export const login = async (email: string, password: string): Promise<Empty<string>> => {
     return await request<string>({
         method: 'login',
         host: RPCHosts.Passport,
@@ -42,7 +42,7 @@ export const login = async (email: string, password: string): Promise<Undefineda
 };
 
 // search-users
-export const getAllProfiles = async (query: string, options?: ISearchParams): Promise<Undefinedable<UsersList>> => {
+export const getAllProfiles = async (query: string, options?: ISearchParams): Promise<Empty<UsersList>> => {
     const {pageKey, limit} = options || {};
     
     return await request<UsersList>({
@@ -63,7 +63,7 @@ export const getAllProfiles = async (query: string, options?: ISearchParams): Pr
     });
 };
 
-export const getProfiles = async (limit?: number): Promise<Undefinedable<User[]>> => {
+export const getProfiles = async (limit?: number): Promise<Empty<User[]>> => {
     return await request<User[]>({
         method: 'popular_profiles',
         host: RPCHosts.Passport,
@@ -75,7 +75,7 @@ export const getProfiles = async (limit?: number): Promise<Undefinedable<User[]>
     });
 };
 
-export const getUserProfile = async (userId: number): Promise<Undefinedable<UserData>> => {
+export const getUserProfile = async (userId: number): Promise<Empty<UserData>> => {
     return await request({
         method: 'get_profile',
         host: RPCHosts.Passport,
@@ -88,7 +88,7 @@ export const getUserProfile = async (userId: number): Promise<Undefinedable<User
     });
 };
 
-export const updateUserProfile = async (newData: Partial<UserData>, token?: string): Promise<Undefinedable<UserData>> => {
+export const updateUserProfile = async (newData: Partial<UserData>, token?: string): Promise<Empty<UserData>> => {
     return await request({
         method: 'update_profile',
         host: RPCHosts.Passport,

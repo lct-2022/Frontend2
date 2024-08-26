@@ -1,25 +1,20 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
-
+import React, { ChangeEvent, useCallback, useState } from "react";
 import { cn } from "@bem-react/classname";
 import { useDispatch, useSelector } from "react-redux";
+
 import { authUserSelector } from "../../../../store/selectors/users";
-import {  updateUserProfile } from "../../../../api/passport";
+import { updateUserProfile } from "../../../../api/passport";
 import { getTokenFromCookies } from "../../../../utils/cookie";
-import { getAuthorizedUserAction } from "../../../../store/actions/users";
+import { getAuthorizedUserAction } from "../../../../store/actions/user";
 import { PHONE_REGEXP } from "../../../../utils/consts";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../utils/routes";
-
-import Button from "../../../../components/Button";
-import { getSkills } from "../../../../api/platform";
-import Spinner from "../../../../components/Spinner";
+import Button from "../../../../ui/Button";
+import Skills from "../../../../ui/Skills/Skills";
 
 import './EditProfile.css';
 
 const cName = cn('edit-profile');
-
-const clientQury = new QueryClient();
 
 function EditProfile() {
     const authUser = useSelector(authUserSelector);
@@ -32,16 +27,8 @@ function EditProfile() {
     const [aboutValue, setAboutalue] = useState(authUser?.about || '');
     const [educationValue, setEducationValue] = useState(authUser?.education || '');
     const [avatarValue, setAvatarValue] = useState('');
-    const [isJob, setIsJob] = useState(false);
-    const [isHakaton, setIsHakaton] = useState(false);
-
-    const [skillState, setSkillState] = useState<{name: string, selected: boolean, id: number}[]>([]);
-
-    const {data, isLoading} = useQuery('skills', () => getSkills());
-
-    useEffect(() => {
-        data && setSkillState(data.map(el => ({name: el.title, selected: false, id: el.id})));
-    }, [data]);
+    const [isJob, setIsJob] = useState(false); // TODO
+    const [isHakaton, setIsHakaton] = useState(false); // TODO
 
     const changeName = (event: ChangeEvent<HTMLInputElement>) => {
         setNameValue(event.target.value)
@@ -73,11 +60,6 @@ function EditProfile() {
     const changeIsHak = (event: ChangeEvent<HTMLInputElement>) => {
         setIsHakaton(event.target.checked ? true : false)
     }
-    ///
-    const changeSkills = useCallback((name: string) => {
-        setSkillState(prev => prev.map(el => el.name === name ? {...el, selected: !el.selected} : el));
-    }, []);
-    ///
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -87,10 +69,12 @@ function EditProfile() {
             alert('Невалидный номер телефона')
             return;
         }
+
         if (!phoneValue || !nameValue || !lastnameValue || !educationValue || !countryValue || !cityValue || !aboutValue) {
             alert('Пожалуйста, заполните все поля!')
             return;
         }
+        
         updateUserProfile({
             ...authUser,
             fio: `${nameValue} ${lastnameValue}`,
@@ -100,89 +84,76 @@ function EditProfile() {
             education: educationValue,
             about: aboutValue,
         }, getTokenFromCookies())
-            .then(() => {
-                return new Promise((res) => {
-                    res(dispatch<any>(getAuthorizedUserAction(getTokenFromCookies())))
-                  })
-            })
+            .then(() => Promise.resolve(
+                    dispatch<any>(getAuthorizedUserAction(getTokenFromCookies()))
+                )
+            )
             .then(() => {
                 navigate(ROUTES.USER);
             })
-    }, [nameValue, lastnameValue, phoneValue, countryValue, cityValue, educationValue, aboutValue])
-
-    if(isLoading) return <Spinner/>
+    }, [nameValue, lastnameValue, phoneValue, countryValue, cityValue, educationValue, aboutValue]);
 
     if (!authUser) return null;
 
     return (
-        <QueryClientProvider client={clientQury}>
-            <div className={cName()}>
-                <div className={cName('input-block')}>
-                    <label htmlFor="name">Имя</label>
-                    <input type="text" name="name" value={nameValue} placeholder="Имя" onChange={changeName}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="lastname">Фамилия</label>
-                    <input type="text" name="lastname" value={lastnameValue} placeholder="Фамилия" onChange={changeLastname}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="phone">Номер телефона</label>
-                    <input type="text" name="phone" value={phoneValue} placeholder="Телефон" onChange={changePhone}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="country">Страна</label>
-                    <input type="text" name="country" value={countryValue} placeholder="Страна" onChange={changeCountry}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="city">Город</label>
-                    <input type="text" name="city" value={cityValue} placeholder="Город" onChange={changeCity}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="education">Образование</label>
-                    <input type="text" name="education" value={educationValue} placeholder="Образование" onChange={changeEducation}/>
-                </div>
-
-                <div className={cName('input-block', {about: true})}>
-                    <label htmlFor="about">О себе</label>
-                    <input type="text" name="about" value={aboutValue} placeholder="О себе" className={cName('input', {about: true})} onChange={changeAbout}/>
-                </div>
-
-                <div className={cName('input-block')}>
-                    <label htmlFor="avatar">Аватар (ссылка)</label>
-                    <input type="text" name="avatar" value={avatarValue} placeholder="url" onChange={changeAvatar}/>
-                </div>
-
-                <p>Ваши навыки</p>
-                <div className={cName('skills')}>
-                    {skillState?.map(({id, name}) => (
-                        <div key={id} className={cName('skills-block')}>
-                            <label htmlFor={name}>{name}</label>
-                            <input name={name} value={name} className={cName('chbx')} type="checkbox" onChange={() => {changeSkills(name)}}/>
-                        </div>    
-                    ))}
-                </div>
-
-                <div className={cName('input-block-chbx')}>
-                    <label htmlFor="job">Хочу в команду</label>
-                    <input type="checkbox" className={cName('chbx')} name="job" value={avatarValue} onChange={changeIsJob}/>
-                </div>
-
-                <div className={cName('input-block-chbx')}>
-                    <label htmlFor="hakaton" >Хочу на хакатон</label>
-                    <input type="checkbox" className={cName('chbx')} name="hakaton" value={avatarValue} onChange={changeIsHak}/>
-                </div>
-                
-                <div className={cName('btns')}>
-                    <Button onClick={updateProfile}>Редактировать</Button>
-                    <Button onClick={() => navigate(-1)}>Назад в профиль</Button>
-                </div>
+        <div className={cName()}>
+            <div className={cName('input-block')}>
+                <label htmlFor="name">Имя</label>
+                <input type="text" name="name" value={nameValue} placeholder="Имя" onChange={changeName}/>
             </div>
-        </QueryClientProvider>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="lastname">Фамилия</label>
+                <input type="text" name="lastname" value={lastnameValue} placeholder="Фамилия" onChange={changeLastname}/>
+            </div>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="phone">Номер телефона</label>
+                <input type="text" name="phone" value={phoneValue} placeholder="Телефон" onChange={changePhone}/>
+            </div>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="country">Страна</label>
+                <input type="text" name="country" value={countryValue} placeholder="Страна" onChange={changeCountry}/>
+            </div>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="city">Город</label>
+                <input type="text" name="city" value={cityValue} placeholder="Город" onChange={changeCity}/>
+            </div>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="education">Образование</label>
+                <input type="text" name="education" value={educationValue} placeholder="Образование" onChange={changeEducation}/>
+            </div>
+
+            <div className={cName('input-block', {about: true})}>
+                <label htmlFor="about">О себе</label>
+                <input type="text" name="about" value={aboutValue} placeholder="О себе" className={cName('input', {about: true})} onChange={changeAbout}/>
+            </div>
+
+            <div className={cName('input-block')}>
+                <label htmlFor="avatar">Аватар (ссылка)</label>
+                <input type="text" name="avatar" value={avatarValue} placeholder="url" onChange={changeAvatar}/>
+            </div>
+
+            <Skills title="Ваши навыки"/>
+
+            <div className={cName('input-block-chbx')}>
+                <label htmlFor="job">Хочу в команду</label>
+                <input type="checkbox" className={cName('chbx')} name="job" value={avatarValue} onChange={changeIsJob}/>
+            </div>
+
+            <div className={cName('input-block-chbx')}>
+                <label htmlFor="hakaton" >Хочу на хакатон</label>
+                <input type="checkbox" className={cName('chbx')} name="hakaton" value={avatarValue} onChange={changeIsHak}/>
+            </div>
+                
+            <div className={cName('btns')}>
+                <Button onClick={updateProfile}>Редактировать</Button>
+                <Button onClick={() => navigate(-1)}>Назад в профиль</Button>
+            </div>
+        </div>
     );
 }
 

@@ -34,6 +34,7 @@ export function prepareDate(dateRaw: string | null | undefined, options?: {proje
     const year = splitted[0];
     const month = MONTHS[splitted[1]];
     let day = splitted[2].slice(0, 2);
+
     if (day.startsWith('0')) {
         day = day.slice(1);
     }
@@ -45,4 +46,8 @@ export function getBrief(str: string): string {
     if (str.length <= 27) return str;
 
     return str.slice(0, 27) + '...';
+}
+
+export function prepareFio(lastName: string, firstName: string, fatherName: string): string {
+    return `${lastName} ${firstName} ${fatherName}`
 }

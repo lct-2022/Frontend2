@@ -9,7 +9,7 @@ export const STATUSES = [
     'Идет найм',
     'Нет найма',
 ];
-export const NAIM = STATUSES[0];
+export const HIRING = STATUSES[0];
 
 export const TAGS = [
     'Здравоохранение',

@@ -4,26 +4,23 @@ import {cn} from '@bem-react/classname';
 import { useSelector } from 'react-redux';
 import { teamsSelector } from '../../store/selectors/teams';
 
+import Button from '../../ui/Button';
+
 import './Teams.css';
-import Button from '../../components/Button';
 
 const cName = cn('teams');
 
 const TEAMS: {title: string; id: number}[] = [
-    {title: 'Team1', id:1},
-    {title: 'Team2', id:2},
-    {title: 'Team3', id:3},
-    {title: 'Team4', id:4},
-    {title: 'Team5', id:5},
+    {title: 'Team1', id: 1},
+    {title: 'Team2', id: 2},
+    {title: 'Team3', id: 3},
+    {title: 'Team4', id: 4},
+    {title: 'Team5', id: 5},
 ];
 
-function Main() {
+function Teams() {
     const teams = useSelector(teamsSelector);
     const tempTeams = teams.length ? teams : TEAMS;
-
-    const addTeamToProject = () => {
-        // ...
-    }
 
     const allTeams = useMemo(() => {
         return (
@@ -33,7 +30,7 @@ function Main() {
                         <h4>{title}</h4>
 
                         <div className={cName('btns')}>
-                            <Button onClick={addTeamToProject}>Кинуть приглашение</Button>
+                            <Button>Кинуть приглашение</Button>
                         </div>
                     </div>
                 ))}
@@ -49,4 +46,4 @@ function Main() {
         </div>
     )
 }
-export default Main;
+export default Teams;

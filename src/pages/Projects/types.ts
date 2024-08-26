@@ -1,9 +1,9 @@
-import { Dispatch, FC, SetStateAction } from "react";
-import { Project, ProjectData } from "../../types";
+import { FC } from "react";
+import { ProjectData } from "../../types/common";
 
 interface IProps {
     projects: ProjectData[];
-    setProjects: Dispatch<SetStateAction<ProjectData[]>>;
+    setNewProjects: (newProjects: ProjectData[]) => void;
 }
 
 export type Props = FC<IProps>;

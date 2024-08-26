@@ -1,5 +1,5 @@
-import { UserData } from "../../types";
-import { CommonAction } from '../../types';
+import { UserData } from "../../types/common";
+import { CommonAction } from '../../types/common';
 
 export enum AuthUserActions {
     SET_USER = 'SET_USER',

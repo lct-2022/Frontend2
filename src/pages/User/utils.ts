@@ -1,4 +1,4 @@
-import { User } from "../../types";
+import { User } from "../../types/common";
 import omit from 'lodash/omit'; 
 
 const notPublicItems: Array<keyof User['user']> = [
